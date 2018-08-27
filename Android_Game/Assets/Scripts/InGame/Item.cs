@@ -1,437 +1,231 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml.Serialization;
 using System;
+using System.Xml;
+using System.Xml.Schema;
 
-namespace InGame
+public enum ItemClass { Armor, Weapon, Potion, Empty }
+public enum ItemType { Magic, Ranged, Melle, Empty }
+
+public abstract class Item
 {
-    public abstract class Item
+    //BASIC VARIABLES ====================================================================================
+
+    public event EventHandler<EventArgs> EquipedItem;
+    public event EventHandler<EventArgs> UnequipedItem;
+
+    //Item class
+    public ItemClass ItemClass { get; set; }
+
+    //Item type
+    public ItemType ItemType { get; set; }
+
+    //Item name
+    public string Name { get; set; }
+
+    //Establish that champion used this item or not
+    public bool IsUsed { get; set; }
+
+    //Establish that item is broken or not
+    public bool IsBroken { get; set; }
+
+    //Durability of item (MAX VALUE: 100 || MIN VALUE: 0)
+    public double Durability { get; set; }
+
+    //Item basic value
+    public int GoldValue { get; set; }
+
+    //Item basic weight
+    public double Weight { get; set; }
+
+
+    //BASIC CONSTRUCTORS ====================================================================================
+    protected Item(ItemClass itemClass, ItemType itemType, 
+        string name, double durability, int goldValue, double weight, bool isUsed, bool isBroken)
     {
-        //ON or OFF Debug informations
-        private bool DegubInfo = false;
+        this.ItemClass = itemClass;
+        this.ItemType = itemType;
 
-        //BASIC VARIABLES ====================================================================================
+        this.Name = name;
+        this.Durability = durability;
+        this.GoldValue = goldValue;
+        this.IsUsed = isUsed;
+        this.IsBroken = isBroken;
+        this.Weight = weight;
+    }
 
-        //Randomizer
-        protected System.Random RandomGenerator;
+    protected Item()
+    {
+        this.ItemClass = ItemClass.Empty;
+        this.ItemType = ItemType.Empty;
 
-        /// <summary>
-        /// Item name
-        /// </summary>
-        public string Name { get; set; }
+        this.Name = string.Empty;
+        this.Durability = 0;
+        this.GoldValue = 0;
+        this.IsUsed = false;
+        this.IsBroken = false;
+        this.Weight = 0;
+    }
 
-        /// <summary>
-        /// Bonus to basic champions defence (will be add to basic champion statistic) (MIN VALUE: 0)
-        /// </summary>
-        public ItemBonus DefenceBonus { get; set; }
+    //Copy constructor
+    protected Item(ref Item championItem)
+    {
+        this.ItemClass = championItem.ItemClass;
+        this.ItemType = championItem.ItemType;
 
-        /// <summary>
-        /// Bonus to basic champions attack (will be add to basic champion statistic) (MIN VALUE: 0)
-        /// </summary>
-        public ItemBonus AttackBonus { get; set; }
+        this.Name = championItem.Name;
+        this.Durability = championItem.Durability;
+        this.GoldValue = championItem.GoldValue;
+        this.IsUsed = championItem.IsUsed;
+        this.IsBroken = championItem.IsBroken;
+        this.Weight = championItem.Weight;
+    }
 
-        /// <summary>
-        /// Establish that champion used this item or not (set to false[not used] by default]
-        /// </summary>
-        public bool Used { get; set; }
+    //BASIC FUNCTIONS ====================================================================================
 
-        /// <summary>
-        /// Establish that item is broken or not (set to false[not broken] by default]
-        /// </summary>
-        public bool Broken { get; set; }
-
-        /// <summary>
-        /// Durability of item (MAX VALUE: 100 || MIN VALUE: 0)
-        /// </summary>
-        public float Durability { get; set; }
-
-        /// <summary>
-        /// Item basic value
-        /// </summary>
-        public int GoldValue { get; set; }
-
-        /// <summary>
-        /// Item basic weight
-        /// </summary>
-        public float Weight { get; set; }
-
-
-        //BASIC CONSTRUCTORS ====================================================================================
-        protected Item(string name, int defenceBonus, int attackBonus, float durability, int goldValue, float weight, bool used, bool broken)
+    /// <summary>
+    /// Function change basic item name to 'name'
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns>TRUE if succeed or FALSE if failed</returns>
+    protected bool ChangeItemName(string name)
+    {
+        try
         {
-            this.RandomGenerator = new System.Random();
-
             this.Name = name;
-
-            this.DefenceBonus = new ItemBonus(defenceBonus);
-            this.AttackBonus = new ItemBonus(attackBonus);
-
-            this.Durability = durability;
-            this.GoldValue = goldValue;
-            this.Used = used;
-            this.Broken = broken;
-            this.Weight = weight;
+            return true;
         }
-
-        protected Item()
+        catch (Exception exc)
         {
-            this.RandomGenerator = new System.Random();
-
-            this.Name = string.Empty;
-
-            this.DefenceBonus = new ItemBonus(0);
-            this.AttackBonus = new ItemBonus(0);
-
-            this.Durability = 0;
-            this.GoldValue = 0;
-            this.Used = false;
-            this.Broken = false;
-            this.Weight = 0;
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
+                Debug.Log("Class 'ChampionItem' in 'ChangeItemName' function:" + exc.ToString());
+            return false;
         }
+    }
 
-        //Copy constructor
-        protected Item(ref Item championItem)
+    /// <summary>
+    /// Function unequip 'item' from player
+    /// </summary>
+    /// <returns>TRUE if succeed (item is off now) or FALSE if failed (item is already on)</returns>
+    protected bool UnequipItem(ref Item item)
+    {
+        if (this.IsUsed == true)
         {
-            this.RandomGenerator = new System.Random();
-            this.Name = championItem.Name;
-
-            ItemBonus defenceBonus = new ItemBonus(championItem.DefenceBonus.BasicBonus, championItem.DefenceBonus.AcctualBonus);
-            ItemBonus attackBonus = new ItemBonus(championItem.AttackBonus.BasicBonus, championItem.AttackBonus.AcctualBonus);
-            this.DefenceBonus = new ItemBonus(ref defenceBonus);
-            this.AttackBonus = new ItemBonus(ref attackBonus);
-
-            this.Durability = championItem.Durability;
-            this.GoldValue = championItem.GoldValue;
-            this.Used = championItem.Used;
-            this.Broken = championItem.Broken;
-            this.Weight = championItem.Weight;
+            this.IsUsed = false;
+            this.OnUnequipedItem(new EventArgs());
+            return true;
         }
-
-        //BASIC FUNCTIONS ====================================================================================
-
-        /// <summary>
-        /// Function change basic item name to 'name'
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool ChangeItemName(string name)
+        else
         {
-            try
-            {
-                this.Name = name;
-                return true;
-            }
-            catch (Exception exc)
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'ChangeItemName' function:" + exc.ToString());
-                return false;
-            }
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
+                Debug.Log("Class 'ChampionItem' in 'UnequipItem' function: Item is already off");
+            return false;
         }
+    }
 
-        /// <summary>
-        /// Function decrease ACCTUAL(not basic) attack bonus by 'decreaseCount'.  MIN VALUE = 0.
-        /// Function acction has chance to fail if 'chance' is smaller than 100.
-        /// 'chance' is set by default to 100 (100% success)
-        /// </summary>
-        /// <param name="decreaseCount"></param>
-        /// <param name="chance"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool DecreaseAttackBonus(int decreaseCount, int chance = 100)
+    /// <summary>
+    /// Function equip 'item' from player
+    /// </summary>
+    /// <returns>TRUE if succeed (item is on now) or FALSE if failed (item is already off)</returns>
+    protected bool EquipItem(ref Item item)
+    {
+        if (this.IsUsed == false)
         {
-            int RandomChanceNumber = this.RandomGenerator.Next(0, 100);
-            bool ifRNGSuccess = false;
-            if (RandomChanceNumber <= chance)
-                ifRNGSuccess = true;
-
-            if (ifRNGSuccess == false)
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseMagicAttackBonus' function: RNG fail");
-                return false;
-            }
-
-            if ((decreaseCount >= 0) && (this.AttackBonus.AcctualBonus != 0))
-            {
-                try
-                {
-                    this.AttackBonus.AcctualBonus -= decreaseCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'DecreaseMagicAttackBonus' function:" + exc.ToString());
-                    return false;
-                }
-
-                if (this.AttackBonus.AcctualBonus < 0)
-                    this.AttackBonus.AcctualBonus = 0;
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseMagicAttackBonus' function: Wrong magicDecreaseCount number or bonus is equal to 0");
-                return false;
-            }
+            this.IsUsed = true;
+            this.OnEquipedItem(new EventArgs());
+            return true;
         }
-
-        /// <summary>
-        /// Function decrease ACCTUAL(not basic) defence bonus by 'decreaseCount'. MIN VALUE = 0.
-        /// Function acction has chance to fail if 'chance' is smaller than 100.
-        /// 'chance' is set by default to 100 (100% success)
-        /// </summary>
-        /// <param name="decreaseCount"></param>
-        /// <param name="chance"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool DecreaseDefenceBonus(int decreaseCount, int chance = 100)
+        else
         {
-            int RandomChanceNumber = this.RandomGenerator.Next(0, 100);
-            bool ifRNGSuccess = false;
-            if (RandomChanceNumber <= chance)
-                ifRNGSuccess = true;
-
-            if (ifRNGSuccess == false)
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseMagicDefenceBonus' function: RNG fail");
-                return false;
-            }
-
-            if ((decreaseCount >= 0) && (this.DefenceBonus.AcctualBonus != 0))
-            {
-                try
-                {
-                    this.DefenceBonus.AcctualBonus -= decreaseCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'DecreaseMagicDefenceBonus' function:" + exc.ToString());
-                    return false;
-                }
-
-                if (this.DefenceBonus.AcctualBonus < 0)
-                    this.DefenceBonus.AcctualBonus = 0;
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseMagicDefenceBonus' function: Wrong magicDecreaseCount number or bonus is equal to 0");
-                return false;
-            }
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
+                Debug.Log("Class 'ChampionItem' in 'EquipItem' function: Item is already on");
+            return false;
         }
+    }
 
-        /// <summary>
-        /// Function boost ACCTUAL(not basic) attact bonus by 'boostCount'.
-        /// Function acction has chance to fail if 'chance' is smaller than 100.
-        /// 'chance' is set by default to 100 (100% success)
-        /// </summary>
-        /// <param name="boostCount"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool BoostAttackBonus(int boostCount)
-        {
-            if (boostCount >= 0)
-            {
-                try
-                {
-                    this.AttackBonus.AcctualBonus += boostCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'BoostAttackBonus' function:" + exc.ToString());
-                    return false;
-                }
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'BoostAttackBonus' function: Wrong boostCount number");
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Function boost ACCTUAL(not basic) defence bonus by 'boostCount'.
-        /// Function acction has chance to fail if 'chance' is smaller than 100.
-        /// 'chance' is set by default to 100 (100% success)
-        /// </summary>
-        /// <param name="boostCount"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool BoostDefenceBonus(int boostCount)
-        {
-            if (boostCount >= 0)
-            {
-                try
-                {
-                    this.DefenceBonus.AcctualBonus += boostCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'BoostDefenceBonus' function:" + exc.ToString());
-                    return false;
-                }
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'BoostDefenceBonus' function: Wrong boostCount number");
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Function set ACCTUAL(not basic) attack bonus to default BASIC bonus. 
-        /// </summary>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool SetAttackBonusToDefault()
+    /// <summary>
+    /// Function decrease durability of item by 'durabilityDecreaseCount' (0.2 by default)
+    /// </summary>
+    /// <param name="durabilityDecreaseCount"></param>
+    /// <returns>TRUE if succeed or FALSE if failed</returns>
+    protected bool DecreaseDurability(double durabilityDecreaseCount = 0.2)
+    {
+        if ((this.Durability > 0) && (durabilityDecreaseCount >= 0))
         {
             try
             {
-                this.AttackBonus.AcctualBonus = this.AttackBonus.BasicBonus;
+                this.Durability -= durabilityDecreaseCount;
             }
             catch (Exception exc)
             {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'SetAttackBonusToDefault' function:" + exc.ToString());
+                if (DebugInfo.InGameNamespaceDebugInfo == true)
+                    Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function:" + exc.ToString());
                 return false;
+            }
+
+            if (this.Durability <= 0)
+            {
+                this.IsBroken = true;
+                this.Durability = 0;
             }
 
             return true;
         }
+        else
+        {
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
+                Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function: Durability is equal to 0");
+            return false;
+        }
+    }
 
-        /// <summary>
-        /// Function set ACCTUAL(not basic) defence bonus to default BASIC bonus. 
-        /// </summary>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool SetDefenceBonusToDefault()
+    /// <summary>
+    /// Function increase durability of item(repair item) by 'durabilityIncreaseCount'.
+    /// </summary>
+    /// <param name="durabilityIncreaseCount"></param>
+    /// <returns>TRUE if succeed or FALSE if failed</returns>
+    protected bool RepairItem(double durabilityIncreaseCount)
+    {
+        if ((this.Durability < 100) && (durabilityIncreaseCount >= 0))
         {
             try
             {
-                this.DefenceBonus.AcctualBonus = this.DefenceBonus.BasicBonus;
+                this.Durability += durabilityIncreaseCount;
             }
             catch (Exception exc)
             {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'SetAttackBonusToDefault' function:" + exc.ToString());
+                if (DebugInfo.InGameNamespaceDebugInfo == true)
+                    Debug.Log("Class 'ChampionItem' in 'RepairItem' function:" + exc.ToString());
                 return false;
             }
+
+            if (this.Durability > 100)
+                this.Durability = 100;
+
+            if (this.IsBroken)
+                this.IsBroken = false;
 
             return true;
         }
-
-        /// <summary>
-        /// Function take off item from player
-        /// </summary>
-        /// <returns>TRUE if succeed (item is off now) or FALSE if failed (item is already on)</returns>
-        protected bool TakeOffItem()
+        else
         {
-            if (this.Used == true)
-            {
-                this.Used = false;
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'TakeOffItem' function: Item is already off");
-                return false;
-            }
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
+                Debug.Log("Class: 'ChampionItem' in 'RepairItem' function: Wrong durabilityIncreaseCount number or durability is equal to 100");
+            return false;
         }
+    }
 
-        /// <summary>
-        /// Function take on item from player
-        /// </summary>
-        /// <returns>TRUE if succeed (item is on now) or FALSE if failed (item is already off)</returns>
-        protected bool TakeOnItem()
-        {
-            if (this.Used == false)
-            {
-                this.Used = true;
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'TakeOnItem' function: Item is already on");
-                return false;
-            }
-        }
+    // EVENTS******************************************************************
+    protected virtual void OnEquipedItem(EventArgs e)
+    {
+        this.EquipedItem?.Invoke(this, e);
+    }
 
-        /// <summary>
-        /// Function decrease durability of item by 'durabilityDecreaseCount'.
-        /// </summary>
-        /// <param name="durabilityDecreaseCount"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool DecreaseDurability(float durabilityDecreaseCount)
-        {
-            if ((this.Durability > 0) && (durabilityDecreaseCount >= 0))
-            {
-                try
-                {
-                    this.Durability -= durabilityDecreaseCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function:" + exc.ToString());
-                    return false;
-                }
-
-                if (this.Durability < 0)
-                    this.Durability = 0;
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function: Wrong durabilityDecreaseCount number or durability is equal to 0");
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Function increase durability of item(repair item) by 'durabilityIncreaseCount'.
-        /// </summary>
-        /// <param name="durabilityIncreaseCount"></param>
-        /// <returns>TRUE if succeed or FALSE if failed</returns>
-        protected bool IncreaseDurability(int durabilityIncreaseCount)
-        {
-            if ((this.Durability < 100) && (durabilityIncreaseCount >= 0))
-            {
-                try
-                {
-                    this.Durability += durabilityIncreaseCount;
-                }
-                catch (Exception exc)
-                {
-                    if (DegubInfo == true)
-                        Debug.Log("Class 'ChampionItem' in 'RepairItem' function:" + exc.ToString());
-                    return false;
-                }
-
-                if (this.Durability > 100)
-                    this.Durability = 100;
-
-                return true;
-            }
-            else
-            {
-                if (DegubInfo == true)
-                    Debug.Log("Class: 'ChampionItem' in 'RepairItem' function: Wrong durabilityIncreaseCount number or durability is equal to 100");
-                return false;
-            }
-        }
-
+    protected virtual void OnUnequipedItem(EventArgs e)
+    {
+        this.UnequipedItem?.Invoke(this, e);
     }
 }
+

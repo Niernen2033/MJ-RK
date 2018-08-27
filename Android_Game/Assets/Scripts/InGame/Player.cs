@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 
-namespace InGame
+//[System.Serializable]
+public class Player : Champion
 {
-    [System.Serializable]
-    public class Player : Champion
+    //List of player backpacki tems
+    [XmlElement(Type = typeof(Armor), ElementName = "ArmorBackpackItem")]
+    [XmlElement(Type = typeof(Weapon), ElementName = "WeaponBackpackItem")]
+    public List<Item> Backpack { get; private set; }
+
+    [XmlElement(Type = typeof(Armor), ElementName = "ArmorEquipmentItem")]
+    [XmlElement(Type = typeof(Weapon), ElementName = "WeaponEquipmentItem")]
+    public List<Item> Equipment { get; private set; }
+
+    public Player(int vitality, double magicArmor, double rangedArmor, double melleArmor,
+        int dexterity, int intelligence, int strength, bool illness)
+        : base(vitality, magicArmor, rangedArmor, melleArmor, dexterity, intelligence, strength, illness)
     {
-        [XmlElement(Type = typeof(MagicItem), ElementName = "MagicItem")]
-        [XmlElement(Type = typeof(RangedItem), ElementName = "RangedItem")]
-        [XmlElement(Type = typeof(MelleItem), ElementName = "MelleItem")]
-        public List<Item> Items { get; set; }
-
-        public Player(int hp, int basicAttack, int basicDefence, bool illness) : base(hp, basicAttack, basicDefence, illness)
-        {
-            this.Items = new List<Item>();
-            this.Items.Add(new RangedItem("bb", 12, 3, 1, 27, 99));
-            this.Items.Add(new MelleItem("cb", 12, 3, 1, 27, 99));
-            Debug.Log("Saved");
-        }
-
-        public Player() : base()
-        {
-
-        }
+        this.Backpack = new List<Item>();
+        this.Equipment = new List<Item>();
     }
+
+    public Player() : base()
+    {
+        this.Backpack = new List<Item>();
+        this.Equipment = new List<Item>();
+    }
+
+
 }

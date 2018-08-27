@@ -6,47 +6,30 @@ using System.Xml.Serialization;
 using System.IO;
 using System;
 
-public class XmlManager<T>
+public static class XmlManager
 {
-    //ON or OFF Debug informations
-    private static bool DegubInfo = false;
-
-    //Variables***********************
-    //Type of class with we will serializable (set by default to type of generic class 'T')
-    public Type Type;
-
-    //Constructors**************************
-    public XmlManager()
-    {
-        Type = typeof(T);
-    }
-    public XmlManager(Type type)
-    {
-        Type = type;
-    }
-
     //Functions***************************
 
     /// <summary>
-    /// Function load content to serializable class from xml file named by 'path'. Return TRUE and 'instance' of this class
+    /// Function load content to serializable class from xml file named by 'name'. Return TRUE and 'instance' of this class
     /// </summary>
     /// <param name="path"></param>
     /// <param name="instance"></param>
     /// <returns>TRUE if succeed or FALSE if failed</returns>
-    public bool Load(string path, out T instance)
+    public static bool Load<T>(string name, out T instance)
     {
         try
         {
-            using (TextReader reader = new StreamReader(path))
+            using (TextReader reader = new StreamReader("Assets/Saves/" + name))
             {
-                XmlSerializer xml = new XmlSerializer(Type);
+                XmlSerializer xml = new XmlSerializer(typeof(T));
                 instance = (T)xml.Deserialize(reader);
             }
             return true;
         }
         catch(Exception exc)
         {
-            if (DegubInfo == true)
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
                 Debug.Log("Class 'XmlManager' in 'Load' function:" + exc.ToString());
             instance = default(T);
             return false;
@@ -54,25 +37,25 @@ public class XmlManager<T>
     }
 
     /// <summary>
-    /// Function save content from serializable class 'obj' to xml file named by 'path'.
+    /// Function save content from serializable class 'obj' to xml file named by 'name'.
     /// </summary>
     /// <param name="obj"></param>
     /// <param name="path"></param>
     /// <returns>TRUE if succeed or FALSE if failed</returns>
-    public bool Save(object obj, string path)
+    public static bool Save<T>(T obj, string name)
     {
         try
         {
-            using (TextWriter writer = new StreamWriter(path))
+            using (TextWriter writer = new StreamWriter("Assets/Saves/" + name))
             {
-                XmlSerializer xml = new XmlSerializer(Type);
+                XmlSerializer xml = new XmlSerializer(typeof(T));
                 xml.Serialize(writer, obj);
             }
             return true;
         }
         catch(Exception exc)
         {
-            if (DegubInfo == true)
+            if (DebugInfo.InGameNamespaceDebugInfo == true)
                 Debug.Log("Class 'XmlManager' in 'Save' function:" + exc.ToString());
             return false;
         }

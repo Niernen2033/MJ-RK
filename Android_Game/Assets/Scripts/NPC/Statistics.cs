@@ -73,8 +73,7 @@ public sealed class Statistics
             if (!this.CalculateAcctualStatistics())
             {
                 this.statisticsModifiers.Remove(modifier);
-                if (DebugInfo.InGameNamespaceDebugInfo == true)
-                    Debug.Log("Class 'Statistics' in 'AddModifier' function: Error in calculating modifires");
+                Debug.Log("Class 'Statistics' in 'AddModifier' function: Error in calculating modifires");
 
                 return false;
             }
@@ -84,8 +83,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'AddModifier' function:" + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'AddModifier' function:" + exc.ToString());
             return false;
         }
     }
@@ -99,8 +97,7 @@ public sealed class Statistics
                 if (!this.CalculateAcctualStatistics())
                 {
                     this.statisticsModifiers.Add(modifier);
-                    if (DebugInfo.InGameNamespaceDebugInfo == true)
-                        Debug.Log("Class 'Statistics' in 'RemoveModifier' function: Error in calculating modifires");
+                    Debug.Log("Class 'Statistics' in 'RemoveModifier' function: Error in calculating modifires");
 
                     return false;
                 }
@@ -110,8 +107,7 @@ public sealed class Statistics
             }
             else
             {
-                if (DebugInfo.InGameNamespaceDebugInfo == true)
-                    Debug.Log("Class 'Statistics' in 'RemoveModifier' function: Error in removing modifire");
+                Debug.Log("Class 'Statistics' in 'RemoveModifier' function: Error in removing modifire");
 
                 return false;
             }
@@ -119,8 +115,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'RemoveModifier' function:" + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'RemoveModifier' function:" + exc.ToString());
             return false;
         }
     }
@@ -135,8 +130,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'RemoveAllModifiers' function:" + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'RemoveAllModifiers' function:" + exc.ToString());
 
             return false;
         }
@@ -152,8 +146,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Type' function: " + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Type' function: " + exc.ToString());
 
             return false;
         }
@@ -169,8 +162,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Class' function: " + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Class' function: " + exc.ToString());
 
             return false;
         }
@@ -186,8 +178,7 @@ public sealed class Statistics
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Value' function: " + exc.ToString());
+            Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Value' function: " + exc.ToString());
 
             return false;
         }
@@ -208,8 +199,7 @@ public sealed class Statistics
                 }
                 catch (Exception exc)
                 {
-                    if (DebugInfo.InGameNamespaceDebugInfo == true)
-                        Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
+                    Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
 
                     this.Acctual = lastAcctualValue;
                     return false;
@@ -223,8 +213,7 @@ public sealed class Statistics
                 }
                 catch (Exception exc)
                 {
-                    if (DebugInfo.InGameNamespaceDebugInfo == true)
-                        Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
+                    Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
 
                     this.Acctual = lastAcctualValue;
                     return false;
@@ -238,8 +227,7 @@ public sealed class Statistics
                 }
                 catch (Exception exc)
                 {
-                    if (DebugInfo.InGameNamespaceDebugInfo == true)
-                        Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
+                    Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
 
                     this.Acctual = lastAcctualValue;
                     return false;
@@ -253,8 +241,7 @@ public sealed class Statistics
                 }
                 catch (Exception exc)
                 {
-                    if (DebugInfo.InGameNamespaceDebugInfo == true)
-                        Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
+                    Debug.Log("Class 'Statistics' in 'CalculateAcctualStatistics' function:" + exc.ToString());
 
                     this.Acctual = lastAcctualValue;
                     return false;

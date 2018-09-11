@@ -20,7 +20,7 @@ public static class XmlManager
     {
         try
         {
-            using (TextReader reader = new StreamReader("Assets/Saves/" + name))
+            using (TextReader reader = new StreamReader(name))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(T));
                 instance = (T)xml.Deserialize(reader);
@@ -29,8 +29,7 @@ public static class XmlManager
         }
         catch(Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'XmlManager' in 'Load' function:" + exc.ToString());
+            Debug.Log("Class 'XmlManager' in 'Load' function:" + exc.ToString());
             instance = default(T);
             return false;
         }
@@ -46,7 +45,7 @@ public static class XmlManager
     {
         try
         {
-            using (TextWriter writer = new StreamWriter("Assets/Saves/" + name))
+            using (TextWriter writer = new StreamWriter(name))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(T));
                 xml.Serialize(writer, obj);
@@ -55,8 +54,7 @@ public static class XmlManager
         }
         catch(Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'XmlManager' in 'Save' function:" + exc.ToString());
+            Debug.Log("Class 'XmlManager' in 'Save' function:" + exc.ToString());
             return false;
         }
     }

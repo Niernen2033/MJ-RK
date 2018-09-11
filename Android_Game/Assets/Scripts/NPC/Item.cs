@@ -99,8 +99,7 @@ public abstract class Item
         }
         catch (Exception exc)
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'ChampionItem' in 'ChangeItemName' function:" + exc.ToString());
+            Debug.Log("Class 'ChampionItem' in 'ChangeItemName' function:" + exc.ToString());
             return false;
         }
     }
@@ -119,8 +118,7 @@ public abstract class Item
         }
         else
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'ChampionItem' in 'UnequipItem' function: Item is already off");
+            Debug.Log("Class 'ChampionItem' in 'UnequipItem' function: Item is already off");
             return false;
         }
     }
@@ -139,8 +137,7 @@ public abstract class Item
         }
         else
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'ChampionItem' in 'EquipItem' function: Item is already on");
+            Debug.Log("Class 'ChampionItem' in 'EquipItem' function: Item is already on");
             return false;
         }
     }
@@ -160,8 +157,7 @@ public abstract class Item
             }
             catch (Exception exc)
             {
-                if (DebugInfo.InGameNamespaceDebugInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function:" + exc.ToString());
+                Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function:" + exc.ToString());
                 return false;
             }
 
@@ -175,8 +171,7 @@ public abstract class Item
         }
         else
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function: Durability is equal to 0");
+            Debug.Log("Class 'ChampionItem' in 'DecreaseDurability' function: Durability is equal to 0");
             return false;
         }
     }
@@ -196,8 +191,7 @@ public abstract class Item
             }
             catch (Exception exc)
             {
-                if (DebugInfo.InGameNamespaceDebugInfo == true)
-                    Debug.Log("Class 'ChampionItem' in 'RepairItem' function:" + exc.ToString());
+                Debug.Log("Class 'ChampionItem' in 'RepairItem' function:" + exc.ToString());
                 return false;
             }
 
@@ -211,8 +205,7 @@ public abstract class Item
         }
         else
         {
-            if (DebugInfo.InGameNamespaceDebugInfo == true)
-                Debug.Log("Class: 'ChampionItem' in 'RepairItem' function: Wrong durabilityIncreaseCount number or durability is equal to 100");
+            Debug.Log("Class: 'ChampionItem' in 'RepairItem' function: Wrong durabilityIncreaseCount number or durability is equal to 100");
             return false;
         }
     }

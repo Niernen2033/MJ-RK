@@ -8,15 +8,20 @@ public class LoadGameMenu : MonoBehaviour
     public GameObject loadButtonList;
     public Button loadButtonPrefab;
 
-    public void Start()
+    public void Awake()
     {
-        /*
-        for (int i = 0; i < 2; i++)
+        this.gameObject.GetComponentInParent<Menu>().SavesIsSetUp += LoadGameMenu_SavesIsSetUp;
+    }
+
+    private void LoadGameMenu_SavesIsSetUp(object sender, SavesEventArgs e)
+    {
+        if(e.HaveSaves)
         {
-            LoadButtonPrefab loadButtonPrefabClone = Instantiate(loadButtonPrefab, loadButtonList.transform).GetComponent<LoadButtonPrefab>();
-            loadButtonPrefabClone.gameObject.SetActive(true);
-            loadButtonPrefabClone.Text.text = "aa";
+            foreach(SaveMember saveMember in e.SaveMembers)
+            {
+                Button saveMemberClone = Instantiate(this.loadButtonPrefab, loadButtonList.transform).GetComponent<Button>();
+                saveMemberClone.gameObject.SetActive(true);
+            }
         }
-        */
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public sealed class Save
 {
@@ -8,7 +10,6 @@ public sealed class Save
     public bool IsAcctualSave { get; set; }
     public string SaveName { get; set; }
     public string SavePath { get; set; }
-
 
     private static Save instance = null;
 
@@ -31,7 +32,7 @@ public sealed class Save
         this.SavePath = string.Empty;
     }
 
-    public bool LoadFile(string loadPath)
+    public bool Load(string loadPath)
     {
         if(!XmlManager.Load<Save>(loadPath, out instance))
         {
@@ -41,9 +42,9 @@ public sealed class Save
         return true;
     }
 
-    public bool SaveFile(string savePath)
+    public bool Update()
     {
-        if(!XmlManager.Save<Save>(instance, savePath))
+        if(!XmlManager.Save<Save>(instance, this.SavePath))
         {
             Debug.Log("Class 'Save' in 'Save' function: Cannot save file");
             return false;

@@ -11,7 +11,7 @@ public class CameraMotion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Button leftButtonActive = leftButton.GetComponent<Button>();
-        Button rightButtonActive = rightButton.GetComponent<Button>();
+        //Button rightButtonActive = rightButton.GetComponent<Button>();
 
         leftButtonActive.onClick.AddListener(cameraMoveLeft);
         //btn.onClick.AddListener(TaskOnClick);

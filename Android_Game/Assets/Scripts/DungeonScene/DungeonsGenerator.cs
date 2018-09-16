@@ -31,7 +31,7 @@ public class DungeonsGenerator : MonoBehaviour {
         factoryObject.layer = 0;
 
         objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
-        string pickedOne;
+        //string pickedOne;
         int pickedOneInt;
         producedChunks = new List<GameChunk>();
         SpriteRenderer spriteRender;
@@ -46,7 +46,7 @@ public class DungeonsGenerator : MonoBehaviour {
         for (i = 0; i < objectsToGenerate; i++)
         {
             pickedOneInt = randomNumber.Next(1, 7);
-            pickedOne = pickedOneInt.ToString();
+            //pickedOne = pickedOneInt.ToString();
             tempObject = Instantiate(factoryObject);
             tempChunk = new GameChunk(tempObject,pickedOneInt);
             tempObject.SetActive(false);

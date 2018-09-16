@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Player xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Vitality>
+    <Basic>0</Basic>
+  </Vitality>
+  <MagicArmor>
+    <Basic>0</Basic>
+  </MagicArmor>
+  <RangedArmor>
+    <Basic>0</Basic>
+  </RangedArmor>
+  <MelleArmor>
+    <Basic>0</Basic>
+  </MelleArmor>
+  <Dexterity>
+    <Basic>0</Basic>
+  </Dexterity>
+  <Intelligence>
+    <Basic>0</Basic>
+  </Intelligence>
+  <Strength>
+    <Basic>0</Basic>
+  </Strength>
+  <IsIllness>false</IsIllness>
+</Player>

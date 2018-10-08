@@ -2,30 +2,38 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class City : MonoBehaviour
 {
     Player player;
 
 	// Use this for initialization
-	void Start()
+	public void Awake()
     {
-        if(!File.Exists(@"Assets/Saves/Player.xml"))
+        if(!File.Exists(Save.Paths.AcctualSave))
         {
-            Debug.Log("new");
-            this.player = new Player();
-            XmlManager.Save<Player>(this.player, "Player.xml");
+            Debug.Log("Class 'City' in 'Start' function: File doesn't exist");
         }
         else
         {
-            Debug.Log("load");
-            XmlManager.Load<Player>("Player.xml", out this.player);
+            Save.Instance.Load(Save.Paths.AcctualSave);
         }
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    public void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}
+
+    public void Test()
+    {
+        SceneManager.LoadScene((int)GameGlobals.SceneIndex.MianMenuScene);
+    }
 }

@@ -6,21 +6,25 @@ using UnityEngine.UI;
 public sealed class SavesEventArgs : System.EventArgs
 {
     public List<SaveMember> SaveMembers { get; private set; }
-    public bool HaveSaves { get; private set; }
+    public bool IsHaveSaves { get; private set; }
+    public bool IfSavesNeedsToBeReloaded { get; private set; }
 
-    public SavesEventArgs(List<SaveMember> saveMembers)
+    public SavesEventArgs(List<SaveMember> saveMembers, bool ifSavesNeedsToBeReloaded)
     {
         this.SaveMembers = saveMembers;
         if (this.SaveMembers.Count == 0)
-            this.HaveSaves = false;
+            this.IsHaveSaves = false;
         else
-            this.HaveSaves = true;
+            this.IsHaveSaves = true;
+
+        this.IfSavesNeedsToBeReloaded = ifSavesNeedsToBeReloaded;
     }
 
-    public SavesEventArgs()
+    public SavesEventArgs(bool ifSavesNeedsToBeReloaded)
     {
         this.SaveMembers = new List<SaveMember>();
-        this.HaveSaves = false;
+        this.IsHaveSaves = false;
+        this.IfSavesNeedsToBeReloaded = ifSavesNeedsToBeReloaded;
     }
 }
 

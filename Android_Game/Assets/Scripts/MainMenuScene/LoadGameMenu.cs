@@ -7,20 +7,31 @@ public class LoadGameMenu : MonoBehaviour
 {
     public GameObject loadButtonList;
     public Button loadButtonPrefab;
+    private List<Button> saveButtons;
 
     public void Awake()
     {
-        this.gameObject.GetComponentInParent<Menu>().SavesIsSetUp += LoadGameMenu_SavesIsSetUp;
+        this.saveButtons = new List<Button>();
+        this.gameObject.GetComponentInParent<Menu>().LoadGameMenuInvoked += LoadGameMenu_LoadGameMenuInvoked;
     }
 
-    private void LoadGameMenu_SavesIsSetUp(object sender, SavesEventArgs e)
+    private void LoadGameMenu_LoadGameMenuInvoked(object sender, SavesEventArgs e)
     {
-        if(e.HaveSaves)
+        if (e.IfSavesNeedsToBeReloaded)
         {
-            foreach(SaveMember saveMember in e.SaveMembers)
+            foreach(Button saveButtons in this.saveButtons)
             {
-                Button saveMemberClone = Instantiate(this.loadButtonPrefab, loadButtonList.transform).GetComponent<Button>();
-                saveMemberClone.gameObject.SetActive(true);
+                Destroy(saveButtons.gameObject);
+            }
+
+            if (e.IsHaveSaves)
+            {
+                foreach (SaveMember saveMember in e.SaveMembers)
+                {
+                    Button saveMemberClone = Instantiate(this.loadButtonPrefab, loadButtonList.transform).GetComponent<Button>();
+                    this.saveButtons.Add(saveMemberClone);
+                    this.saveButtons[this.saveButtons.Count - 1].gameObject.SetActive(true);
+                }
             }
         }
     }

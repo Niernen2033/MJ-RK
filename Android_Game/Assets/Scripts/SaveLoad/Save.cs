@@ -46,16 +46,17 @@ public sealed class Save
     {
         if(!XmlManager.Save<Save>(instance, this.SavePath))
         {
-            Debug.Log("Class 'Save' in 'Save' function: Cannot save file");
+            Debug.Log("Class 'Save' in 'Update' function: Cannot save file");
             return false;
         }
         return true;
     }
 
     //class
-    public static class SavePaths
+    public static class Paths
     {
-        public static string GlobalSavesPath = @"Assets/Saves/";
+        public static readonly string GlobalFolder = @"Assets/Saves/";
+        public static string AcctualSave = "";
     }
 }
 

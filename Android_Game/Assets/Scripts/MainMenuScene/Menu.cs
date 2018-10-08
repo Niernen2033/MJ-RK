@@ -19,6 +19,7 @@ public class Menu : MonoBehaviour
     private AudioSource audioSource;
     private MenuState menuState;
     private List<SaveMember> saveMembers;
+    private bool ifSavesNeedsToBeReloaded;
 
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -26,62 +27,39 @@ public class Menu : MonoBehaviour
     public GameObject createNewGameMenu;
     public Button continueGameButton;
 
-    public event EventHandler<SavesEventArgs> SavesIsSetUp;
-
-    protected void OnSavesIsSetUp(SavesEventArgs e)
-    {
-        this.SavesIsSetUp?.Invoke(this, e);
-    }
-
-    public void Awake()
-    {
-        this.audioSource = GetComponent<AudioSource>();
-        this.saveMembers = new List<SaveMember>();
-
-
-        this.menuState.Current = MenuType.MainMenu;
-        this.menuState.Last = MenuType.MainMenu;
-        this.ChangeAcctualMenu();
-        //temporary*******************
-
-        //temporary*******************
-    }
-
-    public void Start()
-    {
-        this.SetUpSaves();
-    }
+    public event EventHandler<SavesEventArgs> LoadGameMenuInvoked;
 
     private void SetUpSaves()
     {
         string continueSavePath = string.Empty;
 
-        //we dont chave folder to save
-        if (!Directory.Exists(Save.SavePaths.GlobalSavesPath))
+        //we dont chave global folder to save
+        if (!Directory.Exists(Save.Paths.GlobalFolder))
         {
-            //we dont folder to save so we can only create new game folder
-            Directory.CreateDirectory(Save.SavePaths.GlobalSavesPath);
+            //we dont have global folder to save so we can only create it
+            Directory.CreateDirectory(Save.Paths.GlobalFolder);
 
             this.continueGameButton.interactable = false;
             this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
         }
-        //we chave folder to save
+        //we chave global folder to save
         else
         {
-            List<string> allSavesFolderDirectories = Directory.GetDirectories(Save.SavePaths.GlobalSavesPath).ToList();
+            List<string> allSavesFolderDirectories = Directory.GetDirectories(Save.Paths.GlobalFolder).ToList();
 
+            //we dont have game profiles
             if (allSavesFolderDirectories.Count == 0)
             {
-                //we dont have game saves
                 this.continueGameButton.interactable = false;
                 this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
             }
+            //we have game profiles
             else
             {
                 this.continueGameButton.interactable = false;
                 this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
 
-                //we have game saves
+                //check if we have game saves
                 foreach (string saveFile in allSavesFolderDirectories)
                 {
                     List<string> filesPathInSaveFile = Directory.GetFiles(saveFile).ToList();
@@ -96,7 +74,7 @@ public class Menu : MonoBehaviour
                                 continue;
                             }
 
-                            //check if we have active save
+                            //check if this save is active save
                             if (Save.Instance.IsAcctualSave)
                             {
                                 this.continueGameButton.interactable = true;
@@ -111,20 +89,15 @@ public class Menu : MonoBehaviour
             }
         }
 
-        this.OnSavesIsSetUp(new SavesEventArgs(this.saveMembers));
-
         if (continueSavePath != string.Empty)
         {
-            if (!Save.Instance.Load(continueSavePath))
-            {
-                Debug.Log("Class: 'Menu' in 'SetUpSavesAndScenes' function: Cannot load save file in folder" + continueSavePath);
-            }
+            Save.Paths.AcctualSave = continueSavePath;
         }
     }
 
     private void ChangeAcctualMenu()
     {
-        switch(this.menuState.Current)
+        switch (this.menuState.Current)
         {
             case (MenuType.MainMenu):
                 {
@@ -161,35 +134,65 @@ public class Menu : MonoBehaviour
         }
     }
 
-    public void OnMainMenu()
+    protected void OnLoadGameMenuInvoked(SavesEventArgs e)
+    {
+        this.LoadGameMenuInvoked?.Invoke(this, e);
+    }
+
+    public void Awake()
+    {
+        this.audioSource = GetComponent<AudioSource>();
+        this.saveMembers = new List<SaveMember>();
+        this.ifSavesNeedsToBeReloaded = true;
+
+        this.menuState.Current = MenuType.MainMenu;
+        this.menuState.Last = MenuType.MainMenu;
+        this.ChangeAcctualMenu();
+        //temporary*******************
+
+        //temporary*******************
+    }
+
+    public void Start()
+    {
+        this.SetUpSaves();
+    }
+
+    public void InvokeMainMenu()
     {
         this.menuState.Last = this.menuState.Current;
         this.menuState.Current = MenuType.MainMenu;
         this.ChangeAcctualMenu();
     }
 
-    public void OnLoadGameMenu()
+    public void InvokeLoadGameMenu()
     {
         this.menuState.Last = this.menuState.Current;
         this.menuState.Current = MenuType.LoadGameMenu;
         this.ChangeAcctualMenu();
+
+        this.OnLoadGameMenuInvoked(new SavesEventArgs(this.saveMembers, this.ifSavesNeedsToBeReloaded));
+        if(this.ifSavesNeedsToBeReloaded)
+        {
+            this.ifSavesNeedsToBeReloaded = false;
+        }
     }
 
-    public void OnCreateNewGameMenu()
+    public void InvokeCreateNewGameMenu()
     {
         this.menuState.Last = this.menuState.Current;
         this.menuState.Current = MenuType.CreateNewGameMenu;
         this.ChangeAcctualMenu();
     }
 
-    public void OnOptionsMenu()
+    public void InvokeOptionsMenu()
     {
         this.menuState.Last = this.menuState.Current;
         this.menuState.Current = MenuType.OptionsMenu;
         this.ChangeAcctualMenu();
     }
 
-    public void OnBackToLastMenu()
+    public void InvokeBackToLastMenu()
     {
         MenuType last_menu_remember = this.menuState.Last;
         this.menuState.Last = this.menuState.Current;
@@ -197,7 +200,7 @@ public class Menu : MonoBehaviour
         this.ChangeAcctualMenu();
     }
 
-    public void OnOffAudio()
+    public void InvokeOffAudio()
     {
         if (this.audioSource.mute == true)
             this.audioSource.mute = false;
@@ -205,16 +208,16 @@ public class Menu : MonoBehaviour
             this.audioSource.mute = true;
     }
 
-    public void OnPlayGame()
+    public void InvokePlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene((int)GameGlobals.SceneIndex.CityScene);
     }
 
-    public void OnQuitGame()
+    public void InvokeQuitGame()
     {
         Debug.Log("QUIT");
+
         Application.Quit();
     }
-
 
 }

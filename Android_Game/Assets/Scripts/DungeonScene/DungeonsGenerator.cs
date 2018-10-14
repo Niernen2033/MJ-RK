@@ -1,25 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System;
 
 public class DungeonsGenerator : MonoBehaviour {
 
-    public GameObject FirstSprite;
-    public GameObject factoryObject;
-    //List<GameObject> producedObjects;
-    List<GameChunk> producedChunks;
-    public Sprite SecondSprite;
-    public int objectsToGenerate;
-    int chunkWidth;
-    int minimumNumberOfChunks;
-    int maximumNumberOfChunks;
+    private GameObject factoryObject;
+    private List<GameChunk> producedChunks;
+    private int objectsToGenerate;
+    private int chunkWidth;
+    private int minimumNumberOfChunks;
+    private int maximumNumberOfChunks;
 
     System.Random randomNumber = new System.Random();
 
-    void Start() {
+    public void Start() {
         minimumNumberOfChunks = 6;
         maximumNumberOfChunks = 12;
 
@@ -107,6 +100,7 @@ public class DungeonsGenerator : MonoBehaviour {
 
     }
 
+    /*
     void SaveItemData()
     {
         if(!File.Exists(Application.persistentDataPath + "/WarrensTextures/items.data"))
@@ -127,7 +121,7 @@ public class DungeonsGenerator : MonoBehaviour {
             bf.Serialize(file, data);
             file.Close();
         }
-    }
+    }*/
 }
 
 public class GameChunk

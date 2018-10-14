@@ -9,4 +9,6 @@ public static class GameGlobals
         MianMenuScene = 0,
         CityScene = 1
     }
+
+    public static bool IsDebugState { get; set; } = true;
 }

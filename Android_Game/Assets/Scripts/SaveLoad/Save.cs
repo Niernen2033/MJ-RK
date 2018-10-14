@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public sealed class Save
 {
-
-    public bool IsAcctualSave { get; set; }
-    public string SaveName { get; set; }
-    public string SavePath { get; set; }
+    public bool IsAcctual { get; set; }
+    public string Name { get; set; }
+    public string Path { get; set; }
+    public string Texture { get; set; }
+    public Player Player { get; set; }
 
     private static Save instance = null;
 
@@ -27,9 +28,10 @@ public sealed class Save
 
     private Save()
     {
-        this.IsAcctualSave = false;
-        this.SaveName = string.Empty;
-        this.SavePath = string.Empty;
+        this.IsAcctual = false;
+        this.Name = string.Empty;
+        this.Path = string.Empty;
+        this.Player = new Player();
     }
 
     public bool Load(string loadPath)
@@ -44,7 +46,7 @@ public sealed class Save
 
     public bool Update()
     {
-        if(!XmlManager.Save<Save>(instance, this.SavePath))
+        if(!XmlManager.Save<Save>(instance, this.Path))
         {
             Debug.Log("Class 'Save' in 'Update' function: Cannot save file");
             return false;

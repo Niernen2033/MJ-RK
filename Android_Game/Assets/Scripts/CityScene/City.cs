@@ -4,36 +4,78 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class City : MonoBehaviour
+
+namespace CityScene
 {
-    Player player;
+    public enum CityObjectType { BlackSmith, Tawern, Church, PlayerHouse, Dungeons, CityAll };
+    public delegate void OpenBuildingCallback(CityObjectType cityObjectType);
 
-	// Use this for initialization
-	public void Awake()
+    public class City : MonoBehaviour
     {
-        if(!File.Exists(Save.Paths.AcctualSave))
+        private Player player;
+        public GameObject cityAll;
+        public GameObject blackSmithHouse;
+
+        // Use this for initialization
+        public void Awake()
         {
-            Debug.Log("Class 'City' in 'Start' function: File doesn't exist");
+            if (GameGlobals.IsDebugState)
+            {
+                Save.Paths.AcctualSave = @"D:\Repos\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
+
+                if (!File.Exists(Save.Paths.AcctualSave))
+                {
+                    Debug.Log("Class 'Menu' in 'Start' function: File doesn't exist");
+                }
+                else
+                {
+                    Save.Instance.Load(Save.Paths.AcctualSave);
+                }
+            }
         }
-        else
+
+        public void Start()
         {
-            Save.Instance.Load(Save.Paths.AcctualSave);
+
         }
-	}
 
-    public void Start()
-    {
+        // Update is called once per frame
+        void Update()
+        {
 
-    }
+        }
 
-    // Update is called once per frame
-    void Update ()
-    {
-		
-	}
-
-    public void Test()
-    {
-        SceneManager.LoadScene((int)GameGlobals.SceneIndex.MianMenuScene);
+        public void OpenBuilding(CityObjectType cityObjectType)
+        {
+            switch (cityObjectType)
+            {
+                case CityObjectType.BlackSmith:
+                    {
+                        this.blackSmithHouse.SetActive(true);
+                        this.cityAll.SetActive(false);
+                        break;
+                    }
+                case CityObjectType.Church:
+                    {
+                        break;
+                    }
+                case CityObjectType.Dungeons:
+                    {
+                        break;
+                    }
+                case CityObjectType.PlayerHouse:
+                    {
+                        break;
+                    }
+                case CityObjectType.Tawern:
+                    {
+                        break;
+                    }
+                case CityObjectType.CityAll:
+                    {
+                        break;
+                    }
+            }
+        }
     }
 }

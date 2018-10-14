@@ -3,36 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadGameMenu : MonoBehaviour
+namespace MainMenuScene
 {
-    public GameObject loadButtonList;
-    public Button loadButtonPrefab;
-    private List<Button> saveButtons;
-
-    public void Awake()
+    public class LoadGameMenu : MonoBehaviour
     {
-        this.saveButtons = new List<Button>();
-        this.gameObject.GetComponentInParent<Menu>().LoadGameMenuInvoked += LoadGameMenu_LoadGameMenuInvoked;
-    }
+        public GameObject loadButtonList;
+        public Button loadButtonPrefab;
+        private List<Button> saveButtons;
+        private InvokePlayGameCallback invokePlayGameCallback;
 
-    private void LoadGameMenu_LoadGameMenuInvoked(object sender, SavesEventArgs e)
-    {
-        if (e.IfSavesNeedsToBeReloaded)
+        public void Awake()
         {
-            foreach(Button saveButtons in this.saveButtons)
-            {
-                Destroy(saveButtons.gameObject);
-            }
+            this.saveButtons = new List<Button>();
+            this.gameObject.GetComponentInParent<Menu>().LoadGameMenuInvoked += LoadGameMenu_LoadGameMenuInvoked;
+            this.invokePlayGameCallback = GetComponentInParent<Menu>().InvokePlayGame;
+        }
 
-            if (e.IsHaveSaves)
+        private void LoadGameMenu_LoadGameMenuInvoked(object sender, SavesEventArgs e)
+        {
+            if (e.IfSavesNeedsToBeReloaded)
             {
-                foreach (SaveMember saveMember in e.SaveMembers)
+                foreach (Button saveButtons in this.saveButtons)
                 {
-                    Button saveMemberClone = Instantiate(this.loadButtonPrefab, loadButtonList.transform).GetComponent<Button>();
-                    this.saveButtons.Add(saveMemberClone);
-                    this.saveButtons[this.saveButtons.Count - 1].gameObject.SetActive(true);
+                    Destroy(saveButtons.gameObject);
+                }
+
+                if (e.IsHaveSaves)
+                {
+                    foreach (SaveMember saveMember in e.SaveMembers)
+                    {
+                        Button saveMemberButtonClone = Instantiate(this.loadButtonPrefab, loadButtonList.transform).GetComponent<Button>();
+                        this.saveButtons.Add(saveMemberButtonClone);
+                        this.saveButtons[this.saveButtons.Count - 1].gameObject.SetActive(true);
+                        this.saveButtons[this.saveButtons.Count - 1].GetComponentInChildren<Text>().text = saveMember.SavePath;
+                        this.saveButtons[this.saveButtons.Count - 1].onClick.AddListener(() => this.OnButtonClick(saveMember.SavePath));
+                    }
                 }
             }
+        }
+
+        private void OnButtonClick(string path)
+        {
+            Save.Paths.AcctualSave = path;
+            this.invokePlayGameCallback();
         }
     }
 }

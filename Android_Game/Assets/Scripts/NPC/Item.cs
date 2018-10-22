@@ -213,12 +213,12 @@ public abstract class Item
     // EVENTS******************************************************************
     protected virtual void OnEquipedItem(EventArgs e)
     {
-        this.EquipedItem?.Invoke(this, e);
+       //this.EquipedItem?.Invoke(this, e);
     }
 
     protected virtual void OnUnequipedItem(EventArgs e)
     {
-        this.UnequipedItem?.Invoke(this, e);
+        //this.UnequipedItem?.Invoke(this, e);
     }
 }
 

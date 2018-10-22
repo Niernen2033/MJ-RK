@@ -7,8 +7,8 @@ public class DungeonsGenerator : MonoBehaviour {
     private List<GameChunk> producedChunks;
     private int objectsToGenerate;
     private int chunkWidth;
-    private int minimumNumberOfChunks;
-    private int maximumNumberOfChunks;
+    private int minimumNumberOfChunks, maximumNumberOfChunks;
+    private int leftBoundPossition, rightBoundPossition, rightBoundPossitionForGenerator;
 
     System.Random randomNumber = new System.Random();
 
@@ -24,6 +24,9 @@ public class DungeonsGenerator : MonoBehaviour {
         factoryObject.layer = 0;
 
         objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
+        leftBoundPossition = chunkWidth;
+        rightBoundPossition = chunkWidth * (objectsToGenerate-1);
+        rightBoundPossitionForGenerator = chunkWidth * objectsToGenerate;
         string pickedOne;
         int pickedOneInt;
         producedChunks = new List<GameChunk>();
@@ -81,14 +84,14 @@ public class DungeonsGenerator : MonoBehaviour {
             //producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(new Vector2(0,(float)0.4));
             if (i == 0)
             {
-                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.left * chunkWidth);
+                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.left * leftBoundPossition);
                 producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkEntrance";
             }
             else
             {
                 //producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(new Vector2(-3, 0));
                 spriteRender.flipX = true;
-                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.right * chunkWidth * objectsToGenerate);
+                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.right * rightBoundPossitionForGenerator);
                 producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkExit";
             }
             producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
@@ -100,28 +103,15 @@ public class DungeonsGenerator : MonoBehaviour {
 
     }
 
-    /*
-    void SaveItemData()
+    public int getLeftBoundPossition()
     {
-        if(!File.Exists(Application.persistentDataPath + "/WarrensTextures/items.data"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.OpenRead(Application.persistentDataPath + "/WarrensTextures/Items.data");
-            SaveItems data = new SaveItems();
-            data.itemName = SecondSprite.name;
-            bf.Serialize(file, data);
-            file.Close();
-        }
-        else if (File.Exists(Application.persistentDataPath + "/WarrensTextures/items.data"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.OpenRead(Application.persistentDataPath + "/WarrensTextures/Items.data");
-            SaveItems data = new SaveItems();
-            data.itemName = SecondSprite.name;
-            bf.Serialize(file, data);
-            file.Close();
-        }
-    }*/
+        return leftBoundPossition;
+    }
+
+    public int getRightBoundPossition()
+    {
+        return rightBoundPossition;
+    }
 }
 
 public class GameChunk

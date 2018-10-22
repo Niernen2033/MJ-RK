@@ -259,17 +259,17 @@ public sealed class Statistics
     //EVENTS***************************************************
     private void OnAddedModifer(StatisticsEventArgs e)
     {
-        this.AddedModifer?.Invoke(this, e);
+        //this.AddedModifer?.Invoke(this, e);
     }
 
     private void OnRemoveModifer(StatisticsEventArgs e)
     {
-        this.RemovedModifer?.Invoke(this, e);
+        //this.RemovedModifer?.Invoke(this, e);
     }
 
     private void OnRemovedAllModifers(StatisticsEventArgs e)
     {
-        this.RemovedAllModifers?.Invoke(this, e);
+        //this.RemovedAllModifers?.Invoke(this, e);
     }
 
 }

@@ -237,5 +237,10 @@ namespace MainMenuScene
             Application.Quit();
         }
 
+        public void SetVolume(float vol)
+        {
+            this.audioSource.volume = vol;
+        }
+
     }
 }

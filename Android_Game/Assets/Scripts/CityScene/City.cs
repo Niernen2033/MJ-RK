@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using SaveLoad;
 
 namespace CityScene
 {
@@ -19,18 +20,13 @@ namespace CityScene
         // Use this for initialization
         public void Awake()
         {
-            if (GameGlobals.IsDebugState)
+            if (!File.Exists(SaveInfo.Paths.AcctualSave))
             {
-                Save.Paths.AcctualSave = @"D:\Repos\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
-
-                if (!File.Exists(Save.Paths.AcctualSave))
-                {
-                    Debug.Log("Class 'Menu' in 'Start' function: File doesn't exist");
-                }
-                else
-                {
-                    Save.Instance.Load(Save.Paths.AcctualSave);
-                }
+                Debug.Log("Class 'City' in 'Awake' function: File doesn't exist");
+            }
+            else
+            {
+                GameSave.Instance.Load(SaveInfo.Paths.AcctualSave);
             }
         }
 

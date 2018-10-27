@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 
+using SaveLoad;
+
 namespace MainMenuScene
 {
     public enum MenuType { MainMenu, OptionsMenu, LoadGameMenu, CreateNewGameMenu }
@@ -37,10 +39,10 @@ namespace MainMenuScene
             string continueSavePath = string.Empty;
 
             //we dont chave global folder to save
-            if (!Directory.Exists(Save.Paths.GlobalFolder))
+            if (!Directory.Exists(SaveInfo.Paths.GlobalFolder))
             {
                 //we dont have global folder to save so we can only create it
-                Directory.CreateDirectory(Save.Paths.GlobalFolder);
+                Directory.CreateDirectory(SaveInfo.Paths.GlobalFolder);
 
                 this.continueGameButton.interactable = false;
                 this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
@@ -48,7 +50,7 @@ namespace MainMenuScene
             //we chave global folder to save
             else
             {
-                List<string> allSavesFolderDirectories = Directory.GetDirectories(Save.Paths.GlobalFolder).ToList();
+                List<string> allSavesFolderDirectories = Directory.GetDirectories(SaveInfo.Paths.GlobalFolder).ToList();
 
                 //we dont have game profiles
                 if (allSavesFolderDirectories.Count == 0)
@@ -71,20 +73,20 @@ namespace MainMenuScene
                         {
                             if (savePath.Contains(".xml") && !savePath.Contains(".meta"))
                             {
-                                if (!Save.Instance.Load(savePath))
+                                if (!GameSave.Instance.Load(savePath))
                                 {
                                     Debug.Log("Class: 'Menu' in 'SetUpSavesAndScenes' function: Cannot load save file in folder" + savePath);
                                     continue;
                                 }
 
                                 //check if this save is active save
-                                if (Save.Instance.IsAcctual)
+                                if (GameSave.Instance.IsAcctual)
                                 {
                                     this.continueGameButton.interactable = true;
                                     this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.9372549f, 1f, 0f);
                                     continueSavePath = savePath;
                                 }
-                                this.saveMembers.Add(new SaveMember(Save.Instance.Texture, Save.Instance.Name, Save.Instance.Path));
+                                this.saveMembers.Add(new SaveMember(GameSave.Instance.Texture, GameSave.Instance.Name, savePath));
                             }
                         }
                     }
@@ -93,7 +95,7 @@ namespace MainMenuScene
 
             if (continueSavePath != string.Empty)
             {
-                Save.Paths.AcctualSave = continueSavePath;
+                SaveInfo.Paths.AcctualSave = continueSavePath;
             }
         }
 
@@ -147,6 +149,20 @@ namespace MainMenuScene
             this.saveMembers = new List<SaveMember>();
             this.ifSavesNeedsToBeReloaded = true;
 
+            if(!ProfileSave.Instance.Load())
+            {
+                Debug.Log("Trying to create profile save");
+                if(!ProfileSave.Instance.Update())
+                {
+                    Debug.Log("Cannot create profile save");
+                }
+            }
+            else
+            {
+                this.SetVolume(ProfileSave.Instance.MenuVolume);
+                this.optionsMenu.GetComponentInChildren<Slider>().value = ProfileSave.Instance.MenuVolume;
+            }
+
             this.menuState.Current = MenuType.MainMenu;
             this.menuState.Last = MenuType.MainMenu;
             this.ChangeAcctualMenu();
@@ -169,11 +185,9 @@ namespace MainMenuScene
 
         public void InvokeLoadGameMenu()
         {
-            Debug.Log(saveMembers[0].SaveName);
             this.menuState.Last = this.menuState.Current;
             this.menuState.Current = MenuType.LoadGameMenu;
             this.ChangeAcctualMenu();
-            Debug.Log(saveMembers[0].SavePath);
 
             this.OnLoadGameMenuInvoked(new SavesEventArgs(this.saveMembers, this.ifSavesNeedsToBeReloaded));
             if (this.ifSavesNeedsToBeReloaded)
@@ -216,17 +230,9 @@ namespace MainMenuScene
         {
             if (GameGlobals.IsDebugState)
             {
-                Save.Paths.AcctualSave = @"D:\Repos\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
+                SaveInfo.Paths.AcctualSave = @"C:\Users\Michal\Documents\Unity\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
             }
-
-            if (!File.Exists(Save.Paths.AcctualSave))
-            {
-                Debug.Log("Class 'Menu' in 'Start' function: File doesn't exist");
-            }
-            else
-            {
-                Save.Instance.Load(Save.Paths.AcctualSave);
-            }
+            GameSave.Instance.Load(SaveInfo.Paths.AcctualSave);
             SceneManager.LoadScene((int)GameGlobals.SceneIndex.CityScene);
         }
 
@@ -239,7 +245,9 @@ namespace MainMenuScene
 
         public void SetVolume(float vol)
         {
-            this.audioSource.volume = vol;
+            ProfileSave.Instance.MenuVolume = vol;
+            this.audioSource.volume = ProfileSave.Instance.MenuVolume;
+            ProfileSave.Instance.Update();
         }
 
     }

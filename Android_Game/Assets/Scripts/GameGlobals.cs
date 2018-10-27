@@ -10,5 +10,5 @@ public static class GameGlobals
         CityScene = 1
     }
 
-    public static bool IsDebugState { get; set; } = true;
+    public static bool IsDebugState { get; } = true;
 }

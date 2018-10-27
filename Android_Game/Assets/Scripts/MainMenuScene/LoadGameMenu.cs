@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using SaveLoad;
+
 namespace MainMenuScene
 {
     public class LoadGameMenu : MonoBehaviour
@@ -44,7 +46,7 @@ namespace MainMenuScene
 
         private void OnButtonClick(string path)
         {
-            Save.Paths.AcctualSave = path;
+            SaveInfo.Paths.AcctualSave = path;
             this.invokePlayGameCallback();
         }
     }

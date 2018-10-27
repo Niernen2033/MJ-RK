@@ -5,57 +5,141 @@ using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 
-public static class XmlManager
+namespace SaveLoad
 {
-    //Functions***************************
-
-    /// <summary>
-    /// Function load content to serializable class from xml file named by 'name'. Return TRUE and 'instance' of this class
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="instance"></param>
-    /// <returns>TRUE if succeed or FALSE if failed</returns>
-    public static bool Load<T>(string name, out T instance)
+    public static class XmlManager
     {
-        try
+        //Varaibles*****************************
+        private static bool IsCryptoOn = false;
+        //Functions***************************
+        public static bool Load<T>(string name, out T instance)
         {
-            using (TextReader reader = new StreamReader(name))
+            try
             {
-                XmlSerializer xml = new XmlSerializer(typeof(T));
-                instance = (T)xml.Deserialize(reader);
-            }
-            return true;
-        }
-        catch(Exception exc)
-        {
-            Debug.Log("Class 'XmlManager' in 'Load' function:" + exc.ToString());
-            instance = default(T);
-            return false;
-        }
-    }
+                using (FileStream fileStream = File.Open(name, FileMode.Open))
+                {
+                    if (IsCryptoOn)
+                    {
+                        ICryptoTransform key = GetCryptoTransform();
+                        if (key == null)
+                        {
+                            instance = default(T);
+                            return false;
+                        }
 
-    /// <summary>
-    /// Function save content from serializable class 'obj' to xml file named by 'name'.
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="path"></param>
-    /// <returns>TRUE if succeed or FALSE if failed</returns>
-    public static bool Save<T>(T obj, string name)
-    {
-        try
-        {
-            using (TextWriter writer = new StreamWriter(name))
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(T));
-                xml.Serialize(writer, obj);
+                        using (CryptoStream cryptoStream = new CryptoStream(fileStream, key, CryptoStreamMode.Read))
+                        {
+                            XmlSerializer xml = new XmlSerializer(typeof(T));
+                            instance = (T)xml.Deserialize(cryptoStream);
+
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        using (TextReader textReader = new StreamReader(fileStream))
+                        {
+                            XmlSerializer xml = new XmlSerializer(typeof(T));
+                            instance = (T)xml.Deserialize(textReader);
+                        }
+                        return true;
+                    }
+                }
             }
-            return true;
+            catch (Exception exc)
+            {
+                Debug.Log("Class 'XmlManager' in 'Load' function:" + exc.ToString());
+                instance = default(T);
+                return false;
+            }
         }
-        catch(Exception exc)
+
+        public static bool Save<T>(T obj, string name)
         {
-            Debug.Log("Class 'XmlManager' in 'Save' function:" + exc.ToString());
-            return false;
+            try
+            {
+                using (FileStream fileStream = File.Open(name, FileMode.Create))
+                {
+                    if (IsCryptoOn)
+                    {
+                        ICryptoTransform key = GetCryptoTransform();
+                        if (key == null)
+                        {
+                            return false;
+                        }
+
+                        using (CryptoStream cryptoStream = new CryptoStream(fileStream, key, CryptoStreamMode.Read))
+                        {
+                            XmlSerializer xml = new XmlSerializer(typeof(T));
+                            xml.Serialize(cryptoStream, obj);
+
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        using (TextWriter textWriter = new StreamWriter(fileStream))
+                        {
+                            XmlSerializer xml = new XmlSerializer(typeof(T));
+                            xml.Serialize(textWriter, obj);
+                        }
+                        return true;
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.Log("Class 'XmlManager' in 'Save' function:" + exc.ToString());
+                return false;
+            }
+        }
+
+        private static ICryptoTransform GetCryptoTransform()
+        {
+            ICryptoTransform key = null;
+            byte[] sha512 = new byte[512];
+            string keyData = SystemInfo.deviceUniqueIdentifier + SystemInfo.deviceModel;
+            try
+            {
+                using (SHA512CryptoServiceProvider sha512CSP = new SHA512CryptoServiceProvider())
+                {
+                    sha512 = sha512CSP.ComputeHash(Encoding.ASCII.GetBytes(keyData));
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.Log("Class 'XmlManager' in 'GetCryptoTransform' function: " + exc.ToString());
+                return null;
+            }
+
+            byte[] shaKey = new byte[32];
+            byte[] shaIv = new byte[16];
+            for (int i = 0; i < 32; i++)
+            {
+                if (i < 16)
+                {
+                    shaIv[i] = sha512[i * 3];
+                }
+                shaKey[i] = sha512[i * 2];
+            }
+
+            try
+            {
+                using (AesCryptoServiceProvider aesCSP = new AesCryptoServiceProvider())
+                {
+                    key = aesCSP.CreateDecryptor(shaKey, shaIv);
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.Log("Class 'XmlManager' in 'GetCryptoTransform' function: " + exc.ToString());
+                return null;
+            }
+
+            return key;
         }
     }
 }

@@ -2,30 +2,69 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class City : MonoBehaviour
+using SaveLoad;
+
+namespace CityScene
 {
-    Player player;
+    public enum CityObjectType { BlackSmith, Tawern, Church, PlayerHouse, Dungeons, CityAll };
+    public delegate void OpenBuildingCallback(CityObjectType cityObjectType);
 
-	// Use this for initialization
-	void Start()
+    public class City : MonoBehaviour
     {
-        if(!File.Exists(@"Assets/Saves/Player.xml"))
+        private Player player;
+        public GameObject cityAll;
+        public GameObject blackSmithHouse;
+
+        // Use this for initialization
+        public void Awake()
         {
-            Debug.Log("new");
-            this.player = new Player();
-            XmlManager.Save<Player>(this.player, "Player.xml");
+
         }
-        else
+
+        public void Start()
         {
-            Debug.Log("load");
-            XmlManager.Load<Player>("Player.xml", out this.player);
+
         }
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void OpenBuilding(CityObjectType cityObjectType)
+        {
+            switch (cityObjectType)
+            {
+                case CityObjectType.BlackSmith:
+                    {
+                        this.blackSmithHouse.SetActive(true);
+                        this.cityAll.SetActive(false);
+                        break;
+                    }
+                case CityObjectType.Church:
+                    {
+                        break;
+                    }
+                case CityObjectType.Dungeons:
+                    {
+                        break;
+                    }
+                case CityObjectType.PlayerHouse:
+                    {
+                        break;
+                    }
+                case CityObjectType.Tawern:
+                    {
+                        break;
+                    }
+                case CityObjectType.CityAll:
+                    {
+                        break;
+                    }
+            }
+        }
+    }
 }

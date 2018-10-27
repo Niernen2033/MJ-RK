@@ -46,7 +46,8 @@ namespace MainMenuScene
 
         private void OnButtonClick(string path)
         {
-            SaveInfo.Paths.AcctualSave = path;
+            ProfileSave.Instance.AcctualSavePath = path;
+            ProfileSave.Instance.Update();
             this.invokePlayGameCallback();
         }
     }

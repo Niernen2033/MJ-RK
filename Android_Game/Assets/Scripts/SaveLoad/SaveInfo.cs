@@ -12,7 +12,7 @@ namespace SaveLoad
         public static class Paths
         {
             public static readonly string GlobalFolder = @"Assets/Saves/";
-            public static string AcctualSave = "";
+            //public static string AcctualSave = "";
         }
     }
 }

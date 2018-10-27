@@ -7,7 +7,6 @@ namespace SaveLoad
 {
     public sealed class GameSave
     {
-        public bool IsAcctual { get; set; }
         public string Name { get; set; }
         public string Texture { get; set; }
 
@@ -30,7 +29,6 @@ namespace SaveLoad
 
         private GameSave()
         {
-            this.IsAcctual = false;
             this.Name = string.Empty;
             this.SavePath = string.Empty;
             this.Player = new Player();

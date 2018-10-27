@@ -11,7 +11,7 @@ using SaveLoad;
 
 namespace MainMenuScene
 {
-    public enum MenuType { MainMenu, OptionsMenu, LoadGameMenu, CreateNewGameMenu }
+    public enum MenuType { MainMenu, OptionsMenu, LoadGameMenu }
     public delegate void InvokePlayGameCallback();
 
     public class Menu : MonoBehaviour
@@ -29,15 +29,12 @@ namespace MainMenuScene
         public GameObject mainMenu;
         public GameObject optionsMenu;
         public GameObject loadGameMenu;
-        public GameObject createNewGameMenu;
         public Button continueGameButton;
 
         public event EventHandler<SavesEventArgs> LoadGameMenuInvoked;
 
         private void SetUpSaves()
         {
-            string continueSavePath = string.Empty;
-
             //we dont chave global folder to save
             if (!Directory.Exists(SaveInfo.Paths.GlobalFolder))
             {
@@ -79,23 +76,21 @@ namespace MainMenuScene
                                     continue;
                                 }
 
-                                //check if this save is active save
-                                if (GameSave.Instance.IsAcctual)
-                                {
-                                    this.continueGameButton.interactable = true;
-                                    this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.9372549f, 1f, 0f);
-                                    continueSavePath = savePath;
-                                }
                                 this.saveMembers.Add(new SaveMember(GameSave.Instance.Texture, GameSave.Instance.Name, savePath));
                             }
                         }
                     }
-                }
-            }
 
-            if (continueSavePath != string.Empty)
-            {
-                SaveInfo.Paths.AcctualSave = continueSavePath;
+                    //check if this save is active save
+                    if (ProfileSave.Instance.AcctualSavePath != null)
+                    {
+                        if (File.Exists(ProfileSave.Instance.AcctualSavePath))
+                        {
+                            this.continueGameButton.interactable = true;
+                            this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.9372549f, 1f, 0f);
+                        }
+                    }
+                }
             }
         }
 
@@ -108,7 +103,6 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(true);
                         this.optionsMenu.SetActive(false);
                         this.loadGameMenu.SetActive(false);
-                        this.createNewGameMenu.SetActive(false);
                         break;
                     }
                 case (MenuType.OptionsMenu):
@@ -116,7 +110,6 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(false);
                         this.optionsMenu.SetActive(true);
                         this.loadGameMenu.SetActive(false);
-                        this.createNewGameMenu.SetActive(false);
                         break;
                     }
                 case (MenuType.LoadGameMenu):
@@ -124,15 +117,6 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(false);
                         this.optionsMenu.SetActive(false);
                         this.loadGameMenu.SetActive(true);
-                        this.createNewGameMenu.SetActive(false);
-                        break;
-                    }
-                case (MenuType.CreateNewGameMenu):
-                    {
-                        this.mainMenu.SetActive(false);
-                        this.optionsMenu.SetActive(false);
-                        this.loadGameMenu.SetActive(false);
-                        this.createNewGameMenu.SetActive(true);
                         break;
                     }
             }
@@ -149,19 +133,7 @@ namespace MainMenuScene
             this.saveMembers = new List<SaveMember>();
             this.ifSavesNeedsToBeReloaded = true;
 
-            if(!ProfileSave.Instance.Load())
-            {
-                Debug.Log("Trying to create profile save");
-                if(!ProfileSave.Instance.Update())
-                {
-                    Debug.Log("Cannot create profile save");
-                }
-            }
-            else
-            {
-                this.SetVolume(ProfileSave.Instance.MenuVolume);
-                this.optionsMenu.GetComponentInChildren<Slider>().value = ProfileSave.Instance.MenuVolume;
-            }
+            this.LoadSceneData();
 
             this.menuState.Current = MenuType.MainMenu;
             this.menuState.Last = MenuType.MainMenu;
@@ -174,6 +146,23 @@ namespace MainMenuScene
         public void Start()
         {
             this.SetUpSaves();
+        }
+
+        private void LoadSceneData()
+        {
+            if (!ProfileSave.Instance.Load())
+            {
+                Debug.Log("Trying to create profile save");
+                if (!ProfileSave.Instance.Update())
+                {
+                    Debug.Log("Cannot create profile save");
+                }
+            }
+            else
+            {
+                this.SetVolume(ProfileSave.Instance.MenuVolume);
+                this.optionsMenu.GetComponentInChildren<Slider>().value = ProfileSave.Instance.MenuVolume;
+            }
         }
 
         public void InvokeMainMenu()
@@ -194,13 +183,6 @@ namespace MainMenuScene
             {
                 this.ifSavesNeedsToBeReloaded = false;
             }
-        }
-
-        public void InvokeCreateNewGameMenu()
-        {
-            this.menuState.Last = this.menuState.Current;
-            this.menuState.Current = MenuType.CreateNewGameMenu;
-            this.ChangeAcctualMenu();
         }
 
         public void InvokeOptionsMenu()
@@ -226,13 +208,18 @@ namespace MainMenuScene
                 this.audioSource.mute = true;
         }
 
+        public void InvokeNewGame()
+        {
+            SceneManager.LoadScene((int)GameGlobals.SceneIndex.NewGameScene);
+        }
+
         public void InvokePlayGame()
         {
             if (GameGlobals.IsDebugState)
             {
-                SaveInfo.Paths.AcctualSave = @"C:\Users\Michal\Documents\Unity\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
+                ProfileSave.Instance.AcctualSavePath = @"C:\Users\Michal\Documents\Unity\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
             }
-            GameSave.Instance.Load(SaveInfo.Paths.AcctualSave);
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
             SceneManager.LoadScene((int)GameGlobals.SceneIndex.CityScene);
         }
 

@@ -10,6 +10,7 @@ namespace SaveLoad
     public class ProfileSave
     {
         public float MenuVolume { get; set; }
+        public string AcctualSavePath { get; set; }
         
         private static ProfileSave instance = null;
         private static string Path = SaveInfo.Paths.GlobalFolder + "Profile.xml";
@@ -29,6 +30,7 @@ namespace SaveLoad
         private ProfileSave()
         {
             this.MenuVolume = 1f;
+            this.AcctualSavePath = string.Empty;
         }
 
         public bool Load()

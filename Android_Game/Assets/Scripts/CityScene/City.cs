@@ -20,14 +20,7 @@ namespace CityScene
         // Use this for initialization
         public void Awake()
         {
-            if (!File.Exists(SaveInfo.Paths.AcctualSave))
-            {
-                Debug.Log("Class 'City' in 'Awake' function: File doesn't exist");
-            }
-            else
-            {
-                GameSave.Instance.Load(SaveInfo.Paths.AcctualSave);
-            }
+
         }
 
         public void Start()

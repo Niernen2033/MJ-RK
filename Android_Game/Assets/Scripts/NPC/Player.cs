@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
+using Items;
 
 //[System.Serializable]
 public class Player : Champion

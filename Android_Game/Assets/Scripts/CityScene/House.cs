@@ -8,8 +8,7 @@ namespace CityScene
 {
     public class House : MonoBehaviour, IPointerClickHandler
     {
-        public Texture2D houseTexture;
-        public CityObjectType houseType;
+        public City.ObjectType houseType;
         private OpenBuildingCallback openBuildingCallback;
 
         public void Awake()

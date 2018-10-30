@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Armor : Item
+    public class Armor : EquipmentItem
     {
         //Bonus to basic champions vitality (will be add to basic champion statistic)
         public Statistics VitalityBonus { get; set; }
@@ -27,10 +27,11 @@ namespace Items
         //Bonus to basic champions strength (will be add to basic champion statistic)
         public Statistics StrengthBonus { get; set; }
 
-        public Armor(ItemType itemType, string itemIconName, string name, double durability, int goldValue, double weight, bool isUsed, bool isBroken,
-            Statistics vitalityBonus, Statistics magicArmourBonus, Statistics rangedArmorBonus, Statistics melleArmorBonus, Statistics dexterityBonus,
-            Statistics intelligenceBonus, Statistics strengthBonus)
-            : base(ItemClass.Armor, itemType, itemIconName, name, durability, goldValue, weight, isUsed, isBroken)
+        public Armor(ItemType itemType, ItemIcon icon,
+            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, 
+            Statistics vitalityBonus, Statistics magicArmourBonus, Statistics rangedArmorBonus, Statistics melleArmorBonus,
+            Statistics dexterityBonus, Statistics intelligenceBonus, Statistics strengthBonus) : 
+            base(ItemClass.Armor, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability)
         {
             this.VitalityBonus = vitalityBonus;
             this.MagicArmorBonus = magicArmourBonus;
@@ -43,7 +44,7 @@ namespace Items
 
         public Armor() : base()
         {
-            this.ItemClass = ItemClass.Armor;
+            this.Class = ItemClass.Armor;
             this.VitalityBonus = new Statistics();
             this.MagicArmorBonus = new Statistics();
             this.RangedArmorBonus = new Statistics();
@@ -51,26 +52,6 @@ namespace Items
             this.DexterityBonus = new Statistics();
             this.IntelligenceBonus = new Statistics();
             this.StrengthBonus = new Statistics();
-        }
-
-        public Armor(ref Armor armor)
-        {
-            this.ItemClass = armor.ItemClass;
-            this.ItemType = armor.ItemType;
-            this.Name = armor.Name;
-            this.Durability = armor.Durability;
-            this.GoldValue = armor.GoldValue;
-            this.Weight = armor.Weight;
-            this.IsUsed = armor.IsUsed;
-            this.IsBroken = armor.IsBroken;
-
-            this.VitalityBonus = armor.VitalityBonus;
-            this.MagicArmorBonus = armor.MagicArmorBonus;
-            this.RangedArmorBonus = armor.RangedArmorBonus;
-            this.MelleArmorBonus = armor.MelleArmorBonus;
-            this.DexterityBonus = armor.DexterityBonus;
-            this.IntelligenceBonus = armor.IntelligenceBonus;
-            this.StrengthBonus = armor.StrengthBonus;
         }
     }
 }

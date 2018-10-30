@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Weapon : Item
+    public class Weapon : EquipmentItem
     {
         //Bonus to basic champions damage (will be add to basic champion statistic)
         public Statistics BasicDamage { get; set; }
@@ -21,9 +21,10 @@ namespace Items
         //Bonus to basic champions strength (will be add to basic champion statistic)
         public Statistics StrengthBonus { get; set; }
 
-        public Weapon(ItemType itemType, string itemIconName, string name, double durability, int goldValue, double weight, bool isUsed, bool isBroken,
+        public Weapon(ItemType itemType, ItemIcon icon,
+            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability,
             Statistics basicDamage, Statistics vitalityBonus, Statistics dexterityBonus, Statistics intelligenceBonus,
-            Statistics strengthBonus) : base(ItemClass.Weapon, itemType, itemIconName, name, durability, goldValue, weight, isUsed, isBroken)
+            Statistics strengthBonus) : base(ItemClass.Weapon, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability)
         {
             this.BasicDamage = basicDamage;
             this.VitalityBonus = vitalityBonus;
@@ -34,30 +35,12 @@ namespace Items
 
         public Weapon() : base()
         {
-            this.ItemClass = ItemClass.Weapon;
+            this.Class = ItemClass.Weapon;
             this.BasicDamage = new Statistics();
             this.VitalityBonus = new Statistics();
             this.DexterityBonus = new Statistics();
             this.IntelligenceBonus = new Statistics();
             this.StrengthBonus = new Statistics();
-        }
-
-        public Weapon(ref Weapon weapon)
-        {
-            this.ItemClass = weapon.ItemClass;
-            this.ItemType = weapon.ItemType;
-            this.Name = weapon.Name;
-            this.Durability = weapon.Durability;
-            this.GoldValue = weapon.GoldValue;
-            this.Weight = weapon.Weight;
-            this.IsUsed = weapon.IsUsed;
-            this.IsBroken = weapon.IsBroken;
-
-            this.BasicDamage = weapon.BasicDamage;
-            this.VitalityBonus = weapon.VitalityBonus;
-            this.DexterityBonus = weapon.DexterityBonus;
-            this.IntelligenceBonus = weapon.IntelligenceBonus;
-            this.StrengthBonus = weapon.StrengthBonus;
         }
     }
 }

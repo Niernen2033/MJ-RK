@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NPC;
 using Items;
 
 using SaveLoad;
@@ -19,11 +20,13 @@ namespace CityScene
         public GameObject tawern;
         public GameObject playerHouse;
         public GameObject church;
+        public GameObject inventory;
 
         // Use this for initialization
         public void Awake()
         {
-            this.GetComponentInChildren<BagpackSlot>().AddItem(new Armor());
+            ProfileSave.Instance.Load();
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
         }
 
         public void Start()
@@ -35,6 +38,16 @@ namespace CityScene
         void Update()
         {
 
+        }
+
+        public void OpenInventory()
+        {
+            inventory.GetComponent<Inventory>().Open(GameSave.Instance.Player.Backpack, new Vector2(500, 250));
+        }
+
+        public void CloseInventory()
+        {
+            inventory.GetComponent<Inventory>().Close();
         }
 
         public void OpenBuilding(ObjectType cityObjectType)

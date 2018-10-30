@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GameSave xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <IsAcctual>true</IsAcctual>
-  <Name>testowy</Name>
-  <TexturePath>aa</TexturePath>
+  <Name />
   <Player>
     <Vitality>
-      <Basic>3</Basic>
+      <Basic>100</Basic>
     </Vitality>
     <MagicArmor>
-      <Basic>3</Basic>
+      <Basic>1</Basic>
     </MagicArmor>
     <RangedArmor>
-      <Basic>3</Basic>
+      <Basic>1</Basic>
     </RangedArmor>
     <MelleArmor>
-      <Basic>3</Basic>
+      <Basic>1</Basic>
     </MelleArmor>
     <Dexterity>
-      <Basic>2</Basic>
+      <Basic>1</Basic>
     </Dexterity>
     <Intelligence>
-      <Basic>3</Basic>
+      <Basic>1</Basic>
     </Intelligence>
     <Strength>
-      <Basic>3</Basic>
+      <Basic>1</Basic>
     </Strength>
     <IsIllness>false</IsIllness>
-    <ArmorBackpackItem>
-      <ItemClass>Armor</ItemClass>
-      <ItemType>Empty</ItemType>
+    <ArmorBagpackItem>
+      <Class>Armor</Class>
+      <Type>None</Type>
       <Name />
-      <IsUsed>false</IsUsed>
-      <IsBroken>false</IsBroken>
-      <Durability>0</Durability>
+      <Icon>
+        <Index>439</Index>
+        <SlotIndex>-1</SlotIndex>
+        <Rarity>None</Rarity>
+      </Icon>
       <GoldValue>0</GoldValue>
       <Weight>0</Weight>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
       <VitalityBonus>
         <Basic>0</Basic>
       </VitalityBonus>
@@ -56,16 +59,21 @@
       <StrengthBonus>
         <Basic>0</Basic>
       </StrengthBonus>
-    </ArmorBackpackItem>
-    <WeaponEquipmentItem>
-      <ItemClass>Weapon</ItemClass>
-      <ItemType>Empty</ItemType>
+    </ArmorBagpackItem>
+    <WeaponBagpackItem>
+      <Class>Weapon</Class>
+      <Type>None</Type>
       <Name />
-      <IsUsed>false</IsUsed>
-      <IsBroken>false</IsBroken>
-      <Durability>0</Durability>
+      <Icon>
+        <Index>439</Index>
+        <SlotIndex>-1</SlotIndex>
+        <Rarity>None</Rarity>
+      </Icon>
       <GoldValue>0</GoldValue>
       <Weight>0</Weight>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
       <BasicDamage>
         <Basic>0</Basic>
       </BasicDamage>
@@ -81,6 +89,7 @@
       <StrengthBonus>
         <Basic>0</Basic>
       </StrengthBonus>
-    </WeaponEquipmentItem>
+    </WeaponBagpackItem>
+    <MaxCapacity>100</MaxCapacity>
   </Player>
 </GameSave>

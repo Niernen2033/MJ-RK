@@ -5,7 +5,7 @@ using Items;
 
 namespace Items
 {
-    sealed class ItemIconIndex
+    sealed class ItemIndex
     {
         public static class MelleArmor
         {

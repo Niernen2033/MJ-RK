@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NPC;
 using Items;
+using Prefabs.Inventory;
 
 using SaveLoad;
 
@@ -26,7 +27,7 @@ namespace CityScene
         public void Awake()
         {
             ProfileSave.Instance.Load();
-            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
+            //GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
         }
 
         public void Start()
@@ -42,12 +43,20 @@ namespace CityScene
 
         public void OpenInventory()
         {
-            inventory.GetComponent<Inventory>().Open(GameSave.Instance.Player.Backpack, new Vector2(500, 250));
+            inventory.gameObject.GetComponent<NormalInventory>().Open();
         }
 
         public void CloseInventory()
         {
-            inventory.GetComponent<Inventory>().Close();
+            inventory.GetComponent<NormalInventory>().Close();
+        }
+
+
+        public void AddTestItem()
+        {
+            Armor a = new Armor();
+            a.Features.EnableFeatures(FeaturesType.IsEatAble, FeaturesType.IsInfoAble);
+            inventory.GetComponent<NormalInventory>().Bagpack.AddItem(a);
         }
 
         public void OpenBuilding(ObjectType cityObjectType)

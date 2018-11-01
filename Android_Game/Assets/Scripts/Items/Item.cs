@@ -34,6 +34,8 @@ namespace Items
         //Item basic weight
         public double Weight { get; set; }
 
+        //Features
+        public ItemFeatures Features { get; set; }
 
         //BASIC CONSTRUCTORS ====================================================================================
         protected Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
@@ -42,6 +44,7 @@ namespace Items
             this.Class = itemClass;
             this.Type = itemType;
             this.Icon = icon;
+            this.Features = new ItemFeatures();
 
             this.Name = name;
             this.GoldValue = goldValue;
@@ -53,6 +56,7 @@ namespace Items
             this.Class = ItemClass.None;
             this.Type = ItemType.None;
             this.Icon = new ItemIcon();
+            this.Features = new ItemFeatures();
 
             this.Name = string.Empty;
             this.GoldValue = 0;

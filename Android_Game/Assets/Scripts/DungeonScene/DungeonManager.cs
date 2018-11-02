@@ -7,22 +7,20 @@ public class DungeonManager : MonoBehaviour {
     [SerializeField]
     private int numberOfDungeonLevels;
 
-    private List<DungeonLevelChunk> levelChunks;
+    private static List<DungeonLevelChunk> levelChunks;//list of chunks must be shared
     private DungeonLevelChunk tempChunkObject;
-
-
 
     // Use this for initialization
     void Start () {
-        //tempChunkObject = new DungeonLevelChunk();
-        /*
+        tempChunkObject = new DungeonLevelChunk();
+        
         levelChunks = new List<DungeonLevelChunk>();
 
         for(int i=0;i<numberOfDungeonLevels;i++)
         {
             tempChunkObject.setIdOfChunk(i);
             levelChunks.Add(tempChunkObject);
-        }*/
+        }
 	}
 	
 	// Update is called once per frame
@@ -30,14 +28,17 @@ public class DungeonManager : MonoBehaviour {
 		
 	}
 
-    
+    public List<DungeonLevelChunk> GetLevelChunks()
+    {
+        return levelChunks;
+    }
 }
 
 public class DungeonLevelChunk{
     private int idOfChunk;
     private bool wasCreated;
 
-    DungeonLevelChunk()
+    public DungeonLevelChunk()
     {
         wasCreated = false;
     }

@@ -3,12 +3,20 @@ using UnityEngine;
 
 public class DungeonsGenerator : MonoBehaviour {
 
+    [SerializeField]
+    private int idOfCorridor;
+
     private GameObject factoryObject;
     private List<GameChunk> producedChunks;
     private int objectsToGenerate;
     private int chunkWidth;
     private int minimumNumberOfChunks, maximumNumberOfChunks;
     private int leftBoundPossition, rightBoundPossition, rightBoundPossitionForGenerator;
+    private Corridor corridorToGenerate;
+    private DungeonManager dungeonManager;
+    private GameObject dungeonCanvas;
+    private List<DungeonLevelChunk> dungeonLevelChunks;
+    private static List<Corridor> corridorList;
 
     System.Random randomNumber = new System.Random();
 
@@ -16,85 +24,56 @@ public class DungeonsGenerator : MonoBehaviour {
         minimumNumberOfChunks = 6;
         maximumNumberOfChunks = 12;
 
+        //Static list of corridors
+        corridorList = new List<Corridor>();
+
         //to narazie na sztywno
         chunkWidth = 7;
 
-        //to je wzór, tego nie wysprite'ujesz
+        //It's template object for creating another chunks
         factoryObject = new GameObject();
+        //Defines layer to display backgound on
         factoryObject.layer = 0;
 
         objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
+        //Saving length data to object for later reload
+        corridorToGenerate = new Corridor(objectsToGenerate);
         leftBoundPossition = chunkWidth;
         rightBoundPossition = chunkWidth * (objectsToGenerate-1);
         rightBoundPossitionForGenerator = chunkWidth * objectsToGenerate;
         string pickedOne;
         int pickedOneInt;
         producedChunks = new List<GameChunk>();
-        SpriteRenderer spriteRender;
-        string filePath = "WarrensTextures/";
-        string[] typeOfDungeonTexture = { "warrens." };
-        string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01"};
-        GameObject tempObject;
-        GameChunk tempChunk;
-
         int i;
 
-        for (i = 0; i < objectsToGenerate; i++)
+        //Getting dungeonManager to acces his variables
+        dungeonCanvas = GameObject.Find("Dungeon");
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        dungeonLevelChunks = dungeonManager.GetLevelChunks();
+
+        if (dungeonLevelChunks[idOfCorridor].getWasCreated() == true)
         {
-            pickedOneInt = randomNumber.Next(1, 7);
-            pickedOne = pickedOneInt.ToString();
-            tempObject = Instantiate(factoryObject);
-            tempChunk = new GameChunk(tempObject,pickedOneInt);
-            tempObject.SetActive(false);
-            producedChunks.Add(tempChunk);
-        
-            spriteRender = producedChunks[i].getProducedObject().AddComponent<SpriteRenderer>();//jest jeszcze GetComponent
+            Debug.Log("Scena istnieje!");
 
-            if (i == 0 || i == objectsToGenerate - 1)
+            objectsToGenerate = corridorList[idOfCorridor].getCorridorLength();
+            for (i = 0; i < objectsToGenerate; i++)
             {
-                spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[1]);
+                pickedOne = corridorList[idOfCorridor].getTextureArrayElement(i).ToString();
             }
-            else
-            {
-                if(producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
-                {
-                    while(producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
-                    {
-                        producedChunks[i].setRandomizedNumber(randomNumber.Next(1, 7));
-                    }
-                }
-
-                spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[0] + producedChunks[i].getRandomizedNumber());
-            }
-
-            producedChunks[i].getProducedObject().transform.Translate(Vector2.right * chunkWidth * i);
-            producedChunks[i].getProducedObject().name = "DungeonChunk_" + i.ToString();
-            producedChunks[i].getProducedObject().SetActive(true);
         }
-
-        for (i = 0; i < 2; i++)
+        else
         {
-            tempObject = Instantiate(factoryObject);
-            tempChunk = new GameChunk(tempObject, -1);
-            tempObject.SetActive(false);
-            producedChunks.Add(tempChunk);
-            spriteRender = producedChunks[objectsToGenerate + i].getProducedObject().AddComponent<SpriteRenderer>();
-            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[2]);
+            Debug.Log("Scena nie istnieje!");
+            for (i = 0; i < objectsToGenerate; i++)
+            {
+                pickedOneInt = randomNumber.Next(1, 7);
+                corridorToGenerate.setTextureArray(pickedOneInt);//Adding texture number to Corridor object
+                //Adding generated corridor object to List
+                corridorList.Add(corridorToGenerate);
 
-            //producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(new Vector2(0,(float)0.4));
-            if (i == 0)
-            {
-                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.left * leftBoundPossition);
-                producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkEntrance";
-            }
-            else
-            {
-                //producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(new Vector2(-3, 0));
-                spriteRender.flipX = true;
-                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.right * rightBoundPossitionForGenerator);
-                producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkExit";
-            }
-            producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
+                pickedOne = pickedOneInt.ToString();
+                generateMap(pickedOneInt, i);
+            } 
         }
     }
 
@@ -111,6 +90,93 @@ public class DungeonsGenerator : MonoBehaviour {
     public int getRightBoundPossition()
     {
         return rightBoundPossition;
+    }
+
+    public void generateMap(int pickedOneInt, int i)
+    {
+        GameObject tempObject;
+        GameChunk tempChunk;
+        SpriteRenderer spriteRender;
+        string filePath = "WarrensTextures/";
+        string[] typeOfDungeonTexture = { "warrens." };
+        string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01" };
+
+        tempObject = Instantiate(factoryObject);
+        tempChunk = new GameChunk(tempObject, pickedOneInt);
+        tempObject.SetActive(false);
+        producedChunks.Add(tempChunk);
+
+        //Adding SpriteRenderer to component (later we can change it to add it into cloned object)
+        spriteRender = producedChunks[i].getProducedObject().AddComponent<SpriteRenderer>();//jest jeszcze GetComponent
+
+        //Every first and last chunk will be generated as entrance and exit
+        if (i == 0 || i == objectsToGenerate - 1)
+        {
+            //Generating entrance and exit from the corridor
+            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[1]);
+        }
+        else
+        {
+            //This checks if it generated 2 identical textures in a row
+            if (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
+            {
+                //And tries to reroll it until it gets different one
+                while (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
+                {
+                    //Applies new value
+                    producedChunks[i].setRandomizedNumber(randomNumber.Next(1, 7));
+                }
+            }
+            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[0] + producedChunks[i].getRandomizedNumber().ToString());//I might need to remove toString
+        }
+
+        //Setting possition, naming new object and making it active in inspector
+        producedChunks[i].getProducedObject().transform.Translate(Vector2.right * chunkWidth * i);
+        producedChunks[i].getProducedObject().name = "DungeonChunk_" + i.ToString();
+        producedChunks[i].getProducedObject().SetActive(true);
+        Debug.Log("Dlugość chunkow before: " + producedChunks.Count);
+
+        //After generating last chunk we are generating border chunks
+        if (i == objectsToGenerate-1)
+        {
+            generateEdgesOfMap(tempObject, tempChunk, spriteRender, filePath, typeOfDungeonTexture, specificTextureType);
+        }
+    }
+
+    public void generateEdgesOfMap(GameObject tempObject, GameChunk tempChunk, SpriteRenderer spriteRender, string filePath, string[] typeOfDungeonTexture, string[] specificTextureType)
+    {
+        Debug.Log("Dlugość chunkow past: " + producedChunks.Count);
+        int i;
+        for (i = 0; i < 2; i++)
+        {
+            //Generating temporary Object
+            tempObject = Instantiate(factoryObject);
+            tempChunk = new GameChunk(tempObject, -1);
+            tempObject.SetActive(false);
+            producedChunks.Add(tempChunk);
+
+            Debug.Log("Number of object: " + (int)(objectsToGenerate + i));
+            Debug.Log("Debug iterator!" + i);
+            Debug.Log("Debug OTG!" + objectsToGenerate);
+            Debug.Log("Chunk array length: " + producedChunks.Count);
+            spriteRender = producedChunks[(int)(objectsToGenerate + i)].getProducedObject().AddComponent<SpriteRenderer>();
+            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[2]);
+
+            //Entrance and exit generation
+            if (i == 0)
+            {
+                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.left * leftBoundPossition);
+                producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkEntrance";
+            }
+            else
+            {
+                //Exit texture must be flipped
+                spriteRender.flipX = true;
+                producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.right * rightBoundPossitionForGenerator);
+                producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkExit";
+            }
+            producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
+        }
     }
 }
 
@@ -148,10 +214,44 @@ public class GameChunk
     }
 }
 
-
-[System.Serializable]
-public class SaveItems
+public class Corridor
 {
-    public string itemName;
-}
+    private int corridorLength;
+    private List<int> textureArray;
 
+    public Corridor(int corridorLength)
+    {
+        this.corridorLength = corridorLength;
+        textureArray = new List<int>();
+    }
+
+    public void setTextureArray(List<int> textureId)
+    {
+        textureArray = textureId;
+    }
+
+    public void setTextureArray(int textureId)
+    {
+        textureArray.Add(textureId);
+    }
+
+    public List<int> getTextureArray()
+    {
+        return textureArray;
+    }
+
+    public int getTextureArrayElement(int iterator)
+    {
+        return textureArray[iterator];
+    }
+
+    public void setCorridorLength(int corridorLength)
+    {
+        this.corridorLength = corridorLength;
+    }
+
+    public int getCorridorLength()
+    {
+        return corridorLength;
+    }
+}

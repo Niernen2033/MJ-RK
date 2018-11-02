@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 493992197}
   - component: {fileID: 493992202}
   - component: {fileID: 493992204}
+  - component: {fileID: 493992203}
   m_Layer: 0
   m_Name: Dungeon
   m_TagString: Untagged
@@ -422,6 +423,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280a2533a0c567048aa91f37e374717a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idOfCorridor: 0
+--- !u!114 &493992203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 493992196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5effb91a2fed2ca4fb95c409b025cc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfDungeonLevels: 2
 --- !u!114 &493992204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,7 +880,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1541207451}
-  - component: {fileID: 1541207450}
   m_Layer: 0
   m_Name: GameEngineManager
   m_TagString: Untagged
@@ -874,18 +887,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1541207450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1541207449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5effb91a2fed2ca4fb95c409b025cc07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfDungeonLevels: 4
 --- !u!4 &1541207451
 Transform:
   m_ObjectHideFlags: 0

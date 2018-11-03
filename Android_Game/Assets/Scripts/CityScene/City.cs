@@ -55,7 +55,7 @@ namespace CityScene
         public void AddTestItem()
         {
             Armor a = new Armor();
-            a.Features.EnableFeatures(FeaturesType.IsEatAble, FeaturesType.IsInfoAble);
+            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble);
             inventory.GetComponent<NormalInventory>().Bagpack.AddItem(a);
         }
 

@@ -30,51 +30,71 @@ namespace Prefabs.Inventory
 
         }
 
-        public void AddItem(Item newItem, BagpackType bagpackType)
+        public void AddItem(Item newItem, ItemFeaturesType[] bagpackTypeFeatures)
         {
             this.SetSlotIcons(newItem);
-            this.SetSlotOptions(newItem, bagpackType);
+            this.SetSlotOptions(newItem, bagpackTypeFeatures);
             this.IsEmpty = false;
         }
 
-        private void SetSlotOptions(Item item, BagpackType bagpackType)
+        private void SetSlotOptions(Item item, ItemFeaturesType[] bagpackTypeFeatures)
         {
             Sprite[] options_icons = Resources.LoadAll<Sprite>(SaveInfo.Paths.Resources.Images.Inventory.AllOptionsItems);
 
             int actionImageIndex = -1;
             int deleteImageIndex = -1;
             int infoImageIndex = -1;
-            List<FeaturesType> itemFeatures = item.Features.GetAvailableFeatures();
-            switch (bagpackType)
+
+            foreach(ItemFeaturesType bagpackItemFeature in bagpackTypeFeatures)
             {
-                case BagpackType.EQ:
+                if(bagpackItemFeature == ItemFeaturesType.IsDeleteAble)
+                {
+                    if(item.Features.GetFeatureStatus(ItemFeaturesType.IsDeleteAble))
                     {
-
-                        break;
-                    }
-                case BagpackType.Normal:
-                    {
-                        if (itemFeatures.Contains(FeaturesType.IsEatAble))
-                        {
-                            actionImageIndex = (int)InventoryIndex.Options.Eat;
-                        }
-                        if (itemFeatures.Contains(FeaturesType.IsInfoAble))
-                        {
-                            infoImageIndex = (int)InventoryIndex.Options.Info;
-                        }
-
                         deleteImageIndex = (int)InventoryIndex.Options.Delete;
-
-                        break;
                     }
-                case BagpackType.Repair:
+                }
+                else if (bagpackItemFeature == ItemFeaturesType.IsInfoAble)
+                {
+                    if (item.Features.GetFeatureStatus(ItemFeaturesType.IsInfoAble))
                     {
-                        break;
+                        infoImageIndex = (int)InventoryIndex.Options.Info;
                     }
-                case BagpackType.Shop:
+                }
+                else
+                {
+                    if (item.Features.GetFeatureStatus(bagpackItemFeature))
                     {
-                        break;
+                        switch (bagpackItemFeature)
+                        {
+                            case ItemFeaturesType.IsEatAble:
+                                {
+                                    actionImageIndex = (int)InventoryIndex.Options.Eat;
+                                    break;
+                                }
+                            case ItemFeaturesType.IsEquipAble:
+                                {
+                                    actionImageIndex = (int)InventoryIndex.Options.Equip;
+                                    break;
+                                }
+                            case ItemFeaturesType.IsRepairAble:
+                                {
+                                    actionImageIndex = (int)InventoryIndex.Options.Repair;
+                                    break;
+                                }
+                            case ItemFeaturesType.IsSellAble:
+                                {
+                                    actionImageIndex = (int)InventoryIndex.Options.Sell;
+                                    break;
+                                }
+                            case ItemFeaturesType.IsUpgradeAble:
+                                {
+                                    actionImageIndex = (int)InventoryIndex.Options.Upgrade;
+                                    break;
+                                }
+                        }
                     }
+                }
             }
 
             if (actionImageIndex != -1)

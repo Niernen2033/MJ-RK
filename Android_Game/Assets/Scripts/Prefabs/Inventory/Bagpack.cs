@@ -16,6 +16,7 @@ namespace Prefabs.Inventory
         public Text GoldTextValue;
         public Text WeightTextValue;
         public BagpackType bagpackType;
+        private List<ItemFeaturesType[]> bagpackTypeFeatures;
 
         private List<BagpackSlot> bagpackslots;
         private List<Item> items;
@@ -27,6 +28,11 @@ namespace Prefabs.Inventory
         private void Awake()
         {
             this.ClearData();
+            this.bagpackTypeFeatures = new List<ItemFeaturesType[]>();
+            this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsEatAble, ItemFeaturesType.IsDeleteAble });
+            this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsSellAble });
+            this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsRepairAble });
+            this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsEquipAble, ItemFeaturesType.IsDeleteAble });
         }
 
         // Use this for initialization
@@ -76,7 +82,7 @@ namespace Prefabs.Inventory
             {
                 if (this.bagpackslots[i].IsEmpty)
                 {
-                    this.bagpackslots[i].AddItem(item, this.bagpackType);
+                    this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType]);
                     this.inventory_weight += item.Weight;
                     if(this.IsGold(item))
                     {

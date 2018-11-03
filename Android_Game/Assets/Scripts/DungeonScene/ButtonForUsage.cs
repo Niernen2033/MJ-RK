@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -13,19 +14,31 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private Corridor currentCorridor;
     private int currentCorridorNumber;
 
+    [SerializeField]
+    private Button useButton;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(focusedHeroPosition>=0 && focusedHeroPosition<=7)
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+    }
+
+    public void doorTransition()
+    {
+        if (focusedHeroPosition >= 0 && focusedHeroPosition <= 7)
         {
             Debug.Log("Mieści się w drzwiach wejściowych!");
         }
-        else if (focusedHeroPosition >= (currentCorridor.getCorridorLength()-1)*7 && focusedHeroPosition <= currentCorridor.getCorridorLength() * 7)
+        else if (focusedHeroPosition >= (currentCorridor.getCorridorLength() - 1) * 7 && focusedHeroPosition <= currentCorridor.getCorridorLength() * 7)
         {
             Debug.Log("Mieści się w drzwiach wyjściowych!");
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void Click()
     {
     }
 
@@ -37,7 +50,9 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);
         focusedHero = GameObject.Find("HeroObject1");
         focusedHeroPosition = focusedHero.transform.position.x;
-        Debug.Log("----" + currentCorridor.getCorridorLength());
+        //Debug.Log("----" + currentCorridor.getCorridorLength());
+        //useButton = dungeonCanvas.GetComponentInChildren<Button>();
+        useButton.onClick.AddListener(doorTransition);
     }
 
     // Update is called once per frame

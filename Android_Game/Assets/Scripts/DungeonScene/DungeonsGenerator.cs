@@ -6,11 +6,13 @@ public class DungeonsGenerator : MonoBehaviour {
     [SerializeField]
     private int idOfCorridor;
 
+    [SerializeField]
+    private int minimumNumberOfChunks, maximumNumberOfChunks;
+
     private GameObject factoryObject;
     private List<GameChunk> producedChunks;
     private int objectsToGenerate;
     private int chunkWidth;
-    private int minimumNumberOfChunks, maximumNumberOfChunks;
     private int leftBoundPossition, rightBoundPossition, rightBoundPossitionForGenerator;
     private Corridor corridorToGenerate;
     private DungeonManager dungeonManager;
@@ -177,6 +179,11 @@ public class DungeonsGenerator : MonoBehaviour {
             }
             producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
         }
+    }
+
+    public Corridor getCorridorFromList(int whichOne)
+    {
+        return corridorList[whichOne];
     }
 }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class buttonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private GameObject dungeonCanvas;
     private DungeonsGenerator dungeonGenerator;
@@ -35,6 +35,11 @@ public class buttonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     {
         isButtonPressed = false;
         speedTimer = 0;
+    }
+
+    public void getThemToTheEntrance()
+    {
+            Camera.main.transform.Translate(new Vector3(-heroesObjects[0].transform.position.x, 0,0));
     }
 
     public void Start()
@@ -69,7 +74,7 @@ public class buttonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
             speedTimer += Time.deltaTime;
             if (speedTimer > timeLimit)
             {
-                if (cameraMovementDirection == 1)
+                if (cameraMovementDirection == 1) 
                 {
                     if (Camera.main.transform.position.x < dungeonGenerator.getRightBoundPossition())
                     {

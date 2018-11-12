@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public class DungeonsGenerator : MonoBehaviour {
 
@@ -19,10 +20,12 @@ public class DungeonsGenerator : MonoBehaviour {
     private GameObject dungeonCanvas;
     private List<DungeonLevelChunk> dungeonLevelChunks;
     private static List<Corridor> corridorList;
+    private ButtonForCameraMovement movementButton;
 
-    System.Random randomNumber = new System.Random();
+    private System.Random randomNumber;
 
     public void Start() {
+        randomNumber = new System.Random();
         minimumNumberOfChunks = 6;
         maximumNumberOfChunks = 12;
 
@@ -52,10 +55,11 @@ public class DungeonsGenerator : MonoBehaviour {
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         dungeonLevelChunks = dungeonManager.GetLevelChunks();
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
 
         if (dungeonLevelChunks[idOfCorridor].getWasCreated() == true)
         {
-            Debug.Log("Scena istnieje!");
+            Debug.Log("Scene was already created!");
 
             objectsToGenerate = corridorList[idOfCorridor].getCorridorLength();
             for (i = 0; i < objectsToGenerate; i++)
@@ -65,7 +69,7 @@ public class DungeonsGenerator : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Scena nie istnieje!");
+            Debug.Log("Scene wasn't created!");
             for (i = 0; i < objectsToGenerate; i++)
             {
                 pickedOneInt = randomNumber.Next(1, 7);
@@ -82,6 +86,33 @@ public class DungeonsGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+    }
+
+    public void clearingPreviousSpriteObjects()
+    {
+        //GameObject tempObject;
+        
+        for(int i=0;i< objectsToGenerate; i++)
+        {
+            //Destroying previously generated corridor objects
+            Destroy(GameObject.Find("DungeonChunk_" + i));
+        }
+        producedChunks.Clear();
+
+        //Destroying entrance and exit neighbours outside of corridor
+        Destroy(GameObject.Find("DungeonChunkEntrance"));
+        Destroy(GameObject.Find("DungeonChunkExit"));
+        Destroy(GameObject.Find("New Game Object"));//to do
+    }
+
+    public void loadAnotherLevel(int Id)
+    {
+        idOfCorridor = Id;
+        clearingPreviousSpriteObjects();
+        Start();
+        movementButton.getThemToTheEntrance();
+
+        //Here we have to initialize level again -> reload every object
     }
 
     public int getLeftBoundPossition()
@@ -184,6 +215,11 @@ public class DungeonsGenerator : MonoBehaviour {
     public Corridor getCorridorFromList(int whichOne)
     {
         return corridorList[whichOne];
+    }
+
+    public int getIdOfCorridor()
+    {
+        return idOfCorridor;
     }
 }
 

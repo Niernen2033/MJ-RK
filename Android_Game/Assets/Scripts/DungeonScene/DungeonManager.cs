@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour {
 
-    [SerializeField]
+    private ConnectionMap conMap;
+
+    //[SerializeField]
     private int numberOfDungeonLevels;
 
     private static List<DungeonLevelChunk> levelChunks;//list of chunks must be shared
@@ -13,7 +15,9 @@ public class DungeonManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         tempChunkObject = new DungeonLevelChunk();
-        
+        conMap = GameObject.Find("Dungeon").GetComponent<ConnectionMap>();
+        numberOfDungeonLevels = conMap.getNumberOfCorridors();
+
         levelChunks = new List<DungeonLevelChunk>();
 
         for(int i=0;i<numberOfDungeonLevels;i++)

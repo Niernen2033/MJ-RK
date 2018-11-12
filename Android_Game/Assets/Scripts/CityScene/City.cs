@@ -43,19 +43,15 @@ namespace CityScene
 
         public void OpenInventory()
         {
-            inventory.gameObject.GetComponent<NormalInventory>().Open();
-        }
-
-        public void CloseInventory()
-        {
-            inventory.GetComponent<NormalInventory>().Close();
+            inventory.gameObject.GetComponent<NormalInventory>().OpenClose();
+            inventory.gameObject.GetComponent<NormalInventory>().Bagpack.SetBagpack(GameSave.Instance.Player.Backpack);
         }
 
 
         public void AddTestItem()
         {
             Armor a = new Armor();
-            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble);
+            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble);
             inventory.GetComponent<NormalInventory>().Bagpack.AddItem(a);
         }
 

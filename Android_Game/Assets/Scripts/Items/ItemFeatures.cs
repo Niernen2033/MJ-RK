@@ -12,13 +12,13 @@ namespace Items
     public class ItemFeatures
     {
         [XmlElement(ElementName = "FeatureItem")]
-        public bool[] Features { get; set; }
+        public bool[] GetFeatures { get; set; }
 
         public void EnableFeatures(params ItemFeaturesType[] features)
         {
             foreach(ItemFeaturesType featureType in features)
             {
-                this.Features[(int)featureType] = true;
+                this.GetFeatures[(int)featureType] = true;
             }
         }
 
@@ -26,7 +26,7 @@ namespace Items
         {
             foreach (ItemFeaturesType featureType in features)
             {
-                this.Features[(int)featureType] = false;
+                this.GetFeatures[(int)featureType] = false;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Items
         {
             foreach (ItemFeaturesType featureType in features)
             {
-                this.Features[(int)featureType] = true;
+                this.GetFeatures[(int)featureType] = true;
             }
         }
 
@@ -42,21 +42,21 @@ namespace Items
         {
             foreach (ItemFeaturesType featureType in features)
             {
-                this.Features[(int)featureType] = false;
+                this.GetFeatures[(int)featureType] = false;
             }
         }
 
         public bool GetFeatureStatus(ItemFeaturesType featureType)
         {
-            return this.Features[(int)featureType];
+            return this.GetFeatures[(int)featureType];
         }
 
         public ItemFeatures()
         {
-            this.Features = new bool[Enum.GetValues(typeof(ItemFeaturesType)).Length];
+            this.GetFeatures = new bool[Enum.GetValues(typeof(ItemFeaturesType)).Length];
             for (int i = 0; i < (Enum.GetValues(typeof(ItemFeaturesType))).Length; i++)
             {
-                this.Features[i] = false;
+                this.GetFeatures[i] = false;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Items
 
             for (int i = 0; i < Enum.GetValues(typeof(ItemFeaturesType)).Length; i++)
             {
-                if(this.Features[i])
+                if(this.GetFeatures[i])
                 {
                     result.Add((ItemFeaturesType)i);
                 }

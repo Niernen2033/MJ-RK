@@ -28,14 +28,17 @@ namespace Prefabs.Inventory
 
         }
 
-        public void Open()
+        public void OpenClose()
         {
-            this.gameObject.SetActive(true);
-        }
-
-        public void Close()
-        {
-            this.gameObject.SetActive(false);
+            if (this.gameObject.activeSelf == true)
+            {
+                this.Bagpack.FreeSlots();
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.gameObject.SetActive(true);
+            }
         }
     }
 }

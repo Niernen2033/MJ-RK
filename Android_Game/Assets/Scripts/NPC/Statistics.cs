@@ -59,10 +59,10 @@ public sealed class Statistics
         this.statisticsModifiers = new List<StatisticsModifier>();
     }
 
-    public void ChangeBasicValue(double basicBonus)
+    public void ChangeAcctualValue(double acctualBonus)
     {
-        this.Basic = basicBonus;
-        this.CalculateAcctualStatistics();
+        this.Acctual = acctualBonus;
+        //this.CalculateAcctualStatistics();
     }
 
     public bool AddModifier(StatisticsModifier modifier)

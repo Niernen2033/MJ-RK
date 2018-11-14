@@ -53,5 +53,17 @@ namespace Items
             this.IntelligenceBonus = new Statistics();
             this.StrengthBonus = new Statistics();
         }
+
+        public override string ToString()
+        {
+            return this.Class + " : " + this.Name + ";" 
+                + "VitalityBonus: " +this.VitalityBonus.Acctual + ";" 
+                + "MagicArmorBonus: " + this.MagicArmorBonus.Acctual + ";" 
+                + "RangedArmorBonus: " + this.RangedArmorBonus.Acctual + ";" 
+                + "MelleArmorBonus: " + this.MelleArmorBonus.Acctual + ";"
+                + "DexterityBonus: " + this.DexterityBonus.Acctual + ";" 
+                + "IntelligenceBonus: " + this.IntelligenceBonus.Acctual + ";" 
+                + "StrengthBonus: " + this.StrengthBonus.Acctual;
+        }
     }
 }

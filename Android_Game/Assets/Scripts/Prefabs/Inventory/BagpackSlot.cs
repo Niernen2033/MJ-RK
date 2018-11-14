@@ -20,6 +20,7 @@ namespace Prefabs.Inventory
 
         private BagpackDeleteCallback bagpackDeleteCallback;
         private BagpackActivateCallback bagpackActivateCallback;
+        private BagpackInfoCallback bagpackInfoCallback;
         private Item item;
 
         private void Awake()
@@ -41,9 +42,14 @@ namespace Prefabs.Inventory
             this.bagpackDeleteCallback = bagpackDeleteCallback;
         }
 
-        public void SetActivateCallbac(BagpackActivateCallback bagpackActivateCallback)
+        public void SetActivateCallback(BagpackActivateCallback bagpackActivateCallback)
         {
             this.bagpackActivateCallback = bagpackActivateCallback;
+        }
+
+        public void SetInfoCallback(BagpackInfoCallback bagpackInfoCallback)
+        {
+            this.bagpackInfoCallback = bagpackInfoCallback;
         }
 
         public void AddItem(Item newItem, ItemFeaturesType[] bagpackTypeFeatures, int index)
@@ -139,7 +145,7 @@ namespace Prefabs.Inventory
             {
                 this.infoImage.sprite = options_icons[infoImageIndex];
                 this.infoImage.enabled = true;
-                this.infoImage.GetComponent<Button>().onClick.AddListener(() => this.OnInfoClick());
+                this.infoImage.GetComponent<Button>().onClick.AddListener(() => this.OnInfoClick(this.item));
             }
         }
 
@@ -152,9 +158,9 @@ namespace Prefabs.Inventory
             }
         }
 
-        private void OnInfoClick()
+        private void OnInfoClick(Item item)
         {
-
+            this.bagpackInfoCallback(item);
         }
 
         private void OnDeleteClick(Item item)

@@ -8,9 +8,11 @@ using System;
 
 namespace Prefabs.Inventory
 {
-    public enum InvenotryType { Normal, Shop, Repair, EQ };
+    public enum InvenotryType { Normal, Shop, Repair, EQ, Upgrade };
+
     public delegate void BagpackDeleteCallback(Item item);
     public delegate void BagpackActivateCallback(Item item);
+    public delegate void BagpackInfoCallback(Item item);
 
     public class Bagpack : MonoBehaviour
     {
@@ -18,13 +20,17 @@ namespace Prefabs.Inventory
         public BagpackSlot BagpackSlot;
         public Text GoldTextValue;
         public Text WeightTextValue;
+        public Image itemInfoPanel;
         public InvenotryType bagpackType;
 
         private List<ItemFeaturesType[]> bagpackTypeFeatures;
         private List<BagpackSlot> bagpackslots;
         private List<Item> items;
         private Champion bagpackOwner;
+
         private bool isDirty;
+        private bool isItemInfoPanelEnabled;
+
         private double max_weight;
         private double inventory_weight;
         private double inventory_gold;
@@ -50,13 +56,21 @@ namespace Prefabs.Inventory
         // Use this for initialization
         private void Start()
         {
-            //Resize begining inventory
-            this.ResizeInventorySlots();
+
         }
 
         // Update is called once per frame
         private void Update()
         {
+            if(this.isItemInfoPanelEnabled)
+            {
+                if(Input.GetMouseButton(0))
+                {
+                    this.isItemInfoPanelEnabled = false;
+                    this.itemInfoPanel.gameObject.SetActive(false);
+                }
+            }
+
             if (this.isDirty)
             {
                 this.PrepareInventory();
@@ -131,35 +145,85 @@ namespace Prefabs.Inventory
 
         private void ActivateFromBagpack(Item item)
         {
-            if(item.Features.GetAvailableFeatures().Contains(ItemFeaturesType.IsEatAble))
+            switch(this.bagpackType)
             {
-                if(item is EatableItem)
+                case InvenotryType.EQ:
+                    {
+                        break;
+                    }
+                case InvenotryType.Normal:
+                    {
+                        if (item is EatableItem)
+                        {
+                            EatableItem eatableItem = (EatableItem)item;
+                            eatableItem.Eat(this.bagpackOwner);
+                        }
+                        this.DeleteFromBagpack(item);
+
+                        break;
+                    }
+                case InvenotryType.Repair:
+                    {
+                        break;
+                    }
+                case InvenotryType.Shop:
+                    {
+                        break;
+                    }
+                case InvenotryType.Upgrade:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void InfoFromBagpack(Item item)
+        {
+            //we have info feature (Armor or Weapon or Comsuable)
+            this.itemInfoPanel.gameObject.SetActive(true);
+            this.isItemInfoPanelEnabled = true;
+
+            this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = this.GetItemInfo(item);
+        }
+
+        private string GetItemInfo(Item item)
+        {
+            string all_info = string.Empty;
+            if (item is Armor)
+            {
+                Armor armor = (Armor)item;
+                string[] info = armor.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
                 {
-                    EatableItem eatableItem = (EatableItem)item;
-                    eatableItem.Eat(this.bagpackOwner);
-                    this.DeleteFromBagpack(item);
+                    all_info += info[i] + "\n";
                 }
-                else
+                this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = all_info;
+            }
+            else if (item is Weapon)
+            {
+                Weapon weapon = (Weapon)item;
+                string[] info = weapon.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
                 {
-
+                    all_info += info[i] + "\n";
                 }
+                this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = all_info;
             }
-            else if (item.Features.GetAvailableFeatures().Contains(ItemFeaturesType.IsEquipAble))
+            else if (item is EatableItem)
             {
+                EatableItem eatableItem = (EatableItem)item;
+                string[] info = eatableItem.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
+                {
+                    all_info += info[i] + "\n";
+                }
 
             }
-            else if (item.Features.GetAvailableFeatures().Contains(ItemFeaturesType.IsRepairAble))
-            {
 
-            }
-            else if (item.Features.GetAvailableFeatures().Contains(ItemFeaturesType.IsSellAble))
-            {
-
-            }
-            else if (item.Features.GetAvailableFeatures().Contains(ItemFeaturesType.IsUpgradeAble))
-            {
-
-            }
+            return all_info;
         }
 
         private void ResizeInventorySlots()
@@ -167,6 +231,7 @@ namespace Prefabs.Inventory
             double inventory_width = this.AllBagpackSlots.GetComponent<RectTransform>().rect.width;
             double slot_width = this.BagpackSlot.GetComponent<RectTransform>().rect.width;
             int slots_to_create_cout = (int)(inventory_width / slot_width);
+
             for (int i = 0; i < slots_to_create_cout; i++)
             {
                 BagpackSlot bagpackSlotClone = Instantiate(this.BagpackSlot, this.AllBagpackSlots.transform).GetComponent<BagpackSlot>();
@@ -175,12 +240,14 @@ namespace Prefabs.Inventory
 
                 //callback
                 this.bagpackslots[this.bagpackslots.Count - 1].SetDeleteCallback(this.DeleteFromBagpack);
-                this.bagpackslots[this.bagpackslots.Count - 1].SetActivateCallbac(this.ActivateFromBagpack);
+                this.bagpackslots[this.bagpackslots.Count - 1].SetActivateCallback(this.ActivateFromBagpack);
+                this.bagpackslots[this.bagpackslots.Count - 1].SetInfoCallback(this.InfoFromBagpack);
             }
         }
 
         private void PrepareInventory()
         {
+            this.ResizeInventorySlots();
             this.inventory_weight = 0;
             this.inventory_gold = 0;
             if (this.items != null)
@@ -219,17 +286,17 @@ namespace Prefabs.Inventory
         private void ClearData()
         {
             this.isDirty = false;
+            this.isItemInfoPanelEnabled = false;
             this.items = null;
             this.bagpackOwner = null;
             this.inventory_weight = 0;
+            this.inventory_gold = 0;
             this.max_weight = 0;
-
-            this.FreeSlots();
 
             this.bagpackslots = new List<BagpackSlot>();
         }
 
-        public void FreeSlots()
+        private void FreeSlots()
         {
             if (this.bagpackslots != null)
             {
@@ -237,7 +304,7 @@ namespace Prefabs.Inventory
                 {
                     try
                     {
-                        Destroy(slot);
+                        Destroy(slot.gameObject);
                     }
                     catch(Exception exc)
                     {
@@ -245,6 +312,12 @@ namespace Prefabs.Inventory
                     }
                 }
             }
+        }
+
+        public void FreeBagpackMemory()
+        {
+            this.FreeSlots();
+            this.ClearData();
         }
     }
 }

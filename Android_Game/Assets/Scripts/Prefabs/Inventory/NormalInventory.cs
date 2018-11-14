@@ -32,7 +32,7 @@ namespace Prefabs.Inventory
         {
             if (this.gameObject.activeSelf == true)
             {
-                this.Bagpack.FreeSlots();
+                this.Bagpack.FreeBagpackMemory();
                 this.gameObject.SetActive(false);
             }
             else

@@ -10,7 +10,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private GameObject focusedHero;
     private float focusedHeroPosition;
     private GameObject dungeonCanvas;
-    private DungeonsGenerator dungeonGenerator;
+    private static DungeonsGenerator dungeonGenerator;
     private Corridor currentCorridor;
     private int currentCorridorNumber;
     private static GameObject objectForDarkening;
@@ -35,8 +35,22 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public int randomizeChoiseOfCorridor()
     {
+        int howManyAreThere;
+        int randomizedOne;
+        ConnectionMap conMap = dungeonCanvas.GetComponent<ConnectionMap>();
         System.Random randomNumber = new System.Random();
-        return randomNumber.Next(0, 1);
+        howManyAreThere = conMap.getCorridorDependenciesList()[currentCorridorNumber].getNeighbourCorridor().Count;
+        randomizedOne = randomNumber.Next(0, howManyAreThere);
+        string devLog = "Out of following neighbours: ";
+
+        //Debug.Log("Out of following neighbours of corridor ");
+        for (int i = 0; i < howManyAreThere; i++)
+        {
+            //Debug.Log(" " + conMap.getCorridorDependenciesList()[currentCorridorNumber].getSpecificNeighbourCorridor(i));
+            devLog += " " + conMap.getCorridorDependenciesList()[currentCorridorNumber].getSpecificNeighbourCorridor(i).ToString();
+        }
+        Debug.Log(devLog + " of corridor: " + currentCorridorNumber);
+        return conMap.getCorridorDependenciesList()[currentCorridorNumber].getSpecificNeighbourCorridor(randomizedOne);
     }
 
     public void doorTransition()
@@ -47,17 +61,26 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         //For development purposes we're gonna get random corridor to go. Normally we could choose from few of them.
         //Now we should randomize choise. I'll make function for that
         int rand = randomizeChoiseOfCorridor();//here additionaly use randomized number to acces this object from connectionmap
+        Debug.Log("Traveling to corridor number: " + rand);
 
         if (focusedHeroPosition >= 0 && focusedHeroPosition <= 7)
         {
             Debug.Log("Registered use on entrance door!");
             dungeonGenerator.loadAnotherLevel(rand);
+            currentCorridorNumber = rand;
+            Debug.Log("-----------------------Indeks przed bledem: " + currentCorridorNumber);
+            Debug.Log("-----------------------CorridorList in dungeonGenerator length: " + dungeonGenerator.getCorridorList().Count);
+            currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);//tu byl blad
             shouldApplyTransition = true;
         }
         else if (focusedHeroPosition >= (currentCorridor.getCorridorLength() - 1) * 7 && focusedHeroPosition <= currentCorridor.getCorridorLength() * 7)
         {
             Debug.Log("Registered use on exit doors!");
             dungeonGenerator.loadAnotherLevel(rand);
+            currentCorridorNumber = rand;
+            Debug.Log("Now it should fail!");
+            currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);
+            Debug.Log("Told ya son");
             shouldApplyTransition = true;
         }
         Debug.Log("CurrentCorridorNumber is: " + currentCorridorNumber);
@@ -77,7 +100,6 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         //trans = objectForDarkening.GetComponent<Image>();
         shouldApplyTransition = false;
         alphaColor = objectForDarkening.GetComponent<SpriteRenderer>().material.color;
-        Debug.Log("Zee ->: " + alphaColor.a);
         speedTimer = 0;
         objectForDarkeningRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         //trans.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
@@ -100,17 +122,17 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (alphaColor.a < 1.0f && shouldApplyTransition == true)
         {
             alphaColor.a += 0.02f;
-            Debug.Log("Alpha ->: " + alphaColor.a);
+            //Debug.Log("Alpha ->: " + alphaColor.a);
         }
         else if (alphaColor.a >= 1.0f && shouldApplyTransition == true)//">" for making sure
         {
             shouldApplyTransition = false;
-            Debug.Log("Beta ->: ");
+            //Debug.Log("Beta ->: ");
         }
         else if (alphaColor.a > 0.0f && shouldApplyTransition == false)
         {
             alphaColor.a -= 0.02f;
-            Debug.Log("Gamma ->: " + alphaColor.a);
+            //Debug.Log("Gamma ->: " + alphaColor.a);
         }
         objectForDarkeningRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, alphaColor.a);
         //trans.color = new Color(1.0f, 1.0f, 1.0f, alphaColor.a);

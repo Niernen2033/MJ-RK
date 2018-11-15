@@ -51,6 +51,11 @@ public class ConnectionMap : MonoBehaviour {
         return numberOfCorridors;
     }
 
+    public List<CorridorDependency> getCorridorDependenciesList()
+    {
+        return corridorDependenciesList;
+    }
+
     // Update is called once per frame
     void Update () {
 	}
@@ -86,6 +91,11 @@ public class CorridorDependency
     public List<int> getNeighbourCorridor()
     {
         return neighbourCorridor;
+    }
+
+    public int getSpecificNeighbourCorridor(int whichOne)
+    {
+        return neighbourCorridor[whichOne];
     }
 
     public void toString(int Id)

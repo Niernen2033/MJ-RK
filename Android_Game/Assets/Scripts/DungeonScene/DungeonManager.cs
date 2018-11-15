@@ -8,18 +8,23 @@ public class DungeonManager : MonoBehaviour {
 
     //[SerializeField]
     private int numberOfDungeonLevels;
-
-    private static List<DungeonLevelChunk> levelChunks;//list of chunks must be shared
+    //TODO: Eliminating LevelChunks
+    private static List<DungeonLevel> levelsArray;//Array of levels
+    private static List<DungeonLevelChunk> levelChunks;
     private DungeonLevelChunk tempChunkObject;
 
     // Use this for initialization
     void Start () {
+        //Array of levels
+        levelsArray = new List<DungeonLevel>();
+
         tempChunkObject = new DungeonLevelChunk();
+        tempChunkObject.setWasCreated(false);
         conMap = GameObject.Find("Dungeon").GetComponent<ConnectionMap>();
         numberOfDungeonLevels = conMap.getNumberOfCorridors();
 
         levelChunks = new List<DungeonLevelChunk>();
-
+        
         for(int i=0;i<numberOfDungeonLevels;i++)
         {
             tempChunkObject.setIdOfChunk(i);
@@ -35,6 +40,11 @@ public class DungeonManager : MonoBehaviour {
     public List<DungeonLevelChunk> GetLevelChunks()
     {
         return levelChunks;
+    }
+
+    public List<DungeonLevel> getLevelsArray()
+    {
+        return levelsArray;
     }
 }
 
@@ -65,5 +75,75 @@ public class DungeonLevelChunk{
     public bool getWasCreated()
     {
         return this.wasCreated;
+    }
+}
+
+public class DungeonLevel
+{
+    private int idOfLevel;
+    private int numberOfChunks;
+    private List<LevelChunk> chunksArray;
+
+    public DungeonLevel(int idOfLevel, int numberOfChunks)
+    {
+        this.idOfLevel = idOfLevel;
+        this.numberOfChunks = numberOfChunks;
+        chunksArray = new List<LevelChunk>();
+
+        for(int i=0; i < numberOfChunks; i++)
+        {
+            //By default we're setting texture as 0
+            chunksArray.Add(new LevelChunk(0));
+        }
+    }
+
+    public void setIdOfLevel(int idOfLevel)
+    {
+        this.idOfLevel = idOfLevel;
+    }
+
+    public void setNumberOfChunks(int numberOfChunks)
+    {
+        this.numberOfChunks = numberOfChunks;
+    }
+
+    public void setChunkArrayElementTexture(int indexOfChunk, int textureId)
+    {
+        chunksArray[indexOfChunk].setIdOfAppliedTexture(textureId);
+    }
+
+    public int getIdOfLevel()
+    {
+        return idOfLevel;
+    }
+
+    public int getNumberOfChunks()
+    {
+        return numberOfChunks;
+    }
+
+    public int getChunkArrayElementTexture(int indexOfChunk)
+    {
+        return chunksArray[indexOfChunk].getIdOfAppliedTexture();
+    }
+}
+
+public class LevelChunk
+{
+    private int idOfAppliedTexture;
+
+    public LevelChunk(int idOfAppliedTexture)
+    {
+        this.idOfAppliedTexture = idOfAppliedTexture;
+    }
+
+    public void setIdOfAppliedTexture(int idOfAppliedTexture)
+    {
+        this.idOfAppliedTexture = idOfAppliedTexture;
+    }
+
+    public int getIdOfAppliedTexture()
+    {
+        return idOfAppliedTexture;
     }
 }

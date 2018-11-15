@@ -11,18 +11,29 @@ public class DungeonsGenerator : MonoBehaviour {
     private int minimumNumberOfChunks, maximumNumberOfChunks;
 
     private GameObject factoryObject;
-    private List<GameChunk> producedChunks;
+    private static List<GameChunk> producedChunks;
     private int objectsToGenerate;
     private int chunkWidth;
     private int leftBoundPossition, rightBoundPossition, rightBoundPossitionForGenerator;
     private Corridor corridorToGenerate;
-    private DungeonManager dungeonManager;
-    private GameObject dungeonCanvas;
-    private List<DungeonLevelChunk> dungeonLevelChunks;
+    private static DungeonManager dungeonManager;
+    private static GameObject dungeonCanvas;
+    private static List<DungeonLevelChunk> dungeonLevelChunks;
     private static List<Corridor> corridorList;
     private ButtonForCameraMovement movementButton;
 
     private System.Random randomNumber;
+
+    public void Reset()
+    {
+        //Getting dungeonManager to acces his variables
+        dungeonCanvas = GameObject.Find("Dungeon");
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        dungeonLevelChunks = dungeonManager.GetLevelChunks();//Not sure now if needed
+        //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
+        generationDecission();
+    }
 
     public void Start() {
         randomNumber = new System.Random();
@@ -46,52 +57,25 @@ public class DungeonsGenerator : MonoBehaviour {
         leftBoundPossition = chunkWidth;
         rightBoundPossition = chunkWidth * (objectsToGenerate-1);
         rightBoundPossitionForGenerator = chunkWidth * objectsToGenerate;
-        string pickedOne;
-        int pickedOneInt;
         producedChunks = new List<GameChunk>();
-        int i;
 
         //Getting dungeonManager to acces his variables
         dungeonCanvas = GameObject.Find("Dungeon");
-        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
-        dungeonLevelChunks = dungeonManager.GetLevelChunks();
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();//YET NEEDED
+        dungeonLevelChunks = dungeonManager.GetLevelChunks();//YET NEEDED
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
 
-        if (dungeonLevelChunks[idOfCorridor].getWasCreated() == true)
-        {
-            Debug.Log("Scene was already created!");
-
-            objectsToGenerate = corridorList[idOfCorridor].getCorridorLength();
-            for (i = 0; i < objectsToGenerate; i++)
-            {
-                pickedOne = corridorList[idOfCorridor].getTextureArrayElement(i).ToString();
-            }
-        }
-        else
-        {
-            Debug.Log("Scene wasn't created!");
-            for (i = 0; i < objectsToGenerate; i++)
-            {
-                pickedOneInt = randomNumber.Next(1, 7);
-                corridorToGenerate.setTextureArray(pickedOneInt);//Adding texture number to Corridor object
-                //Adding generated corridor object to List
-                corridorList.Add(corridorToGenerate);
-
-                pickedOne = pickedOneInt.ToString();
-                generateMap(pickedOneInt, i);
-            } 
-        }
+        generationDecission();
     }
 
     // Update is called once per frame
     void Update() {
-
+        //Debug.Log("-----------------------CorridorList straight length: " + getCorridorList().Count);
     }
 
     public void clearingPreviousSpriteObjects()
     {
-        //GameObject tempObject;
-        
         for(int i=0;i< objectsToGenerate; i++)
         {
             //Destroying previously generated corridor objects
@@ -102,16 +86,17 @@ public class DungeonsGenerator : MonoBehaviour {
         //Destroying entrance and exit neighbours outside of corridor
         Destroy(GameObject.Find("DungeonChunkEntrance"));
         Destroy(GameObject.Find("DungeonChunkExit"));
-        Destroy(GameObject.Find("New Game Object"));//to do
+        //Destroy(GameObject.Find("New Game Object"));//It's needed when reloading another corridor
     }
 
     public void loadAnotherLevel(int Id)
     {
         idOfCorridor = Id;
+        Debug.Log("-----------------------ID: " + Id);
         clearingPreviousSpriteObjects();
-        Start();
+        Reset();
         movementButton.getThemToTheEntrance();
-
+        Debug.Log("-----------------------Debug4 in dungeonGenerator length: " + getCorridorList().Count);
         //Here we have to initialize level again -> reload every object
     }
 
@@ -125,7 +110,62 @@ public class DungeonsGenerator : MonoBehaviour {
         return rightBoundPossition;
     }
 
-    public void generateMap(int pickedOneInt, int i)
+    public void generationDecission()
+    {
+        int i;
+        string pickedOne;
+        int pickedOneInt;
+
+        Debug.Log("Id of corridor before: " + idOfCorridor);
+        if (dungeonManager.getLevelsArray().Exists(x => x.getIdOfLevel() == idOfCorridor))
+        //if (dungeonLevelChunks[idOfCorridor].getWasCreated() == true)
+        {
+            Debug.Log("Scene " + idOfCorridor + " was already created!");
+            //objectsToGenerate = corridorList[idOfCorridor].getCorridorLength();
+            objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();
+            Debug.Log("Objects to generate: " + objectsToGenerate);
+            Debug.Log("Id of corridor: " + idOfCorridor);
+            string debug = "";
+            for (i = 0; i < objectsToGenerate; i++)
+            {
+                //pickedOneInt = corridorList[idOfCorridor].getTextureArrayElement(i);
+                pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
+                generateMap(pickedOneInt, i, true);
+                debug += " " + pickedOneInt;
+            }
+            Debug.Log("REEEEEEEEEEEEEEEEEEEEEEEEEEEE " + debug);
+        }
+        else
+        {
+            Debug.Log("Scene " + idOfCorridor + " wasn't created!");
+
+            Debug.Log("||--|| Length of array before " + dungeonManager.getLevelsArray().Count + " objects to gen " + objectsToGenerate);
+            dungeonManager.getLevelsArray().Add(new DungeonLevel(dungeonManager.getLevelsArray().Count, objectsToGenerate));
+            Debug.Log("||--|| Length of array after " + dungeonManager.getLevelsArray().Count + " objects to gen " + objectsToGenerate);
+            Debug.Log("||--|| Id of level " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count-1].getIdOfLevel() + " objects to gen " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].getNumberOfChunks());
+
+
+            for (i = 0; i < objectsToGenerate; i++)
+            {
+                pickedOneInt = randomNumber.Next(1, 7);
+                //HERE IS LOCAL CORRIDOR - TO BE REMOVED
+                {
+                    corridorToGenerate.setTextureArray(pickedOneInt);//Adding texture number to Corridor object
+                                                                     //Adding generated corridor object to List
+                    corridorList.Add(corridorToGenerate);
+                }
+
+                //Setting and saving texture in array inside DungeonManager
+                dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count-1].setChunkArrayElementTexture(i, pickedOneInt);//tu cos
+
+                pickedOne = pickedOneInt.ToString();
+                generateMap(pickedOneInt, i, false);
+                //dungeonLevelChunks[idOfCorridor].setWasCreated(true);//We will need to eliminate theese
+            }
+        }
+    }
+
+    public void generateMap(int pickedOneInt, int i, bool wasAlreadyGenerated)
     {
         GameObject tempObject;
         GameChunk tempChunk;
@@ -150,24 +190,30 @@ public class DungeonsGenerator : MonoBehaviour {
         }
         else
         {
-            //This checks if it generated 2 identical textures in a row
-            if (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
+            if (wasAlreadyGenerated == false)
             {
-                //And tries to reroll it until it gets different one
-                while (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
+                //This checks if it generated 2 identical textures in a row
+                if (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
                 {
-                    //Applies new value
-                    producedChunks[i].setRandomizedNumber(randomNumber.Next(1, 7));
+                    //And tries to reroll it until it gets different one
+                    while (producedChunks[i - 1].getRandomizedNumber() == producedChunks[i].getRandomizedNumber())
+                    {
+                        //Applies new value
+                        producedChunks[i].setRandomizedNumber(randomNumber.Next(1, 7));
+                    }
                 }
+                spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[0] + producedChunks[i].getRandomizedNumber().ToString());//I might need to remove toString
             }
-            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[0] + producedChunks[i].getRandomizedNumber().ToString());//I might need to remove toString
+            else
+            {
+                spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[0] + pickedOneInt);
+            }
         }
 
         //Setting possition, naming new object and making it active in inspector
         producedChunks[i].getProducedObject().transform.Translate(Vector2.right * chunkWidth * i);
         producedChunks[i].getProducedObject().name = "DungeonChunk_" + i.ToString();
         producedChunks[i].getProducedObject().SetActive(true);
-        Debug.Log("Dlugość chunkow before: " + producedChunks.Count);
 
         //After generating last chunk we are generating border chunks
         if (i == objectsToGenerate-1)
@@ -178,7 +224,7 @@ public class DungeonsGenerator : MonoBehaviour {
 
     public void generateEdgesOfMap(GameObject tempObject, GameChunk tempChunk, SpriteRenderer spriteRender, string filePath, string[] typeOfDungeonTexture, string[] specificTextureType)
     {
-        Debug.Log("Dlugość chunkow past: " + producedChunks.Count);
+        //Debug.Log("Dlugość chunkow past: " + producedChunks.Count);
         int i;
         for (i = 0; i < 2; i++)
         {
@@ -188,10 +234,10 @@ public class DungeonsGenerator : MonoBehaviour {
             tempObject.SetActive(false);
             producedChunks.Add(tempChunk);
 
-            Debug.Log("Number of object: " + (int)(objectsToGenerate + i));
-            Debug.Log("Debug iterator!" + i);
-            Debug.Log("Debug OTG!" + objectsToGenerate);
-            Debug.Log("Chunk array length: " + producedChunks.Count);
+            //Debug.Log("Number of object: " + (int)(objectsToGenerate + i));
+            //Debug.Log("Debug iterator!" + i);
+            //Debug.Log("Debug OTG!" + objectsToGenerate);
+            //Debug.Log("Chunk array length: " + producedChunks.Count);
             spriteRender = producedChunks[(int)(objectsToGenerate + i)].getProducedObject().AddComponent<SpriteRenderer>();
             spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[2]);
 
@@ -215,6 +261,11 @@ public class DungeonsGenerator : MonoBehaviour {
     public Corridor getCorridorFromList(int whichOne)
     {
         return corridorList[whichOne];
+    }
+
+    public List<Corridor> getCorridorList()
+    {
+        return corridorList;
     }
 
     public int getIdOfCorridor()

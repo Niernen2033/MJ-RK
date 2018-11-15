@@ -19,7 +19,7 @@ namespace Items
     public enum ItemClass { Armor, Weapon, Potion, Food, None };
     public enum ItemType { Magic, Ranged, Melle, None };
 
-    public abstract class Item
+    public class Item
     {
         //BASIC VARIABLES ====================================================================================
         [XmlIgnore]
@@ -72,6 +72,20 @@ namespace Items
             this.Name = string.Empty;
             this.GoldValue = 0;
             this.Weight = 0;
+
+            this.CalculateHash();
+        }
+
+        public Item(Item item)
+        {
+            this.Class = item.Class;
+            this.Type = item.Type;
+            this.Icon = new ItemIcon(item.Icon);
+            this.Features = new ItemFeatures(item.Features);
+
+            this.Name = string.Copy(item.Name);
+            this.GoldValue = item.GoldValue;
+            this.Weight = item.Weight;
 
             this.CalculateHash();
         }

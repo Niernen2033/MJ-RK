@@ -20,5 +20,11 @@ namespace Items
             this.Index = index;
             this.Rarity = itemRarity;
         }
+
+        public ItemIcon(ItemIcon itemIcon)
+        {
+            this.Index = itemIcon.Index;
+            this.Rarity = itemIcon.Rarity;
+        }
     }
 }

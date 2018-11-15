@@ -43,17 +43,37 @@ namespace CityScene
 
         public void OpenInventory()
         {
-            inventory.gameObject.GetComponent<NormalInventory>().OpenClose();
-            inventory.gameObject.GetComponent<NormalInventory>().Bagpack.SetBagpack(GameSave.Instance.Player.Backpack);
+            ShopInventory shopInventory = inventory.gameObject.GetComponent<ShopInventory>();
+            if (!shopInventory.IsOpen)
+            {
+                if(shopInventory.PlayerBagpack == null)
+                {
+                    shopInventory.OpenAndLoadInventory(null, GameSave.Instance.Player.Backpack, null);
+                }
+                if (shopInventory.PlayerBagpack.IsDataLoaded || shopInventory.ShopBagpack.IsDataLoaded)
+                {
+                    shopInventory.OpenInventory();
+                }
+                else
+                {
+                    shopInventory.OpenAndLoadInventory(null, GameSave.Instance.Player.Backpack, null);
+                }
+            }
+            else
+            {
+                shopInventory.CloseInventory();
+            }
         }
 
 
         public void AddTestItem()
         {
             Armor a = new Armor();
-            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble);
+            a.VitalityBonus = new Statistics(20);
+            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble);
             a.Icon.Rarity = ItemRarity.Epic;
-            inventory.GetComponent<NormalInventory>().Bagpack.AddItem(a);
+            a.GoldValue = 20;
+            inventory.GetComponent<ShopInventory>().PlayerBagpack.AddItem(a);
         }
 
         public void OpenBuilding(ObjectType cityObjectType)

@@ -22,14 +22,20 @@ namespace Prefabs.Inventory
         private BagpackActivateCallback bagpackActivateCallback;
         private BagpackInfoCallback bagpackInfoCallback;
         private Item item;
+        private int itemIndex;
 
         private void Awake()
         {
-            this.bagpackDeleteCallback = null;
-            this.item = null;
+
             this.IsEmpty = true;
             this.icon = this.gameObject.GetComponentsInChildren<Image>()[1];
             this.iconRarity = this.gameObject.GetComponentsInChildren<Image>()[2];
+
+            this.bagpackDeleteCallback = null;
+            this.bagpackInfoCallback = null;
+            this.bagpackActivateCallback = null;
+            this.item = null;
+            this.itemIndex = -1;
         }
 
         private void Start()
@@ -54,14 +60,21 @@ namespace Prefabs.Inventory
 
         public void AddItem(Item newItem, ItemFeaturesType[] bagpackTypeFeatures, int index)
         {
-            this.SetSlotIcons(newItem);
-            this.SetSlotOptions(newItem, bagpackTypeFeatures);
-            this.IsEmpty = false;
-
-            this.item = newItem;
+            if (newItem != null)
+            {
+                this.item = newItem;
+                this.itemIndex = index;
+                this.SetSlotIcons();
+                this.SetSlotOptions(bagpackTypeFeatures);
+                this.IsEmpty = false;
+            }
+            else
+            {
+                ClearSlot();
+            }
         }
 
-        private void SetSlotOptions(Item item, ItemFeaturesType[] bagpackTypeFeatures)
+        private void SetSlotOptions(ItemFeaturesType[] bagpackTypeFeatures)
         {
             Sprite[] options_icons = Resources.LoadAll<Sprite>(SaveInfo.Paths.Resources.Images.Inventory.AllOptionsItems);
 
@@ -69,25 +82,25 @@ namespace Prefabs.Inventory
             int deleteImageIndex = -1;
             int infoImageIndex = -1;
 
-            foreach(ItemFeaturesType bagpackItemFeature in bagpackTypeFeatures)
+            foreach (ItemFeaturesType bagpackItemFeature in bagpackTypeFeatures)
             {
                 if(bagpackItemFeature == ItemFeaturesType.IsDeleteAble)
                 {
-                    if(item.Features.GetFeatureStatus(ItemFeaturesType.IsDeleteAble))
+                    if(this.item.Features.GetFeatureStatus(ItemFeaturesType.IsDeleteAble))
                     {
                         deleteImageIndex = (int)InventoryIndex.Options.Delete;
                     }
                 }
                 else if (bagpackItemFeature == ItemFeaturesType.IsInfoAble)
                 {
-                    if (item.Features.GetFeatureStatus(ItemFeaturesType.IsInfoAble))
+                    if (this.item.Features.GetFeatureStatus(ItemFeaturesType.IsInfoAble))
                     {
                         infoImageIndex = (int)InventoryIndex.Options.Info;
                     }
                 }
                 else
                 {
-                    if (item.Features.GetFeatureStatus(bagpackItemFeature))
+                    if (this.item.Features.GetFeatureStatus(bagpackItemFeature))
                     {
                         switch (bagpackItemFeature)
                         {
@@ -133,51 +146,51 @@ namespace Prefabs.Inventory
 
                 this.actionImage.sprite = options_icons[actionImageIndex];
                 this.actionImage.enabled = true;
-                this.actionImage.GetComponent<Button>().onClick.AddListener(() => this.OnActionClick(this.item, delete));
+                this.actionImage.GetComponent<Button>().onClick.AddListener(() => this.OnActionClick(delete));
             }
             if (deleteImageIndex != -1)
             {
                 this.deleteImage.sprite = options_icons[deleteImageIndex];
                 this.deleteImage.enabled = true;
-                this.deleteImage.GetComponent<Button>().onClick.AddListener(() => this.OnDeleteClick(this.item));
+                this.deleteImage.GetComponent<Button>().onClick.AddListener(() => this.OnDeleteClick());
             }
             if (infoImageIndex != -1)
             {
                 this.infoImage.sprite = options_icons[infoImageIndex];
                 this.infoImage.enabled = true;
-                this.infoImage.GetComponent<Button>().onClick.AddListener(() => this.OnInfoClick(this.item));
+                this.infoImage.GetComponent<Button>().onClick.AddListener(() => this.OnInfoClick());
             }
         }
 
-        private void OnActionClick(Item item, bool delete)
+        private void OnActionClick(bool delete)
         {
-            this.bagpackActivateCallback(item);
-            if(delete)
+            this.bagpackActivateCallback?.Invoke(this.item, this.itemIndex);
+            if (delete)
             {
                 this.ClearSlot();
             }
         }
 
-        private void OnInfoClick(Item item)
+        private void OnInfoClick()
         {
-            this.bagpackInfoCallback(item);
+            this.bagpackInfoCallback?.Invoke(this.item);
         }
 
-        private void OnDeleteClick(Item item)
+        private void OnDeleteClick()
         {
-            this.bagpackDeleteCallback?.Invoke(item);
+            this.bagpackDeleteCallback?.Invoke(this.item, this.itemIndex);
             this.ClearSlot();
         }
 
-        private void SetSlotIcons(Item item)
+        private void SetSlotIcons()
         {
             Sprite[] items_icons = Resources.LoadAll<Sprite>(SaveInfo.Paths.Resources.Images.Inventory.AllItems);
 
-            int iconIndex = item.Icon.Index;
+            int iconIndex = this.item.Icon.Index;
             this.icon.sprite = items_icons[iconIndex];
             this.icon.enabled = true;
 
-            ItemRarity iconRarityIndex = item.Icon.Rarity;
+            ItemRarity iconRarityIndex = this.item.Icon.Rarity;
             if (iconRarityIndex != ItemRarity.None)
             {
                 this.iconRarity.sprite = items_icons[(int)iconRarityIndex];
@@ -203,8 +216,8 @@ namespace Prefabs.Inventory
             this.infoImage.enabled = false;
 
             this.IsEmpty = true;
-            this.bagpackDeleteCallback = null;
             this.item = null;
+            this.itemIndex = -1;
         }
     }
 }

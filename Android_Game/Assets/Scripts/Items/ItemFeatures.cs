@@ -60,6 +60,15 @@ namespace Items
             }
         }
 
+        public ItemFeatures(ItemFeatures itemFeatures)
+        {
+            this.GetFeatures = new bool[Enum.GetValues(typeof(ItemFeaturesType)).Length];
+            for (int i = 0; i < (Enum.GetValues(typeof(ItemFeaturesType))).Length; i++)
+            {
+                this.GetFeatures[i] = itemFeatures.GetFeatures[i];
+            }
+        }
+
         public List<ItemFeaturesType> GetAvailableFeatures()
         {
             List<ItemFeaturesType> result = new List<ItemFeaturesType>();

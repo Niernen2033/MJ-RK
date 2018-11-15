@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 using Items;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Prefabs.Inventory
 {
     public enum InvenotryType { Normal, Shop, Repair, EQ, Upgrade };
 
-    public delegate void BagpackDeleteCallback(Item item);
-    public delegate void BagpackActivateCallback(Item item);
+    public delegate void BagpackDeleteCallback(Item item, int index);
+    public delegate void BagpackActivateCallback(Item item, int index);
     public delegate void BagpackInfoCallback(Item item);
 
     public class Bagpack : MonoBehaviour
@@ -31,14 +32,17 @@ namespace Prefabs.Inventory
         private bool isDirty;
         private bool isItemInfoPanelEnabled;
 
+        public bool IsDataLoaded { get; private set; }
+
         private double max_weight;
         private double inventory_weight;
-        private double inventory_gold;
+        private int inventory_gold;
 
         private void Awake()
         {
             this.ClearData();
             this.bagpackTypeFeatures = new List<ItemFeaturesType[]>();
+            this.bagpackslots = new List<BagpackSlot>();
 
             //Normal================================================================
             this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsEatAble, ItemFeaturesType.IsDeleteAble });
@@ -56,7 +60,7 @@ namespace Prefabs.Inventory
         // Use this for initialization
         private void Start()
         {
-
+            this.isDirty = true;
         }
 
         // Update is called once per frame
@@ -66,8 +70,7 @@ namespace Prefabs.Inventory
             {
                 if(Input.GetMouseButton(0))
                 {
-                    this.isItemInfoPanelEnabled = false;
-                    this.itemInfoPanel.gameObject.SetActive(false);
+                    this.CloseInfoPanel();
                 }
             }
 
@@ -79,14 +82,66 @@ namespace Prefabs.Inventory
 
         public void AddItem(Item item)
         {
-            if ((this.inventory_weight + item.Weight) > this.max_weight)
+            if (item != null)
             {
-                //to heavy
+                if ((this.inventory_weight + item.Weight) > this.max_weight)
+                {
+                    //to heavy
+                }
+                else
+                {
+                    if (this.items == null)
+                    {
+                        this.items = new List<Item>();
+                        Debug.Log("Bagpack is not set to a instance of class");
+                    }
+                    this.items.Add(item);
+                    this.AddToBagpack(this.items[this.items.Count - 1], this.items.Count - 1);
+                }
+            }
+        }
+
+        private bool IfICanSellItem(int bagpackGold, int itemGold)
+        {
+            if(bagpackGold < itemGold)
+            {
+                return false;
             }
             else
             {
-                this.items.Add(item);
-                this.AddToBagpack(item);
+                return true;
+            }
+        }
+
+        private void SellItem(Item item, int index)
+        {
+            if (item != null)
+            {
+                Bagpack PlayerBagpack = this.gameObject.GetComponentInParent<ShopInventory>().PlayerBagpack;
+                Bagpack ShopBagpack = this.gameObject.GetComponentInParent<ShopInventory>().ShopBagpack;
+                if (PlayerBagpack == this)
+                {
+                    //this is player bagpack
+                    ShopBagpack.AddItem(item);
+                    PlayerBagpack.DeleteFromBagpack(item, index);
+                }
+                else
+                {
+                    //this is shop bagpack
+                    if (this.IfICanSellItem(PlayerBagpack.inventory_gold, item.GoldValue))
+                    {
+                        PlayerBagpack.AddItem(item);
+                        ShopBagpack.DeleteFromBagpack(item, index);
+                    }
+                    else
+                    {
+                        this.PrintToInfoPanel("You dont have gold to buy this item");
+                    }
+                }
+
+
+                //Debug.Log("Player: " + this.gameObject.GetComponentInParent<ShopInventory>().PlayerBagpack.items.Count);
+                //Debug.Log("Shop: " + this.gameObject.GetComponentInParent<ShopInventory>().ShopBagpack.items.Count);
             }
         }
 
@@ -102,48 +157,59 @@ namespace Prefabs.Inventory
             return result;
         }
 
-        private void AddToBagpack(Item item)
+
+
+        private void AddToBagpack(Item item, int index)
         {
-            bool isAdded = false;
-            for (int i = 0; i < this.bagpackslots.Count; i++)
+            if (item != null)
             {
-                if (this.bagpackslots[i].IsEmpty)
+                bool isAdded = false;
+                for (int i = 0; i < this.bagpackslots.Count; i++)
                 {
-                    this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType], i);
-                    this.inventory_weight += item.Weight;
-                    if(this.IsGold(item))
+                    //Debug.Log("Slot nr " + i + " jest: " + this.bagpackslots[i].IsEmpty);
+                    if (this.bagpackslots[i].IsEmpty)
                     {
-                        this.inventory_gold += item.GoldValue;
+                        //Debug.Log("Dodaje do slota: " + i + " item o indexie: " + index);
+                        this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType], index);
+                        this.inventory_weight += item.Weight;
+                        if (this.IsGold(item))
+                        {
+                            this.inventory_gold += item.GoldValue;
+                        }
+                        isAdded = true;
+                        break;
                     }
-                    isAdded = true;
-                    break;
+                }
+                if (!isAdded)
+                {
+                    this.ResizeInventorySlots();
+                    this.AddToBagpack(item, index);
+                }
+                else
+                {
+                    this.WeightTextValue.text = this.inventory_weight.ToString();
+                    this.GoldTextValue.text = this.inventory_gold.ToString();
                 }
             }
-            if (!isAdded)
-            {
-                this.ResizeInventorySlots();
-                this.AddToBagpack(item);
-            }
-            else
-            {
-                this.WeightTextValue.text = this.inventory_weight.ToString();
-                this.GoldTextValue.text = this.inventory_gold.ToString();
-            }
         }
 
-        private void DeleteFromBagpack(Item item)
+        private void DeleteFromBagpack(Item item, int index)
         {
-            try
+            if (item != null)
             {
-                this.items.Remove(item);
-            }
-            catch (Exception ex)
-            {
-                Debug.Log("Class: 'Bagpack' in 'DeleteFromBagpack' function: Cannot delete item | " + ex.Message);
+                try
+                {
+                    //Debug.Log("Kasuje item o indexie: " + index);
+                    this.items.RemoveAt(index);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log("Class: 'Bagpack' in 'DeleteFromBagpack' function: Cannot delete item | " + ex.Message);
+                }
             }
         }
 
-        private void ActivateFromBagpack(Item item)
+        private void ActivateFromBagpack(Item item, int index)
         {
             switch(this.bagpackType)
             {
@@ -158,7 +224,7 @@ namespace Prefabs.Inventory
                             EatableItem eatableItem = (EatableItem)item;
                             eatableItem.Eat(this.bagpackOwner);
                         }
-                        this.DeleteFromBagpack(item);
+                        this.DeleteFromBagpack(item, index);
 
                         break;
                     }
@@ -168,6 +234,7 @@ namespace Prefabs.Inventory
                     }
                 case InvenotryType.Shop:
                     {
+                        this.SellItem(item, index);
                         break;
                     }
                 case InvenotryType.Upgrade:
@@ -177,13 +244,34 @@ namespace Prefabs.Inventory
             }
         }
 
+
+
         private void InfoFromBagpack(Item item)
         {
             //we have info feature (Armor or Weapon or Comsuable)
+            this.OpenInfoPanel();
+            this.PrintToInfoPanel(this.GetItemInfo(item));
+        }
+
+        private void PrintToInfoPanel(string info)
+        {
+            if(!this.isItemInfoPanelEnabled)
+            {
+                this.OpenInfoPanel();
+            }
+            this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = info;
+        }
+
+        private void OpenInfoPanel()
+        {
             this.itemInfoPanel.gameObject.SetActive(true);
             this.isItemInfoPanelEnabled = true;
+        }
 
-            this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = this.GetItemInfo(item);
+        private void CloseInfoPanel()
+        {
+            this.isItemInfoPanelEnabled = false;
+            this.itemInfoPanel.gameObject.SetActive(false);
         }
 
         private string GetItemInfo(Item item)
@@ -252,9 +340,9 @@ namespace Prefabs.Inventory
             this.inventory_gold = 0;
             if (this.items != null)
             {
-                foreach (Item item in this.items)
+                for(int i=0; i<this.items.Count; i++)
                 {
-                    this.AddToBagpack(item);
+                    this.AddToBagpack(this.items[i], i);
                 }
             }
             this.WeightTextValue.text = this.inventory_weight.ToString();
@@ -267,11 +355,11 @@ namespace Prefabs.Inventory
         {
             this.ClearData();
 
-            this.isDirty = false;
-            if (this.items != items)
+            if (this.items != items && items != null)
             {
                 this.items = items;
                 this.isDirty = true;
+                this.IsDataLoaded = true;
             }
         }
 
@@ -286,14 +374,13 @@ namespace Prefabs.Inventory
         private void ClearData()
         {
             this.isDirty = false;
+            this.IsDataLoaded = false;
             this.isItemInfoPanelEnabled = false;
             this.items = null;
             this.bagpackOwner = null;
             this.inventory_weight = 0;
             this.inventory_gold = 0;
             this.max_weight = 0;
-
-            this.bagpackslots = new List<BagpackSlot>();
         }
 
         private void FreeSlots()
@@ -311,6 +398,7 @@ namespace Prefabs.Inventory
                         Debug.Log("Class 'Bagpack' in 'FreeSlots' function: Cannot destroy slot : " + exc.Message);
                     }
                 }
+                this.bagpackslots = new List<BagpackSlot>();
             }
         }
 
@@ -318,6 +406,15 @@ namespace Prefabs.Inventory
         {
             this.FreeSlots();
             this.ClearData();
+        }
+
+        public void ReloadBagpack()
+        {
+            if(this.items != null)
+            {
+                this.FreeSlots();
+                this.PrepareInventory();
+            }
         }
     }
 }

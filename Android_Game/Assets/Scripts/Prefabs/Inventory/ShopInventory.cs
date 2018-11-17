@@ -5,6 +5,8 @@ using Items;
 
 namespace Prefabs.Inventory
 {
+    public enum InvenotryType { Normal, Shop, Repair, EQ, Upgrade };
+
     public class ShopInventory : MonoBehaviour
     {
         public bool IsOpen { get; private set; }

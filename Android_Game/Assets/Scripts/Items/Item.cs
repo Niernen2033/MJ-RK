@@ -47,7 +47,7 @@ namespace Items
         public ItemFeatures Features { get; set; }
 
         //BASIC CONSTRUCTORS ====================================================================================
-        protected Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
+        public Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
             string name, int goldValue, double weight)
         {
             this.Class = itemClass;
@@ -62,7 +62,7 @@ namespace Items
             this.CalculateHash();
         }
 
-        protected Item()
+        public Item()
         {
             this.Class = ItemClass.None;
             this.Type = ItemType.None;

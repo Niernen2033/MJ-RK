@@ -21,7 +21,7 @@ namespace Prefabs.Inventory
         private BagpackDeleteCallback bagpackDeleteCallback;
         private BagpackActivateCallback bagpackActivateCallback;
         private BagpackInfoCallback bagpackInfoCallback;
-        private Item item;
+        public Item item { get; private set; }
         private int itemIndex;
 
         private void Awake()

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Prefabs.Inventory
 {
-    public enum InvenotryType { Normal, Shop, Repair, EQ, Upgrade };
+    public enum BagpackType { Player, Shop };
 
     public delegate void BagpackDeleteCallback(Item item, int index);
     public delegate void BagpackActivateCallback(Item item, int index);
@@ -37,6 +37,8 @@ namespace Prefabs.Inventory
         private double max_weight;
         private double inventory_weight;
         private int inventory_gold;
+
+        public event EventHandler<BagpackEventArgs> SellItem;
 
         private void Awake()
         {
@@ -80,6 +82,11 @@ namespace Prefabs.Inventory
             }
         }
 
+        protected void OnSellItem(BagpackEventArgs bagpackEventArgs)
+        {
+            this.SellItem?.Invoke(this, bagpackEventArgs);
+        }
+
         public void AddItem(Item item)
         {
             if (item != null)
@@ -112,7 +119,7 @@ namespace Prefabs.Inventory
                 return true;
             }
         }
-
+        /*
         private void SellItem(Item item, int index)
         {
             if (item != null)
@@ -144,17 +151,17 @@ namespace Prefabs.Inventory
                 //Debug.Log("Shop: " + this.gameObject.GetComponentInParent<ShopInventory>().ShopBagpack.items.Count);
             }
         }
-
+        */
         private bool IsGold(Item item)
         {
-            bool result = false;
-            if(item.Icon.Index == (int)ItemIndex.Gold.Large
-                || item.Icon.Index == (int)ItemIndex.Gold.Medium
-                || item.Icon.Index == (int)ItemIndex.Gold.Small)
+            if (item != null)
             {
-                result = true;
+                if (item.Icon.Index == (int)ItemIndex.Gold.Large)
+                {
+                    return true;
+                }
             }
-            return result;
+            return false;
         }
 
 
@@ -170,12 +177,30 @@ namespace Prefabs.Inventory
                     if (this.bagpackslots[i].IsEmpty)
                     {
                         //Debug.Log("Dodaje do slota: " + i + " item o indexie: " + index);
-                        this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType], index);
-                        this.inventory_weight += item.Weight;
-                        if (this.IsGold(item))
+                        if(!this.IsGold(item))
                         {
-                            this.inventory_gold += item.GoldValue;
+                            this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType], index);
                         }
+                        else
+                        {
+                            bool ifGoldInSlots = false;
+                            foreach(BagpackSlot bagpackSlot in this.bagpackslots)
+                            {
+                                if(this.IsGold(bagpackSlot.item))
+                                {
+                                    this.inventory_gold += item.GoldValue;
+                                    ifGoldInSlots = true;
+                                    break;
+                                }
+                            }
+                            if(!ifGoldInSlots)
+                            {
+                                this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType], index);
+                                this.inventory_gold += item.GoldValue;
+                            }
+                        }
+                        
+                        this.inventory_weight += item.Weight;
                         isAdded = true;
                         break;
                     }
@@ -234,7 +259,17 @@ namespace Prefabs.Inventory
                     }
                 case InvenotryType.Shop:
                     {
-                        this.SellItem(item, index);
+                        //this.SellItem(item, index);
+                        BagpackType bagpack;
+                        if (this.gameObject.GetComponentInParent<ShopInventory>().PlayerBagpack == this)
+                        {
+                            bagpack = BagpackType.Player;
+                        }
+                        else
+                        {
+                            bagpack = BagpackType.Shop;
+                        }
+                        this.OnSellItem(new BagpackEventArgs(bagpack));
                         break;
                     }
                 case InvenotryType.Upgrade:
@@ -243,8 +278,6 @@ namespace Prefabs.Inventory
                     }
             }
         }
-
-
 
         private void InfoFromBagpack(Item item)
         {
@@ -415,6 +448,15 @@ namespace Prefabs.Inventory
                 this.FreeSlots();
                 this.PrepareInventory();
             }
+        }
+    }
+    public class BagpackEventArgs : EventArgs
+    {
+        public BagpackType BagpackType { get; private set; }
+
+        public BagpackEventArgs(BagpackType bagpackType)
+        {
+            this.BagpackType = bagpackType;
         }
     }
 }

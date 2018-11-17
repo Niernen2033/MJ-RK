@@ -72,9 +72,17 @@ namespace CityScene
             a.VitalityBonus = new Statistics(20);
             a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble);
             a.Icon.Rarity = ItemRarity.Epic;
-            a.GoldValue = 20;
             inventory.GetComponent<ShopInventory>().PlayerBagpack.AddItem(a);
         }
+
+        public void AddTestGold()
+        {
+            Item b = new Item();
+            b.Icon.Index = (int)ItemIndex.Gold.Large;
+            b.GoldValue = 100;
+            inventory.GetComponent<ShopInventory>().PlayerBagpack.AddItem(b);
+        }
+
 
         public void OpenBuilding(ObjectType cityObjectType)
         {

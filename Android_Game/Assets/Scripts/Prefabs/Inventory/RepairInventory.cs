@@ -5,17 +5,18 @@ using Items;
 
 namespace Prefabs.Inventory
 {
-    public class ShopInventory : MonoBehaviour
+    public class RepairInventory : MonoBehaviour
     {
+        public double RepairValue;
+        public int RepairTickCost;
+
         public bool IsOpen { get; private set; }
         public Bagpack PlayerBagpack { get; private set; }
-        public Bagpack ShopBagpack { get; private set; }
 
         private void Awake()
         {
             this.IsOpen = false;
             this.PlayerBagpack = this.gameObject.GetComponentsInChildren<Bagpack>()[0];
-            this.ShopBagpack = this.gameObject.GetComponentsInChildren<Bagpack>()[1];
         }
 
         // Use this for initialization
@@ -38,7 +39,6 @@ namespace Prefabs.Inventory
             {
                 this.gameObject.SetActive(true);
                 this.PlayerBagpack.ReloadBagpack();
-                this.ShopBagpack.ReloadBagpack();
                 this.IsOpen = true;
             }
         }
@@ -55,10 +55,6 @@ namespace Prefabs.Inventory
                 if (champion != null)
                 {
                     this.PlayerBagpack.SetChampion(champion);
-                }
-                if (shop_items != null)
-                {
-                    this.ShopBagpack.SetBagpack(shop_items);
                 }
                 this.IsOpen = true;
             }
@@ -78,7 +74,6 @@ namespace Prefabs.Inventory
             if (this.gameObject.activeSelf == true)
             {
                 this.PlayerBagpack.FreeBagpackMemory();
-                this.ShopBagpack.FreeBagpackMemory();
                 this.IsOpen = false;
                 this.gameObject.SetActive(false);
             }

@@ -20,14 +20,14 @@ namespace Items
         //Durability of item (MAX VALUE: 100 || MIN VALUE: 0)
         public double Durability { get; set; }
 
-        protected EquipmentItem() : base()
+        public EquipmentItem() : base()
         {
             this.IsEquiped = false;
             this.IsBroken = false;
             this.Durability = 100;
         }
 
-        protected EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon,
+        public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon,
             string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability) :
             base(itemClass, itemType, icon, name, goldValue, weight)
         {
@@ -37,7 +37,7 @@ namespace Items
         }
 
         //METHODS***********************************************
-        protected bool UnequipItem(Item item)
+        public bool UnequipItem(Item item)
         {
             if (this.IsEquiped == true)
             {
@@ -52,7 +52,7 @@ namespace Items
             }
         }
 
-        protected bool EquipItem(Item item)
+        public bool EquipItem(Item item)
         {
             if (this.IsEquiped == false)
             {
@@ -67,7 +67,7 @@ namespace Items
             }
         }
 
-        protected bool DecreaseDurability(double durabilityDecreaseCount = 0.2)
+        public bool DecreaseDurability(double durabilityDecreaseCount = 0.2)
         {
             if ((this.Durability > 0) && (durabilityDecreaseCount >= 0))
             {
@@ -96,7 +96,7 @@ namespace Items
             }
         }
 
-        protected bool RepairItem(double durabilityIncreaseCount)
+        public bool RepairItem(double durabilityIncreaseCount)
         {
             if ((this.Durability < 100) && (durabilityIncreaseCount >= 0))
             {

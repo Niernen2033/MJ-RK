@@ -110,7 +110,7 @@ namespace Items
         private void CalculateHash()
         {
             string dataInfo = this.Class.ToString() + this.Type.ToString() + this.Name + this.Icon.Index.ToString()
-                + this.Icon.Rarity.ToString();
+                + this.Icon.Rarity.ToString() + DateTime.Now.ToString();
 
             for (int i = 0; i < this.Features.GetFeatures.Length; i++)
             {

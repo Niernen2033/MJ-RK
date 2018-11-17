@@ -8,6 +8,8 @@ using SaveLoad;
 
 namespace Prefabs.Inventory
 {
+    public delegate void ClearSlotCallback();
+
     public class BagpackSlot : MonoBehaviour
     {
         public Image actionImage;
@@ -22,7 +24,6 @@ namespace Prefabs.Inventory
         private BagpackActivateCallback bagpackActivateCallback;
         private BagpackInfoCallback bagpackInfoCallback;
         public Item item { get; private set; }
-        private int itemIndex;
 
         private void Awake()
         {
@@ -35,7 +36,6 @@ namespace Prefabs.Inventory
             this.bagpackInfoCallback = null;
             this.bagpackActivateCallback = null;
             this.item = null;
-            this.itemIndex = -1;
         }
 
         private void Start()
@@ -58,12 +58,11 @@ namespace Prefabs.Inventory
             this.bagpackInfoCallback = bagpackInfoCallback;
         }
 
-        public void AddItem(Item newItem, ItemFeaturesType[] bagpackTypeFeatures, int index)
+        public void AddItem(Item newItem, ItemFeaturesType[] bagpackTypeFeatures)
         {
             if (newItem != null)
             {
                 this.item = newItem;
-                this.itemIndex = index;
                 this.SetSlotIcons();
                 this.SetSlotOptions(bagpackTypeFeatures);
                 this.IsEmpty = false;
@@ -136,17 +135,9 @@ namespace Prefabs.Inventory
 
             if (actionImageIndex != -1)
             {
-                bool delete = false;
-                if((actionImageIndex == (int)InventoryIndex.Options.Sell) ||
-                    (actionImageIndex == (int)InventoryIndex.Options.Equip) ||
-                    (actionImageIndex == (int)InventoryIndex.Options.Eat))
-                {
-                    delete = true;
-                }
-
                 this.actionImage.sprite = options_icons[actionImageIndex];
                 this.actionImage.enabled = true;
-                this.actionImage.GetComponent<Button>().onClick.AddListener(() => this.OnActionClick(delete));
+                this.actionImage.GetComponent<Button>().onClick.AddListener(() => this.OnActionClick());
             }
             if (deleteImageIndex != -1)
             {
@@ -162,13 +153,9 @@ namespace Prefabs.Inventory
             }
         }
 
-        private void OnActionClick(bool delete)
+        private void OnActionClick()
         {
-            this.bagpackActivateCallback?.Invoke(this.item, this.itemIndex);
-            if (delete)
-            {
-                this.ClearSlot();
-            }
+            this.bagpackActivateCallback?.Invoke(this.item, this.ClearSlot);
         }
 
         private void OnInfoClick()
@@ -178,7 +165,7 @@ namespace Prefabs.Inventory
 
         private void OnDeleteClick()
         {
-            this.bagpackDeleteCallback?.Invoke(this.item, this.itemIndex);
+            this.bagpackDeleteCallback?.Invoke(this.item);
             this.ClearSlot();
         }
 
@@ -217,7 +204,6 @@ namespace Prefabs.Inventory
 
             this.IsEmpty = true;
             this.item = null;
-            this.itemIndex = -1;
         }
     }
 }

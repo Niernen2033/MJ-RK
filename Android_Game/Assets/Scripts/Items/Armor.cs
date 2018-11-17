@@ -57,7 +57,8 @@ namespace Items
         public override string ToString()
         {
             return this.Class + " : " + this.Name + ";" 
-                + "VitalityBonus: " +this.VitalityBonus.Acctual + ";" 
+                + "Durability: " + this.Durability + ";"
+                + "VitalityBonus: " + this.VitalityBonus.Acctual + ";" 
                 + "MagicArmorBonus: " + this.MagicArmorBonus.Acctual + ";" 
                 + "RangedArmorBonus: " + this.RangedArmorBonus.Acctual + ";" 
                 + "MelleArmorBonus: " + this.MelleArmorBonus.Acctual + ";"

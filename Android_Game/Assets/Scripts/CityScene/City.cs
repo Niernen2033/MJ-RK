@@ -43,14 +43,14 @@ namespace CityScene
 
         public void OpenInventory()
         {
-            ShopInventory shopInventory = inventory.gameObject.GetComponent<ShopInventory>();
+            RepairInventory shopInventory = inventory.gameObject.GetComponent<RepairInventory>();
             if (!shopInventory.IsOpen)
             {
                 if(shopInventory.PlayerBagpack == null)
                 {
                     shopInventory.OpenAndLoadInventory(null, GameSave.Instance.Player.Backpack, null);
                 }
-                if (shopInventory.PlayerBagpack.IsDataLoaded || shopInventory.ShopBagpack.IsDataLoaded)
+                if (shopInventory.PlayerBagpack.IsDataLoaded/* || shopInventory.ShopBagpack.IsDataLoaded*/)
                 {
                     shopInventory.OpenInventory();
                 }
@@ -70,9 +70,12 @@ namespace CityScene
         {
             Armor a = new Armor();
             a.VitalityBonus = new Statistics(20);
-            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble);
+            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, 
+                ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble, ItemFeaturesType.IsRepairAble);
             a.Icon.Rarity = ItemRarity.Epic;
-            inventory.GetComponent<ShopInventory>().PlayerBagpack.AddItem(a);
+            a.GoldValue = 60;
+            a.Durability = 10;
+            inventory.GetComponent<RepairInventory>().PlayerBagpack.AddItem(a);
         }
 
         public void AddTestGold()
@@ -80,7 +83,7 @@ namespace CityScene
             Item b = new Item();
             b.Icon.Index = (int)ItemIndex.Gold.Large;
             b.GoldValue = 100;
-            inventory.GetComponent<ShopInventory>().PlayerBagpack.AddItem(b);
+            inventory.GetComponent<RepairInventory>().PlayerBagpack.AddItem(b);
         }
 
 

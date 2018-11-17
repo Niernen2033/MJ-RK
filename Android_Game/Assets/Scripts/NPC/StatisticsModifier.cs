@@ -7,9 +7,9 @@ public enum StatisticsModifierType { AddFlat, AddPercent, MinusFlat, MinusPercen
 
 public sealed class StatisticsModifier
 {
-    public readonly double Value;
-    public readonly StatisticsModifierType modifierType;
-    public readonly StatisticsModifierClass modifierClass;
+    public double Value { get; set; }
+    public StatisticsModifierType modifierType { get; set; }
+    public StatisticsModifierClass modifierClass { get; set; }
 
     public StatisticsModifier(StatisticsModifierClass modifierClass, StatisticsModifierType modifierType, double value)
     {

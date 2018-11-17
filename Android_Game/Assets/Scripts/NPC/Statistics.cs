@@ -25,7 +25,8 @@ public sealed class Statistics
     //Basic item bonus
     public double Basic { get; set; }
 
-    private readonly List<StatisticsModifier> statisticsModifiers;
+    [XmlElement(ElementName = "StatisticsModifiersItem")]
+    public List<StatisticsModifier> StatisticsModifiers { get; set; }
 
     [XmlIgnore]
     //Acctual bonus of item
@@ -40,7 +41,7 @@ public sealed class Statistics
         this.Basic = basicBonus;
         this.Acctual = basicBonus;
 
-        this.statisticsModifiers = new List<StatisticsModifier>();
+        this.StatisticsModifiers = new List<StatisticsModifier>();
     }
 
     public Statistics()
@@ -48,7 +49,7 @@ public sealed class Statistics
         this.Basic = 0;
         this.Acctual = 0;
 
-        this.statisticsModifiers = new List<StatisticsModifier>();
+        this.StatisticsModifiers = new List<StatisticsModifier>();
     }
 
     public Statistics(ref Statistics itemBonus)
@@ -56,7 +57,7 @@ public sealed class Statistics
         this.Basic = itemBonus.Basic;
         this.Acctual = itemBonus.Acctual;
 
-        this.statisticsModifiers = new List<StatisticsModifier>();
+        this.StatisticsModifiers = new List<StatisticsModifier>();
     }
 
     public void ChangeAcctualValue(double acctualBonus)
@@ -65,14 +66,20 @@ public sealed class Statistics
         //this.CalculateAcctualStatistics();
     }
 
+    public void ChangeBasicValue(double basicBonus)
+    {
+        this.Basic = basicBonus;
+        this.CalculateAcctualStatistics();
+    }
+
     public bool AddModifier(StatisticsModifier modifier)
     {
         try
         {
-            this.statisticsModifiers.Add(modifier);
+            this.StatisticsModifiers.Add(modifier);
             if (!this.CalculateAcctualStatistics())
             {
-                this.statisticsModifiers.Remove(modifier);
+                this.StatisticsModifiers.Remove(modifier);
                 Debug.Log("Class 'Statistics' in 'AddModifier' function: Error in calculating modifires");
 
                 return false;
@@ -92,11 +99,11 @@ public sealed class Statistics
     {
         try
         {
-            if (this.statisticsModifiers.Remove(modifier))
+            if (this.StatisticsModifiers.Remove(modifier))
             {
                 if (!this.CalculateAcctualStatistics())
                 {
-                    this.statisticsModifiers.Add(modifier);
+                    this.StatisticsModifiers.Add(modifier);
                     Debug.Log("Class 'Statistics' in 'RemoveModifier' function: Error in calculating modifires");
 
                     return false;
@@ -124,7 +131,7 @@ public sealed class Statistics
     {
         try
         {
-            this.statisticsModifiers.Clear();
+            this.StatisticsModifiers.Clear();
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -140,7 +147,7 @@ public sealed class Statistics
     {
         try
         {
-            this.statisticsModifiers.RemoveAll(item => (item.modifierType == modifierType));
+            this.StatisticsModifiers.RemoveAll(item => (item.modifierType == modifierType));
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -156,7 +163,7 @@ public sealed class Statistics
     {
         try
         {
-            this.statisticsModifiers.RemoveAll(item => (item.modifierClass == modifierClass));
+            this.StatisticsModifiers.RemoveAll(item => (item.modifierClass == modifierClass));
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -172,7 +179,7 @@ public sealed class Statistics
     {
         try
         {
-            this.statisticsModifiers.RemoveAll(item => (item.Value == value));
+            this.StatisticsModifiers.RemoveAll(item => (item.Value == value));
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -189,7 +196,7 @@ public sealed class Statistics
         double lastAcctualValue = this.Acctual;
         this.Acctual = this.Basic;
 
-        foreach (StatisticsModifier modifier in this.statisticsModifiers)
+        foreach (StatisticsModifier modifier in this.StatisticsModifiers)
         {
             if (modifier.modifierType == StatisticsModifierType.AddFlat)
             {

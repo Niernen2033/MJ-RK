@@ -34,6 +34,9 @@ namespace Items
         //Item name
         public string Name { get; set; }
 
+        //Item level
+        public int Level { get; set; }
+
         //Item icon
         public ItemIcon Icon { get; set; }
 
@@ -46,9 +49,11 @@ namespace Items
         //Features
         public ItemFeatures Features { get; set; }
 
+        private string BasicName;
+
         //BASIC CONSTRUCTORS ====================================================================================
         public Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight)
+            string name, int goldValue, double weight, int level)
         {
             this.Class = itemClass;
             this.Type = itemType;
@@ -58,6 +63,8 @@ namespace Items
             this.Name = name;
             this.GoldValue = goldValue;
             this.Weight = weight;
+            this.Level = level;
+            this.BasicName = this.Name;
 
             this.CalculateHash();
         }
@@ -72,6 +79,8 @@ namespace Items
             this.Name = string.Empty;
             this.GoldValue = 0;
             this.Weight = 0;
+            this.Level = 0;
+            this.BasicName = this.Name;
 
             this.CalculateHash();
         }
@@ -86,17 +95,23 @@ namespace Items
             this.Name = string.Copy(item.Name);
             this.GoldValue = item.GoldValue;
             this.Weight = item.Weight;
+            this.BasicName = this.Name;
 
             this.CalculateHash();
         }
 
         //BASIC FUNCTIONS ====================================================================================
+        public virtual void PostInstantiate()
+        {
+            this.BasicName = this.Name;
+            this.CalculateHash();
+        }
 
         protected bool ChangeName(string name)
         {
             try
             {
-                this.Name = name;
+                this.Name = this.BasicName + name;
                 this.CalculateHash();
                 return true;
             }

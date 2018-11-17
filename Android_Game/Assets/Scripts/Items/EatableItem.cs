@@ -16,7 +16,7 @@ namespace Items
         }
 
         public EatableItem(int healValue, ItemClass itemClass, ItemIcon itemIcon, string name, int goldValue, double weight) 
-            : base(itemClass, ItemType.None, itemIcon, name, goldValue, weight)
+            : base(itemClass, ItemType.None, itemIcon, name, goldValue, weight, 0)
         {
             this.HealValue = healValue;
         }

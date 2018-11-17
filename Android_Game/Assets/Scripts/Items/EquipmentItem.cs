@@ -11,6 +11,9 @@ namespace Items
         public event EventHandler<ItemEventArgs> EquipedItem;
         public event EventHandler<ItemEventArgs> UnequipedItem;
 
+        //Item level
+        public int UpgradeLevel { get; set; }
+
         //Establish that champion used this item or not
         public bool IsEquiped { get; set; }
 
@@ -25,15 +28,17 @@ namespace Items
             this.IsEquiped = false;
             this.IsBroken = false;
             this.Durability = 100;
+            this.UpgradeLevel = 0;
         }
 
         public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability) :
-            base(itemClass, itemType, icon, name, goldValue, weight)
+            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel) :
+            base(itemClass, itemType, icon, name, goldValue, weight, level)
         {
             this.IsEquiped = isEquiped;
             this.IsBroken = isBroken;
             this.Durability = durability;
+            this.UpgradeLevel = upgradeLevel;
         }
 
         //METHODS***********************************************

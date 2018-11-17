@@ -9,8 +9,6 @@ using System.Runtime.InteropServices;
 
 namespace Prefabs.Inventory
 {
-    public enum BagpackType { Player, Shop };
-
     public delegate void BagpackDeleteCallback(Item item);
     public delegate void BagpackActivateCallback(Item item, ClearSlotCallback clearSlotCallback);
     public delegate void BagpackInfoCallback(Item item);
@@ -55,6 +53,9 @@ namespace Prefabs.Inventory
 
             //EQ====================================================================
             this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsEquipAble, ItemFeaturesType.IsDeleteAble });
+
+            //Upgrade===============================================================
+            this.bagpackTypeFeatures.Add(new ItemFeaturesType[] { ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsUpgradeAble, ItemFeaturesType.IsDeleteAble });
         }
 
         // Use this for initialization
@@ -283,7 +284,7 @@ namespace Prefabs.Inventory
                     }
                     else
                     {
-                        this.PrintToInfoPanel("You dont have enough gold");
+                        this.PrintToInfoPanel("You doesnt have enough gold");
                     }
                 }
             }
@@ -295,7 +296,43 @@ namespace Prefabs.Inventory
             {
                 if (item is EquipmentItem)
                 {
+                    if(item is Armor)
+                    {
+                        Armor armor = (Armor)item;
 
+                        int upgradeCost = (int)(this.gameObject.GetComponentInParent<UpgradeInventory>().GetUpgradeTickCost * Math.Exp(armor.UpgradeLevel));
+                        if (this.IfICanSellBuyItem(this.inventory_gold, upgradeCost))
+                        {
+                            if (armor.UpgradeLevel < 5)
+                            {
+                                armor.LevelUp();
+                                this.IncreaseDecreaseGold(-upgradeCost);
+                            }
+                            else
+                            {
+                                this.PrintToInfoPanel("Item max level");
+                            }
+                        }
+                        else
+                        {
+                            if (armor.UpgradeLevel < 5)
+                            {
+                                this.PrintToInfoPanel("You doesnt have enough gold");
+                            }
+                            else
+                            {
+                                this.PrintToInfoPanel("Item max level");
+                            }
+                        }
+                    }
+                    else if (item is Weapon)
+                    {
+                        Weapon weapon = (Weapon)item;
+                    }
+                    else if (item is Trinket)
+                    {
+                        Trinket trinket = (Trinket)item;
+                    }
                 }
             }
         }

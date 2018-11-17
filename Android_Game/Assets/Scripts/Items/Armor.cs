@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Items
 {
@@ -28,10 +29,10 @@ namespace Items
         public Statistics StrengthBonus { get; set; }
 
         public Armor(ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, 
+            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel,
             Statistics vitalityBonus, Statistics magicArmourBonus, Statistics rangedArmorBonus, Statistics melleArmorBonus,
             Statistics dexterityBonus, Statistics intelligenceBonus, Statistics strengthBonus) : 
-            base(ItemClass.Armor, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability)
+            base(ItemClass.Armor, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability, level, upgradeLevel)
         {
             this.VitalityBonus = vitalityBonus;
             this.MagicArmorBonus = magicArmourBonus;
@@ -52,6 +53,45 @@ namespace Items
             this.DexterityBonus = new Statistics();
             this.IntelligenceBonus = new Statistics();
             this.StrengthBonus = new Statistics();
+        }
+
+        public void LevelUp()
+        {
+            int upgradeValue = 0;
+            if (this.UpgradeLevel < 5)
+            {
+                this.UpgradeLevel++;
+
+                upgradeValue = (int)(this.VitalityBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.VitalityBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.VitalityBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.MagicArmorBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.MagicArmorBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.MagicArmorBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.RangedArmorBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.RangedArmorBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.RangedArmorBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.MelleArmorBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.MelleArmorBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.MelleArmorBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.DexterityBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.DexterityBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.DexterityBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.IntelligenceBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.IntelligenceBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.IntelligenceBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                upgradeValue = (int)(this.StrengthBonus.Basic * Math.Pow(1.2, this.UpgradeLevel));
+                this.StrengthBonus.RemoveAllModifiers(StatisticsModifierClass.LevelUP);
+                this.StrengthBonus.AddModifier(new StatisticsModifier(StatisticsModifierClass.LevelUP, StatisticsModifierType.AddFlat, upgradeValue));
+
+                this.ChangeName("(+" + this.UpgradeLevel.ToString() + ")");
+            }
         }
 
         public override string ToString()

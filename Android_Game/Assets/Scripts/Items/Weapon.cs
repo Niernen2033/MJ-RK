@@ -22,9 +22,9 @@ namespace Items
         public Statistics StrengthBonus { get; set; }
 
         public Weapon(ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability,
+            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel,
             Statistics basicDamage, Statistics vitalityBonus, Statistics dexterityBonus, Statistics intelligenceBonus,
-            Statistics strengthBonus) : base(ItemClass.Weapon, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability)
+            Statistics strengthBonus) : base(ItemClass.Weapon, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability, level, upgradeLevel)
         {
             this.BasicDamage = basicDamage;
             this.VitalityBonus = vitalityBonus;

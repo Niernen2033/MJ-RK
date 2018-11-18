@@ -51,6 +51,14 @@ namespace Items
             return this.GetFeatures[(int)featureType];
         }
 
+        public void EnableAllFeatures()
+        {
+            for (int i = 0; i < (Enum.GetValues(typeof(ItemFeaturesType))).Length; i++)
+            {
+                this.GetFeatures[i] = true;
+            }
+        }
+
         public ItemFeatures()
         {
             this.GetFeatures = new bool[Enum.GetValues(typeof(ItemFeaturesType)).Length];

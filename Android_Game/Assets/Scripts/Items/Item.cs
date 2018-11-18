@@ -25,6 +25,9 @@ namespace Items
         [XmlIgnore]
         public string Hash { get; private set; }
 
+        [XmlIgnore]
+        public string Name { get; private set; }
+
         //Item class
         public ItemClass Class { get; set; }
 
@@ -32,7 +35,10 @@ namespace Items
         public ItemType Type { get; set; }
 
         //Item name
-        public string Name { get; set; }
+        public string BasicName { get; set; }
+
+        //Item additional name
+        public string AdditionalName { get; set; }
 
         //Item level
         public int Level { get; set; }
@@ -49,22 +55,22 @@ namespace Items
         //Features
         public ItemFeatures Features { get; set; }
 
-        private string BasicName;
 
         //BASIC CONSTRUCTORS ====================================================================================
         public Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, int level)
+            string basicName, string additionalName, int goldValue, double weight, int level)
         {
             this.Class = itemClass;
             this.Type = itemType;
             this.Icon = icon;
             this.Features = new ItemFeatures();
 
-            this.Name = name;
+            this.BasicName = basicName;
+            this.AdditionalName = additionalName;
             this.GoldValue = goldValue;
             this.Weight = weight;
             this.Level = level;
-            this.BasicName = this.Name;
+            this.Name = this.BasicName + this.AdditionalName;
 
             this.CalculateHash();
         }
@@ -76,11 +82,12 @@ namespace Items
             this.Icon = new ItemIcon();
             this.Features = new ItemFeatures();
 
-            this.Name = string.Empty;
+            this.BasicName = string.Empty;
+            this.AdditionalName = string.Empty;
             this.GoldValue = 0;
             this.Weight = 0;
             this.Level = 0;
-            this.BasicName = this.Name;
+            this.Name = this.BasicName + this.AdditionalName;
 
             this.CalculateHash();
         }
@@ -92,10 +99,12 @@ namespace Items
             this.Icon = new ItemIcon(item.Icon);
             this.Features = new ItemFeatures(item.Features);
 
-            this.Name = string.Copy(item.Name);
+            this.BasicName = string.Copy(item.BasicName);
+            this.AdditionalName = string.Copy(item.AdditionalName);
             this.GoldValue = item.GoldValue;
             this.Weight = item.Weight;
-            this.BasicName = this.Name;
+            this.Level = item.Level;
+            this.Name = this.BasicName + this.AdditionalName;
 
             this.CalculateHash();
         }
@@ -103,7 +112,7 @@ namespace Items
         //BASIC FUNCTIONS ====================================================================================
         public virtual void PostInstantiate()
         {
-            this.BasicName = this.Name;
+            this.Name = this.BasicName + this.AdditionalName;
             this.CalculateHash();
         }
 
@@ -111,7 +120,8 @@ namespace Items
         {
             try
             {
-                this.Name = this.BasicName + name;
+                this.AdditionalName = name;
+                this.Name = this.BasicName + this.AdditionalName;
                 this.CalculateHash();
                 return true;
             }

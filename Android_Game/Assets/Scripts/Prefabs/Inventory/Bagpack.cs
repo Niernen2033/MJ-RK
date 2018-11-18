@@ -278,7 +278,7 @@ namespace Prefabs.Inventory
                         EquipmentItem equipmentItem = (EquipmentItem)item;
                         if (equipmentItem.Durability < 100)
                         {
-                            equipmentItem.RepairItem(increaseValue);
+                            equipmentItem.Repair(increaseValue);
                             this.IncreaseDecreaseGold(-increaseCost);
                         }
                     }
@@ -296,7 +296,7 @@ namespace Prefabs.Inventory
             {
                 if (item is EquipmentItem)
                 {
-                    if(item is Armor)
+                    if (item is Armor)
                     {
                         Armor armor = (Armor)item;
 
@@ -328,12 +328,42 @@ namespace Prefabs.Inventory
                     else if (item is Weapon)
                     {
                         Weapon weapon = (Weapon)item;
-                    }
-                    else if (item is Trinket)
-                    {
-                        Trinket trinket = (Trinket)item;
+
+                        int upgradeCost = (int)(this.gameObject.GetComponentInParent<UpgradeInventory>().GetUpgradeTickCost * Math.Exp(weapon.UpgradeLevel));
+                        if (this.IfICanSellBuyItem(this.inventory_gold, upgradeCost))
+                        {
+                            if (weapon.UpgradeLevel < 5)
+                            {
+                                weapon.LevelUp();
+                                this.IncreaseDecreaseGold(-upgradeCost);
+                            }
+                            else
+                            {
+                                this.PrintToInfoPanel("Item max level");
+                            }
+                        }
+                        else
+                        {
+                            if (weapon.UpgradeLevel < 5)
+                            {
+                                this.PrintToInfoPanel("You doesnt have enough gold");
+                            }
+                            else
+                            {
+                                this.PrintToInfoPanel("Item max level");
+                            }
+                        }
                     }
                 }
+            }
+        }
+
+        private void EquipItem(Item item, ClearSlotCallback clearSlotCallback)
+        {
+            if(item != null)
+            {
+                Item swapItem = null;
+
             }
         }
 
@@ -343,6 +373,7 @@ namespace Prefabs.Inventory
             {
                 case InvenotryType.EQ:
                     {
+                        EquipItem(item, clearSlotCallback);
                         break;
                     }
                 case InvenotryType.Normal:

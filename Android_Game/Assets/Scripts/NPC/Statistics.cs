@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Xml.Serialization;
+using Items;
 
 using UnityEngine;
 
@@ -147,7 +148,7 @@ public sealed class Statistics
     {
         try
         {
-            this.StatisticsModifiers.RemoveAll(item => (item.modifierType == modifierType));
+            this.StatisticsModifiers.RemoveAll(item => (item.ModifierType == modifierType));
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -163,7 +164,28 @@ public sealed class Statistics
     {
         try
         {
-            this.StatisticsModifiers.RemoveAll(item => (item.modifierClass == modifierClass));
+            this.StatisticsModifiers.RemoveAll(item => (item.ModifierClass == modifierClass));
+            this.OnRemovedAllModifers(new StatisticsEventArgs());
+            return true;
+        }
+        catch (Exception exc)
+        {
+            Debug.Log("Class 'Statistics' in 'RemoveAllModifiers|Class' function: " + exc.ToString());
+
+            return false;
+        }
+    }
+
+    public bool RemoveAllModifiers(EqType modifierEqItem)
+    {
+        if(modifierEqItem == EqType.None)
+        {
+            return false;
+        }
+
+        try
+        {
+            this.StatisticsModifiers.RemoveAll(item => (item.ModifierEqItem == modifierEqItem));
             this.OnRemovedAllModifers(new StatisticsEventArgs());
             return true;
         }
@@ -198,7 +220,7 @@ public sealed class Statistics
 
         foreach (StatisticsModifier modifier in this.StatisticsModifiers)
         {
-            if (modifier.modifierType == StatisticsModifierType.AddFlat)
+            if (modifier.ModifierType == StatisticsModifierType.AddFlat)
             {
                 try
                 {
@@ -212,7 +234,7 @@ public sealed class Statistics
                     return false;
                 }
             }
-            else if (modifier.modifierType == StatisticsModifierType.AddPercent)
+            else if (modifier.ModifierType == StatisticsModifierType.AddPercent)
             {
                 try
                 {
@@ -226,7 +248,7 @@ public sealed class Statistics
                     return false;
                 }
             }
-            else if (modifier.modifierType == StatisticsModifierType.MinusFlat)
+            else if (modifier.ModifierType == StatisticsModifierType.MinusFlat)
             {
                 try
                 {
@@ -240,7 +262,7 @@ public sealed class Statistics
                     return false;
                 }
             }
-            else if (modifier.modifierType == StatisticsModifierType.MinusPercent)
+            else if (modifier.ModifierType == StatisticsModifierType.MinusPercent)
             {
                 try
                 {

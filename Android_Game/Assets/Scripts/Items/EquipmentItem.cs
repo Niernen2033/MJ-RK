@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 
 namespace Items
 {
+    public enum EqType { None = -1, Helmet, Body, Weapon, Shield, Trinket, Gloves, Boots };
+
     public abstract class EquipmentItem : Item
     {
         public event EventHandler<ItemEventArgs> EquipedItem;
@@ -23,31 +25,35 @@ namespace Items
         //Durability of item (MAX VALUE: 100 || MIN VALUE: 0)
         public double Durability { get; set; }
 
+        public EqType EquipmentType { get; set; }
+
         public EquipmentItem() : base()
         {
             this.IsEquiped = false;
             this.IsBroken = false;
             this.Durability = 100;
             this.UpgradeLevel = 0;
+            this.EquipmentType = EqType.None;
         }
 
-        public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel) :
-            base(itemClass, itemType, icon, name, goldValue, weight, level)
+        public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon, EqType eqType,
+            string basicName, string additionalName, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel) :
+            base(itemClass, itemType, icon, basicName, additionalName, goldValue, weight, level)
         {
             this.IsEquiped = isEquiped;
             this.IsBroken = isBroken;
             this.Durability = durability;
             this.UpgradeLevel = upgradeLevel;
+            this.EquipmentType = eqType;
         }
 
         //METHODS***********************************************
-        public bool UnequipItem(Item item)
+        public bool Unequip()
         {
             if (this.IsEquiped == true)
             {
                 this.IsEquiped = false;
-                this.OnUnequipedItem(new ItemEventArgs(item));
+                this.OnUnequipedItem(new ItemEventArgs(this));
                 return true;
             }
             else
@@ -57,12 +63,12 @@ namespace Items
             }
         }
 
-        public bool EquipItem(Item item)
+        public bool Equip()
         {
             if (this.IsEquiped == false)
             {
                 this.IsEquiped = true;
-                this.OnEquipedItem(new ItemEventArgs(item));
+                this.OnEquipedItem(new ItemEventArgs(this));
                 return true;
             }
             else
@@ -101,7 +107,7 @@ namespace Items
             }
         }
 
-        public bool RepairItem(double durabilityIncreaseCount)
+        public bool Repair(double durabilityIncreaseCount)
         {
             if ((this.Durability < 100) && (durabilityIncreaseCount >= 0))
             {

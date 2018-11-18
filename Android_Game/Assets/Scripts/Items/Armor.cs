@@ -28,11 +28,11 @@ namespace Items
         //Bonus to basic champions strength (will be add to basic champion statistic)
         public Statistics StrengthBonus { get; set; }
 
-        public Armor(ItemType itemType, ItemIcon icon,
-            string name, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel,
+        public Armor(ItemType itemType, ItemIcon icon, EqType eqType,
+            string basicName, string additionalName, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel,
             Statistics vitalityBonus, Statistics magicArmourBonus, Statistics rangedArmorBonus, Statistics melleArmorBonus,
             Statistics dexterityBonus, Statistics intelligenceBonus, Statistics strengthBonus) : 
-            base(ItemClass.Armor, itemType, icon, name, goldValue, weight, isEquiped, isBroken, durability, level, upgradeLevel)
+            base(ItemClass.Armor, itemType, icon, eqType, basicName, additionalName, goldValue, weight, isEquiped, isBroken, durability, level, upgradeLevel)
         {
             this.VitalityBonus = vitalityBonus;
             this.MagicArmorBonus = magicArmourBonus;

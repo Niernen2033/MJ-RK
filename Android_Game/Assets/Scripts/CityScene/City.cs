@@ -69,14 +69,18 @@ namespace CityScene
         public void AddTestItem()
         {
             Armor a = new Armor();
+            Weapon b = new Weapon();
             a.VitalityBonus = new Statistics(20);
             a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, 
                 ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble, ItemFeaturesType.IsRepairAble, ItemFeaturesType.IsUpgradeAble);
             a.Icon.Rarity = ItemRarity.Epic;
             a.GoldValue = 60;
             a.Durability = 10;
+
+            b.Features.EnableAllFeatures();
+            b.BasicDamage = new Statistics(50);
             
-            inventory.GetComponent<UpgradeInventory>().PlayerBagpack.AddItem(a);
+            inventory.GetComponent<UpgradeInventory>().PlayerBagpack.AddItem(b);
         }
 
         public void AddTestGold()

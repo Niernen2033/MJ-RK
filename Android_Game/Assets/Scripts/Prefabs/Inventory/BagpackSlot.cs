@@ -110,7 +110,19 @@ namespace Prefabs.Inventory
                                 }
                             case ItemFeaturesType.IsEquipAble:
                                 {
-                                    actionImageIndex = (int)InventoryIndex.Options.Equip;
+                                    if(this.item is EquipmentItem)
+                                    {
+                                        EquipmentItem equipmentItem = (EquipmentItem)this.item;
+                                        if(equipmentItem.IsEquiped)
+                                        {
+                                            actionImageIndex = (int)InventoryIndex.Options.Equip;
+                                        }
+                                        else
+                                        {
+                                            actionImageIndex = (int)InventoryIndex.Options.Disequip;
+                                        }
+                                    }
+                                                                 
                                     break;
                                 }
                             case ItemFeaturesType.IsRepairAble:

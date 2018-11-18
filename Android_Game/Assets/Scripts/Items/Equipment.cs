@@ -12,9 +12,18 @@ namespace Items
         public Armor Boots { get; set; }
         public Weapon Weapon { get; set; }
         public Armor Gloves { get; set; }
-        public Armor SecondHand { get; set; }
+        public Armor Shield { get; set; }
+        public Armor Trinket { get; set; }
 
-        [XmlElement(Type = typeof(Armor), ElementName = "Trinket")]
-        public List<Armor> Trinkets { get; set; }
+        public Equipment()
+        {
+            this.Helmet = null;
+            this.Body = null;
+            this.Boots = null;
+            this.Weapon = null;
+            this.Gloves = null;
+            this.Shield = null;
+            this.Trinket = null;
+        }
     }
 }

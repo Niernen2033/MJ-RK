@@ -113,7 +113,7 @@ namespace Prefabs.Inventory
                                     if(this.item is EquipmentItem)
                                     {
                                         EquipmentItem equipmentItem = (EquipmentItem)this.item;
-                                        if(equipmentItem.IsEquiped)
+                                        if(!equipmentItem.IsEquiped)
                                         {
                                             actionImageIndex = (int)InventoryIndex.Options.Equip;
                                         }
@@ -197,7 +197,7 @@ namespace Prefabs.Inventory
             }
         }
 
-        private void ClearSlot()
+        public void ClearSlot()
         {
             this.icon.sprite = null;
             this.icon.enabled = false;

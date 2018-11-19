@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Items;
+using System;
 
 namespace Prefabs.Inventory
 {
@@ -21,19 +22,56 @@ namespace Prefabs.Inventory
 
         private ItemFeaturesType[] eqFeatures;
         private Champion eqOwner;
+        private Equipment equipment;
+
+        private bool isDirty;
+        private bool isItemInfoPanelEnabled;
+        public bool IsCallbacksSeted { get; private set; }
+
+        public bool IsDataLoaded { get; private set; }
+
+        public void SetCallbacks(BagpackActivateCallback bagpackActivateCallback)
+        {
+            this.HelmetSlot.SetActivateCallback(bagpackActivateCallback);
+            this.HelmetSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.BodySlot.SetActivateCallback(bagpackActivateCallback);
+            this.BodySlot.SetInfoCallback(this.InfoFromEquipment);
+            this.WeaponSlot.SetActivateCallback(bagpackActivateCallback);
+            this.WeaponSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.ShieldSlot.SetActivateCallback(bagpackActivateCallback);
+            this.ShieldSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.TrinketSlot.SetActivateCallback(bagpackActivateCallback);
+            this.TrinketSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.GlovesSlot.SetActivateCallback(bagpackActivateCallback);
+            this.GlovesSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.BootsSlot.SetActivateCallback(bagpackActivateCallback);
+            this.BootsSlot.SetInfoCallback(this.InfoFromEquipment);
+            this.IsCallbacksSeted = true;
+        }
 
         private void Awake()
         {
             this.ClearData();
+
             this.eqFeatures = new ItemFeaturesType[2] { ItemFeaturesType.IsEquipAble, ItemFeaturesType.IsInfoAble };
+        }
+
+        private void Start()
+        {
+            this.isDirty = true;
         }
 
         private void ClearData()
         {
+            this.IsDataLoaded = false;
+            this.isItemInfoPanelEnabled = false;
+            this.isDirty = false;
             this.eqOwner = null;
+            this.equipment = null;
+            this.IsCallbacksSeted = false;
         }
 
-        private void AddModifiersToChampion(EquipmentItem item, EqType eqType)
+        private void AddModifiersToChampion(Item item, EqType eqType)
         {
             if(this.eqOwner != null)
             {
@@ -92,32 +130,45 @@ namespace Prefabs.Inventory
             }
         }
 
+        public void SetBagpack(Equipment equipment)
+        {
+            this.ClearData();
+
+            if (this.equipment != equipment && equipment != null)
+            {
+                this.equipment = equipment;
+                this.isDirty = true;
+                this.IsDataLoaded = true;
+            }
+        }
+
         public void SetChampion(Champion champion)
         {
             this.eqOwner = champion;
         }
 
-        public void AddToEQ(EquipmentItem item, EqType eqType, out EquipmentItem returnItem)
+        public void AddToEQ(Item item, EqType eqType, out Item returnItem)
         {
-            if (item != null)
+            if (item != null && eqType != EqType.None)
             {
-                EquipmentItem result = null;
+                Item swapResult = null;
                 switch (eqType)
                 {
                     case EqType.Body:
                         {
                             if (this.BodySlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.BodySlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.BodySlot.item;
-                                result.Unequip();
+                                swapResult = this.BodySlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.BodySlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -126,16 +177,17 @@ namespace Prefabs.Inventory
                         {
                             if (this.BootsSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.BootsSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.BootsSlot.item;
-                                result.Unequip();
+                                swapResult = this.BootsSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.BootsSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -144,16 +196,17 @@ namespace Prefabs.Inventory
                         {
                             if (this.GlovesSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.GlovesSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.GlovesSlot.item;
-                                result.Unequip();
+                                swapResult = this.GlovesSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.GlovesSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -162,16 +215,17 @@ namespace Prefabs.Inventory
                         {
                             if (this.HelmetSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.HelmetSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.HelmetSlot.item;
-                                result.Unequip();
+                                swapResult = this.HelmetSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.HelmetSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -180,16 +234,17 @@ namespace Prefabs.Inventory
                         {
                             if (this.ShieldSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.ShieldSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.ShieldSlot.item;
-                                result.Unequip();
+                                swapResult = this.ShieldSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.ShieldSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -198,16 +253,17 @@ namespace Prefabs.Inventory
                         {
                             if (this.TrinketSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.TrinketSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.TrinketSlot.item;
-                                result.Unequip();
+                                swapResult = this.TrinketSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.TrinketSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
@@ -216,27 +272,203 @@ namespace Prefabs.Inventory
                         {
                             if (this.WeaponSlot.IsEmpty)
                             {
+                                this.equipment.EquipItem(eqType, item);
                                 this.WeaponSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             else
                             {
                                 //swap
-                                result = (EquipmentItem)this.WeaponSlot.item;
-                                result.Unequip();
+                                swapResult = this.WeaponSlot.item;
+                                this.equipment.UnequipItem(eqType);
+
+                                this.equipment.EquipItem(eqType, item);
                                 this.WeaponSlot.AddItem(item, this.eqFeatures);
-                                item.Equip();
                             }
                             this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                 }
-                returnItem = result;
+                returnItem = swapResult;
             }
             else
             {
                 returnItem = null;
             }
+        }
+
+        public Item RemoveFromEQ(EqType eqItemType)
+        {
+            if(eqItemType == EqType.None)
+            {
+                return null;
+            }
+
+            Item result = null;
+
+            switch (eqItemType)
+            {
+                case EqType.Body:
+                    {
+                        result = this.BodySlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.BodySlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Boots:
+                    {
+                        result = this.BootsSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.BootsSlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Gloves:
+                    {
+                        result = this.GlovesSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.GlovesSlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Helmet:
+                    {
+                        result = this.HelmetSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.HelmetSlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Shield:
+                    {
+                        result = this.ShieldSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.ShieldSlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Trinket:
+                    {
+                        result = this.TrinketSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.TrinketSlot.ClearSlot();
+                        break;
+                    }
+                case EqType.Weapon:
+                    {
+                        result = this.WeaponSlot.item;
+                        this.equipment.UnequipItem(eqItemType);
+                        this.WeaponSlot.ClearSlot();
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
+        private void PrepareEquipment()
+        {
+            if (this.equipment != null)
+            {
+                for (int i = 0; i < Enum.GetValues(typeof(EqType)).Length; i++)
+                {
+                    Item equipmentItem = new Item();
+                    this.AddToEQ(this.equipment.GetItemByType((EqType)i), (EqType)i, out equipmentItem);
+                }
+            }
+
+            this.isDirty = false;
+        }
+
+        private void Update()
+        {
+            if (this.isItemInfoPanelEnabled)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    this.CloseInfoPanel();
+                }
+            }
+
+            if (this.isDirty)
+            {
+                this.PrepareEquipment();
+            }
+        }
+
+        private void FreeSlots()
+        {
+            this.HelmetSlot.ClearSlot();
+            this.BodySlot.ClearSlot();
+            this.WeaponSlot.ClearSlot();
+            this.ShieldSlot.ClearSlot();
+            this.TrinketSlot.ClearSlot();
+            this.GlovesSlot.ClearSlot();
+            this.BootsSlot.ClearSlot();
+        }
+
+        public void FreeEquipmentMemory()
+        {
+            this.FreeSlots();
+            this.ClearData();
+        }
+
+        public void ReloadEquipment()
+        {
+            this.FreeSlots();
+            this.PrepareEquipment();
+        }
+
+        private void PrintToInfoPanel(string info)
+        {
+            if (!this.isItemInfoPanelEnabled)
+            {
+                this.OpenInfoPanel();
+            }
+            this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = info;
+        }
+
+        private void OpenInfoPanel()
+        {
+            this.itemInfoPanel.gameObject.SetActive(true);
+            this.isItemInfoPanelEnabled = true;
+        }
+
+        private void CloseInfoPanel()
+        {
+            this.isItemInfoPanelEnabled = false;
+            this.itemInfoPanel.gameObject.SetActive(false);
+        }
+
+        private void InfoFromEquipment(Item item)
+        {
+            //we have info feature (Armor or Weapon or Comsuable)
+            this.OpenInfoPanel();
+            this.PrintToInfoPanel(this.GetItemInfo(item));
+        }
+
+        private string GetItemInfo(Item item)
+        {
+            string all_info = string.Empty;
+            if (item is Armor)
+            {
+                Armor armor = (Armor)item;
+                string[] info = armor.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
+                {
+                    all_info += info[i] + "\n";
+                }
+                this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = all_info;
+            }
+            else if (item is Weapon)
+            {
+                Weapon weapon = (Weapon)item;
+                string[] info = weapon.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
+                {
+                    all_info += info[i] + "\n";
+                }
+                this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = all_info;
+            }
+
+            return all_info;
         }
     }
 }

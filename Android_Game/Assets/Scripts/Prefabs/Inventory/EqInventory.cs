@@ -14,7 +14,8 @@ namespace Prefabs.Inventory
         private void Awake()
         {
             this.IsOpen = false;
-            this.PlayerBagpack = this.gameObject.GetComponentsInChildren<Bagpack>()[0];
+            this.PlayerBagpack = this.gameObject.GetComponentInChildren<Bagpack>();
+            this.ChampionEquipment = this.gameObject.GetComponentInChildren<Eq>();
         }
 
         // Use this for initialization
@@ -37,11 +38,12 @@ namespace Prefabs.Inventory
             {
                 this.gameObject.SetActive(true);
                 this.PlayerBagpack.ReloadBagpack();
+                this.ChampionEquipment.ReloadEquipment();
                 this.IsOpen = true;
             }
         }
 
-        public void OpenAndLoadInventory(List<Item> shop_items, List<Item> player_items, Champion champion = null)
+        public void OpenAndLoadInventory(Equipment equipment, List<Item> player_items, Champion champion = null)
         {
             if (this.gameObject.activeSelf == false)
             {
@@ -50,9 +52,14 @@ namespace Prefabs.Inventory
                 {
                     this.PlayerBagpack.SetBagpack(player_items);
                 }
+                if(equipment != null)
+                {
+                    this.ChampionEquipment.SetBagpack(equipment);
+                }
                 if (champion != null)
                 {
                     this.PlayerBagpack.SetChampion(champion);
+                    this.ChampionEquipment.SetChampion(champion);
                 }
                 this.IsOpen = true;
             }
@@ -72,6 +79,7 @@ namespace Prefabs.Inventory
             if (this.gameObject.activeSelf == true)
             {
                 this.PlayerBagpack.FreeBagpackMemory();
+                this.ChampionEquipment.FreeEquipmentMemory();
                 this.IsOpen = false;
                 this.gameObject.SetActive(false);
             }

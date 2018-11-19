@@ -43,7 +43,7 @@ namespace Prefabs.Inventory
             }
         }
 
-        public void OpenAndLoadInventory(List<Item> shop_items, List<Item> player_items, Champion champion = null)
+        public void OpenAndLoadInventory(List<Item> player_items, Champion champion = null)
         {
             if (this.gameObject.activeSelf == false)
             {

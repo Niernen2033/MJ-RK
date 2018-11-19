@@ -362,8 +362,41 @@ namespace Prefabs.Inventory
         {
             if(item != null)
             {
-                Item swapItem = null;
+                Eq eq = this.gameObject.GetComponentInParent<EqInventory>().ChampionEquipment; 
 
+                if(item is EquipmentItem)
+                {
+                    EquipmentItem equipmentItem = (EquipmentItem)item;
+
+                    if(!eq.IsCallbacksSeted)
+                    {
+                        eq.SetCallbacks(this.ActivateFromBagpack);
+                    }
+
+                    if(equipmentItem.IsEquiped)
+                    {
+                        //remove from equipment
+                        Item tempItem = eq.RemoveFromEQ(equipmentItem.EquipmentType);
+                        if (tempItem != null)
+                        {
+                            this.AddItem(tempItem);
+                        }
+                    }
+                    else
+                    {
+                        //add or swap item in equipment 
+                        Item swapItem = null;
+                        eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType, out swapItem);
+
+                        this.DeleteFromBagpack(item);
+                        clearSlotCallback();
+
+                        if(swapItem != null)
+                        {
+                            this.AddItem(swapItem);
+                        }
+                    }
+                }
             }
         }
 

@@ -8,7 +8,7 @@ namespace Items
 {
     public enum EqType { None = -1, Helmet, Body, Weapon, Shield, Trinket, Gloves, Boots };
 
-    public abstract class EquipmentItem : Item
+    public class EquipmentItem : Item
     {
         public event EventHandler<ItemEventArgs> EquipedItem;
         public event EventHandler<ItemEventArgs> UnequipedItem;

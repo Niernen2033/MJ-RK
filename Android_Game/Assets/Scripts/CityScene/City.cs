@@ -42,13 +42,13 @@ namespace CityScene
         }
 
         public void OpenInventory()
-        {
-            UpgradeInventory shopInventory = inventory.gameObject.GetComponent<UpgradeInventory>();
+        {           
+            EqInventory shopInventory = inventory.gameObject.GetComponent<EqInventory>();
             if (!shopInventory.IsOpen)
             {
                 if(shopInventory.PlayerBagpack == null)
                 {
-                    shopInventory.OpenAndLoadInventory(null, GameSave.Instance.Player.Backpack, null);
+                    shopInventory.OpenAndLoadInventory(GameSave.Instance.Player.Equipment, GameSave.Instance.Player.Bagpack, null);
                 }
                 if (shopInventory.PlayerBagpack.IsDataLoaded/* || shopInventory.ShopBagpack.IsDataLoaded*/)
                 {
@@ -56,7 +56,7 @@ namespace CityScene
                 }
                 else
                 {
-                    shopInventory.OpenAndLoadInventory(null, GameSave.Instance.Player.Backpack, null);
+                    shopInventory.OpenAndLoadInventory(GameSave.Instance.Player.Equipment, GameSave.Instance.Player.Bagpack, null);
                 }
             }
             else
@@ -71,16 +71,17 @@ namespace CityScene
             Armor a = new Armor();
             Weapon b = new Weapon();
             a.VitalityBonus = new Statistics(20);
-            a.Features.EnableFeatures(ItemFeaturesType.IsEatAble, ItemFeaturesType.IsInfoAble, 
-                ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble, ItemFeaturesType.IsRepairAble, ItemFeaturesType.IsUpgradeAble);
+            a.Features.EnableAllFeatures();
             a.Icon.Rarity = ItemRarity.Epic;
             a.GoldValue = 60;
             a.Durability = 10;
+            a.EquipmentType = EqType.Gloves;
 
             b.Features.EnableAllFeatures();
             b.BasicDamage = new Statistics(50);
+            b.EquipmentType = EqType.Weapon;
             
-            inventory.GetComponent<UpgradeInventory>().PlayerBagpack.AddItem(b);
+            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(a);
         }
 
         public void AddTestGold()
@@ -88,7 +89,7 @@ namespace CityScene
             Item b = new Item();
             b.Icon.Index = (int)ItemIndex.Gold.Large;
             b.GoldValue = 500;
-            inventory.GetComponent<UpgradeInventory>().PlayerBagpack.AddItem(b);
+            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(b);
         }
 
 

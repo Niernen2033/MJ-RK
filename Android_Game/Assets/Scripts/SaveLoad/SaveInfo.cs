@@ -17,6 +17,13 @@ namespace SaveLoad
             {
                 public static readonly string ImagesFolder = @"Images/";
                 public static readonly string MusicFolder = @"Music/";
+                public static readonly string ItemNameDataFolder = @"ItemNameData/";
+
+                public static class ItemNameData
+                {
+                    public static readonly string ItemNames = @"Assets/Resources/ItemNameData/ItemsNames.xml";
+                }
+
                 public static class Images
                 {
                     public static readonly string InventoryFolder = @"Images/Inventory/";

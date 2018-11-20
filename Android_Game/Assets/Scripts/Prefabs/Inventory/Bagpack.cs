@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 using Items;
 using System;
-using System.Runtime.InteropServices;
+using NPC;
 
 namespace Prefabs.Inventory
 {
@@ -88,6 +88,7 @@ namespace Prefabs.Inventory
                 if ((this.inventory_weight + item.Weight) > this.max_weight)
                 {
                     //to heavy
+                    Debug.Log("to heavy");
                 }
                 else
                 {
@@ -246,7 +247,10 @@ namespace Prefabs.Inventory
             {
                 try
                 {
+                    double itemWeight = item.Weight;
                     this.items.Remove(item);
+                    this.inventory_weight -= item.Weight;
+                    this.RefreshBagpack();
                 }
                 catch (Exception ex)
                 {
@@ -385,15 +389,18 @@ namespace Prefabs.Inventory
                     else
                     {
                         //add or swap item in equipment 
-                        Item swapItem = null;
-                        eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType, out swapItem);
 
-                        this.DeleteFromBagpack(item);
-                        clearSlotCallback();
-
-                        if(swapItem != null)
+                        if(eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType))
                         {
+                            clearSlotCallback();
+                            this.DeleteFromBagpack(item);
+                        }
+
+                        if(eq.IsIHaveItemToSwap)
+                        {
+                            Item swapItem = eq.GetSwapItem();
                             this.AddItem(swapItem);
+                            this.ReloadBagpack();
                         }
                     }
                 }
@@ -566,7 +573,7 @@ namespace Prefabs.Inventory
             this.bagpackOwner = null;
             this.inventory_weight = 0;
             this.inventory_gold = 0;
-            this.max_weight = 0;
+            this.max_weight = 100;
         }
 
         private void FreeSlots()
@@ -601,6 +608,12 @@ namespace Prefabs.Inventory
                 this.FreeSlots();
                 this.PrepareInventory();
             }
+        }
+
+        private void RefreshBagpack()
+        {
+            this.WeightTextValue.text = this.inventory_weight.ToString();
+            this.GoldTextValue.text = this.inventory_gold.ToString();
         }
     }
 }

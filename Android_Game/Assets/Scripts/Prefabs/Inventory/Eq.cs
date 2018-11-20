@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Items;
 using System;
+using NPC;
 
 namespace Prefabs.Inventory
 {
-
     public class Eq : MonoBehaviour
     {
 
@@ -27,6 +27,8 @@ namespace Prefabs.Inventory
         private bool isDirty;
         private bool isItemInfoPanelEnabled;
         public bool IsCallbacksSeted { get; private set; }
+        private Item swapItem;
+        public bool IsIHaveItemToSwap { get; private set; }
 
         public bool IsDataLoaded { get; private set; }
 
@@ -63,6 +65,8 @@ namespace Prefabs.Inventory
 
         private void ClearData()
         {
+            this.swapItem = null;
+            this.IsIHaveItemToSwap = false;
             this.IsDataLoaded = false;
             this.isItemInfoPanelEnabled = false;
             this.isDirty = false;
@@ -142,16 +146,29 @@ namespace Prefabs.Inventory
             }
         }
 
+        public Item GetSwapItem()
+        {
+            Item result = null;
+            if(this.IsIHaveItemToSwap)
+            {
+                result = this.swapItem;
+                this.swapItem = null;
+                this.IsIHaveItemToSwap = false;
+            }
+
+            return result;
+        }
+
         public void SetChampion(Champion champion)
         {
             this.eqOwner = champion;
         }
 
-        public void AddToEQ(Item item, EqType eqType, out Item returnItem)
+        public bool AddToEQ(Item item, EqType eqType)
         {
             if (item != null && eqType != EqType.None)
             {
-                Item swapResult = null;
+                bool canIEquip = true;
                 switch (eqType)
                 {
                     case EqType.Body:
@@ -164,13 +181,14 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.BodySlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.BodySlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.BodySlot.ClearSlot();
                                 this.BodySlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Boots:
@@ -183,13 +201,14 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.BootsSlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.BootsSlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.BootsSlot.ClearSlot();
                                 this.BootsSlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Gloves:
@@ -202,13 +221,14 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.GlovesSlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.GlovesSlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.GlovesSlot.ClearSlot();
                                 this.GlovesSlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Helmet:
@@ -221,32 +241,44 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.HelmetSlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.HelmetSlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.HelmetSlot.ClearSlot();
                                 this.HelmetSlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Shield:
                         {
-                            if (this.ShieldSlot.IsEmpty)
+                            if(this.eqOwner != null)
                             {
-                                this.equipment.EquipItem(eqType, item);
-                                this.ShieldSlot.AddItem(item, this.eqFeatures);
+                                if(this.eqOwner.ChampionClass == ChampionClass.Range)
+                                {
+                                    canIEquip = false;
+                                }
                             }
-                            else
+                            if (canIEquip)
                             {
-                                //swap
-                                swapResult = this.ShieldSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                if (this.ShieldSlot.IsEmpty)
+                                {
+                                    this.equipment.EquipItem(eqType, item);
+                                    this.ShieldSlot.AddItem(item, this.eqFeatures);
+                                }
+                                else
+                                {
+                                    //swap
+                                    this.IsIHaveItemToSwap = true;
+                                    this.swapItem = this.ShieldSlot.item;
+                                    this.equipment.UnequipItem(eqType);
 
-                                this.equipment.EquipItem(eqType, item);
-                                this.ShieldSlot.AddItem(item, this.eqFeatures);
+                                    this.equipment.EquipItem(eqType, item);
+                                    this.ShieldSlot.ClearSlot();
+                                    this.ShieldSlot.AddItem(item, this.eqFeatures);
+                                }
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Trinket:
@@ -259,13 +291,14 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.TrinketSlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.TrinketSlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.TrinketSlot.ClearSlot();
                                 this.TrinketSlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                     case EqType.Weapon:
@@ -278,21 +311,29 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                swapResult = this.WeaponSlot.item;
+                                this.IsIHaveItemToSwap = true;
+                                this.swapItem = this.WeaponSlot.item;
                                 this.equipment.UnequipItem(eqType);
 
                                 this.equipment.EquipItem(eqType, item);
+                                this.WeaponSlot.ClearSlot();
                                 this.WeaponSlot.AddItem(item, this.eqFeatures);
                             }
-                            this.AddModifiersToChampion(item, eqType);
                             break;
                         }
                 }
-                returnItem = swapResult;
+                if (canIEquip)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                returnItem = null;
+                return false;
             }
         }
 
@@ -367,8 +408,7 @@ namespace Prefabs.Inventory
             {
                 for (int i = 0; i < Enum.GetValues(typeof(EqType)).Length; i++)
                 {
-                    Item equipmentItem = new Item();
-                    this.AddToEQ(this.equipment.GetItemByType((EqType)i), (EqType)i, out equipmentItem);
+                    this.AddToEQ(this.equipment.GetItemByType((EqType)i), (EqType)i);
                 }
             }
 

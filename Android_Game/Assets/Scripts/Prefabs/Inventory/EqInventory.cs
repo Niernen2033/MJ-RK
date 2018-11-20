@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
+using NPC;
 
 namespace Prefabs.Inventory
 {

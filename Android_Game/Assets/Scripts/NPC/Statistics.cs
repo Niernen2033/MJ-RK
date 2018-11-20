@@ -26,7 +26,7 @@ public sealed class Statistics
     //Basic item bonus
     public double Basic { get; set; }
 
-    [XmlElement(ElementName = "StatisticsModifiersItem")]
+    [XmlElement(Type = typeof(StatisticsModifier), ElementName = "StatisticsModifiersItem")]
     public List<StatisticsModifier> StatisticsModifiers { get; set; }
 
     [XmlIgnore]

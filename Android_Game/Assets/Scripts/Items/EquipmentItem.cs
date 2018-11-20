@@ -36,9 +36,9 @@ namespace Items
             this.EquipmentType = EqType.None;
         }
 
-        public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemIcon icon, EqType eqType,
+        public EquipmentItem(ItemClass itemClass, ItemType itemType, ItemSubType itemSubType, ItemIcon icon, EqType eqType, ItemFeatures itemFeatures,
             string basicName, string additionalName, int goldValue, double weight, bool isEquiped, bool isBroken, int durability, int level, int upgradeLevel) :
-            base(itemClass, itemType, icon, basicName, additionalName, goldValue, weight, level)
+            base(itemClass, itemType, itemSubType, icon, itemFeatures, basicName, additionalName, goldValue, weight, level)
         {
             this.IsEquiped = isEquiped;
             this.IsBroken = isBroken;

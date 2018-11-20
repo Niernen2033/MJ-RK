@@ -15,6 +15,7 @@ namespace SaveLoad
 
         private static GameSave instance = null;
         private string SavePath;
+        private readonly bool IsCryptoOn = false;
 
         public static GameSave Instance
         {
@@ -37,7 +38,7 @@ namespace SaveLoad
 
         public bool Load(string loadPath)
         {
-            if (!XmlManager.Load<GameSave>(loadPath, out instance))
+            if (!XmlManager.Load<GameSave>(loadPath, out instance, IsCryptoOn))
             {
                 Debug.Log("Class 'Save' in 'Load' function: Cannot load file");
                 return false;
@@ -48,7 +49,7 @@ namespace SaveLoad
 
         public bool Update()
         {
-            if (!XmlManager.Save<GameSave>(instance, this.SavePath))
+            if (!XmlManager.Save<GameSave>(instance, this.SavePath, IsCryptoOn))
             {
                 Debug.Log("Class 'Save' in 'Update' function: Cannot save file");
                 return false;

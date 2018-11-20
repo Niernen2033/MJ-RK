@@ -53,7 +53,7 @@ namespace Items
                 Axe3 = 563,
                 Axe4 = 571,
             }
-            public enum SecondHand
+            public enum Shield
             {
                 Shield1 = 113,
                 Shield2 = 114,
@@ -155,7 +155,7 @@ namespace Items
                 Staff7 = 695,
                 Staff8 = 683,
             }
-            public enum SecondHand
+            public enum Shield
             {
                 Shield1 = 120,
                 Shield2 = 702,

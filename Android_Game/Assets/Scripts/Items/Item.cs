@@ -7,17 +7,27 @@ using System.Text;
 
 namespace Items
 {
-    public enum ItemRarity
+    public enum ItemSubType
     {
-        Basic = 809,
-        Common = 810,
-        Uncommon = 7,
-        Epic = 808,
-        Legendary = 12,
-        None = 439,
+        None = -1,
+        Potion_Health,
+        Potion_Mana,
+        Potion_Strength,
+        Potion_Dexterity,
+        Potion_Intelligence,
+        Potion_Armor,
+        Junk_Gems,
+        Junk_Gold,
+        Junk_Minerals,
+        Junk_BodyParts,
+        Junk_Generic,
     };
-    public enum ItemClass { Armor, Weapon, Potion, Food, None };
-    public enum ItemType { Magic, Ranged, Melle, None };
+
+    public enum ItemType { None = -1, Armor, Weapon, Trinket, Potion, Junk, Food, Gold };
+
+    public enum ItemClass { None = -1, Normal, Magic, Ranged, Melle };
+
+    public enum ItemRarity { None = -1, Basic, Common, Uncommon, Epic, Legendary };
 
     public class Item
     {
@@ -33,6 +43,9 @@ namespace Items
 
         //Item type
         public ItemType Type { get; set; }
+
+        //Item subtype
+        public ItemSubType SubType { get; set; }
 
         //Item name
         public string BasicName { get; set; }
@@ -57,13 +70,14 @@ namespace Items
 
 
         //BASIC CONSTRUCTORS ====================================================================================
-        public Item(ItemClass itemClass, ItemType itemType, ItemIcon icon,
+        public Item(ItemClass itemClass, ItemType itemType, ItemSubType itemSubType, ItemIcon icon, ItemFeatures itemFeatures,
             string basicName, string additionalName, int goldValue, double weight, int level)
         {
             this.Class = itemClass;
             this.Type = itemType;
+            this.SubType = itemSubType;
             this.Icon = icon;
-            this.Features = new ItemFeatures();
+            this.Features = itemFeatures;
 
             this.BasicName = basicName;
             this.AdditionalName = additionalName;
@@ -79,6 +93,7 @@ namespace Items
         {
             this.Class = ItemClass.None;
             this.Type = ItemType.None;
+            this.SubType = ItemSubType.None;
             this.Icon = new ItemIcon();
             this.Features = new ItemFeatures();
 
@@ -96,6 +111,7 @@ namespace Items
         {
             this.Class = item.Class;
             this.Type = item.Type;
+            this.SubType = item.SubType;
             this.Icon = new ItemIcon(item.Icon);
             this.Features = new ItemFeatures(item.Features);
 

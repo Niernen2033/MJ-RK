@@ -10,9 +10,9 @@ namespace NPC
     {
         public int MaxCapacity { get; set; }
 
-        public Player(int vitality, double magicArmor, double rangedArmor, double melleArmor,
+        public Player(ChampionClass championClass, int vitality, double magicArmor, double rangedArmor, double melleArmor,
             int dexterity, int intelligence, int strength, bool illness, Equipment equipment, List<Item> bagpack)
-            : base(vitality, magicArmor, rangedArmor, melleArmor, dexterity, intelligence, strength, illness, equipment, bagpack)
+            : base(championClass, vitality, magicArmor, rangedArmor, melleArmor, dexterity, intelligence, strength, illness, equipment, bagpack)
         {
             this.MaxCapacity = 100;
         }

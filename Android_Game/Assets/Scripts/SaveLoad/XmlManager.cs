@@ -12,10 +12,8 @@ namespace SaveLoad
 {
     public static class XmlManager
     {
-        //Varaibles*****************************
-        private static bool IsCryptoOn = false;
         //Functions***************************
-        public static bool Load<T>(string name, out T instance)
+        public static bool Load<T>(string name, out T instance, bool IsCryptoOn = false)
         {
             try
             {
@@ -57,7 +55,7 @@ namespace SaveLoad
             }
         }
 
-        public static bool Save<T>(T obj, string name)
+        public static bool Save<T>(T obj, string name, bool IsCryptoOn = false)
         {
             try
             {

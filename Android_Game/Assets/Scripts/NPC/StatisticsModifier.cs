@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
-public enum StatisticsModifierClass { LevelUP, Durability, Spell, Talent, ItemBonus }
-public enum StatisticsModifierType { AddFlat, AddPercent, MinusFlat, MinusPercent }
+public enum StatisticsModifierClass { None = -1, LevelUP, Durability, Spell, Talent, ItemBonus };
+public enum StatisticsModifierType { None = -1, AddFlat, AddPercent, MinusFlat, MinusPercent };
 
 public sealed class StatisticsModifier
 {
@@ -12,6 +12,14 @@ public sealed class StatisticsModifier
     public StatisticsModifierType ModifierType { get; set; }
     public StatisticsModifierClass ModifierClass { get; set; }
     public EqType ModifierEqItem { get; set; }
+
+    public StatisticsModifier()
+    {
+        this.ModifierClass = StatisticsModifierClass.None;
+        this.Value = 0;
+        this.ModifierType = StatisticsModifierType.None;
+        this.ModifierEqItem = EqType.None;
+    }
 
     public StatisticsModifier(StatisticsModifierClass modifierClass, StatisticsModifierType modifierType, double value, EqType eqItemType = EqType.None)
     {

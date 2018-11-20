@@ -72,7 +72,7 @@ namespace CityScene
             Weapon b = new Weapon();
             a.VitalityBonus = new Statistics(20);
             a.Features.EnableAllFeatures();
-            a.Icon.Rarity = ItemRarity.Epic;
+            a.Icon.Rarity = ItemIndexManagement.GetItemRarityIndex(ItemRarity.Legendary);
             a.GoldValue = 60;
             a.Durability = 10;
             a.EquipmentType = EqType.Gloves;
@@ -80,8 +80,11 @@ namespace CityScene
             b.Features.EnableAllFeatures();
             b.BasicDamage = new Statistics(50);
             b.EquipmentType = EqType.Weapon;
-            
-            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(a);
+
+            ItemGenerator itemGenerator = new ItemGenerator();
+
+            Armor c = itemGenerator.GenerateArmor(1, ItemClass.Melle, ItemType.Armor, EqType.Body);
+            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(c);
         }
 
         public void AddTestGold()

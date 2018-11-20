@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ItemNameData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ArmorBodyItemNamesItem>Armor of Unholy Fortunes</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Armor of Fleeting Justice</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Golden Cuirass of Dark Wars</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Skeletal Batteplate of Frozen Fortune</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Ghostly Ebon Chestpiece</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Twilight's Chain Chestguard</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Lightning Vest of the Prince</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Fusion Chestpiece of the Eagle</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Defiler of the Corrupted</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Conqueror of Hope</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Chestplate of Timeless Powers</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Breastplate of Cursed Bloodlust</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Steel Armor of Shattered Hells</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Iron Greatplate of Unholy Kings</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Ebon Chain Breastplate</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Prime Iron Chestguard</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Chestplate of the Immortals</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Champion's Vest of Glory</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Bond of the Beast</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Blessing of the Whale</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Raiment of Ancient Protection</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Raiment of Dark Misery</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Quilted Wraps of Ending Sorrow</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Quilted Vest of Immortal Punishment</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Possessed Leather Tunic</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Thunder-Forged Silk Tunic</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Undead Tunic of Eternity</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Fusion Jerkin of the Prophecy</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Memory of Eternity</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Hope of Fury</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Wraps of Infernal Fire</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Garments of Divine Damnation</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Cloth Vestment of Relentless Fortune</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Heavy Hide Vest of Divine Honor</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Trainee's Scaled Robes</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Burnished Wool Vest</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>War-Forged Breastplate of Twilight</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Ruby Infused Wraps of Reckoning</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Emissary of Thunders</ArmorBodyItemNamesItem>
+  <ArmorBodyItemNamesItem>Bane of the Burning Sun</ArmorBodyItemNamesItem>
+  <ArmorShieldItemNamesItem>Hope</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Truthbreaker</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Face of Death</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Tyrannical Bastion</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Thunderfury Tower Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Vengeful Bone Heater</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Military Warpwood Defender</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Night's End, Ferocity of Fools</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Peacekeeper, Legacy of the Moon</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Faithkeeper, Pledge of Anguish</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Warmonger</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Rumpel Steelskin</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Storm Breaker</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Defender Keeper</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Guardian's Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Venom Obsidian Shield Wall</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Bloodied Silver Barricade</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Extinction, Call of Frozen Hells</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Shroud, Incarnation of Cunning</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>The Righteous, Vindicator of the Forsaken</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Aegeus</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Wall of Pride</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Prelude</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Fragile Tower Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Frost Buffer</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Haunted Silver Tower Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Promised Silver Wall</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Triumph, Wit of Twilight's End</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Barrage, Might of Shadow Strikes</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Catastrophe, Ward of the Wicked</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Loyalty</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Glimmer</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Alpha</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Warlord's Wall</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Soulless Defender</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Loyal Obsidian Bastion</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Heartless Silver Light Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Stormbringer, Memory of Mercy</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Monster, Conqueror of Terror</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Ragnarok, Light Shield of Blight</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Treachery</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>The Shadow</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Honor's Call</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Guardian's Blockade</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Ancient Visage</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Terror Copper Heavy Shield</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Conqueror Bronzed Visage</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>The Void, Might of Subtlety</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Blackout, Champion of the Moon</ArmorShieldItemNamesItem>
+  <ArmorShieldItemNamesItem>Honor's Pride, Reach of Mercy</ArmorShieldItemNamesItem>
+  <ArmorHelmetItemNamesItem>Headcover of Relentless Freedom</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Headcover of Damned Torment</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Iron Helmet of Dark Bloodlust</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Demon Helmet of Twisted Glory</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Mended Ivory Visage</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Hungering Golden Helm</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Peacekeeper Faceguard of Blood</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Vindication Greathelm of Delusions</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Visage of Life</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Ender of Ashes</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Helmet of Divine Damnation</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Helmet of Cursed Fortunes</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Bronzed Casque of Holy Fires</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Obsidian Jaws of Unholy Glory</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Hero's Bone Gaze</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Sorrow's Plate Headcover</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Burnished Visage of Demon Fire</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Stormfury Helm of Truths</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Death of Dusk</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Crusader of Ending Hope</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Bandana of Doomed Glory</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Hood of Eternal Visions</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Scaled Hood of Eternal Warlords</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Cloth Headguard of Infinite Nightmares</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Ghost-Forged Leather Helm</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Brutality Wool Headpiece</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Sentinel Hood of the North</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Honor's Cap of the Brotherhood</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Warden of Moonlight</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Bond of Binding</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Headpiece of Infernal Comrades</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Helm of Shattered Punishment</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Scaled Headguard of Lost Souls</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Padded Cap of Eternal Might</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Baneful Silk Hood</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Pride's Padded Headpiece</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Dragon Helm of Pride's Fall</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Phantom Helm of Titans</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Edge of Oblivion</ArmorHelmetItemNamesItem>
+  <ArmorHelmetItemNamesItem>Gift of the Knight</ArmorHelmetItemNamesItem>
+  <ArmorBootsItemNamesItem>Spurs of Infernal Bloodlust</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Greatboots of Demonic Might</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Adamantite Footguards of Dark Sorrow</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Chain Warboots of Timeless Damnation</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Titanium Greaves</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Recruit's Ebon Boots</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Heartless Steel Boots</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Wretched Boots of Greed</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Thunder Warboots of Hatred</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Baneful Warboots of Clarity</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Feet of Hallowed Memories</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Footguards of Immortal Powers</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Chainmail Sabatons of Eternal Worlds</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Titanium Treads of Twisted Hells</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Proud Steel Walkers</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Sorrow's Golden Footguards</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Lich Demon Greaves</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Soldier's Feet of Due Diligence</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Inherited Boots of Mystery</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Malicious Walkers of Immortality</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Footguards of Infinite Ancestors</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Sandals of Burning Whispers</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Heavy Leather Sprinters of Immortal Fortune</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Embroided Treads of Broken Nightmares</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Atuned Leather Footguards</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Battleworn Heavy Hide Heels</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Defender Quilted Sprinters</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Desire's Sandals of Terror</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Lightning Sandals of Slaughter</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Legionnaire's Sprinters of Prophecies</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Footguards of Cursed Worlds</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Footguards of Holy Magic</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Scaled Sandals of Smoldering Protection</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Heavy Leather Sprinters of Burning Fortunes</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Massive Cloth Sandals</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Vindicator Silk Sandals</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Vanquisher Hide Footpads</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Retribution Footpads of the Prisoner</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Blood-Forged Feet of the Enigma</ArmorBootsItemNamesItem>
+  <ArmorBootsItemNamesItem>Soul Feet of Stealth</ArmorBootsItemNamesItem>
+  <ArmorGlovesItemNamesItem>Warfists of Sacred Bloodlust</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Gloves of Damned Hope</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Chainmail Grasps of Dark Fires</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Silver Grips of Haunted Fortune</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Twilight Demon Handguards</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Mourning Bronzed Grasps</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Gladiator's Iron Grips</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Rune-Forged Warfists of the Cataclysm</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Atuned Handguards of Fallen Souls</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Cursed Handguards of the Setting Sun</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Grips of Cursed Damnation</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Grips of Blind Fire</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Demon Hands of Divine Might</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Bronzed Gloves of Condemned Voices</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Shadow Iron Grasps</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Oathkeeper's Obsidian Gauntlets</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Hero Bone Warfists</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Champion Grips of the Dreadlord</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Terror Handguards of Immortality</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Malevolent Handguards of the Corrupted</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Gauntlets of Cursed Freedom</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Handwraps of Relentless Hell</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Wool Hands of Infinite Fortune</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Cloth Gauntlets of Imminent Fire</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Thunder-Forged Quilted Grips</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Wool Gloves</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Challenger Embroided Gauntlets</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Mourning Handwraps of Burdens</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Vicious Grips of Holy Might</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Vindictive Handguards of Paradise</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Touch of Burning Wars</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Handguards of Blind Whispers</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Linen Fists of Damned Magic</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Heavy Hide Grips of Doomed Ancestors</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Yearning Wool Handwraps</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Sentinel Padded Handguards</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Stormfury Leather Grasps</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Hope's Fists of Thorns</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Honor's Gauntlets of Kings</ArmorGlovesItemNamesItem>
+  <ArmorGlovesItemNamesItem>Proud Grips of the Swamp</ArmorGlovesItemNamesItem>
+  <WeaponMelleItemNamesItem>Broken Promise</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Mangler</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Misery's End</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Knightly Reaver</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>War-Forged Greatsword</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Dragonbreath Skeletal Razor</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Replica Glass Defender</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Venom, Annihilation of the Lionheart</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Interrogator, Whisper of Invocation</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Scar, Cry of Infinite Trials</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Armageddon</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Needle</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Mournblade</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Eerie Crusader</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Soul Mageblade</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Spectral Diamond Claymore</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Rune-Forged Copper Slicer</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Peacekeeper, Voice of the Lone Wolf</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Heartseeker, Blade of Ashes</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Spineripper, Bringer of Deception</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Willbreaker</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Mangler</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Valkyrie</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Flimsy Carver</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Isolated Blade</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Primitive Steel Defender</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Ominous Mithril Rapier</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Oblivion, Defiler of the Wretched</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Witherbrand, Broadsword of Shadows</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Deathbringer, Carver of the Covenant</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Bloodweep</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Nightbane</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Treachery</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Lich Scimitar</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Bonecarvin Claymore</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Dire Skeletal Razor</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Desolation Glass Blade</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Hell's Scream, Glory of Assassins</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>The Black Blade, Vengeance of Hope</WeaponMelleItemNamesItem>
+  <WeaponMelleItemNamesItem>Skullcrusher, Greatsword of Fallen Souls</WeaponMelleItemNamesItem>
+  <WeaponMagicItemNamesItem>Celestia</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Visage</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Nemesis</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Void</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Bloodied Instrument</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Replica Goblet</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Roaring Eye</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Cryptic, Dawn of the Fallen</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Netherlight, Pledge of Illuminated Dreams</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Spark, Visage of Time-Lost Memories</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Dreamkiss</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Alakaslam</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Fury</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Eclipse</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Malevolent Stone</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Holy Instrument</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Spectral Crystal</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Midnight, Trinket of the South</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Dragonwrath, Favor of Regret</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Soulsliver, Edge of Blessings</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Ferallity</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Pursuit</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Earthfire</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Shadowfeather</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Possessed Eye</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Grim Torch</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Shadow Aspect</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Necrolight, Sphere of the West</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Soulsiphon, Satchel of Pride</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Void, Call of the Night</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Insight</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Blackout</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Snowflake</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Dreamwhisper</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Restored Cane</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Singed Cage</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Dire Globe</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Whispersong, Pouch of the Moon</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Blightspore, Beacon of Summoning</WeaponMagicItemNamesItem>
+  <WeaponMagicItemNamesItem>Brimstone, Call of the Serpent</WeaponMagicItemNamesItem>
+  <WeaponRangedItemNamesItem>Twisted</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Shriek</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Salvation</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Driftwood Composite Bow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Titanium Compound Bow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Banished Steel Bolter</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Ghostly Iron Shooter</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Soulstring, Chord of the Sky</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Recurve, Reach of the Lionheart</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Razorsong, Defiler of Hope</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Razorwind</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Graviton</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Eagle</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Steel Crossfire</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Maple Flatbow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Renewed Ashwood Compound Bow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Blessed Ebon Crossfire</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Death's Kiss, Bow of the Breaking Storm</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>High-Strung, Bringer of Redemption</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Recurve, Boon of the Wicked</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Starstruck</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Spitfire</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Swoosh</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Yew Longbow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Steel Compound Crossbow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Brutal Yew Straight Bow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Thunderfury Hardwood Bow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Scorpio, Reflex Bow of Closing Eyes</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Valkyrie, Self Bow of Dark Magic</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Whisperwind, Soul of the Breaking Storm</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Scorpio</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Siren's Song</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Razorsong</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Iron Launcher</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Titanium Warbow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Ritual Yew Flatbow</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Charmed Skeletal Speargun</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Starstruck, Last Hope of Timeless Battles</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Twitch, Ellipse of Suffering</WeaponRangedItemNamesItem>
+  <WeaponRangedItemNamesItem>Netherstrand, Reach of Diligence</WeaponRangedItemNamesItem>
+  <TrinketItemNamesItem>The Sweet Memorial</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Devoted Lure</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Mellow Panther</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Frozen Leaf</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Solar Heart</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Luminous Aura Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Darling Eye Tiara</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Quiet Light Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Violet Drop Pin</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Pink Trinket Pendant</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Coral Sun</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Luminous Favor</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Purity Hymn</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Lonely Vow</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Pink Promise</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Perfect Memorial Pin</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Colossal Glamour Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Lavish Love Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Loyal Focus Amulet</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Gracious Orb Amulet</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Jade Promise</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Elegant Breath</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Zircon Core</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Spinel Resolve</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Silent Bond</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Flawless Poem Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Graceful Twirl Amulet</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Angel Vision Pin</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Illustrious Crest Ornament</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Perfect Petal Pendant</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Spotless Trinket</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Serene Bubble</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Arctic Spark</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Infinite Palm</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Bright Focus</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Adored Twins Ring</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Lustrous Panther Necklace</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Faint Prayer Ring</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Impossible Seal Ornament</TrinketItemNamesItem>
+  <TrinketItemNamesItem>The Crisp Teardrop Bracelet</TrinketItemNamesItem>
+</ItemNameData>

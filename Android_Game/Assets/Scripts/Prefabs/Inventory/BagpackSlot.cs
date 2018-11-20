@@ -186,13 +186,16 @@ namespace Prefabs.Inventory
             Sprite[] items_icons = Resources.LoadAll<Sprite>(SaveInfo.Paths.Resources.Images.Inventory.AllItems);
 
             int iconIndex = this.item.Icon.Index;
-            this.icon.sprite = items_icons[iconIndex];
-            this.icon.enabled = true;
-
-            ItemRarity iconRarityIndex = this.item.Icon.Rarity;
-            if (iconRarityIndex != ItemRarity.None)
+            if (iconIndex != (int)ItemIndex.Special.No_Item)
             {
-                this.iconRarity.sprite = items_icons[(int)iconRarityIndex];
+                this.icon.sprite = items_icons[iconIndex];
+                this.icon.enabled = true;
+            }
+
+            int iconRarityIndex = this.item.Icon.Rarity;
+            if (iconRarityIndex != (int)ItemRarity.None)
+            {
+                this.iconRarity.sprite = items_icons[iconRarityIndex];
                 this.iconRarity.enabled = true;
             }
         }

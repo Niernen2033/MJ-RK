@@ -17,13 +17,13 @@ namespace Items
 
         public Equipment()
         {
-            this.Helmet = null;
-            this.Body = null;
-            this.Boots = null;
-            this.Weapon = null;
-            this.Gloves = null;
-            this.Shield = null;
-            this.Trinket = null;
+            this.Helmet = new Armor();
+            this.Body = new Armor();
+            this.Boots = new Armor();
+            this.Weapon = new Weapon();
+            this.Gloves = new Armor();
+            this.Shield = new Armor();
+            this.Trinket = new Armor();
         }
 
         public Equipment(Armor helmet, Armor body, Armor boots, Armor gloves, Armor shield, Armor trinket, Weapon weapon)

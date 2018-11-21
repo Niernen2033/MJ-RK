@@ -261,9 +261,9 @@ namespace Prefabs.Inventory
 
         private void ConsumeItem(Item item)
         {
-            if (item is EatableItem)
+            if (item is ConsumeableItem)
             {
-                EatableItem eatableItem = (EatableItem)item;
+                ConsumeableItem eatableItem = (ConsumeableItem)item;
                 eatableItem.Eat(this.bagpackOwner);
             }
             this.DeleteFromBagpack(item);
@@ -392,15 +392,15 @@ namespace Prefabs.Inventory
 
                         if(eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType))
                         {
-                            clearSlotCallback();
                             this.DeleteFromBagpack(item);
+                            clearSlotCallback();
                         }
 
                         if(eq.IsIHaveItemToSwap)
                         {
                             Item swapItem = eq.GetSwapItem();
                             this.AddItem(swapItem);
-                            this.ReloadBagpack();
+                            //this.ReloadBagpack();
                         }
                     }
                 }
@@ -492,9 +492,9 @@ namespace Prefabs.Inventory
                 }
                 this.itemInfoPanel.gameObject.GetComponentInChildren<Text>().text = all_info;
             }
-            else if (item is EatableItem)
+            else if (item is ConsumeableItem)
             {
-                EatableItem eatableItem = (EatableItem)item;
+                ConsumeableItem eatableItem = (ConsumeableItem)item;
                 string[] info = eatableItem.ToString().Split(';');
 
                 for (int i = 0; i < info.Length; i++)

@@ -61,6 +61,11 @@ public sealed class Statistics
         this.StatisticsModifiers = new List<StatisticsModifier>();
     }
 
+    public void PostInstantiate()
+    {
+        this.CalculateAcctualStatistics();
+    }
+
     public void ChangeAcctualValue(double acctualBonus)
     {
         this.Acctual = acctualBonus;

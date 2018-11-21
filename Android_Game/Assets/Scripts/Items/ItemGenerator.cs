@@ -8,45 +8,361 @@ using UnityEngine;
 
 namespace Items
 {
+    public enum ItemGeneratorBoostType { Increase, Decrease, Normal, Zero, MegaDecrease, MegaIncrease };
+
     public class ItemGenerator
     {
         public Armor GenerateArmor(int itemLevel, ItemClass itemClass, ItemType itemType, EqType eqType)
         {
             Armor result = null;
+
+            ItemIcon itemIcon = this.GenerateItemIcon(itemClass, itemType, eqType);
+            string itemName = this.GenerateItemName(itemClass, eqType);
+            int goldValue = this.GenerateItemGoldValue(itemLevel);
+            double itemWeight;
+            ItemFeatures itemFeatures = new ItemFeatures();
+            itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsEquipAble,
+                ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsRepairAble, ItemFeaturesType.IsSellAble,
+                ItemFeaturesType.IsUpgradeAble);
+
             if (itemType == ItemType.Armor)
             {
-                ItemIcon itemIcon = this.GenerateItemIcon(itemClass, itemType, eqType);
-                string itemName = this.GenerateItemName(itemClass, eqType);
-                int goldValue = this.GenerateItemGoldValue(itemLevel);
-                double itemWeight = Math.Round(CryptoRandom.NextDouble(0, 5), 2, MidpointRounding.AwayFromZero);
-                ItemFeatures itemFeatures = new ItemFeatures();
-                itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsEquipAble, 
-                    ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsRepairAble, ItemFeaturesType.IsSellAble, 
-                    ItemFeaturesType.IsUpgradeAble);
+                itemWeight = Math.Round(CryptoRandom.NextDouble(0, 5), 2, MidpointRounding.AwayFromZero);
 
-                Armor armor = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
-                   itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity),
-                   this.GenerateItemStatistics(itemLevel, itemIcon.Rarity));
+                Armor armor = null;
+
+                switch (itemClass)
+                {
+                    case ItemClass.Magic:
+                        {
+                            armor = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                            break;
+                        }
+                    case ItemClass.Melle:
+                        {
+                            armor = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease));
+                            break;
+                        }
+                    case ItemClass.Ranged:
+                        {
+                            armor = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                            break;
+                        }
+                }
 
                 result = armor;
             }
             else if (itemType == ItemType.Trinket)
             {
+                itemWeight = Math.Round(CryptoRandom.NextDouble(0, 2), 2, MidpointRounding.AwayFromZero);
 
+                Armor trinket = null;
+
+                switch (itemClass)
+                {
+                    case ItemClass.Magic:
+                        {
+                            trinket = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                            break;
+                        }
+                    case ItemClass.Melle:
+                        {
+                            trinket = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                            break;
+                        }
+                    case ItemClass.Ranged:
+                        {
+                            trinket = new Armor(itemClass, itemType, ItemSubType.None, itemIcon, eqType, itemFeatures,
+                               itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Decrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaIncrease),
+                               this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                            break;
+                        }
+                }
+
+                result = trinket;
             }
 
             return result;
         }
 
-        private Statistics GenerateItemStatistics(int level, int itemRarity)
+        public Weapon GenerateWeapon(int itemLevel, ItemClass itemClass)
         {
-            int basicValue = CryptoRandom.Next((int)((10 + itemRarity) * Math.Pow(1.1, level)), (int)((15+itemRarity) * Math.Pow(1.1, level)));
+            Weapon result = null;
+
+            ItemIcon itemIcon = this.GenerateItemIcon(itemClass, ItemType.Weapon);
+            string itemName = this.GenerateItemName(itemClass, EqType.Weapon);
+            int goldValue = this.GenerateItemGoldValue(itemLevel);
+            double itemWeight = Math.Round(CryptoRandom.NextDouble(0, 5), 2, MidpointRounding.AwayFromZero);
+            ItemFeatures itemFeatures = new ItemFeatures();
+            itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsEquipAble,
+                ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsRepairAble, ItemFeaturesType.IsSellAble,
+                ItemFeaturesType.IsUpgradeAble);
+
+            switch (itemClass)
+            {
+                case ItemClass.Magic:
+                    {
+                        result = new Weapon(itemClass, ItemType.Weapon, ItemSubType.None, itemIcon, EqType.Weapon,
+                            itemFeatures, itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                        break;
+                    }
+                case ItemClass.Melle:
+                    {
+                        result = new Weapon(itemClass, ItemType.Weapon, ItemSubType.None, itemIcon, EqType.Weapon,
+                            itemFeatures, itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase));
+
+                        break;
+                    }
+                case ItemClass.Ranged:
+                    {
+                        result = new Weapon(itemClass, ItemType.Weapon, ItemSubType.None, itemIcon, EqType.Weapon,
+                            itemFeatures, itemName, string.Empty, goldValue, itemWeight, false, false, 100, itemLevel, 0,
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Normal),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.Increase),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease),
+                            this.GenerateItemStatistics(itemLevel, ItemIndexManagement.GetRarityFromIndex(itemIcon.Rarity), ItemGeneratorBoostType.MegaDecrease));
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
+        public ConsumeableItem GenerateConsumeableItem(ItemType itemType, ItemSubType itemSubType)
+        {
+            ConsumeableItem result = null;
+
+            int goldValue;
+            int boost;
+            ItemIcon itemIcon = this.GenerateItemIcon(ItemClass.None, itemType, EqType.None, itemSubType);
+            itemIcon.Rarity = (int)ItemRarity.None;
+            ItemFeatures itemFeatures = new ItemFeatures();
+            itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsSellAble, ItemFeaturesType.IsEatAble);
+
+            switch(itemType)
+            {
+                case ItemType.Potion:
+                    {
+                        switch (itemSubType)
+                        {
+                            case ItemSubType.Potion_Armor:
+                                {
+                                    goldValue = CryptoRandom.Next(200,500);
+                                    boost = CryptoRandom.Next(8, 15);
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Armor Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            case ItemSubType.Potion_Dexterity:
+                                {
+                                    goldValue = CryptoRandom.Next(200, 500);
+                                    boost = CryptoRandom.Next(8, 15);
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Dexterity Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            case ItemSubType.Potion_Health:
+                                {
+                                    goldValue = 50;
+                                    boost = 60;
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Health Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            case ItemSubType.Potion_Intelligence:
+                                {
+                                    goldValue = CryptoRandom.Next(200, 500);
+                                    boost = CryptoRandom.Next(8, 15);
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Intelligence Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            case ItemSubType.Potion_Mana:
+                                {
+                                    goldValue = 50;
+                                    boost = 60;
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Mana Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            case ItemSubType.Potion_Strength:
+                                {
+                                    goldValue = CryptoRandom.Next(200, 500);
+                                    boost = CryptoRandom.Next(8, 15);
+                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                        itemFeatures, "Armor Potion", string.Empty, goldValue, 0.5);
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case ItemType.Food:
+                    {
+                        boost = CryptoRandom.Next(20, 50);
+                        goldValue = CryptoRandom.Next(20, 60);
+                        result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                            itemFeatures, "Food" +
+                            "", string.Empty, goldValue, CryptoRandom.NextDouble(0.3, 1));
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
+        public Item GenerateJunk(ItemSubType itemSubType)
+        {
+            Item result = null;
+
+            int goldValue;
+            ItemIcon itemIcon = this.GenerateItemIcon(ItemClass.Normal, ItemType.Junk, EqType.None, itemSubType);
+            itemIcon.Rarity = (int)ItemRarity.None;
+
+            ItemFeatures itemFeatures = new ItemFeatures();
+            itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsSellAble);
+
+            switch (itemSubType)
+            {
+                case ItemSubType.Junk_BodyParts:
+                    {
+                        goldValue = CryptoRandom.Next(20, 50);
+                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                            "Body part", string.Empty, goldValue, 0.5, 0);
+                        break;
+                    }
+                case ItemSubType.Junk_Gems:
+                    {
+                        goldValue = CryptoRandom.Next(100, 500);
+                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                            "Gem", string.Empty, goldValue, 0.5, 0);
+                        break;
+                    }
+                case ItemSubType.Junk_Generic:
+                    {
+                        goldValue = CryptoRandom.Next(20, 60);
+                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                            "Strange thing", string.Empty, goldValue, 0.5, 0);
+                        break;
+                    }
+                case ItemSubType.Junk_Gold:
+                    {
+                        goldValue = CryptoRandom.Next(100, 300);
+                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                            "Golden item", string.Empty, goldValue, 0.5, 0);
+                        break;
+                    }
+                case ItemSubType.Junk_Minerals:
+                    {
+                        goldValue = CryptoRandom.Next(50, 200);
+                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                            "Mineral", string.Empty, goldValue, 0.5, 0);
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
+        private Statistics GenerateItemStatistics(int level, ItemRarity itemRarity, ItemGeneratorBoostType boost)
+        {
+            int basicValue = 0;
+
+            switch(boost)
+            {
+                case ItemGeneratorBoostType.Decrease:
+                    {
+                        basicValue = CryptoRandom.Next((int)((6 + (int)itemRarity) * Math.Pow(1.1, level)), (int)((11 + (int)itemRarity) * Math.Pow(1.1, level)));
+                        break;
+                    }
+                case ItemGeneratorBoostType.Increase:
+                    {
+                        basicValue = CryptoRandom.Next((int)((14 + (int)itemRarity) * Math.Pow(1.1, level)), (int)((19 + (int)itemRarity) * Math.Pow(1.1, level)));
+                        break;
+                    }
+                case ItemGeneratorBoostType.Normal:
+                    {
+                        basicValue = CryptoRandom.Next((int)((10 + (int)itemRarity) * Math.Pow(1.1, level)), (int)((15 + (int)itemRarity) * Math.Pow(1.1, level)));
+                        break;
+                    }
+                case ItemGeneratorBoostType.Zero:
+                    {
+                        basicValue = 0;
+                        break;
+                    }
+                case ItemGeneratorBoostType.MegaDecrease:
+                    {
+                        basicValue = CryptoRandom.Next((int)((2 + (int)itemRarity) * Math.Pow(1.1, level)), (int)((7 + (int)itemRarity) * Math.Pow(1.1, level)));
+                        break;
+                    }
+                case ItemGeneratorBoostType.MegaIncrease:
+                    {
+                        basicValue = CryptoRandom.Next((int)((18 + (int)itemRarity) * Math.Pow(1.1, level)), (int)((23 + (int)itemRarity) * Math.Pow(1.1, level)));
+                        break;
+                    }
+            }
+
+            
             Statistics result = new Statistics(basicValue);
 
             return result;
@@ -64,7 +380,6 @@ namespace Items
         private ItemIcon GenerateItemIcon(ItemClass itemClass, ItemType itemType, EqType eqType = EqType.None, ItemSubType itemSubType = ItemSubType.None)
         {
             ItemIcon result = null;
-
             int iconIndex_index = CryptoRandom.Next(0, Enum.GetValues(ItemIndexManagement.GetItemTypeBy(itemClass, itemType, eqType, itemSubType)).Length - 1);
             int iconIndex = (int)Enum.GetValues(ItemIndexManagement.GetItemTypeBy(itemClass, itemType, eqType, itemSubType)).GetValue(iconIndex_index);
 
@@ -166,11 +481,11 @@ namespace Items
             //must sum to 100
             int[] itemRarityChance = new int[6]
             {
-                30, //none
-                25, //basic
-                20, //common
-                13, //uncommon
-                8, //epic
+                50, //none
+                20, //basic
+                12, //common
+                8, //uncommon
+                6, //epic
                 4, //legendary
             };
 

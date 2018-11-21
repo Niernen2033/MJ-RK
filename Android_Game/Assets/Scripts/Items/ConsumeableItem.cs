@@ -7,16 +7,16 @@ using NPC;
 
 namespace Items
 {
-    public class EatableItem : Item
+    public class ConsumeableItem : Item
     {
         public int HealValue { get; set; }
 
-        public EatableItem() : base()
+        public ConsumeableItem() : base()
         {
             this.HealValue = 0;
         }
 
-        public EatableItem(int healValue, ItemClass itemClass, ItemType itemType, ItemSubType itemSubType, ItemIcon itemIcon, ItemFeatures itemFeatures,
+        public ConsumeableItem(int healValue, ItemClass itemClass, ItemType itemType, ItemSubType itemSubType, ItemIcon itemIcon, ItemFeatures itemFeatures,
             string basicName, string additionalName, int goldValue, double weight)
             : base(itemClass, itemType, itemSubType, itemIcon, itemFeatures, basicName, additionalName, goldValue, weight, 0)
         {

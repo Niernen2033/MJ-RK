@@ -83,8 +83,10 @@ namespace CityScene
 
             ItemGenerator itemGenerator = new ItemGenerator();
 
-            Armor c = itemGenerator.GenerateArmor(1, ItemClass.Melle, ItemType.Armor, EqType.Body);
-            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(c);
+            Armor c = itemGenerator.GenerateArmor(1, ItemClass.Melle, ItemType.Trinket, EqType.Trinket);
+            Weapon d = itemGenerator.GenerateWeapon(1, ItemClass.Melle);
+            Item e = itemGenerator.GenerateJunk(ItemSubType.Junk_Gems);
+            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(e);
         }
 
         public void AddTestGold()

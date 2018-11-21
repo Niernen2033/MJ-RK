@@ -60,6 +60,7 @@ namespace Prefabs.Inventory
 
         private void Start()
         {
+            this.FreeSlots();
             this.isDirty = true;
         }
 
@@ -73,65 +74,6 @@ namespace Prefabs.Inventory
             this.eqOwner = null;
             this.equipment = null;
             this.IsCallbacksSeted = false;
-        }
-
-        private void AddModifiersToChampion(Item item, EqType eqType)
-        {
-            if(this.eqOwner != null)
-            {
-                if (item is Armor)
-                {
-                    Armor armor = (Armor)item;
-
-                    this.eqOwner.Dexterity.RemoveAllModifiers(eqType);
-                    this.eqOwner.Dexterity.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.DexterityBonus.Acctual, eqType));
-
-                    this.eqOwner.Intelligence.RemoveAllModifiers(eqType);
-                    this.eqOwner.Intelligence.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.IntelligenceBonus.Acctual, eqType));
-
-                    this.eqOwner.MagicArmor.RemoveAllModifiers(eqType);
-                    this.eqOwner.MagicArmor.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.MagicArmorBonus.Acctual, eqType));
-
-                    this.eqOwner.MelleArmor.RemoveAllModifiers(eqType);
-                    this.eqOwner.MelleArmor.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.MelleArmorBonus.Acctual, eqType));
-
-                    this.eqOwner.RangedArmor.RemoveAllModifiers(eqType);
-                    this.eqOwner.RangedArmor.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.RangedArmorBonus.Acctual, eqType));
-
-                    this.eqOwner.Strength.RemoveAllModifiers(eqType);
-                    this.eqOwner.Strength.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.StrengthBonus.Acctual, eqType));
-
-                    this.eqOwner.Vitality.RemoveAllModifiers(eqType);
-                    this.eqOwner.Vitality.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus, 
-                        StatisticsModifierType.AddFlat, armor.VitalityBonus.Acctual, eqType));
-                }
-                else if (item is Weapon)
-                {
-                    Weapon weapon = (Weapon)item;
-
-                    this.eqOwner.Dexterity.RemoveAllModifiers(eqType);
-                    this.eqOwner.Dexterity.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus,
-                        StatisticsModifierType.AddFlat, weapon.DexterityBonus.Acctual, eqType));
-
-                    this.eqOwner.Intelligence.RemoveAllModifiers(eqType);
-                    this.eqOwner.Intelligence.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus,
-                        StatisticsModifierType.AddFlat, weapon.IntelligenceBonus.Acctual, eqType));
-
-                    this.eqOwner.Strength.RemoveAllModifiers(eqType);
-                    this.eqOwner.Strength.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus,
-                        StatisticsModifierType.AddFlat, weapon.StrengthBonus.Acctual, eqType));
-
-                    this.eqOwner.Vitality.RemoveAllModifiers(eqType);
-                    this.eqOwner.Vitality.AddModifier(new StatisticsModifier(StatisticsModifierClass.ItemBonus,
-                        StatisticsModifierType.AddFlat, weapon.VitalityBonus.Acctual, eqType));
-                }
-            }
         }
 
         public void SetBagpack(Equipment equipment)
@@ -175,17 +117,18 @@ namespace Prefabs.Inventory
                         {
                             if (this.BodySlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.BodySlot.AddItem(item, this.eqFeatures);
                             }
                             else
                             {
                                 //swap
+                                Debug.Log("Y");
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.BodySlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.BodySlot.ClearSlot();
                                 this.BodySlot.AddItem(item, this.eqFeatures);
                             }
@@ -195,7 +138,7 @@ namespace Prefabs.Inventory
                         {
                             if (this.BootsSlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.BootsSlot.AddItem(item, this.eqFeatures);
                             }
                             else
@@ -203,9 +146,9 @@ namespace Prefabs.Inventory
                                 //swap
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.BootsSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.BootsSlot.ClearSlot();
                                 this.BootsSlot.AddItem(item, this.eqFeatures);
                             }
@@ -215,7 +158,7 @@ namespace Prefabs.Inventory
                         {
                             if (this.GlovesSlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.GlovesSlot.AddItem(item, this.eqFeatures);
                             }
                             else
@@ -223,9 +166,9 @@ namespace Prefabs.Inventory
                                 //swap
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.GlovesSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.GlovesSlot.ClearSlot();
                                 this.GlovesSlot.AddItem(item, this.eqFeatures);
                             }
@@ -235,7 +178,7 @@ namespace Prefabs.Inventory
                         {
                             if (this.HelmetSlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.HelmetSlot.AddItem(item, this.eqFeatures);
                             }
                             else
@@ -243,9 +186,9 @@ namespace Prefabs.Inventory
                                 //swap
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.HelmetSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.HelmetSlot.ClearSlot();
                                 this.HelmetSlot.AddItem(item, this.eqFeatures);
                             }
@@ -264,7 +207,7 @@ namespace Prefabs.Inventory
                             {
                                 if (this.ShieldSlot.IsEmpty)
                                 {
-                                    this.equipment.EquipItem(eqType, item);
+                                    this.equipment.EquipItem(eqType, item, this.eqOwner);
                                     this.ShieldSlot.AddItem(item, this.eqFeatures);
                                 }
                                 else
@@ -272,9 +215,9 @@ namespace Prefabs.Inventory
                                     //swap
                                     this.IsIHaveItemToSwap = true;
                                     this.swapItem = this.ShieldSlot.item;
-                                    this.equipment.UnequipItem(eqType);
+                                    this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                    this.equipment.EquipItem(eqType, item);
+                                    this.equipment.EquipItem(eqType, item, this.eqOwner);
                                     this.ShieldSlot.ClearSlot();
                                     this.ShieldSlot.AddItem(item, this.eqFeatures);
                                 }
@@ -285,7 +228,7 @@ namespace Prefabs.Inventory
                         {
                             if (this.TrinketSlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.TrinketSlot.AddItem(item, this.eqFeatures);
                             }
                             else
@@ -293,9 +236,9 @@ namespace Prefabs.Inventory
                                 //swap
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.TrinketSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.TrinketSlot.ClearSlot();
                                 this.TrinketSlot.AddItem(item, this.eqFeatures);
                             }
@@ -305,7 +248,7 @@ namespace Prefabs.Inventory
                         {
                             if (this.WeaponSlot.IsEmpty)
                             {
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.WeaponSlot.AddItem(item, this.eqFeatures);
                             }
                             else
@@ -313,9 +256,9 @@ namespace Prefabs.Inventory
                                 //swap
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.WeaponSlot.item;
-                                this.equipment.UnequipItem(eqType);
+                                this.equipment.UnequipItem(eqType, this.eqOwner);
 
-                                this.equipment.EquipItem(eqType, item);
+                                this.equipment.EquipItem(eqType, item, this.eqOwner);
                                 this.WeaponSlot.ClearSlot();
                                 this.WeaponSlot.AddItem(item, this.eqFeatures);
                             }
@@ -351,49 +294,49 @@ namespace Prefabs.Inventory
                 case EqType.Body:
                     {
                         result = this.BodySlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.BodySlot.ClearSlot();
                         break;
                     }
                 case EqType.Boots:
                     {
                         result = this.BootsSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.BootsSlot.ClearSlot();
                         break;
                     }
                 case EqType.Gloves:
                     {
                         result = this.GlovesSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.GlovesSlot.ClearSlot();
                         break;
                     }
                 case EqType.Helmet:
                     {
                         result = this.HelmetSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.HelmetSlot.ClearSlot();
                         break;
                     }
                 case EqType.Shield:
                     {
                         result = this.ShieldSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.ShieldSlot.ClearSlot();
                         break;
                     }
                 case EqType.Trinket:
                     {
                         result = this.TrinketSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.TrinketSlot.ClearSlot();
                         break;
                     }
                 case EqType.Weapon:
                     {
                         result = this.WeaponSlot.item;
-                        this.equipment.UnequipItem(eqItemType);
+                        this.equipment.UnequipItem(eqItemType, this.eqOwner);
                         this.WeaponSlot.ClearSlot();
                         break;
                     }
@@ -406,9 +349,16 @@ namespace Prefabs.Inventory
         {
             if (this.equipment != null)
             {
-                for (int i = 0; i < Enum.GetValues(typeof(EqType)).Length; i++)
+                for (int i = 0; i < Enum.GetValues(typeof(EqType)).Length - 1; i++)
                 {
-                    this.AddToEQ(this.equipment.GetItemByType((EqType)i), (EqType)i);
+                    EquipmentItem equipmentItem = this.equipment.GetItemByType((EqType)i);
+                    if (equipmentItem != null)
+                    {
+                        if (equipmentItem.EquipmentType == (EqType)i)
+                        {
+                            this.AddToEQ(equipmentItem, (EqType)i);
+                        }
+                    }
                 }
             }
 

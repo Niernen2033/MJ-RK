@@ -10,7 +10,7 @@ namespace Items
     {
         public static int GetItemRarityIndex(ItemRarity itemRarity)
         {
-            int result = (int)ItemIndex.Special.No_Item;
+            int result = (int)ItemRarity.None;
 
             if (itemRarity == ItemRarity.None)
             {
@@ -42,6 +42,45 @@ namespace Items
                 case ItemRarity.Uncommon:
                     {
                         result = (int)ItemIndex.ItemClass.Uncommon;
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
+
+        public static ItemRarity GetRarityFromIndex(int index)
+        {
+            ItemRarity result = ItemRarity.None;
+
+            ItemIndex.ItemClass itemClass = (ItemIndex.ItemClass)index;
+
+            switch(itemClass)
+            {
+                case ItemIndex.ItemClass.Basic:
+                    {
+                        result = ItemRarity.Basic;
+                        break;
+                    }
+                case ItemIndex.ItemClass.Common:
+                    {
+                        result = ItemRarity.Common;
+                        break;
+                    }
+                case ItemIndex.ItemClass.Epic:
+                    {
+                        result = ItemRarity.Epic;
+                        break;
+                    }
+                case ItemIndex.ItemClass.Legendary:
+                    {
+                        result = ItemRarity.Legendary;
+                        break;
+                    }
+                case ItemIndex.ItemClass.Uncommon:
+                    {
+                        result = ItemRarity.Uncommon;
                         break;
                     }
             }

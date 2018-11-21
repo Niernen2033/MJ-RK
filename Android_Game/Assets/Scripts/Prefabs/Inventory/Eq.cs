@@ -123,7 +123,6 @@ namespace Prefabs.Inventory
                             else
                             {
                                 //swap
-                                Debug.Log("Y");
                                 this.IsIHaveItemToSwap = true;
                                 this.swapItem = this.BodySlot.item;
                                 this.equipment.UnequipItem(eqType, this.eqOwner);

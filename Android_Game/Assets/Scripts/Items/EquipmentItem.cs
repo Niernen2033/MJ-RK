@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Items
 {
-    public enum EqType { None = -1, Helmet, Body, Weapon, Shield, Trinket, Gloves, Boots };
+    public enum EqType { None = -1, Trinket, Weapon, Helmet, Body, Shield, Gloves, Boots };
 
     public class EquipmentItem : Item
     {

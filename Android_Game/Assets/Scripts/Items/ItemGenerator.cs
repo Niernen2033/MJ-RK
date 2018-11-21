@@ -16,6 +16,11 @@ namespace Items
         {
             Armor result = null;
 
+            if(itemClass == ItemClass.Ranged && eqType == EqType.Shield)
+            {
+                return result;
+            }
+
             ItemIcon itemIcon = this.GenerateItemIcon(itemClass, itemType, eqType);
             string itemName = this.GenerateItemName(itemClass, eqType);
             int goldValue = this.GenerateItemGoldValue(itemLevel);
@@ -191,7 +196,7 @@ namespace Items
 
             int goldValue;
             int boost;
-            ItemIcon itemIcon = this.GenerateItemIcon(ItemClass.None, itemType, EqType.None, itemSubType);
+            ItemIcon itemIcon = this.GenerateItemIcon(ItemClass.Normal, itemType, EqType.None, itemSubType);
             itemIcon.Rarity = (int)ItemRarity.None;
             ItemFeatures itemFeatures = new ItemFeatures();
             itemFeatures.EnableFeatures(ItemFeaturesType.IsDeleteAble, ItemFeaturesType.IsInfoAble, ItemFeaturesType.IsSellAble, ItemFeaturesType.IsEatAble);
@@ -206,7 +211,7 @@ namespace Items
                                 {
                                     goldValue = CryptoRandom.Next(200,500);
                                     boost = CryptoRandom.Next(8, 15);
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Armor Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -214,7 +219,7 @@ namespace Items
                                 {
                                     goldValue = CryptoRandom.Next(200, 500);
                                     boost = CryptoRandom.Next(8, 15);
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Dexterity Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -222,7 +227,7 @@ namespace Items
                                 {
                                     goldValue = 50;
                                     boost = 60;
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Health Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -230,7 +235,7 @@ namespace Items
                                 {
                                     goldValue = CryptoRandom.Next(200, 500);
                                     boost = CryptoRandom.Next(8, 15);
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Intelligence Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -238,7 +243,7 @@ namespace Items
                                 {
                                     goldValue = 50;
                                     boost = 60;
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Mana Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -246,7 +251,7 @@ namespace Items
                                 {
                                     goldValue = CryptoRandom.Next(200, 500);
                                     boost = CryptoRandom.Next(8, 15);
-                                    result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                                    result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                                         itemFeatures, "Armor Potion", string.Empty, goldValue, 0.5);
                                     break;
                                 }
@@ -261,13 +266,30 @@ namespace Items
                     {
                         boost = CryptoRandom.Next(20, 50);
                         goldValue = CryptoRandom.Next(20, 60);
-                        result = new ConsumeableItem(boost, ItemClass.None, itemType, itemSubType, itemIcon,
+                        result = new ConsumeableItem(boost, ItemClass.Normal, itemType, itemSubType, itemIcon,
                             itemFeatures, "Food" +
                             "", string.Empty, goldValue, CryptoRandom.NextDouble(0.3, 1));
                         break;
                     }
             }
 
+            return result;
+        }
+
+        public Item GenerateGoldByValue(int goldValue)
+        {
+            ItemIcon itemIcon = new ItemIcon();
+            itemIcon.Index = (int)ItemIndex.Gold.Large;
+            itemIcon.Rarity = (int)ItemRarity.None;
+            ItemFeatures itemFeatures = new ItemFeatures();
+            Item goldPrefab = new Item(ItemClass.Normal, ItemType.Gold, ItemSubType.None, itemIcon, itemFeatures,
+                "Gold", string.Empty, goldValue, 0, 0);
+            return goldPrefab;
+        }
+
+        public Item GenerateGoldByLevel(int level)
+        {
+            Item result = this.GenerateGoldByValue(CryptoRandom.Next((int)Math.Pow(1.1,level)*50, (int)Math.Pow(1.1, level) * 80));
             return result;
         }
 
@@ -287,35 +309,35 @@ namespace Items
                 case ItemSubType.Junk_BodyParts:
                     {
                         goldValue = CryptoRandom.Next(20, 50);
-                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                        result = new Item(ItemClass.Normal, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
                             "Body part", string.Empty, goldValue, 0.5, 0);
                         break;
                     }
                 case ItemSubType.Junk_Gems:
                     {
                         goldValue = CryptoRandom.Next(100, 500);
-                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                        result = new Item(ItemClass.Normal, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
                             "Gem", string.Empty, goldValue, 0.5, 0);
                         break;
                     }
                 case ItemSubType.Junk_Generic:
                     {
                         goldValue = CryptoRandom.Next(20, 60);
-                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                        result = new Item(ItemClass.Normal, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
                             "Strange thing", string.Empty, goldValue, 0.5, 0);
                         break;
                     }
                 case ItemSubType.Junk_Gold:
                     {
                         goldValue = CryptoRandom.Next(100, 300);
-                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                        result = new Item(ItemClass.Normal, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
                             "Golden item", string.Empty, goldValue, 0.5, 0);
                         break;
                     }
                 case ItemSubType.Junk_Minerals:
                     {
                         goldValue = CryptoRandom.Next(50, 200);
-                        result = new Item(ItemClass.None, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
+                        result = new Item(ItemClass.Normal, ItemType.Junk, itemSubType, itemIcon, itemFeatures,
                             "Mineral", string.Empty, goldValue, 0.5, 0);
                         break;
                     }

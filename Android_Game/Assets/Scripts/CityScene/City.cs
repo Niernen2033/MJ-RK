@@ -15,19 +15,30 @@ namespace CityScene
 
     public class City : MonoBehaviour
     {
-        public enum ObjectType { BlackSmith, Tawern, Church, PlayerHouse, Dungeons, CityAll };
+        public enum ObjectType { BlackSmith, Tawern, Church, Dungeons, CityAll };
         public GameObject cityAll;
         public GameObject blackSmith;
         public GameObject tawern;
-        public GameObject playerHouse;
         public GameObject church;
         public GameObject inventory;
 
         // Use this for initialization
         public void Awake()
         {
-            ProfileSave.Instance.Load();
-            //GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
+            if (GameGlobals.IsDebugState)
+            {
+                ProfileSave.Instance.Load();
+            }
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
+            //XmlManager.Save<GameSave>(GameSave.Instance, ProfileSave.Instance.AcctualSavePath, false);
+            GameSave.Instance.CityData.Reload(1);
+
+            //GameSave.Instance.Player.Bagpack.Clear();
+
+            //ItemGenerator itemGenerator = new ItemGenerator();
+            //Item item = itemGenerator.GenerateGoldByValue(1000);
+            //GameSave.Instance.Player.Bagpack.Add(item);
+            //GameSave.Instance.Update();
         }
 
         public void Start()
@@ -41,54 +52,6 @@ namespace CityScene
 
         }
 
-        public void OpenInventory()
-        {           
-            EqInventory shopInventory = inventory.gameObject.GetComponent<EqInventory>();
-            if (!shopInventory.IsOpen)
-            {
-                if(shopInventory.PlayerBagpack == null)
-                {
-                    shopInventory.OpenAndLoadInventory(GameSave.Instance.Player.Equipment, GameSave.Instance.Player.Bagpack, null);
-                }
-                if (shopInventory.PlayerBagpack.IsDataLoaded/* || shopInventory.ShopBagpack.IsDataLoaded*/)
-                {
-                    shopInventory.OpenInventory();
-                }
-                else
-                {
-                    shopInventory.OpenAndLoadInventory(GameSave.Instance.Player.Equipment, GameSave.Instance.Player.Bagpack, null);
-                }
-            }
-            else
-            {
-                shopInventory.CloseInventory();
-            }
-        }
-
-
-        public void AddTestItem()
-        {
-            Armor a = new Armor();
-            Weapon b = new Weapon();
-            a.VitalityBonus = new Statistics(20);
-            a.Features.EnableAllFeatures();
-            a.Icon.Rarity = ItemIndexManagement.GetItemRarityIndex(ItemRarity.Legendary);
-            a.GoldValue = 60;
-            a.Durability = 10;
-            a.EquipmentType = EqType.Gloves;
-
-            b.Features.EnableAllFeatures();
-            b.BasicDamage = new Statistics(50);
-            b.EquipmentType = EqType.Weapon;
-
-            ItemGenerator itemGenerator = new ItemGenerator();
-
-            Armor c = itemGenerator.GenerateArmor(1, ItemClass.Melle, ItemType.Trinket, EqType.Trinket);
-            Weapon d = itemGenerator.GenerateWeapon(1, ItemClass.Melle);
-            Item e = itemGenerator.GenerateJunk(ItemSubType.Junk_Gems);
-            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(e);
-        }
-
         public void AddTestGold()
         {
             Item b = new Item();
@@ -100,65 +63,48 @@ namespace CityScene
 
         public void OpenBuilding(ObjectType cityObjectType)
         {
-            if (!this.inventory.activeSelf)
+            switch (cityObjectType)
             {
-                switch (cityObjectType)
-                {
-                    case ObjectType.BlackSmith:
-                        {
-                            this.blackSmith.SetActive(true);
-                            this.cityAll.SetActive(false);
-                            this.church.SetActive(false);
-                            this.playerHouse.SetActive(false);
-                            this.tawern.SetActive(false);
-                            break;
-                        }
-                    case ObjectType.Church:
-                        {
-                            this.blackSmith.SetActive(false);
-                            this.cityAll.SetActive(false);
-                            this.church.SetActive(true);
-                            this.playerHouse.SetActive(false);
-                            this.tawern.SetActive(false);
-                            break;
-                        }
-                    case ObjectType.CityAll:
-                        {
-                            this.blackSmith.SetActive(false);
-                            this.cityAll.SetActive(true);
-                            this.church.SetActive(false);
-                            this.playerHouse.SetActive(false);
-                            this.tawern.SetActive(false);
-                            break;
-                        }
-                    case ObjectType.PlayerHouse:
-                        {
-                            this.blackSmith.SetActive(false);
-                            this.cityAll.SetActive(false);
-                            this.church.SetActive(false);
-                            this.playerHouse.SetActive(true);
-                            this.tawern.SetActive(false);
-                            break;
-                        }
-                    case ObjectType.Tawern:
-                        {
-                            this.blackSmith.SetActive(false);
-                            this.cityAll.SetActive(false);
-                            this.church.SetActive(false);
-                            this.playerHouse.SetActive(false);
-                            this.tawern.SetActive(true);
-                            break;
-                        }
-                    default:
-                        {
-                            this.blackSmith.SetActive(false);
-                            this.cityAll.SetActive(true);
-                            this.church.SetActive(false);
-                            this.playerHouse.SetActive(false);
-                            this.tawern.SetActive(false);
-                            break;
-                        }
-                }
+                case ObjectType.BlackSmith:
+                    {
+                        this.blackSmith.SetActive(true);
+                        this.cityAll.SetActive(false);
+                        this.church.SetActive(false);
+                        this.tawern.SetActive(false);
+                        break;
+                    }
+                case ObjectType.Church:
+                    {
+                        this.blackSmith.SetActive(false);
+                        this.cityAll.SetActive(false);
+                        this.church.SetActive(true);
+                        this.tawern.SetActive(false);
+                        break;
+                    }
+                case ObjectType.CityAll:
+                    {
+                        this.blackSmith.SetActive(false);
+                        this.cityAll.SetActive(true);
+                        this.church.SetActive(false);
+                        this.tawern.SetActive(false);
+                        break;
+                    }
+                case ObjectType.Tawern:
+                    {
+                        this.blackSmith.SetActive(false);
+                        this.cityAll.SetActive(false);
+                        this.church.SetActive(false);
+                        this.tawern.SetActive(true);
+                        break;
+                    }
+                default:
+                    {
+                        this.blackSmith.SetActive(false);
+                        this.cityAll.SetActive(true);
+                        this.church.SetActive(false);
+                        this.tawern.SetActive(false);
+                        break;
+                    }
             }
         }
     }

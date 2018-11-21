@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using Items;
 using SaveLoad;
+using NPC;
 
 namespace Prefabs.Inventory
 {
     public class NormalInventory : MonoBehaviour
     {
-        public Bagpack Bagpack { get; private set; }
+        public bool IsOpen { get; private set; }
+        public Bagpack PlayerBagpack { get; private set; }
 
         private void Awake()
         {      
-            this.Bagpack = this.gameObject.GetComponentInChildren<Bagpack>();
+            this.PlayerBagpack = this.gameObject.GetComponentInChildren<Bagpack>();
         }
 
         // Use this for initialization
@@ -28,16 +30,49 @@ namespace Prefabs.Inventory
 
         }
 
-        public void OpenClose()
+        public void OpenInventory()
+        {
+            if (this.gameObject.activeSelf == false)
+            {
+                this.gameObject.SetActive(true);
+                this.PlayerBagpack.ReloadBagpack();
+                this.IsOpen = true;
+            }
+        }
+
+        public void OpenAndLoadInventory(List<Item> player_items, Champion champion = null)
+        {
+            if (this.gameObject.activeSelf == false)
+            {
+                this.gameObject.SetActive(true);
+                if (player_items != null)
+                {
+                    this.PlayerBagpack.SetBagpack(player_items);
+                }
+                if (champion != null)
+                {
+                    this.PlayerBagpack.SetChampion(champion);
+                }
+                this.IsOpen = true;
+            }
+        }
+
+        public void CloseInventory()
         {
             if (this.gameObject.activeSelf == true)
             {
-                this.Bagpack.FreeBagpackMemory();
+                this.IsOpen = false;
                 this.gameObject.SetActive(false);
             }
-            else
+        }
+
+        public void CloseAndDestroyInventory()
+        {
+            if (this.gameObject.activeSelf == true)
             {
-                this.gameObject.SetActive(true);
+                this.PlayerBagpack.FreeBagpackMemory();
+                this.IsOpen = false;
+                this.gameObject.SetActive(false);
             }
         }
     }

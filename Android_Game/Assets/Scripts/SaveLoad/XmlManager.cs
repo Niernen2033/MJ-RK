@@ -21,7 +21,7 @@ namespace SaveLoad
                 {
                     if (IsCryptoOn)
                     {
-                        ICryptoTransform key = GetCryptoTransform();
+                        ICryptoTransform key = GetCryptoTransform(false);
                         if (key == null)
                         {
                             instance = default(T);
@@ -63,13 +63,13 @@ namespace SaveLoad
                 {
                     if (IsCryptoOn)
                     {
-                        ICryptoTransform key = GetCryptoTransform();
+                        ICryptoTransform key = GetCryptoTransform(true);
                         if (key == null)
                         {
                             return false;
                         }
 
-                        using (CryptoStream cryptoStream = new CryptoStream(fileStream, key, CryptoStreamMode.Read))
+                        using (CryptoStream cryptoStream = new CryptoStream(fileStream, key, CryptoStreamMode.Write))
                         {
                             XmlSerializer xml = new XmlSerializer(typeof(T));
                             xml.Serialize(cryptoStream, obj);
@@ -95,10 +95,10 @@ namespace SaveLoad
             }
         }
 
-        private static ICryptoTransform GetCryptoTransform()
+        private static ICryptoTransform GetCryptoTransform(bool encrypt)
         {
             ICryptoTransform key = null;
-            byte[] sha512 = new byte[512];
+            byte[] sha512 = new byte[64];
             string keyData = SystemInfo.deviceUniqueIdentifier + SystemInfo.deviceModel;
             try
             {
@@ -128,7 +128,14 @@ namespace SaveLoad
             {
                 using (AesCryptoServiceProvider aesCSP = new AesCryptoServiceProvider())
                 {
-                    key = aesCSP.CreateDecryptor(shaKey, shaIv);
+                    if (encrypt)
+                    {
+                        key = aesCSP.CreateEncryptor(shaKey, shaIv);
+                    }
+                    else
+                    {
+                        key = aesCSP.CreateDecryptor(shaKey, shaIv);
+                    }
                 }
             }
             catch (Exception exc)

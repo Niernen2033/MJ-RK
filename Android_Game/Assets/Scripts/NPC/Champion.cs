@@ -40,6 +40,8 @@ namespace NPC
         public bool IsIllness { get; set; }
 
         //List of player backpacki tems
+        [XmlElement(Type = typeof(Item), ElementName = "ItemBagpackItem")]
+        [XmlElement(Type = typeof(ConsumeableItem), ElementName = "ConsumeableBagpackItem")]
         [XmlElement(Type = typeof(Armor), ElementName = "ArmorBagpackItem")]
         [XmlElement(Type = typeof(Weapon), ElementName = "WeaponBagpackItem")]
         public List<Item> Bagpack { get; set; }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Items;
 using System;
 using NPC;
+using SaveLoad;
 
 namespace Prefabs.Inventory
 {
@@ -61,7 +62,17 @@ namespace Prefabs.Inventory
         // Use this for initialization
         private void Start()
         {
+            if (this.bagpackType == InvenotryType.EQ)
+            {
+                this.gameObject.GetComponentInParent<EqInventory>().ChampionEquipment.SetCallbacks(this.ActivateFromBagpack);
+            }
+
+            //this.AddItem(this.GetGoldByValue(1000));
+            //this.AddItem(this.GetGoldByValue(1000));
+            //GameSave.Instance.Update();
+
             this.isDirty = true;
+            Debug.Log("Podczas startu: " + this.items.Count);
         }
 
         // Update is called once per frame
@@ -78,11 +89,13 @@ namespace Prefabs.Inventory
             if (this.isDirty)
             {
                 this.PrepareInventory();
+                Debug.Log("Po prepareInventory: " + this.items.Count);
             }
         }
 
         public void AddItem(Item item)
         {
+            Debug.Log("AddITem");
             if (item != null)
             {
                 if ((this.inventory_weight + item.Weight) > this.max_weight)
@@ -97,8 +110,25 @@ namespace Prefabs.Inventory
                         this.items = new List<Item>();
                         Debug.Log("Bagpack is not set to a instance of class");
                     }
-                    this.items.Add(item);
-                    this.AddToBagpack(this.items[this.items.Count - 1]);
+                    if (this.IsGold(item))
+                    {
+                        if (!this.IsGoldInBagpack())
+                        {
+                            Debug.Log("W plecaku jest gold");
+                            this.items.Add(item);
+
+                            Debug.Log(this.items.Count);
+                        }
+                    }
+                    else
+                    {
+                        if (!this.items.Contains(item))
+                        {
+                            this.items.Add(item);
+                            Debug.Log(this.items.Count);
+                        }
+                    }
+                    this.AddToBagpack(item);
                 }
             }
         }
@@ -168,12 +198,26 @@ namespace Prefabs.Inventory
         {
             if (item != null)
             {
-                if (item.Icon.Index == (int)ItemIndex.Gold.Large)
+                if (item.Type == ItemType.Gold)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private bool IsGoldInBagpack()
+        {
+            bool result = false;
+            foreach (BagpackSlot bagpackSlot in this.bagpackslots)
+            {
+                if (this.IsGold(bagpackSlot.item))
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
         private void IncreaseDecreaseGold(int value)
@@ -183,9 +227,7 @@ namespace Prefabs.Inventory
 
         private Item GetGoldByValue(int goldValue)
         {
-            Item goldPrefab = new Item();
-            goldPrefab.Icon.Index = (int)ItemIndex.Gold.Large;
-            goldPrefab.GoldValue = goldValue;
+            Item goldPrefab = (new ItemGenerator()).GenerateGoldByValue(goldValue);
             return goldPrefab;
         }
 
@@ -211,6 +253,7 @@ namespace Prefabs.Inventory
                             {
                                 if(this.IsGold(bagpackSlot.item))
                                 {
+                                    bagpackSlot.item.GoldValue += item.GoldValue;
                                     this.inventory_gold += item.GoldValue;
                                     ifGoldInSlots = true;
                                     break;
@@ -222,7 +265,7 @@ namespace Prefabs.Inventory
                                 this.inventory_gold += item.GoldValue;
                             }
                         }
-                        
+
                         this.inventory_weight += item.Weight;
                         isAdded = true;
                         break;
@@ -364,18 +407,13 @@ namespace Prefabs.Inventory
 
         private void EquipItem(Item item, ClearSlotCallback clearSlotCallback)
         {
-            if(item != null)
+            if (item != null)
             {
                 Eq eq = this.gameObject.GetComponentInParent<EqInventory>().ChampionEquipment; 
 
                 if(item is EquipmentItem)
                 {
                     EquipmentItem equipmentItem = (EquipmentItem)item;
-
-                    if(!eq.IsCallbacksSeted)
-                    {
-                        eq.SetCallbacks(this.ActivateFromBagpack);
-                    }
 
                     if(equipmentItem.IsEquiped)
                     {
@@ -390,7 +428,7 @@ namespace Prefabs.Inventory
                     {
                         //add or swap item in equipment 
 
-                        if(eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType))
+                        if (eq.AddToEQ(equipmentItem, equipmentItem.EquipmentType))
                         {
                             this.DeleteFromBagpack(item);
                             clearSlotCallback();

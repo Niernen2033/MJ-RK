@@ -14,9 +14,10 @@ public class DisplayParty : MonoBehaviour {
 
         SpriteRenderer spriteRender;
         string filePath = "HeroesModels/";
+        string[] typeOfDungeonTexture = { "crusader", "jester", "abomination", "vestal" };
+
         for (int i = 0; i < 4; i++)
         {
-            string[] typeOfDungeonTexture = { "crusader", "jester", "abomination", "vestal"};
             spriteRender = heroObject[i].GetComponent<SpriteRenderer>();
             spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[i]);
         }

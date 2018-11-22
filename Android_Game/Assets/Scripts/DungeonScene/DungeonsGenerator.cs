@@ -20,7 +20,8 @@ public class DungeonsGenerator : MonoBehaviour {
     private static GameObject dungeonCanvas;
     private static List<DungeonLevelChunk> dungeonLevelChunks;
     private static List<Corridor> corridorList;
-    private ButtonForCameraMovement movementButton;
+    private static ButtonForCameraMovement movementButton;
+    private static EnemyGenerator enemyGen;
 
     private System.Random randomNumber;
 
@@ -118,17 +119,14 @@ public class DungeonsGenerator : MonoBehaviour {
 
         Debug.Log("Id of corridor before: " + idOfCorridor);
         if (dungeonManager.getLevelsArray().Exists(x => x.getIdOfLevel() == idOfCorridor))
-        //if (dungeonLevelChunks[idOfCorridor].getWasCreated() == true)
         {
             Debug.Log("Scene " + idOfCorridor + " was already created!");
-            //objectsToGenerate = corridorList[idOfCorridor].getCorridorLength();
             objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();
             Debug.Log("Objects to generate: " + objectsToGenerate);
             Debug.Log("Id of corridor: " + idOfCorridor);
             string debug = "";
             for (i = 0; i < objectsToGenerate; i++)
             {
-                //pickedOneInt = corridorList[idOfCorridor].getTextureArrayElement(i);
                 pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
                 generateMap(pickedOneInt, i, true);
                 debug += " " + pickedOneInt;
@@ -162,7 +160,12 @@ public class DungeonsGenerator : MonoBehaviour {
                 generateMap(pickedOneInt, i, false);
                 //dungeonLevelChunks[idOfCorridor].setWasCreated(true);//We will need to eliminate theese
             }
+
+            //Temporary generating enemy possition
+            generateEnemyParties();
         }
+
+        //EnemyParty enemyParty = new EnemyParty(chunkWidth * (objectsToGenerate - 1), idOfCorridor);
     }
 
     public void generateMap(int pickedOneInt, int i, bool wasAlreadyGenerated)
@@ -256,6 +259,20 @@ public class DungeonsGenerator : MonoBehaviour {
             }
             producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
         }
+    }
+
+    public void generateEnemyParties()
+    {
+        //EnemyParty generatedEnemyParty;
+        for (int i = 0; i < 4; i++)
+        {
+            //generatedEnemyParty = new EnemyParty(objectsToGenerate, idOfCorridor);
+            EnemyParty generatedEnemyParty = new EnemyParty(objectsToGenerate - 1, idOfCorridor);
+            dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).addToEnemyParties(generatedEnemyParty);
+            Debug.Log("Spooky skeletons party no " + i);
+        }
+        //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
+        //generateMap(pickedOneInt, i, true);
     }
 
     public Corridor getCorridorFromList(int whichOne)

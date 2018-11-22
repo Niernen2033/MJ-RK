@@ -49,6 +49,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
         isFacingRight = true;
 
         heroesObjects = new GameObject[sizeOfParty];
+
         for(int i=0;i<sizeOfParty;i++)
         {
             heroesObjects[i] = GameObject.Find("HeroObject" + (i + 1).ToString());

@@ -83,12 +83,14 @@ public class DungeonLevel
     private int idOfLevel;
     private int numberOfChunks;
     private List<LevelChunk> chunksArray;
+    private List<EnemyParty> enemyParties;
 
     public DungeonLevel(int idOfLevel, int numberOfChunks)
     {
         this.idOfLevel = idOfLevel;
         this.numberOfChunks = numberOfChunks;
         chunksArray = new List<LevelChunk>();
+        enemyParties = new List<EnemyParty>();
 
         for(int i=0; i < numberOfChunks; i++)
         {
@@ -112,6 +114,11 @@ public class DungeonLevel
         chunksArray[indexOfChunk].setIdOfAppliedTexture(textureId);
     }
 
+    public void addToEnemyParties(EnemyParty partyToAdd)
+    {
+        enemyParties.Add(partyToAdd);
+    }
+
     public int getIdOfLevel()
     {
         return idOfLevel;
@@ -125,6 +132,16 @@ public class DungeonLevel
     public int getChunkArrayElementTexture(int indexOfChunk)
     {
         return chunksArray[indexOfChunk].getIdOfAppliedTexture();
+    }
+
+    public List<EnemyParty> getEnemyParties()
+    {
+        return enemyParties;
+    }
+
+    public EnemyParty getSpecificEnemyParty(int id)
+    {
+        return enemyParties[id];
     }
 }
 

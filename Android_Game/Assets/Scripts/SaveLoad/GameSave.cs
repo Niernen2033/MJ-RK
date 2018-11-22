@@ -9,6 +9,8 @@ namespace SaveLoad
 {
     public sealed class GameSave
     {
+        public GameGlobals.SceneIndex SceneIndex { get; set; }
+
         public string Name { get; set; }
         public string Texture { get; set; }
 
@@ -33,6 +35,7 @@ namespace SaveLoad
 
         private GameSave()
         {
+            this.SceneIndex = GameGlobals.SceneIndex.None;
             this.Name = string.Empty;
             this.Texture = string.Empty;
             this.Player = new Player();
@@ -46,7 +49,16 @@ namespace SaveLoad
                 Debug.Log("Class 'Save' in 'Load' function: Cannot load file");
                 return false;
             }
+
+            this.ExecutePostInstantiate();
+
             return true;
+        }
+
+        private void ExecutePostInstantiate()
+        {
+            Instance.Player.PostInstantiate();
+            Instance.CityData.PostInstantiate();
         }
 
         public bool Update()

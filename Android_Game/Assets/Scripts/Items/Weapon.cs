@@ -74,9 +74,20 @@ namespace Items
             }
         }
 
+        public override void PostInstantiate()
+        {
+            base.PostInstantiate();
+            this.BasicDamage.PostInstantiate();
+            this.VitalityBonus.PostInstantiate();
+            this.DexterityBonus.PostInstantiate();
+            this.IntelligenceBonus.PostInstantiate();
+            this.StrengthBonus.PostInstantiate();
+        }
+
         public override string ToString()
         {
             return this.Class + " : " + this.Name + ";"
+                + "GoldValue: " + this.GoldValue + ";"
                 + "BasicDamage: " + this.BasicDamage.Acctual + ";"
                 + "Durability: " + this.Durability + ";"
                 + "VitalityBonus: " + this.VitalityBonus.Acctual + ";"

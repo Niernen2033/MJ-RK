@@ -11,16 +11,19 @@ using SaveLoad;
 
 namespace CityScene
 {
-    public delegate void OpenBuildingCallback(City.ObjectType cityObjectType);
+    public enum CityObjectType { BlackSmith, Tawern, Church, Dungeons, CityAll };
+
+    public delegate void OpenBuildingCallback(CityObjectType cityObjectType);
 
     public class City : MonoBehaviour
     {
-        public enum ObjectType { BlackSmith, Tawern, Church, Dungeons, CityAll };
         public GameObject cityAll;
         public GameObject blackSmith;
         public GameObject tawern;
         public GameObject church;
         public GameObject inventory;
+
+        private CityData cityData;
 
         // Use this for initialization
         public void Awake()
@@ -28,22 +31,27 @@ namespace CityScene
             if (GameGlobals.IsDebugState)
             {
                 ProfileSave.Instance.Load();
+                GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
+                //XmlManager.Save<GameSave>(GameSave.Instance, ProfileSave.Instance.AcctualSavePath, false);
             }
-            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
-            //XmlManager.Save<GameSave>(GameSave.Instance, ProfileSave.Instance.AcctualSavePath, false);
-            GameSave.Instance.CityData.Reload(1);
+
+            this.cityData = GameSave.Instance.CityData;
+
+            if (GameSave.Instance.SceneIndex != GameGlobals.SceneIndex.CityScene)
+            {
+                GameSave.Instance.CityData.Reload(1);
+            }
+            //Debug.Log("Itemy po wczytaniu: " + GameSave.Instance.Player.Bagpack.Count);
 
             //GameSave.Instance.Player.Bagpack.Clear();
-
             //ItemGenerator itemGenerator = new ItemGenerator();
-            //Item item = itemGenerator.GenerateGoldByValue(1000);
-            //GameSave.Instance.Player.Bagpack.Add(item);
+            //GameSave.Instance.Player.Bagpack.Add(itemGenerator.GenerateGoldByValue(1000));
             //GameSave.Instance.Update();
         }
 
         public void Start()
         {
-            this.OpenBuilding(ObjectType.CityAll);
+            this.OpenBuilding(this.cityData.CityObjectType);
         }
 
         // Update is called once per frame
@@ -52,49 +60,45 @@ namespace CityScene
 
         }
 
-        public void AddTestGold()
-        {
-            Item b = new Item();
-            b.Icon.Index = (int)ItemIndex.Gold.Large;
-            b.GoldValue = 500;
-            inventory.GetComponent<EqInventory>().PlayerBagpack.AddItem(b);
-        }
 
-
-        public void OpenBuilding(ObjectType cityObjectType)
+        public void OpenBuilding(CityObjectType cityObjectType)
         {
             switch (cityObjectType)
             {
-                case ObjectType.BlackSmith:
+                case CityObjectType.BlackSmith:
                     {
                         this.blackSmith.SetActive(true);
                         this.cityAll.SetActive(false);
                         this.church.SetActive(false);
                         this.tawern.SetActive(false);
+                        this.cityData.CityObjectType = CityObjectType.BlackSmith;
                         break;
                     }
-                case ObjectType.Church:
+                case CityObjectType.Church:
                     {
                         this.blackSmith.SetActive(false);
                         this.cityAll.SetActive(false);
                         this.church.SetActive(true);
                         this.tawern.SetActive(false);
+                        this.cityData.CityObjectType = CityObjectType.Church;
                         break;
                     }
-                case ObjectType.CityAll:
+                case CityObjectType.CityAll:
                     {
                         this.blackSmith.SetActive(false);
                         this.cityAll.SetActive(true);
                         this.church.SetActive(false);
                         this.tawern.SetActive(false);
+                        this.cityData.CityObjectType = CityObjectType.CityAll;
                         break;
                     }
-                case ObjectType.Tawern:
+                case CityObjectType.Tawern:
                     {
                         this.blackSmith.SetActive(false);
                         this.cityAll.SetActive(false);
                         this.church.SetActive(false);
                         this.tawern.SetActive(true);
+                        this.cityData.CityObjectType = CityObjectType.Tawern;
                         break;
                     }
                 default:
@@ -103,9 +107,11 @@ namespace CityScene
                         this.cityAll.SetActive(true);
                         this.church.SetActive(false);
                         this.tawern.SetActive(false);
+                        this.cityData.CityObjectType = CityObjectType.CityAll;
                         break;
                     }
             }
+            GameSave.Instance.Update();
         }
     }
 }

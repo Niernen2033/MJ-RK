@@ -136,6 +136,11 @@ namespace Items
             }
         }
 
+        public override void PostInstantiate()
+        {
+            base.PostInstantiate();
+        }
+
         // EVENTS******************************************************************
         protected virtual void OnEquipedItem(ItemEventArgs e)
         {

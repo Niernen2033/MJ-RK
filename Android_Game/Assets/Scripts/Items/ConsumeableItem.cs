@@ -35,5 +35,18 @@ namespace Items
                 champion.Vitality.ChangeAcctualValue(champion.Vitality.Basic);
             }
         }
+
+        public override string ToString()
+        {
+            return this.Class + " : " + this.Name + ";"
+                + "GoldValue: " + this.GoldValue + ";"
+                + "Effect: " + this.HealValue;
+        }
+
+        public override void PostInstantiate()
+        {
+            base.PostInstantiate();
+
+        }
     }
 }

@@ -49,6 +49,38 @@ namespace Items
             this.Trinket = equipment.Trinket;
         }
 
+        public virtual void PostInstantiate()
+        {
+            if (this.Helmet != null)
+            {
+                this.Helmet.PostInstantiate();
+            }
+            if (this.Body != null)
+            {
+                this.Body.PostInstantiate();
+            }
+            if (this.Boots != null)
+            {
+                this.Boots.PostInstantiate();
+            }
+            if (this.Weapon != null)
+            {
+                this.Weapon.PostInstantiate();
+            }
+            if (this.Gloves != null)
+            {
+                this.Gloves.PostInstantiate();
+            }
+            if (this.Shield != null)
+            {
+                this.Shield.PostInstantiate();
+            }
+            if (this.Trinket != null)
+            {
+                this.Trinket.PostInstantiate();
+            }
+        }
+
         public void EquipItem(EqType eqItemType, Item item, Champion eqOwner)
         {
             switch (eqItemType)

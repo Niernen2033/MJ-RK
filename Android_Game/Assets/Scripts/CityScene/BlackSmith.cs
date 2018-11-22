@@ -139,7 +139,7 @@ namespace CityScene
 
         public void BackToCity()
         {
-            this.openBuildingCallback(City.ObjectType.CityAll);
+            this.openBuildingCallback(CityObjectType.CityAll);
         }
 
         // Use this for initialization

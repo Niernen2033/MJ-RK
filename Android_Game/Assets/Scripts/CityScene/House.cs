@@ -8,7 +8,7 @@ namespace CityScene
 {
     public class House : MonoBehaviour, IPointerClickHandler
     {
-        public City.ObjectType houseType;
+        public CityObjectType houseType;
         private OpenBuildingCallback openBuildingCallback;
 
         public void Awake()

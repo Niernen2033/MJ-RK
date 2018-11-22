@@ -93,9 +93,22 @@ namespace Items
             }
         }
 
+        public override void PostInstantiate()
+        {
+            base.PostInstantiate();
+            this.VitalityBonus.PostInstantiate();
+            this.MagicArmorBonus.PostInstantiate();
+            this.RangedArmorBonus.PostInstantiate();
+            this.MelleArmorBonus.PostInstantiate();
+            this.DexterityBonus.PostInstantiate();
+            this.IntelligenceBonus.PostInstantiate();
+            this.StrengthBonus.PostInstantiate();
+        }
+
         public override string ToString()
         {
             return this.Class + " : " + this.Name + ";" 
+                + "GoldValue: " + this.GoldValue + ";"
                 + "Durability: " + this.Durability + ";"
                 + "VitalityBonus: " + this.VitalityBonus.Acctual + ";" 
                 + "MagicArmorBonus: " + this.MagicArmorBonus.Acctual + ";" 

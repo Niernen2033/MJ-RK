@@ -9,6 +9,7 @@ public static class GameGlobals
 {
     public enum SceneIndex
     {
+        None = -1,
         MianMenuScene = 0,
         CityScene = 1,
         NewGameScene = 2

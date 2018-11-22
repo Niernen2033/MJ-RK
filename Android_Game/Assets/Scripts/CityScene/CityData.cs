@@ -30,8 +30,11 @@ namespace CityScene
         [XmlElement(Type = typeof(Weapon), ElementName = "WeaponChurchShopBagpackItem")]
         public List<Item> ChurchShopBagpack { get; set; }
 
+        public CityObjectType CityObjectType { get; set; }
+
         public CityData()
         {
+            this.CityObjectType = CityObjectType.CityAll;
             this.BlackSmithShopBagpack = new List<Item>();
             this.TawernShopBagpack = new List<Item>();
             this.ChurchShopBagpack = new List<Item>();
@@ -140,6 +143,22 @@ namespace CityScene
                 //Debug.Log((ItemSubType)randPotion);
                 ConsumeableItem consumeItem = itemGenerator.GenerateConsumeableItem(ItemType.Potion, (ItemSubType)randPotion);
                 this.ChurchShopBagpack.Add(consumeItem);
+            }
+        }
+
+        public virtual void PostInstantiate()
+        {
+            foreach(Item item in this.BlackSmithShopBagpack)
+            {
+                item.PostInstantiate();
+            }
+            foreach (Item item in this.TawernShopBagpack)
+            {
+                item.PostInstantiate();
+            }
+            foreach (Item item in this.ChurchShopBagpack)
+            {
+                item.PostInstantiate();
             }
         }
     }

@@ -69,10 +69,8 @@ namespace Prefabs.Inventory
 
             //this.AddItem(this.GetGoldByValue(1000));
             //this.AddItem(this.GetGoldByValue(1000));
-            //GameSave.Instance.Update();
 
             this.isDirty = true;
-            Debug.Log("Podczas startu: " + this.items.Count);
         }
 
         // Update is called once per frame
@@ -89,13 +87,11 @@ namespace Prefabs.Inventory
             if (this.isDirty)
             {
                 this.PrepareInventory();
-                Debug.Log("Po prepareInventory: " + this.items.Count);
             }
         }
 
         public void AddItem(Item item)
         {
-            Debug.Log("AddITem");
             if (item != null)
             {
                 if ((this.inventory_weight + item.Weight) > this.max_weight)
@@ -114,10 +110,7 @@ namespace Prefabs.Inventory
                     {
                         if (!this.IsGoldInBagpack())
                         {
-                            Debug.Log("W plecaku jest gold");
                             this.items.Add(item);
-
-                            Debug.Log(this.items.Count);
                         }
                     }
                     else
@@ -125,7 +118,6 @@ namespace Prefabs.Inventory
                         if (!this.items.Contains(item))
                         {
                             this.items.Add(item);
-                            Debug.Log(this.items.Count);
                         }
                     }
                     this.AddToBagpack(item);
@@ -302,14 +294,15 @@ namespace Prefabs.Inventory
             }
         }
 
-        private void ConsumeItem(Item item)
+        private void ConsumeItem(Item item, ClearSlotCallback clearSlotCallbac)
         {
             if (item is ConsumeableItem)
             {
                 ConsumeableItem eatableItem = (ConsumeableItem)item;
                 eatableItem.Eat(this.bagpackOwner);
+                this.DeleteFromBagpack(item);
+                clearSlotCallbac();
             }
-            this.DeleteFromBagpack(item);
         }
 
         private void RepairItem(Item item)
@@ -327,6 +320,10 @@ namespace Prefabs.Inventory
                         {
                             equipmentItem.Repair(increaseValue);
                             this.IncreaseDecreaseGold(-increaseCost);
+                        }
+                        else
+                        {
+                            this.PrintToInfoPanel("Item has max durability");
                         }
                     }
                     else
@@ -434,6 +431,8 @@ namespace Prefabs.Inventory
                             clearSlotCallback();
                         }
 
+
+                        //swap if we have item
                         if(eq.IsIHaveItemToSwap)
                         {
                             Item swapItem = eq.GetSwapItem();
@@ -456,7 +455,7 @@ namespace Prefabs.Inventory
                     }
                 case InvenotryType.Normal:
                     {
-                        this.ConsumeItem(item);
+                        this.ConsumeItem(item, clearSlotCallback);
                         break;
                     }
                 case InvenotryType.Repair:
@@ -540,6 +539,15 @@ namespace Prefabs.Inventory
                     all_info += info[i] + "\n";
                 }
 
+            }
+            else
+            {
+                string[] info = item.ToString().Split(';');
+
+                for (int i = 0; i < info.Length; i++)
+                {
+                    all_info += info[i] + "\n";
+                }
             }
 
             return all_info;

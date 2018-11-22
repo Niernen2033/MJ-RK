@@ -126,8 +126,9 @@ namespace Items
         }
 
         //BASIC FUNCTIONS ====================================================================================
+
         public virtual void PostInstantiate()
-        {
+        {           
             this.Name = this.BasicName + this.AdditionalName;
             this.CalculateHash();
         }
@@ -151,7 +152,7 @@ namespace Items
         private void CalculateHash()
         {
             string dataInfo = this.Class.ToString() + this.Type.ToString() + this.Name + this.Icon.Index.ToString()
-                + this.Icon.Rarity.ToString() + DateTime.Now.ToString();
+                + this.Icon.Rarity.ToString() + CryptoRandom.Next(0, int.MaxValue - 1).ToString();
 
             for (int i = 0; i < this.Features.GetFeatures.Length; i++)
             {
@@ -196,6 +197,12 @@ namespace Items
                 result ^= (int)bytes[i];
             }
             return result;
+        }
+
+        public override string ToString()
+        {
+            return this.Class + " : " + this.Name + ";"
+                + "GoldValue: " + this.GoldValue;
         }
     }
 

@@ -9,11 +9,17 @@ using Items;
 namespace NPC
 {
     public enum ChampionClass { None = -1, Mage, Warrior, Range };
+    public enum ChampionType { None = -1, Enemy, Normal };
 
     public class Champion
     {
+        public ChampionType ChampionType { get; set; }
         //Champion class
         public ChampionClass ChampionClass { get; set; }
+
+        public int Experience { get; set; }
+
+        public int Level { get; set; }
 
         //Basic champions vitality
         public Statistics Vitality { get; set; }
@@ -51,26 +57,33 @@ namespace NPC
 
         //CONSTRUCTORS************************************************************
 
-        protected Champion(ChampionClass championClass, int vitality, double magicArmor, double rangedArmor, double melleArmor,
-            int dexterity, int intelligence, int strength, bool illness, Equipment equipment, List<Item> bagpack)
+        public Champion(ChampionClass championClass, ChampionType championType,
+            int experience, int level, Statistics vitality, Statistics magicArmor, Statistics rangedArmor, Statistics melleArmor,
+            Statistics dexterity, Statistics intelligence, Statistics strength, bool illness, Equipment equipment, List<Item> bagpack)
         {
             this.ChampionClass = championClass;
-            this.Vitality = new Statistics(vitality);
-            this.MagicArmor = new Statistics(magicArmor);
-            this.RangedArmor = new Statistics(rangedArmor);
-            this.MelleArmor = new Statistics(melleArmor);
-            this.Dexterity = new Statistics(dexterity);
-            this.Intelligence = new Statistics(intelligence);
-            this.Strength = new Statistics(strength);
+            this.ChampionType = championType;
+            this.Experience = experience;
+            this.Level = level;
+            this.Vitality = vitality;
+            this.MagicArmor = magicArmor;
+            this.RangedArmor = rangedArmor;
+            this.MelleArmor = melleArmor;
+            this.Dexterity = dexterity;
+            this.Intelligence = intelligence;
+            this.Strength =strength;
             this.IsIllness = illness;
 
             this.Equipment = equipment;
             this.Bagpack = new List<Item>(bagpack);
         }
 
-        protected Champion()
+        public Champion()
         {
             this.ChampionClass = ChampionClass.None;
+            this.ChampionType = ChampionType.None;
+            this.Experience = 0;
+            this.Level = 0;
             this.Vitality = new Statistics();
             this.MagicArmor = new Statistics();
             this.RangedArmor = new Statistics();
@@ -84,9 +97,12 @@ namespace NPC
             this.Bagpack = new List<Item>();
         }
 
-        protected Champion(Champion champion)
+        public Champion(Champion champion)
         {
             this.ChampionClass = champion.ChampionClass;
+            this.ChampionType = champion.ChampionType;
+            this.Experience = champion.Experience;
+            this.Level = champion.Level;
             this.Vitality = champion.Vitality;
             this.MagicArmor = champion.MagicArmor;
             this.RangedArmor = champion.RangedArmor;
@@ -101,7 +117,22 @@ namespace NPC
         }
 
         //FUNCTIONS**************************************************
+        public virtual void PostInstantiate()
+        {
+            foreach(Item item in this.Bagpack)
+            {
+                item.PostInstantiate();
+            }
+            this.Equipment.PostInstantiate();
 
+            this.Vitality.PostInstantiate();
+            this.MagicArmor.PostInstantiate();
+            this.RangedArmor.PostInstantiate();
+            this.MelleArmor.PostInstantiate();
+            this.Dexterity.PostInstantiate();
+            this.Intelligence.PostInstantiate();
+            this.Strength.PostInstantiate();
+        }
 
     }
 }

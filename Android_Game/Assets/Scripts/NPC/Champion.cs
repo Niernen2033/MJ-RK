@@ -13,6 +13,8 @@ namespace NPC
 
     public class Champion
     {
+        public string Name { get; set; }
+
         public ChampionType ChampionType { get; set; }
         //Champion class
         public ChampionClass ChampionClass { get; set; }
@@ -55,12 +57,14 @@ namespace NPC
         public Equipment Equipment { get; set; }
 
 
+
         //CONSTRUCTORS************************************************************
 
-        public Champion(ChampionClass championClass, ChampionType championType,
+        public Champion(ChampionClass championClass, ChampionType championType, string name,
             int experience, int level, Statistics vitality, Statistics magicArmor, Statistics rangedArmor, Statistics melleArmor,
             Statistics dexterity, Statistics intelligence, Statistics strength, bool illness, Equipment equipment, List<Item> bagpack)
         {
+            this.Name = name;
             this.ChampionClass = championClass;
             this.ChampionType = championType;
             this.Experience = experience;
@@ -71,7 +75,7 @@ namespace NPC
             this.MelleArmor = melleArmor;
             this.Dexterity = dexterity;
             this.Intelligence = intelligence;
-            this.Strength =strength;
+            this.Strength = strength;
             this.IsIllness = illness;
 
             this.Equipment = equipment;
@@ -80,6 +84,7 @@ namespace NPC
 
         public Champion()
         {
+            this.Name = string.Empty;
             this.ChampionClass = ChampionClass.None;
             this.ChampionType = ChampionType.None;
             this.Experience = 0;

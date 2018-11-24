@@ -23,7 +23,10 @@ namespace CityScene
 
         public void OnPointerClick(PointerEventData eventData)
         {
-           this.openBuildingCallback(this.houseType);
+            if (!this.gameObject.GetComponentInParent<City>().BlockChangingBuilding)
+            {
+                this.openBuildingCallback(this.houseType);
+            }
         }
     }
 }

@@ -23,6 +23,12 @@ namespace CityScene
         private RepairInventory RepairInventory;
         private OpenBuildingCallback openBuildingCallback;
 
+        private Sprite[] blacksmithSprites;
+        private const int framePerSecond = 10;
+        private bool wrap;
+        private bool oneLoop;
+        private int startFrame;
+
         private void Awake()
         {
             this.ShopInventory = shopInventory.GetComponent<ShopInventory>();
@@ -45,14 +51,17 @@ namespace CityScene
                 if (this.RepairInventory.PlayerBagpack == null)
                 {
                     this.RepairInventory.OpenAndLoadInventory(GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 if (this.RepairInventory.PlayerBagpack.IsDataLoaded)
                 {
                     this.RepairInventory.OpenInventory();
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 else
                 {
                     this.RepairInventory.OpenAndLoadInventory(GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
             }
         }
@@ -66,14 +75,17 @@ namespace CityScene
                 if (this.UpgradeInventory.PlayerBagpack == null)
                 {
                     this.UpgradeInventory.OpenAndLoadInventory(GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 if (this.UpgradeInventory.PlayerBagpack.IsDataLoaded)
                 {
                     this.UpgradeInventory.OpenInventory();
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 else
                 {
                     this.UpgradeInventory.OpenAndLoadInventory(GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
             }
         }
@@ -88,14 +100,17 @@ namespace CityScene
                 if (this.ShopInventory.PlayerBagpack == null)
                 {
                     this.ShopInventory.OpenAndLoadInventory(GameSave.Instance.CityData.BlackSmithShopBagpack, GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 if (this.ShopInventory.PlayerBagpack.IsDataLoaded || this.ShopInventory.ShopBagpack.IsDataLoaded)
                 {
                     this.ShopInventory.OpenInventory();
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
                 else
                 {
                     this.ShopInventory.OpenAndLoadInventory(GameSave.Instance.CityData.BlackSmithShopBagpack, GameSave.Instance.Player.Bagpack, GameSave.Instance.Player);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(true);
                 }
             }
         }
@@ -110,6 +125,7 @@ namespace CityScene
                     GameSave.Instance.Update();
                     this.closeInventoryButton.gameObject.SetActive(false);
                     this.backToCityButton.gameObject.SetActive(true);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(false);
                 }
             }
 
@@ -121,6 +137,7 @@ namespace CityScene
                     GameSave.Instance.Update();
                     this.closeInventoryButton.gameObject.SetActive(false);
                     this.backToCityButton.gameObject.SetActive(true);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(false);
                 }
             }
 
@@ -133,6 +150,7 @@ namespace CityScene
                     GameSave.Instance.Update();
                     this.closeInventoryButton.gameObject.SetActive(false);
                     this.backToCityButton.gameObject.SetActive(true);
+                    this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(false);
                 }
             }
         }

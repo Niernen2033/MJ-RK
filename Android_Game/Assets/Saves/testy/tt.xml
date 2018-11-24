@@ -4,6 +4,7 @@
   <Name />
   <Texture />
   <Player>
+    <Name />
     <ChampionType>None</ChampionType>
     <ChampionClass>None</ChampionClass>
     <Experience>0</Experience>
@@ -30,56 +31,128 @@
       <Basic>0</Basic>
     </Strength>
     <IsIllness>false</IsIllness>
+    <ItemBagpackItem>
+      <Class>Normal</Class>
+      <Type>Gold</Type>
+      <SubType>None</SubType>
+      <BasicName>Gold</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>363</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>9952</GoldValue>
+      <Weight>0</Weight>
+      <Features>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+      </Features>
+    </ItemBagpackItem>
+    <ArmorBagpackItem>
+      <Class>Magic</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Helm of Shattered Punishment</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>33</Index>
+        <Rarity>809</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>4.75</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Helmet</EquipmentType>
+      <VitalityBonus>
+        <Basic>18</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>15</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>6</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>12</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>4</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>24</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>6</Basic>
+      </StrengthBonus>
+    </ArmorBagpackItem>
+    <ArmorBagpackItem>
+      <Class>Magic</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Retribution Footpads of the Prisoner</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>19</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>1.78</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Boots</EquipmentType>
+      <VitalityBonus>
+        <Basic>17</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>13</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>9</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>5</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>5</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>21</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </ArmorBagpackItem>
     <Equipment>
-      <Helmet>
-        <Class>None</Class>
-        <Type>None</Type>
-        <SubType>None</SubType>
-        <BasicName />
-        <AdditionalName />
-        <Level>0</Level>
-        <Icon>
-          <Index>439</Index>
-          <Rarity>-1</Rarity>
-        </Icon>
-        <GoldValue>0</GoldValue>
-        <Weight>0</Weight>
-        <Features>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-          <FeatureItem>false</FeatureItem>
-        </Features>
-        <UpgradeLevel>0</UpgradeLevel>
-        <IsEquiped>false</IsEquiped>
-        <IsBroken>false</IsBroken>
-        <Durability>100</Durability>
-        <EquipmentType>None</EquipmentType>
-        <VitalityBonus>
-          <Basic>0</Basic>
-        </VitalityBonus>
-        <MagicArmorBonus>
-          <Basic>0</Basic>
-        </MagicArmorBonus>
-        <RangedArmorBonus>
-          <Basic>0</Basic>
-        </RangedArmorBonus>
-        <MelleArmorBonus>
-          <Basic>0</Basic>
-        </MelleArmorBonus>
-        <DexterityBonus>
-          <Basic>0</Basic>
-        </DexterityBonus>
-        <IntelligenceBonus>
-          <Basic>0</Basic>
-        </IntelligenceBonus>
-        <StrengthBonus>
-          <Basic>0</Basic>
-        </StrengthBonus>
-      </Helmet>
       <Body>
         <Class>None</Class>
         <Type>None</Type>
@@ -370,6 +443,1061 @@
       </Trinket>
     </Equipment>
     <MaxCapacity>0</MaxCapacity>
+    <PlayerTeam>
+      <Name />
+      <ChampionType>Normal</ChampionType>
+      <ChampionClass>Mage</ChampionClass>
+      <Experience>1</Experience>
+      <Level>1</Level>
+      <Vitality>
+        <Basic>15</Basic>
+      </Vitality>
+      <MagicArmor>
+        <Basic>21</Basic>
+      </MagicArmor>
+      <RangedArmor>
+        <Basic>6</Basic>
+      </RangedArmor>
+      <MelleArmor>
+        <Basic>7</Basic>
+      </MelleArmor>
+      <Dexterity>
+        <Basic>7</Basic>
+      </Dexterity>
+      <Intelligence>
+        <Basic>22</Basic>
+      </Intelligence>
+      <Strength>
+        <Basic>3</Basic>
+      </Strength>
+      <IsIllness>false</IsIllness>
+      <Equipment>
+        <Helmet>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Helmet>
+        <Body>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Body>
+        <Weapon>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <BasicDamage>
+            <Basic>0</Basic>
+          </BasicDamage>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Weapon>
+        <Gloves>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Gloves>
+        <Shield>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Shield>
+        <Trinket>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Trinket>
+      </Equipment>
+    </PlayerTeam>
+    <PlayerTeam>
+      <Name />
+      <ChampionType>None</ChampionType>
+      <ChampionClass>None</ChampionClass>
+      <Experience>0</Experience>
+      <Level>0</Level>
+      <Vitality>
+        <Basic>0</Basic>
+      </Vitality>
+      <MagicArmor>
+        <Basic>0</Basic>
+      </MagicArmor>
+      <RangedArmor>
+        <Basic>0</Basic>
+      </RangedArmor>
+      <MelleArmor>
+        <Basic>0</Basic>
+      </MelleArmor>
+      <Dexterity>
+        <Basic>0</Basic>
+      </Dexterity>
+      <Intelligence>
+        <Basic>0</Basic>
+      </Intelligence>
+      <Strength>
+        <Basic>0</Basic>
+      </Strength>
+      <IsIllness>false</IsIllness>
+      <Equipment>
+        <Helmet>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Helmet>
+        <Body>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Body>
+        <Boots>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Boots>
+        <Weapon>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <BasicDamage>
+            <Basic>0</Basic>
+          </BasicDamage>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Weapon>
+        <Gloves>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Gloves>
+        <Shield>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Shield>
+        <Trinket>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Trinket>
+      </Equipment>
+    </PlayerTeam>
+    <PlayerTeam>
+      <Name />
+      <ChampionType>None</ChampionType>
+      <ChampionClass>None</ChampionClass>
+      <Experience>0</Experience>
+      <Level>0</Level>
+      <Vitality>
+        <Basic>0</Basic>
+      </Vitality>
+      <MagicArmor>
+        <Basic>0</Basic>
+      </MagicArmor>
+      <RangedArmor>
+        <Basic>0</Basic>
+      </RangedArmor>
+      <MelleArmor>
+        <Basic>0</Basic>
+      </MelleArmor>
+      <Dexterity>
+        <Basic>0</Basic>
+      </Dexterity>
+      <Intelligence>
+        <Basic>0</Basic>
+      </Intelligence>
+      <Strength>
+        <Basic>0</Basic>
+      </Strength>
+      <IsIllness>false</IsIllness>
+      <Equipment>
+        <Helmet>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Helmet>
+        <Body>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Body>
+        <Boots>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Boots>
+        <Weapon>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <BasicDamage>
+            <Basic>0</Basic>
+          </BasicDamage>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Weapon>
+        <Gloves>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Gloves>
+        <Shield>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Shield>
+        <Trinket>
+          <Class>None</Class>
+          <Type>None</Type>
+          <SubType>None</SubType>
+          <BasicName />
+          <AdditionalName />
+          <Level>0</Level>
+          <Icon>
+            <Index>439</Index>
+            <Rarity>-1</Rarity>
+          </Icon>
+          <GoldValue>0</GoldValue>
+          <Weight>0</Weight>
+          <Features>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+            <FeatureItem>false</FeatureItem>
+          </Features>
+          <UpgradeLevel>0</UpgradeLevel>
+          <IsEquiped>false</IsEquiped>
+          <IsBroken>false</IsBroken>
+          <Durability>100</Durability>
+          <EquipmentType>None</EquipmentType>
+          <VitalityBonus>
+            <Basic>0</Basic>
+          </VitalityBonus>
+          <MagicArmorBonus>
+            <Basic>0</Basic>
+          </MagicArmorBonus>
+          <RangedArmorBonus>
+            <Basic>0</Basic>
+          </RangedArmorBonus>
+          <MelleArmorBonus>
+            <Basic>0</Basic>
+          </MelleArmorBonus>
+          <DexterityBonus>
+            <Basic>0</Basic>
+          </DexterityBonus>
+          <IntelligenceBonus>
+            <Basic>0</Basic>
+          </IntelligenceBonus>
+          <StrengthBonus>
+            <Basic>0</Basic>
+          </StrengthBonus>
+        </Trinket>
+      </Equipment>
+    </PlayerTeam>
   </Player>
   <CityData>
     <ItemBlackSmithShopBagpackItem>
@@ -383,7 +1511,7 @@
         <Index>363</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>78</GoldValue>
+      <GoldValue>120</GoldValue>
       <Weight>0</Weight>
       <Features>
         <FeatureItem>false</FeatureItem>
@@ -399,15 +1527,15 @@
       <Class>Melle</Class>
       <Type>Armor</Type>
       <SubType>None</SubType>
-      <BasicName>Undead Tunic of Eternity</BasicName>
+      <BasicName>Aegeus</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>44</Index>
+        <Index>113</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>24</GoldValue>
-      <Weight>2.28</Weight>
+      <GoldValue>23</GoldValue>
+      <Weight>1</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -421,91 +1549,42 @@
       <IsEquiped>false</IsEquiped>
       <IsBroken>false</IsBroken>
       <Durability>100</Durability>
-      <EquipmentType>Body</EquipmentType>
+      <EquipmentType>Shield</EquipmentType>
       <VitalityBonus>
-        <Basic>22</Basic>
+        <Basic>24</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>5</Basic>
+        <Basic>6</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>14</Basic>
+        <Basic>15</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>18</Basic>
+        <Basic>16</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>2</Basic>
+        <Basic>3</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>1</Basic>
+        <Basic>6</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>23</Basic>
+        <Basic>24</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Magic</Class>
       <Type>Armor</Type>
       <SubType>None</SubType>
-      <BasicName>Memory of Eternity</BasicName>
+      <BasicName>Shadow Iron Grasps</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>70</Index>
-        <Rarity>-1</Rarity>
+        <Index>441</Index>
+        <Rarity>810</Rarity>
       </Icon>
       <GoldValue>25</GoldValue>
-      <Weight>2.16</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Body</EquipmentType>
-      <VitalityBonus>
-        <Basic>18</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>9</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>10</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>6</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>4</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>18</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>1</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Gladiator's Iron Grips</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>46</Index>
-        <Rarity>808</Rarity>
-      </Icon>
-      <GoldValue>22</GoldValue>
-      <Weight>0.43</Weight>
+      <Weight>0.61</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -521,40 +1600,40 @@
       <Durability>100</Durability>
       <EquipmentType>Gloves</EquipmentType>
       <VitalityBonus>
-        <Basic>16</Basic>
+        <Basic>19</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>22</Basic>
+        <Basic>12</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>14</Basic>
+        <Basic>12</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>10</Basic>
+        <Basic>11</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>27</Basic>
+        <Basic>8</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>9</Basic>
+        <Basic>23</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>5</Basic>
+        <Basic>7</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Ranged</Class>
       <Type>Armor</Type>
       <SubType>None</SubType>
-      <BasicName>Fusion Chestpiece of the Eagle</BasicName>
+      <BasicName>Raiment of Ancient Protection</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>670</Index>
+        <Index>24</Index>
         <Rarity>-1</Rarity>
       </Icon>
       <GoldValue>26</GoldValue>
-      <Weight>4.41</Weight>
+      <Weight>4.04</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -570,187 +1649,40 @@
       <Durability>100</Durability>
       <EquipmentType>Body</EquipmentType>
       <VitalityBonus>
-        <Basic>13</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>18</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>14</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>9</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>19</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>2</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>5</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Scaled Sandals of Smoldering Protection</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>39</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>26</GoldValue>
-      <Weight>3.83</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Boots</EquipmentType>
-      <VitalityBonus>
-        <Basic>24</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>6</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>16</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
         <Basic>15</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>2</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>1</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>18</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Glimmer</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>637</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>4.25</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Shield</EquipmentType>
-      <VitalityBonus>
-        <Basic>19</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>10</Basic>
+        <Basic>19</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>15</Basic>
+        <Basic>12</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>19</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>4</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
         <Basic>6</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>24</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Footguards of Holy Magic</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>20</Index>
-        <Rarity>810</Rarity>
-      </Icon>
-      <GoldValue>24</GoldValue>
-      <Weight>4.21</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Boots</EquipmentType>
-      <VitalityBonus>
-        <Basic>16</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>22</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>13</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>13</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
         <Basic>23</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>3</Basic>
+        <Basic>5</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>7</Basic>
+        <Basic>2</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Magic</Class>
       <Type>Armor</Type>
       <SubType>None</SubType>
-      <BasicName>Storm Breaker</BasicName>
+      <BasicName>Heartless Silver Light Shield</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>703</Index>
-        <Rarity>-1</Rarity>
+        <Index>120</Index>
+        <Rarity>809</Rarity>
       </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>1.38</Weight>
+      <GoldValue>23</GoldValue>
+      <Weight>1.22</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -766,40 +1698,432 @@
       <Durability>100</Durability>
       <EquipmentType>Shield</EquipmentType>
       <VitalityBonus>
-        <Basic>16</Basic>
+        <Basic>20</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>10</Basic>
+        <Basic>16</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>6</Basic>
+        <Basic>9</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>8</Basic>
+        <Basic>6</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>2</Basic>
+        <Basic>7</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>18</Basic>
+        <Basic>21</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>1</Basic>
+        <Basic>5</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Melle</Class>
       <Type>Armor</Type>
       <SubType>None</SubType>
-      <BasicName>Vindicator Silk Sandals</BasicName>
+      <BasicName>Shadow Iron Grasps</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>45</Index>
+        <Index>58</Index>
+        <Rarity>810</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>0.1</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Gloves</EquipmentType>
+      <VitalityBonus>
+        <Basic>23</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>9</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>17</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>22</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>8</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>4</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>22</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Possessed Leather Tunic</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>66</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>2.3</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Body</EquipmentType>
+      <VitalityBonus>
+        <Basic>19</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>13</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>6</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>11</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>1</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>21</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>1</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Armor of Fleeting Justice</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>670</Index>
         <Rarity>809</Rarity>
       </Icon>
+      <GoldValue>26</GoldValue>
+      <Weight>2.6</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Body</EquipmentType>
+      <VitalityBonus>
+        <Basic>14</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>16</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>14</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>7</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>22</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>6</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>6</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Hope's Fists of Thorns</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>669</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
       <GoldValue>23</GoldValue>
-      <Weight>0.44</Weight>
+      <Weight>2.63</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Gloves</EquipmentType>
+      <VitalityBonus>
+        <Basic>9</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>15</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>11</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>6</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>22</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>6</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>1</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Ancient Visage</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>505</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>23</GoldValue>
+      <Weight>4.77</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Shield</EquipmentType>
+      <VitalityBonus>
+        <Basic>14</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>14</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>5</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>5</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>5</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>23</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>1</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Peacekeeper Faceguard of Blood</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>442</Index>
+        <Rarity>809</Rarity>
+      </Icon>
+      <GoldValue>27</GoldValue>
+      <Weight>3.26</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Helmet</EquipmentType>
+      <VitalityBonus>
+        <Basic>13</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>16</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>12</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>11</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>24</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>3</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Mended Ivory Visage</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>442</Index>
+        <Rarity>808</Rarity>
+      </Icon>
+      <GoldValue>23</GoldValue>
+      <Weight>2</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Helmet</EquipmentType>
+      <VitalityBonus>
+        <Basic>15</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>24</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>14</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>14</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>26</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>7</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>6</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Stormfury Leather Grasps</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>441</Index>
+        <Rarity>7</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>3.31</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Gloves</EquipmentType>
+      <VitalityBonus>
+        <Basic>13</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>23</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>17</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>14</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>23</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>9</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Armor</Type>
+      <SubType>None</SubType>
+      <BasicName>Malicious Walkers of Immortality</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>39</Index>
+        <Rarity>7</Rarity>
+      </Icon>
+      <GoldValue>26</GoldValue>
+      <Weight>4.36</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -815,536 +2139,27 @@
       <Durability>100</Durability>
       <EquipmentType>Boots</EquipmentType>
       <VitalityBonus>
-        <Basic>24</Basic>
+        <Basic>20</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>12</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>20</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>18</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>4</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>7</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>20</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Breastplate of Cursed Bloodlust</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>666</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>4.72</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Body</EquipmentType>
-      <VitalityBonus>
-        <Basic>14</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>16</Basic>
+        <Basic>13</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
         <Basic>11</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>7</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>24</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>6</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>2</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Crusader of Ending Hope</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>41</Index>
-        <Rarity>7</Rarity>
-      </Icon>
-      <GoldValue>22</GoldValue>
-      <Weight>0.53</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Helmet</EquipmentType>
-      <VitalityBonus>
-        <Basic>17</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>15</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>11</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>9</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>9</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>22</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
         <Basic>8</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Honor's Cap of the Brotherhood</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>47</Index>
-        <Rarity>809</Rarity>
-      </Icon>
-      <GoldValue>23</GoldValue>
-      <Weight>2.24</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Helmet</EquipmentType>
-      <VitalityBonus>
-        <Basic>19</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>6</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>19</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>18</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>5</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>5</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>25</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Headcover of Relentless Freedom</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>22</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>2.23</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Helmet</EquipmentType>
-      <VitalityBonus>
-        <Basic>17</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>10</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>6</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>11</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>3</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>24</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>3</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Gift of the Knight</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>42</Index>
-        <Rarity>7</Rarity>
-      </Icon>
-      <GoldValue>24</GoldValue>
-      <Weight>4.92</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Helmet</EquipmentType>
-      <VitalityBonus>
-        <Basic>20</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>15</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
         <Basic>8</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>14</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>7</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>26</Basic>
+        <Basic>27</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>5</Basic>
+        <Basic>9</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Armor</Type>
-      <SubType>None</SubType>
-      <BasicName>Defiler of the Corrupted</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>60</Index>
-        <Rarity>809</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>2.08</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Body</EquipmentType>
-      <VitalityBonus>
-        <Basic>22</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>7</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>20</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>15</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>4</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>2</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>22</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>War-Forged Greatsword</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>122</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>24</GoldValue>
-      <Weight>2.53</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>14</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>13</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>6</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>5</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>15</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Salvation</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>617</Index>
-        <Rarity>810</Rarity>
-      </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>0.22</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>15</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>12</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>18</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>3</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>3</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Steel Crossfire</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>817</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>24</GoldValue>
-      <Weight>1.41</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>9</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>10</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>16</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>1</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>4</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Armageddon</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>563</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>22</GoldValue>
-      <Weight>0.95</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>12</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>13</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>5</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>6</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>18</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Replica Goblet</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>683</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>4.28</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>9</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>13</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>3</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>18</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>5</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
     <WeaponBlackSmithShopBagpackItem>
       <Class>Magic</Class>
       <Type>Weapon</Type>
@@ -1353,11 +2168,11 @@
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>683</Index>
-        <Rarity>809</Rarity>
+        <Index>693</Index>
+        <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>4.52</Weight>
+      <GoldValue>23</GoldValue>
+      <Weight>0.18</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1373,19 +2188,105 @@
       <Durability>100</Durability>
       <EquipmentType>Weapon</EquipmentType>
       <BasicDamage>
-        <Basic>15</Basic>
+        <Basic>9</Basic>
       </BasicDamage>
       <VitalityBonus>
-        <Basic>14</Basic>
+        <Basic>9</Basic>
       </VitalityBonus>
       <DexterityBonus>
-        <Basic>7</Basic>
+        <Basic>5</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>19</Basic>
+        <Basic>18</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
+        <Basic>4</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Melle</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Spineripper, Bringer of Deception</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>589</Index>
+        <Rarity>809</Rarity>
+      </Icon>
+      <GoldValue>23</GoldValue>
+      <Weight>2.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>13</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>13</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
         <Basic>6</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>5</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>17</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Twitch, Ellipse of Suffering</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>616</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>27</GoldValue>
+      <Weight>0.66</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>11</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>9</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>15</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>4</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>4</Basic>
       </StrengthBonus>
     </WeaponBlackSmithShopBagpackItem>
     <WeaponBlackSmithShopBagpackItem>
@@ -1396,140 +2297,11 @@
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>571</Index>
+        <Index>608</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>26</GoldValue>
-      <Weight>4.01</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>9</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>12</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>5</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>6</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>19</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Iron Launcher</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>817</Index>
-        <Rarity>7</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>4.45</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>17</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>16</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>21</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>4</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>7</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Venom, Annihilation of the Lionheart</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>122</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>4.88</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Weapon</EquipmentType>
-      <BasicDamage>
-        <Basic>12</Basic>
-      </BasicDamage>
-      <VitalityBonus>
-        <Basic>15</Basic>
-      </VitalityBonus>
-      <DexterityBonus>
-        <Basic>6</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>5</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>19</Basic>
-      </StrengthBonus>
-    </WeaponBlackSmithShopBagpackItem>
-    <WeaponBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Weapon</Type>
-      <SubType>None</SubType>
-      <BasicName>Mangler</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>105</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>4.97</Weight>
+      <GoldValue>23</GoldValue>
+      <Weight>4.77</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1548,31 +2320,289 @@
         <Basic>14</Basic>
       </BasicDamage>
       <VitalityBonus>
-        <Basic>9</Basic>
+        <Basic>13</Basic>
       </VitalityBonus>
       <DexterityBonus>
-        <Basic>5</Basic>
+        <Basic>6</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>1</Basic>
+        <Basic>2</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>19</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Dire Globe</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>701</Index>
+        <Rarity>12</Rarity>
+      </Icon>
+      <GoldValue>26</GoldValue>
+      <Weight>1.21</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>16</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>19</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>9</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>19</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>11</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Melle</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Bloodweep</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>589</Index>
+        <Rarity>12</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>3.39</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>17</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>15</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>9</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>6</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>24</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Melle</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Desolation Glass Blade</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>122</Index>
+        <Rarity>810</Rarity>
+      </Icon>
+      <GoldValue>22</GoldValue>
+      <Weight>0.11</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>16</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>14</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>3</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>8</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
         <Basic>18</Basic>
       </StrengthBonus>
     </WeaponBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
       <Class>Magic</Class>
-      <Type>Trinket</Type>
+      <Type>Weapon</Type>
       <SubType>None</SubType>
-      <BasicName>The Coral Sun</BasicName>
+      <BasicName>Singed Cage</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>460</Index>
-        <Rarity>809</Rarity>
+        <Index>680</Index>
+        <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>1.16</Weight>
+      <GoldValue>25</GoldValue>
+      <Weight>2.32</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>12</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>10</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>1</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>16</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>6</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Starstruck</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>817</Index>
+        <Rarity>810</Rarity>
+      </Icon>
+      <GoldValue>26</GoldValue>
+      <Weight>4.42</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>12</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>12</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>17</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>3</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <WeaponBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Weapon</Type>
+      <SubType>None</SubType>
+      <BasicName>Nemesis</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>695</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>22</GoldValue>
+      <Weight>3.07</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Weapon</EquipmentType>
+      <BasicDamage>
+        <Basic>12</Basic>
+      </BasicDamage>
+      <VitalityBonus>
+        <Basic>12</Basic>
+      </VitalityBonus>
+      <DexterityBonus>
+        <Basic>3</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>19</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </WeaponBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Lonely Vow</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>448</Index>
+        <Rarity>808</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>1.4</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1588,89 +2618,40 @@
       <Durability>100</Durability>
       <EquipmentType>Trinket</EquipmentType>
       <VitalityBonus>
-        <Basic>15</Basic>
+        <Basic>20</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
         <Basic>16</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>7</Basic>
+        <Basic>15</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
+        <Basic>14</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
         <Basic>8</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>5</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>19</Basic>
+        <Basic>28</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>2</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Ranged</Class>
-      <Type>Trinket</Type>
-      <SubType>None</SubType>
-      <BasicName>The Zircon Core</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>460</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>26</GoldValue>
-      <Weight>0.97</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Trinket</EquipmentType>
-      <VitalityBonus>
-        <Basic>19</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>12</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>5</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>9</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>1</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>20</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>3</Basic>
+        <Basic>6</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Melle</Class>
       <Type>Trinket</Type>
       <SubType>None</SubType>
-      <BasicName>The Serene Bubble</BasicName>
+      <BasicName>The Elegant Breath</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>456</Index>
-        <Rarity>809</Rarity>
+        <Index>450</Index>
+        <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>1.91</Weight>
+      <GoldValue>23</GoldValue>
+      <Weight>1.35</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1686,40 +2667,89 @@
       <Durability>100</Durability>
       <EquipmentType>Trinket</EquipmentType>
       <VitalityBonus>
-        <Basic>15</Basic>
+        <Basic>16</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>16</Basic>
+        <Basic>13</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>11</Basic>
+        <Basic>9</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>6</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>6</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>18</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>4</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Melle</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Violet Drop Pin</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>455</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>27</GoldValue>
+      <Weight>1.53</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Trinket</EquipmentType>
+      <VitalityBonus>
+        <Basic>19</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>9</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>8</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
         <Basic>7</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>5</Basic>
+        <Basic>2</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
         <Basic>24</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>4</Basic>
+        <Basic>6</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Magic</Class>
       <Type>Trinket</Type>
       <SubType>None</SubType>
-      <BasicName>The Angel Vision Pin</BasicName>
+      <BasicName>The Elegant Breath</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>456</Index>
+        <Index>414</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>26</GoldValue>
-      <Weight>1.47</Weight>
+      <GoldValue>27</GoldValue>
+      <Weight>0.41</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1735,40 +2765,40 @@
       <Durability>100</Durability>
       <EquipmentType>Trinket</EquipmentType>
       <VitalityBonus>
-        <Basic>17</Basic>
+        <Basic>14</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>14</Basic>
+        <Basic>12</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
         <Basic>9</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
-        <Basic>9</Basic>
+        <Basic>6</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>3</Basic>
+        <Basic>5</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
         <Basic>23</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>5</Basic>
+        <Basic>1</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ArmorBlackSmithShopBagpackItem>
       <Class>Ranged</Class>
       <Type>Trinket</Type>
       <SubType>None</SubType>
-      <BasicName>The Loyal Focus Amulet</BasicName>
+      <BasicName>The Colossal Glamour Necklace</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>457</Index>
-        <Rarity>808</Rarity>
+        <Index>450</Index>
+        <Rarity>-1</Rarity>
       </Icon>
       <GoldValue>27</GoldValue>
-      <Weight>1.8</Weight>
+      <Weight>1.11</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -1784,22 +2814,169 @@
       <Durability>100</Durability>
       <EquipmentType>Trinket</EquipmentType>
       <VitalityBonus>
-        <Basic>23</Basic>
+        <Basic>15</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>17</Basic>
+        <Basic>11</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>10</Basic>
+        <Basic>8</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
         <Basic>10</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>6</Basic>
+        <Basic>4</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>23</Basic>
+        <Basic>22</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>4</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Jade Promise</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>456</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>22</GoldValue>
+      <Weight>0.94</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Trinket</EquipmentType>
+      <VitalityBonus>
+        <Basic>19</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>12</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>9</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>10</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>4</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>24</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>5</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Colossal Glamour Necklace</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>449</Index>
+        <Rarity>809</Rarity>
+      </Icon>
+      <GoldValue>22</GoldValue>
+      <Weight>1.51</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Trinket</EquipmentType>
+      <VitalityBonus>
+        <Basic>15</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>15</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>9</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>10</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>5</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>21</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>3</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Magic</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Spinel Resolve</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>448</Index>
+        <Rarity>810</Rarity>
+      </Icon>
+      <GoldValue>23</GoldValue>
+      <Weight>1.69</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Trinket</EquipmentType>
+      <VitalityBonus>
+        <Basic>20</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>16</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>8</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>12</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>3</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>20</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
         <Basic>7</Basic>
@@ -1809,211 +2986,15 @@
       <Class>Ranged</Class>
       <Type>Trinket</Type>
       <SubType>None</SubType>
-      <BasicName>The Devoted Lure</BasicName>
+      <BasicName>The Crisp Teardrop Bracelet</BasicName>
       <AdditionalName />
       <Level>1</Level>
       <Icon>
-        <Index>450</Index>
-        <Rarity>810</Rarity>
-      </Icon>
-      <GoldValue>23</GoldValue>
-      <Weight>0.67</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Trinket</EquipmentType>
-      <VitalityBonus>
-        <Basic>19</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>17</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>8</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>8</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>3</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>20</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>3</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Trinket</Type>
-      <SubType>None</SubType>
-      <BasicName>The Quiet Light Necklace</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>449</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>27</GoldValue>
-      <Weight>0.81</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Trinket</EquipmentType>
-      <VitalityBonus>
-        <Basic>17</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>15</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>11</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>11</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>3</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>19</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>6</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Trinket</Type>
-      <SubType>None</SubType>
-      <BasicName>The Solar Heart</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>449</Index>
-        <Rarity>809</Rarity>
+        <Index>448</Index>
+        <Rarity>7</Rarity>
       </Icon>
       <GoldValue>25</GoldValue>
-      <Weight>0.81</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Trinket</EquipmentType>
-      <VitalityBonus>
-        <Basic>15</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>16</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>11</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>10</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>6</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>25</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>2</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Melle</Class>
-      <Type>Trinket</Type>
-      <SubType>None</SubType>
-      <BasicName>The Angel Vision Pin</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>460</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>22</GoldValue>
-      <Weight>0.72</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <UpgradeLevel>0</UpgradeLevel>
-      <IsEquiped>false</IsEquiped>
-      <IsBroken>false</IsBroken>
-      <Durability>100</Durability>
-      <EquipmentType>Trinket</EquipmentType>
-      <VitalityBonus>
-        <Basic>15</Basic>
-      </VitalityBonus>
-      <MagicArmorBonus>
-        <Basic>11</Basic>
-      </MagicArmorBonus>
-      <RangedArmorBonus>
-        <Basic>5</Basic>
-      </RangedArmorBonus>
-      <MelleArmorBonus>
-        <Basic>5</Basic>
-      </MelleArmorBonus>
-      <DexterityBonus>
-        <Basic>5</Basic>
-      </DexterityBonus>
-      <IntelligenceBonus>
-        <Basic>22</Basic>
-      </IntelligenceBonus>
-      <StrengthBonus>
-        <Basic>6</Basic>
-      </StrengthBonus>
-    </ArmorBlackSmithShopBagpackItem>
-    <ArmorBlackSmithShopBagpackItem>
-      <Class>Magic</Class>
-      <Type>Trinket</Type>
-      <SubType>None</SubType>
-      <BasicName>The Loyal Focus Amulet</BasicName>
-      <AdditionalName />
-      <Level>1</Level>
-      <Icon>
-        <Index>449</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>25</GoldValue>
-      <Weight>1.85</Weight>
+      <Weight>1.93</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>false</FeatureItem>
@@ -2032,22 +3013,71 @@
         <Basic>18</Basic>
       </VitalityBonus>
       <MagicArmorBonus>
-        <Basic>10</Basic>
+        <Basic>14</Basic>
       </MagicArmorBonus>
       <RangedArmorBonus>
-        <Basic>11</Basic>
+        <Basic>13</Basic>
+      </RangedArmorBonus>
+      <MelleArmorBonus>
+        <Basic>10</Basic>
+      </MelleArmorBonus>
+      <DexterityBonus>
+        <Basic>4</Basic>
+      </DexterityBonus>
+      <IntelligenceBonus>
+        <Basic>26</Basic>
+      </IntelligenceBonus>
+      <StrengthBonus>
+        <Basic>6</Basic>
+      </StrengthBonus>
+    </ArmorBlackSmithShopBagpackItem>
+    <ArmorBlackSmithShopBagpackItem>
+      <Class>Ranged</Class>
+      <Type>Trinket</Type>
+      <SubType>None</SubType>
+      <BasicName>The Pink Promise</BasicName>
+      <AdditionalName />
+      <Level>1</Level>
+      <Icon>
+        <Index>450</Index>
+        <Rarity>808</Rarity>
+      </Icon>
+      <GoldValue>24</GoldValue>
+      <Weight>1.83</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <UpgradeLevel>0</UpgradeLevel>
+      <IsEquiped>false</IsEquiped>
+      <IsBroken>false</IsBroken>
+      <Durability>100</Durability>
+      <EquipmentType>Trinket</EquipmentType>
+      <VitalityBonus>
+        <Basic>22</Basic>
+      </VitalityBonus>
+      <MagicArmorBonus>
+        <Basic>18</Basic>
+      </MagicArmorBonus>
+      <RangedArmorBonus>
+        <Basic>9</Basic>
       </RangedArmorBonus>
       <MelleArmorBonus>
         <Basic>11</Basic>
       </MelleArmorBonus>
       <DexterityBonus>
-        <Basic>3</Basic>
+        <Basic>10</Basic>
       </DexterityBonus>
       <IntelligenceBonus>
-        <Basic>19</Basic>
+        <Basic>23</Basic>
       </IntelligenceBonus>
       <StrengthBonus>
-        <Basic>3</Basic>
+        <Basic>8</Basic>
       </StrengthBonus>
     </ArmorBlackSmithShopBagpackItem>
     <ItemTawernShopBagpackItem>
@@ -2061,7 +3091,7 @@
         <Index>363</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>80</GoldValue>
+      <GoldValue>50</GoldValue>
       <Weight>0</Weight>
       <Features>
         <FeatureItem>false</FeatureItem>
@@ -2076,15 +3106,61 @@
     <ItemTawernShopBagpackItem>
       <Class>Normal</Class>
       <Type>Junk</Type>
+      <SubType>Junk_Minerals</SubType>
+      <BasicName>Mineral</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>380</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>59</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+    </ItemTawernShopBagpackItem>
+    <ItemTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Junk</Type>
       <SubType>Junk_BodyParts</SubType>
       <BasicName>Body part</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>780</Index>
+        <Index>778</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>25</GoldValue>
+      <GoldValue>44</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+    </ItemTawernShopBagpackItem>
+    <ItemTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Junk</Type>
+      <SubType>Junk_Minerals</SubType>
+      <BasicName>Mineral</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>381</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>150</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2107,30 +3183,7 @@
         <Index>361</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>327</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-    </ItemTawernShopBagpackItem>
-    <ItemTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Junk</Type>
-      <SubType>Junk_Gold</SubType>
-      <BasicName>Golden item</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>301</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>262</GoldValue>
+      <GoldValue>412</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2153,7 +3206,76 @@
         <Index>333</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>53</GoldValue>
+      <GoldValue>49</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+    </ItemTawernShopBagpackItem>
+    <ItemTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Junk</Type>
+      <SubType>Junk_Gold</SubType>
+      <BasicName>Golden item</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>301</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>225</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+    </ItemTawernShopBagpackItem>
+    <ItemTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Junk</Type>
+      <SubType>Junk_Gold</SubType>
+      <BasicName>Golden item</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>304</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>291</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+    </ItemTawernShopBagpackItem>
+    <ItemTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Junk</Type>
+      <SubType>Junk_Gold</SubType>
+      <BasicName>Golden item</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>301</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>131</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2173,102 +3295,10 @@
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>274</Index>
+        <Index>272</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>32</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-    </ItemTawernShopBagpackItem>
-    <ItemTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Junk</Type>
-      <SubType>Junk_Minerals</SubType>
-      <BasicName>Mineral</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>380</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>78</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-    </ItemTawernShopBagpackItem>
-    <ItemTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Junk</Type>
-      <SubType>Junk_BodyParts</SubType>
-      <BasicName>Body part</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>451</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>46</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-    </ItemTawernShopBagpackItem>
-    <ItemTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Junk</Type>
-      <SubType>Junk_Gems</SubType>
-      <BasicName>Gem</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>403</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>313</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-    </ItemTawernShopBagpackItem>
-    <ItemTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Junk</Type>
-      <SubType>Junk_Gems</SubType>
-      <BasicName>Gem</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>360</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>430</GoldValue>
+      <GoldValue>21</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2291,7 +3321,7 @@
         <Index>361</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>167</GoldValue>
+      <GoldValue>121</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2306,15 +3336,15 @@
     <ConsumeableTawernShopBagpackItem>
       <Class>Normal</Class>
       <Type>Potion</Type>
-      <SubType>Potion_Strength</SubType>
+      <SubType>Potion_Armor</SubType>
       <BasicName>Armor Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>221</Index>
+        <Index>234</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>205</GoldValue>
+      <GoldValue>300</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2325,21 +3355,21 @@
         <FeatureItem>false</FeatureItem>
         <FeatureItem>true</FeatureItem>
       </Features>
-      <HealValue>11</HealValue>
+      <HealValue>12</HealValue>
     </ConsumeableTawernShopBagpackItem>
     <ConsumeableTawernShopBagpackItem>
       <Class>Normal</Class>
-      <Type>Food</Type>
+      <Type>Potion</Type>
       <SubType>Potion_Intelligence</SubType>
-      <BasicName>Food</BasicName>
+      <BasicName>Intelligence Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>149</Index>
+        <Index>210</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>52</GoldValue>
-      <Weight>0.771478074991954</Weight>
+      <GoldValue>461</GoldValue>
+      <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>true</FeatureItem>
@@ -2349,7 +3379,55 @@
         <FeatureItem>false</FeatureItem>
         <FeatureItem>true</FeatureItem>
       </Features>
-      <HealValue>45</HealValue>
+      <HealValue>14</HealValue>
+    </ConsumeableTawernShopBagpackItem>
+    <ConsumeableTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Food</Type>
+      <SubType>Potion_Mana</SubType>
+      <BasicName>Food</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>155</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>46</GoldValue>
+      <Weight>0.59554134933174152</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>34</HealValue>
+    </ConsumeableTawernShopBagpackItem>
+    <ConsumeableTawernShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Food</Type>
+      <SubType>Potion_Health</SubType>
+      <BasicName>Food</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>147</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>59</GoldValue>
+      <Weight>0.7704537008820227</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>33</HealValue>
     </ConsumeableTawernShopBagpackItem>
     <ConsumeableTawernShopBagpackItem>
       <Class>Normal</Class>
@@ -2378,16 +3456,16 @@
     <ConsumeableTawernShopBagpackItem>
       <Class>Normal</Class>
       <Type>Food</Type>
-      <SubType>Potion_Dexterity</SubType>
+      <SubType>Potion_Health</SubType>
       <BasicName>Food</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>149</Index>
+        <Index>144</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>28</GoldValue>
-      <Weight>0.61372615201718306</Weight>
+      <GoldValue>58</GoldValue>
+      <Weight>0.54996887753949708</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
         <FeatureItem>true</FeatureItem>
@@ -2397,55 +3475,7 @@
         <FeatureItem>false</FeatureItem>
         <FeatureItem>true</FeatureItem>
       </Features>
-      <HealValue>27</HealValue>
-    </ConsumeableTawernShopBagpackItem>
-    <ConsumeableTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Food</Type>
-      <SubType>Potion_Intelligence</SubType>
-      <BasicName>Food</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>151</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>26</GoldValue>
-      <Weight>0.98787207663708188</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>44</HealValue>
-    </ConsumeableTawernShopBagpackItem>
-    <ConsumeableTawernShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Food</Type>
-      <SubType>Potion_Strength</SubType>
-      <BasicName>Food</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>152</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>41</GoldValue>
-      <Weight>0.92325304344372183</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>29</HealValue>
+      <HealValue>37</HealValue>
     </ConsumeableTawernShopBagpackItem>
     <ItemChurchShopBagpackItem>
       <Class>Normal</Class>
@@ -2458,7 +3488,7 @@
         <Index>363</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>61</GoldValue>
+      <GoldValue>60</GoldValue>
       <Weight>0</Weight>
       <Features>
         <FeatureItem>false</FeatureItem>
@@ -2473,15 +3503,15 @@
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
       <Type>Potion</Type>
-      <SubType>Potion_Armor</SubType>
-      <BasicName>Armor Potion</BasicName>
+      <SubType>Potion_Mana</SubType>
+      <BasicName>Mana Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>235</Index>
+        <Index>233</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>383</GoldValue>
+      <GoldValue>50</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2492,7 +3522,7 @@
         <FeatureItem>false</FeatureItem>
         <FeatureItem>true</FeatureItem>
       </Features>
-      <HealValue>13</HealValue>
+      <HealValue>60</HealValue>
     </ConsumeableChurchShopBagpackItem>
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
@@ -2505,31 +3535,7 @@
         <Index>215</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>202</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>14</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Intelligence</SubType>
-      <BasicName>Intelligence Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>212</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>397</GoldValue>
+      <GoldValue>471</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2545,15 +3551,15 @@
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
       <Type>Potion</Type>
-      <SubType>Potion_Strength</SubType>
-      <BasicName>Armor Potion</BasicName>
+      <SubType>Potion_Intelligence</SubType>
+      <BasicName>Intelligence Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>221</Index>
+        <Index>210</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>232</GoldValue>
+      <GoldValue>303</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2569,12 +3575,36 @@
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
       <Type>Potion</Type>
-      <SubType>Potion_Health</SubType>
-      <BasicName>Health Potion</BasicName>
+      <SubType>Potion_Strength</SubType>
+      <BasicName>Armor Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>228</Index>
+        <Index>219</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>266</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>8</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Mana</SubType>
+      <BasicName>Mana Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>231</Index>
         <Rarity>-1</Rarity>
       </Icon>
       <GoldValue>50</GoldValue>
@@ -2589,6 +3619,102 @@
         <FeatureItem>true</FeatureItem>
       </Features>
       <HealValue>60</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Armor</SubType>
+      <BasicName>Armor Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>235</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>343</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>14</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Mana</SubType>
+      <BasicName>Mana Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>232</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>50</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>60</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Health</SubType>
+      <BasicName>Health Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>230</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>50</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>60</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Strength</SubType>
+      <BasicName>Armor Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>219</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>290</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>13</HealValue>
     </ConsumeableChurchShopBagpackItem>
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
@@ -2625,7 +3751,7 @@
         <Index>215</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>317</GoldValue>
+      <GoldValue>468</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2637,6 +3763,30 @@
         <FeatureItem>true</FeatureItem>
       </Features>
       <HealValue>13</HealValue>
+    </ConsumeableChurchShopBagpackItem>
+    <ConsumeableChurchShopBagpackItem>
+      <Class>Normal</Class>
+      <Type>Potion</Type>
+      <SubType>Potion_Strength</SubType>
+      <BasicName>Armor Potion</BasicName>
+      <AdditionalName />
+      <Level>0</Level>
+      <Icon>
+        <Index>220</Index>
+        <Rarity>-1</Rarity>
+      </Icon>
+      <GoldValue>227</GoldValue>
+      <Weight>0.5</Weight>
+      <Features>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>false</FeatureItem>
+        <FeatureItem>true</FeatureItem>
+      </Features>
+      <HealValue>12</HealValue>
     </ConsumeableChurchShopBagpackItem>
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
@@ -2673,7 +3823,7 @@
         <Index>219</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>428</GoldValue>
+      <GoldValue>349</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2684,92 +3834,20 @@
         <FeatureItem>false</FeatureItem>
         <FeatureItem>true</FeatureItem>
       </Features>
-      <HealValue>13</HealValue>
+      <HealValue>15</HealValue>
     </ConsumeableChurchShopBagpackItem>
     <ConsumeableChurchShopBagpackItem>
       <Class>Normal</Class>
       <Type>Potion</Type>
-      <SubType>Potion_Intelligence</SubType>
-      <BasicName>Intelligence Potion</BasicName>
+      <SubType>Potion_Dexterity</SubType>
+      <BasicName>Dexterity Potion</BasicName>
       <AdditionalName />
       <Level>0</Level>
       <Icon>
-        <Index>212</Index>
+        <Index>215</Index>
         <Rarity>-1</Rarity>
       </Icon>
-      <GoldValue>345</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>8</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Strength</SubType>
-      <BasicName>Armor Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>219</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>332</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>10</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Health</SubType>
-      <BasicName>Health Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>229</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>50</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>60</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Armor</SubType>
-      <BasicName>Armor Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>234</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>371</GoldValue>
+      <GoldValue>423</GoldValue>
       <Weight>0.5</Weight>
       <Features>
         <FeatureItem>true</FeatureItem>
@@ -2781,54 +3859,6 @@
         <FeatureItem>true</FeatureItem>
       </Features>
       <HealValue>12</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Armor</SubType>
-      <BasicName>Armor Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>234</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>292</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>8</HealValue>
-    </ConsumeableChurchShopBagpackItem>
-    <ConsumeableChurchShopBagpackItem>
-      <Class>Normal</Class>
-      <Type>Potion</Type>
-      <SubType>Potion_Mana</SubType>
-      <BasicName>Mana Potion</BasicName>
-      <AdditionalName />
-      <Level>0</Level>
-      <Icon>
-        <Index>233</Index>
-        <Rarity>-1</Rarity>
-      </Icon>
-      <GoldValue>50</GoldValue>
-      <Weight>0.5</Weight>
-      <Features>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>false</FeatureItem>
-        <FeatureItem>true</FeatureItem>
-      </Features>
-      <HealValue>60</HealValue>
     </ConsumeableChurchShopBagpackItem>
     <CityObjectType>CityAll</CityObjectType>
   </CityData>

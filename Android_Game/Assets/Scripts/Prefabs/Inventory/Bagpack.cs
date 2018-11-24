@@ -36,6 +36,7 @@ namespace Prefabs.Inventory
         private double max_weight;
         private double inventory_weight;
         private int inventory_gold;
+        private bool isReloadingBagpack;
 
         private void Awake()
         {
@@ -67,7 +68,6 @@ namespace Prefabs.Inventory
                 this.gameObject.GetComponentInParent<EqInventory>().ChampionEquipment.SetCallbacks(this.ActivateFromBagpack);
             }
 
-            //this.AddItem(this.GetGoldByValue(1000));
             //this.AddItem(this.GetGoldByValue(1000));
 
             this.isDirty = true;
@@ -111,6 +111,12 @@ namespace Prefabs.Inventory
                         if (!this.IsGoldInBagpack())
                         {
                             this.items.Add(item);
+                            this.AddToBagpack(item);
+                        }
+
+                        if(!this.isReloadingBagpack)
+                        {
+                            this.AddToBagpack(item);
                         }
                     }
                     else
@@ -118,9 +124,9 @@ namespace Prefabs.Inventory
                         if (!this.items.Contains(item))
                         {
                             this.items.Add(item);
+                            this.AddToBagpack(item);
                         }
                     }
-                    this.AddToBagpack(item);
                 }
             }
         }
@@ -223,6 +229,25 @@ namespace Prefabs.Inventory
             return goldPrefab;
         }
 
+        private bool IfBagpackSlotsContainItem(Item item)
+        {
+            bool result = false;
+
+            foreach(BagpackSlot bagpackSlot in this.bagpackslots)
+            {
+                if(!bagpackSlot.IsEmpty)
+                {
+                    if(bagpackSlot.item == item)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private void AddToBagpack(Item item)
         {
             if (item != null)
@@ -234,24 +259,27 @@ namespace Prefabs.Inventory
                     if (this.bagpackslots[i].IsEmpty)
                     {
                         //Debug.Log("Dodaje do slota: " + i + " item o indexie: " + index);
-                        if(!this.IsGold(item))
+                        if (!this.IsGold(item))
                         {
                             this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType]);
                         }
                         else
                         {
                             bool ifGoldInSlots = false;
-                            foreach(BagpackSlot bagpackSlot in this.bagpackslots)
+                            foreach (BagpackSlot bagpackSlot in this.bagpackslots)
                             {
-                                if(this.IsGold(bagpackSlot.item))
+                                if (this.IsGold(bagpackSlot.item))
                                 {
-                                    bagpackSlot.item.GoldValue += item.GoldValue;
-                                    this.inventory_gold += item.GoldValue;
+                                    if (!this.isReloadingBagpack)
+                                    {
+                                        bagpackSlot.item.GoldValue += item.GoldValue;
+                                        this.inventory_gold += item.GoldValue;
+                                    }
                                     ifGoldInSlots = true;
                                     break;
                                 }
                             }
-                            if(!ifGoldInSlots)
+                            if (!ifGoldInSlots)
                             {
                                 this.bagpackslots[i].AddItem(item, bagpackTypeFeatures[(int)this.bagpackType]);
                                 this.inventory_gold += item.GoldValue;
@@ -328,7 +356,7 @@ namespace Prefabs.Inventory
                     }
                     else
                     {
-                        this.PrintToInfoPanel("You doesnt have enough gold");
+                        this.PrintToInfoPanel("You dont have enough gold");
                     }
                 }
             }
@@ -361,7 +389,7 @@ namespace Prefabs.Inventory
                         {
                             if (armor.UpgradeLevel < 5)
                             {
-                                this.PrintToInfoPanel("You doesnt have enough gold");
+                                this.PrintToInfoPanel("You dont have enough gold");
                             }
                             else
                             {
@@ -612,6 +640,7 @@ namespace Prefabs.Inventory
 
         private void ClearData()
         {
+            this.isReloadingBagpack = false;
             this.isDirty = false;
             this.IsDataLoaded = false;
             this.isItemInfoPanelEnabled = false;
@@ -651,8 +680,10 @@ namespace Prefabs.Inventory
         {
             if(this.items != null)
             {
+                this.isReloadingBagpack = true;
                 this.FreeSlots();
                 this.PrepareInventory();
+                this.isReloadingBagpack = false;
             }
         }
 

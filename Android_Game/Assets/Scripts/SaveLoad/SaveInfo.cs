@@ -27,6 +27,14 @@ namespace SaveLoad
                 public static class Images
                 {
                     public static readonly string InventoryFolder = @"Images/Inventory/";
+                    public static readonly string CityFolder = @"Images/City/";
+
+                    public static class City
+                    {
+
+
+                    }
+
                     public static class Inventory
                     {
                         public static readonly string AllItems = @"Images/Inventory/all_items";

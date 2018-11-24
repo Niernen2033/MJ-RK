@@ -19,7 +19,7 @@ namespace NPC
             {
                 case ChampionClass.Mage:
                     {
-                        result = new Champion(championClass, championType, this.GenerateExperience(level), level,
+                        result = new Champion(championClass, championType, string.Empty, this.GenerateExperience(level), level,
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.Normal),
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaIncrease), //magic 
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaDecrease), //ranged
@@ -33,7 +33,7 @@ namespace NPC
                     }
                 case ChampionClass.Range:
                     {
-                        result = new Champion(championClass, championType, this.GenerateExperience(level), level,
+                        result = new Champion(championClass, championType, string.Empty, this.GenerateExperience(level), level,
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.Normal),
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaDecrease), //magic 
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaIncrease), //ranged
@@ -47,7 +47,7 @@ namespace NPC
                     }
                 case ChampionClass.Warrior:
                     {
-                        result = new Champion(championClass, championType, this.GenerateExperience(level), level,
+                        result = new Champion(championClass, championType, string.Empty, this.GenerateExperience(level), level,
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.Normal),
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaDecrease), //magic 
                             StatisticsGenerator.GenerateChampionStatistics(level, championClass, StatisticsGeneratorBoostType.MegaDecrease), //ranged

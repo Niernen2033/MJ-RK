@@ -44,6 +44,15 @@ namespace Prefabs.Inventory
             }
         }
 
+        public void ChangeEquipment(Equipment equipment, Champion champion)
+        {
+            if(equipment != null && champion != null)
+            {
+                this.ChampionEquipment.SetChampion(champion);
+                this.ChampionEquipment.SetBagpack(equipment);
+            }
+        }
+
         public void OpenAndLoadInventory(Equipment equipment, List<Item> player_items, Champion champion = null)
         {
             if (this.gameObject.activeSelf == false)

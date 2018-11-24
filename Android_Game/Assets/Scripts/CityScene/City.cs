@@ -21,9 +21,9 @@ namespace CityScene
         public GameObject blackSmith;
         public GameObject tawern;
         public GameObject church;
-        public GameObject inventory;
 
         private CityData cityData;
+        public bool BlockChangingBuilding { get; private set; }
 
         // Use this for initialization
         public void Awake()
@@ -35,18 +35,18 @@ namespace CityScene
                 //XmlManager.Save<GameSave>(GameSave.Instance, ProfileSave.Instance.AcctualSavePath, false);
             }
 
+            this.BlockChangingBuilding = false;
             this.cityData = GameSave.Instance.CityData;
+            this.cityData.Reload(1);
 
-            if (GameSave.Instance.SceneIndex != GameGlobals.SceneIndex.CityScene)
-            {
-                GameSave.Instance.CityData.Reload(1);
-            }
             //Debug.Log("Itemy po wczytaniu: " + GameSave.Instance.Player.Bagpack.Count);
 
-            //GameSave.Instance.Player.Bagpack.Clear();
             //ItemGenerator itemGenerator = new ItemGenerator();
-            //GameSave.Instance.Player.Bagpack.Add(itemGenerator.GenerateGoldByValue(1000));
+            //GameSave.Instance.Player.Bagpack.Add(itemGenerator.GenerateGoldByValue(10000));
+
+            //GameSave.Instance.Player.Bagpack.Clear();
             //GameSave.Instance.Update();
+
         }
 
         public void Start()
@@ -60,6 +60,10 @@ namespace CityScene
 
         }
 
+        public void ChangeBuildingBlockStatus(bool status)
+        {
+            this.BlockChangingBuilding = status;
+        }
 
         public void OpenBuilding(CityObjectType cityObjectType)
         {
@@ -90,6 +94,7 @@ namespace CityScene
                         this.church.SetActive(false);
                         this.tawern.SetActive(false);
                         this.cityData.CityObjectType = CityObjectType.CityAll;
+                        this.cityAll.GetComponent<CityAll>().RefreshPlayerTeam();
                         break;
                     }
                 case CityObjectType.Tawern:
@@ -101,6 +106,13 @@ namespace CityScene
                         this.cityData.CityObjectType = CityObjectType.Tawern;
                         break;
                     }
+                case CityObjectType.Dungeons:
+                    {
+                        //GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.
+                        //GameSave.Instance.Update();
+                        //SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);
+                        break;
+                    }
                 default:
                     {
                         this.blackSmith.SetActive(false);
@@ -108,6 +120,7 @@ namespace CityScene
                         this.church.SetActive(false);
                         this.tawern.SetActive(false);
                         this.cityData.CityObjectType = CityObjectType.CityAll;
+                        this.cityAll.GetComponent<CityAll>().RefreshPlayerTeam();
                         break;
                     }
             }

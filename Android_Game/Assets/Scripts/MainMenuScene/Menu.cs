@@ -11,7 +11,7 @@ using SaveLoad;
 
 namespace MainMenuScene
 {
-    public enum MenuType { MainMenu, OptionsMenu, LoadGameMenu }
+    public enum MenuType { MainMenu, OptionsMenu, LoadGameMenu, NewGameMenu }
     public delegate void InvokePlayGameCallback();
 
     public class Menu : MonoBehaviour
@@ -29,6 +29,7 @@ namespace MainMenuScene
         public GameObject mainMenu;
         public GameObject optionsMenu;
         public GameObject loadGameMenu;
+        public GameObject newGameMenu;
         public Button continueGameButton;
 
         public event EventHandler<SavesEventArgs> LoadGameMenuInvoked;
@@ -103,6 +104,7 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(true);
                         this.optionsMenu.SetActive(false);
                         this.loadGameMenu.SetActive(false);
+                        this.newGameMenu.SetActive(false);
                         break;
                     }
                 case (MenuType.OptionsMenu):
@@ -110,6 +112,7 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(false);
                         this.optionsMenu.SetActive(true);
                         this.loadGameMenu.SetActive(false);
+                        this.newGameMenu.SetActive(false);
                         break;
                     }
                 case (MenuType.LoadGameMenu):
@@ -117,6 +120,15 @@ namespace MainMenuScene
                         this.mainMenu.SetActive(false);
                         this.optionsMenu.SetActive(false);
                         this.loadGameMenu.SetActive(true);
+                        this.newGameMenu.SetActive(false);
+                        break;
+                    }
+                case MenuType.NewGameMenu:
+                    {
+                        this.mainMenu.SetActive(false);
+                        this.optionsMenu.SetActive(false);
+                        this.loadGameMenu.SetActive(false);
+                        this.newGameMenu.SetActive(true);
                         break;
                     }
             }
@@ -212,9 +224,11 @@ namespace MainMenuScene
             }
         }
 
-        public void InvokeNewGame()
+        public void InvokeNewGameMenu()
         {
-            SceneManager.LoadScene((int)GameGlobals.SceneIndex.NewGameScene);
+            this.menuState.Last = this.menuState.Current;
+            this.menuState.Current = MenuType.NewGameMenu;
+            this.ChangeAcctualMenu();
         }
 
         public void InvokePlayGame()

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using NPC;
 using CityScene;
+using System.IO;
 
 namespace SaveLoad
 {
@@ -59,6 +60,27 @@ namespace SaveLoad
         {
             Instance.Player.PostInstantiate();
             Instance.CityData.PostInstantiate();
+        }
+
+        public bool CreateNewSave(string name)
+        {
+            if(name == string.Empty)
+            {
+                Debug.Log("Class 'Save' in 'CreateNewSave' function: Name is empty");
+                return false;
+            }
+            GameSave newGameSave = new GameSave();
+            newGameSave.Name = name;
+            Directory.CreateDirectory(SaveInfo.Paths.GlobalFolder + name + "_data");
+            if(!XmlManager.Save<GameSave>(newGameSave, SaveInfo.Paths.GlobalFolder + name + "_data/" + name + ".xml", IsCryptoOn))
+            {
+                Debug.Log("Class 'Save' in 'CreateNewSave' function: Cannot save file");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Update()

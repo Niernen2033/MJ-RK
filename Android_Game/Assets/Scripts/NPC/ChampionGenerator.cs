@@ -64,6 +64,61 @@ namespace NPC
             return result;
         }
 
+        public Player GenerateNewPlayer(ChampionClass championClass, string name)
+        {
+            Player result = null;
+            Equipment equipment = new Equipment();
+            List<Item> items = new List<Item>();
+
+            switch (championClass)
+            {
+                case ChampionClass.Mage:
+                    {
+                        result = new Player(championClass, ChampionType.Normal, name, 0, 1,
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.Normal),
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //magic 
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //ranged
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //melle
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //dexterity
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //inteli
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //streng
+                            false, equipment, items);
+
+                        break;
+                    }
+                case ChampionClass.Range:
+                    {
+                        result = new Player(championClass, ChampionType.Normal, name, 0, 1,
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.Normal),
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //magic 
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //ranged
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //melle
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //dexterity
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //inteli
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //streng
+                            false, equipment, items);
+
+                        break;
+                    }
+                case ChampionClass.Warrior:
+                    {
+                        result = new Player(championClass, ChampionType.Normal, name, 0, 1,
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.Normal),
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //magic 
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //ranged
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //melle
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //dexterity
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaDecrease), //inteli
+                            StatisticsGenerator.GenerateChampionStatistics(1, championClass, StatisticsGeneratorBoostType.MegaIncrease), //streng
+                            false, equipment, items);
+
+                        break;
+                    }
+            }
+
+            return result;
+        }
+
         private int GenerateExperience(int level)
         {
             int result = 0;

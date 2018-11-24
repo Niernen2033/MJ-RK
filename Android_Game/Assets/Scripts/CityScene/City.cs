@@ -37,7 +37,7 @@ namespace CityScene
 
             this.BlockChangingBuilding = false;
             this.cityData = GameSave.Instance.CityData;
-            this.cityData.Reload(1);
+            this.cityData.Reload(GameSave.Instance.Player.Level);
 
             //Debug.Log("Itemy po wczytaniu: " + GameSave.Instance.Player.Bagpack.Count);
 

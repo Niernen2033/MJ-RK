@@ -11,6 +11,8 @@ namespace CityScene
     {
         public GameObject shopInventory;
         public GameObject shop;
+        public GameObject recruit;
+        public GameObject recruitPanel;
         public Button closeInventoryButton;
         public Button backToCityButton;
 
@@ -21,7 +23,8 @@ namespace CityScene
         {
             this.ShopInventory = shopInventory.GetComponent<ShopInventory>();
 
-            this.shop.gameObject.GetComponent<Button>().onClick.AddListener(() => this.OpenTawernShop());
+            this.shop.GetComponent<Button>().onClick.AddListener(() => this.OpenTawernShop());
+            this.recruit.GetComponent<Button>().onClick.AddListener(() => this.OpenRecruitTable());
 
             this.openBuildingCallback = this.gameObject.GetComponentInParent<City>().OpenBuilding;
         }
@@ -36,6 +39,12 @@ namespace CityScene
         void Update()
         {
 
+        }
+
+        private void OpenRecruitTable()
+        {
+            this.recruitPanel.SetActive(true);
+            this.recruitPanel.GetComponent<RecruitPanel>().SetRecruitTable();
         }
 
         private void OpenTawernShop()

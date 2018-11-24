@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Prefabs.Options;
 
 namespace CityScene
 {
@@ -12,11 +13,14 @@ namespace CityScene
     {
         public GameObject normalInventory;
         public GameObject equipmentInventory;
+        public GameObject optionsMenu;
         public Button closeInventoryButton;
         public Button normalInventoryButton;
         public Button equipmentInventoryButton;
+        public Button optionsMenuButton;
         public GameObject teamChoose;
 
+        private InGameOptions InGameOptions;
         private NormalInventory NormalInventory;
         private EqInventory EqInventory;
         private Player player;
@@ -28,6 +32,7 @@ namespace CityScene
         {
             this.NormalInventory = this.normalInventory.GetComponent<NormalInventory>();
             this.EqInventory = this.equipmentInventory.GetComponent<EqInventory>();
+            this.InGameOptions = this.optionsMenu.GetComponent<InGameOptions>();
             this.championsButtons = this.teamChoose.GetComponentsInChildren<AvatarButton>();
             this.player = GameSave.Instance.Player;
         }
@@ -60,13 +65,19 @@ namespace CityScene
             }
         }
 
+        public void OpenInGameOptions()
+        {
+            this.InGameOptions.OpenOptions();
+        }
+
         public void OpenBagpack()
         {
-            if (!this.NormalInventory.IsOpen)
+            if (!this.NormalInventory.IsOpen && !this.InGameOptions.IsOpen)
             {
                 this.normalInventoryButton.gameObject.SetActive(false);
                 this.equipmentInventoryButton.gameObject.SetActive(false);
                 this.closeInventoryButton.gameObject.SetActive(true);
+                this.optionsMenuButton.gameObject.SetActive(false);
 
                 if (this.NormalInventory.PlayerBagpack == null)
                 {
@@ -91,11 +102,12 @@ namespace CityScene
 
         public void OpenInventory()
         {
-            if (!this.EqInventory.IsOpen)
+            if (!this.EqInventory.IsOpen && !this.InGameOptions.IsOpen)
             {
                 this.normalInventoryButton.gameObject.SetActive(false);
                 this.equipmentInventoryButton.gameObject.SetActive(false);
                 this.closeInventoryButton.gameObject.SetActive(true);
+                this.optionsMenuButton.gameObject.SetActive(false);
 
                 if (this.EqInventory.PlayerBagpack == null)
                 {
@@ -129,6 +141,7 @@ namespace CityScene
                     this.closeInventoryButton.gameObject.SetActive(false);
                     this.normalInventoryButton.gameObject.SetActive(true);
                     this.equipmentInventoryButton.gameObject.SetActive(true);
+                    this.optionsMenuButton.gameObject.SetActive(true);
                     this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(false);
                     this.teamChoose.SetActive(true);
                 }
@@ -143,6 +156,7 @@ namespace CityScene
                     this.closeInventoryButton.gameObject.SetActive(false);
                     this.normalInventoryButton.gameObject.SetActive(true);
                     this.equipmentInventoryButton.gameObject.SetActive(true);
+                    this.optionsMenuButton.gameObject.SetActive(true);
                     this.gameObject.GetComponentInParent<City>().ChangeBuildingBlockStatus(false);
                     this.teamChoose.SetActive(true);
                 }

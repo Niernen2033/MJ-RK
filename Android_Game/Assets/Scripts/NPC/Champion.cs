@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 using Items;
-
+using System.Text;
 
 namespace NPC
 {
@@ -13,6 +13,9 @@ namespace NPC
 
     public class Champion
     {
+        [XmlIgnore]
+        public string Hash { get; private set; } 
+
         public string Name { get; set; }
 
         public ChampionType ChampionType { get; set; }
@@ -80,6 +83,8 @@ namespace NPC
 
             this.Equipment = equipment;
             this.Bagpack = new List<Item>(bagpack);
+
+            CalculateHash();
         }
 
         public Champion()
@@ -100,6 +105,8 @@ namespace NPC
 
             this.Equipment = new Equipment();
             this.Bagpack = new List<Item>();
+
+            CalculateHash();
         }
 
         public Champion(Champion champion)
@@ -119,9 +126,19 @@ namespace NPC
 
             this.Equipment = new Equipment(champion.Equipment);
             this.Bagpack = new List<Item>(champion.Bagpack);
+
+            CalculateHash();
         }
 
         //FUNCTIONS**************************************************
+        private void CalculateHash()
+        {
+            string data = this.ChampionClass.ToString() + this.ChampionType.ToString() + this.Experience.ToString() +
+                this.Level.ToString() + this.Vitality.ToString() + CryptoRandom.Next(0, int.MaxValue - 1).ToString();
+
+            this.Hash = GameGlobals.CalculateIndyvidualHash(data);
+        }
+
         public virtual void PostInstantiate()
         {
             foreach(Item item in this.Bagpack)
@@ -137,8 +154,53 @@ namespace NPC
             this.Dexterity.PostInstantiate();
             this.Intelligence.PostInstantiate();
             this.Strength.PostInstantiate();
+
+            this.CalculateHash();
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Champion champion;
+            try
+            {
+                champion = (Champion)obj;
+            }
+            catch
+            {
+                return false;
+            }
+
+            if (this.Hash != champion.Hash)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(this.Hash);
+            int result = 0;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                result ^= (int)bytes[i];
+            }
+            return result;
+        }
+
+        public override string ToString()
+        {
+            return this.ChampionClass + " : " + this.Name + ";"
+                + "Vitality: " + this.Vitality.Acctual.ToString();
+        }
     }
 }
 

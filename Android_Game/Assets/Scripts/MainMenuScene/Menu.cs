@@ -203,9 +203,13 @@ namespace MainMenuScene
         public void InvokeOffAudio()
         {
             if (this.audioSource.mute == true)
+            {
                 this.audioSource.mute = false;
+            }
             else
+            {
                 this.audioSource.mute = true;
+            }
         }
 
         public void InvokeNewGame()
@@ -217,7 +221,8 @@ namespace MainMenuScene
         {
             if (GameGlobals.IsDebugState)
             {
-                ProfileSave.Instance.AcctualSavePath = @"C:\Users\Michal\Documents\Unity\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
+                ProfileSave.Instance.AcctualSavePath = @"D:\Repos\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
+                ProfileSave.Instance.Update();
             }
             GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
             SceneManager.LoadScene((int)GameGlobals.SceneIndex.CityScene);

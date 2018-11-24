@@ -15,6 +15,11 @@ namespace Prefabs.Inventory
         private void Awake()
         {
             this.IsOpen = false;
+            this.SetUpBagpacks();
+        }
+
+        private void SetUpBagpacks()
+        {
             this.PlayerBagpack = this.gameObject.GetComponentInChildren<Bagpack>();
             this.ChampionEquipment = this.gameObject.GetComponentInChildren<Eq>();
         }
@@ -48,8 +53,13 @@ namespace Prefabs.Inventory
         {
             if(equipment != null && champion != null)
             {
+                if (this.ChampionEquipment == null || this.PlayerBagpack == null)
+                {
+                    this.SetUpBagpacks();
+                }
                 this.ChampionEquipment.SetChampion(champion);
                 this.ChampionEquipment.SetBagpack(equipment);
+                this.PlayerBagpack.SetChampion(champion);
             }
         }
 

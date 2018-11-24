@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Items;
+using NPC;
 using UnityEngine;
 
 namespace CityScene
@@ -32,12 +33,16 @@ namespace CityScene
 
         public CityObjectType CityObjectType { get; set; }
 
+        [XmlElement(Type = typeof(CityDataChampion), ElementName = "TawernCityDataChampionItem")]
+        public List<CityDataChampion> TawernChampions { get; set; }
+
         public CityData()
         {
             this.CityObjectType = CityObjectType.CityAll;
             this.BlackSmithShopBagpack = new List<Item>();
             this.TawernShopBagpack = new List<Item>();
             this.ChurchShopBagpack = new List<Item>();
+            this.TawernChampions = new List<CityDataChampion>();
         }
 
         public void Reload(int playerLevel)
@@ -50,6 +55,9 @@ namespace CityScene
 
             this.TawernShopBagpack.Clear();
             this.GenerateTawernShopBagpack(playerLevel);
+
+            this.TawernChampions.Clear();
+            this.GenerateTawernChampions(playerLevel);
         }
 
         private void GenerateBlackSmithShopBagpack(int playerLevel)
@@ -146,6 +154,19 @@ namespace CityScene
             }
         }
 
+        private void GenerateTawernChampions(int playerLevel)
+        {
+            ChampionGenerator championGenerator = new ChampionGenerator();
+
+            Champion mageChampion = championGenerator.GenerateChampion(playerLevel, ChampionClass.Mage, ChampionType.Normal);
+            Champion rangedChampion = championGenerator.GenerateChampion(playerLevel, ChampionClass.Range, ChampionType.Normal);
+            Champion melleChampion = championGenerator.GenerateChampion(playerLevel, ChampionClass.Warrior, ChampionType.Normal);
+
+            this.TawernChampions.Add(new CityDataChampion(mageChampion, true));
+            this.TawernChampions.Add(new CityDataChampion(rangedChampion, true));
+            this.TawernChampions.Add(new CityDataChampion(melleChampion, true));
+        }
+
         public virtual void PostInstantiate()
         {
             foreach(Item item in this.BlackSmithShopBagpack)
@@ -160,6 +181,33 @@ namespace CityScene
             {
                 item.PostInstantiate();
             }
+            foreach(CityDataChampion cityDataChampion in this.TawernChampions)
+            {
+                cityDataChampion.PostInstantiate();
+            }
+        }
+    }
+
+    public class CityDataChampion
+    {
+        public Champion Champion { get; set; }
+        public bool Available { get; set; }
+
+        public CityDataChampion()
+        {
+            this.Champion = new Champion();
+            this.Available = false;
+        }
+
+        public CityDataChampion(Champion champion, bool available)
+        {
+            this.Champion = champion;
+            this.Available = available;
+        }
+
+        public virtual void PostInstantiate()
+        {
+            this.Champion.PostInstantiate();
         }
     }
 }

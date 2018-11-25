@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class DisplayParty : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
-    {
-        //SpriteRenderer spriteRender;
-        //string filePath = "HeroesTextures/";
-        //string[] typeOfDungeonTexture = { "crusader" };
+    [SerializeField]
+    private GameObject[] heroObject = new GameObject[4];
+
+    [SerializeField]
+    private List<string> characterType = new List<string>();
+
+    void Start () {
+
+        SpriteRenderer spriteRender;
+        string filePath = "HeroesModels/";
+        string[] typeOfDungeonTexture = { "crusader", "jester", "abomination", "vestal" };
+
+        for (int i = 0; i < 4; i++)
+        {
+            spriteRender = heroObject[i].GetComponent<SpriteRenderer>();
+            spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[i]);
+        }
     }
 	
-	// Update is called once per frame
-	void Update ()
-    {
-		
+	void Update () {
 	}
 }

@@ -14,7 +14,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     private bool isButtonPressed;
     private float speedTimer;
     //timeLimit is for making sure that camera is moved every few frames
-    private double timeLimit=0.125;
+    private double timeLimit = 0.125;
     private int sizeOfParty = 4;
     private float focusedHeroPosition;
     private static bool isFacingRight;
@@ -39,7 +39,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
 
     public void getThemToTheEntrance()
     {
-            Camera.main.transform.Translate(new Vector3(-heroesObjects[0].transform.position.x, 0,0));
+        Camera.main.transform.Translate(new Vector3(-heroesObjects[0].transform.position.x, 0, 0));
     }
 
     public void Start()
@@ -50,7 +50,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
 
         heroesObjects = new GameObject[sizeOfParty];
 
-        for(int i=0;i<sizeOfParty;i++)
+        for (int i = 0; i < sizeOfParty; i++)
         {
             heroesObjects[i] = GameObject.Find("HeroObject" + (i + 1).ToString());
         }
@@ -75,11 +75,11 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
             speedTimer += Time.deltaTime;
             if (speedTimer > timeLimit)
             {
-                if (cameraMovementDirection == 1) 
+                if (cameraMovementDirection == 1)
                 {
                     if (Camera.main.transform.position.x < dungeonGenerator.getRightBoundPossition())
                     {
-                      
+
                         if (isFacingRight == false)
                         {
                             Debug.Log("Kamera x:" + focusedHeroPosition);
@@ -98,7 +98,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                             }
                             isFacingRight = true;
                             Debug.Log("Last camera coords: " + Camera.main.transform.position.x + " and hero coords ");
-                            for(int i=0;i< sizeOfParty;i++)
+                            for (int i = 0; i < sizeOfParty; i++)
                             {
                                 Debug.Log(" " + heroesObjects[i].transform.position.x + ",");
                             }
@@ -111,7 +111,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                 {
                     if (Camera.main.transform.position.x > 0)
                     {
-                        
+
                         if (isFacingRight == true)
                         {
                             for (int i = 0; i < sizeOfParty; i++)
@@ -122,7 +122,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                                 }
                                 else
                                 {
-                                    heroesObjects[i].transform.position = new Vector3(Camera.main.transform.position.x - ( heroesObjects[i].transform.position.x - Camera.main.transform.position.x), heroesObjects[i].transform.position.y, heroesObjects[i].transform.position.z);
+                                    heroesObjects[i].transform.position = new Vector3(Camera.main.transform.position.x - (heroesObjects[i].transform.position.x - Camera.main.transform.position.x), heroesObjects[i].transform.position.y, heroesObjects[i].transform.position.z);
                                 }
                                 render = heroesObjects[i].GetComponent<SpriteRenderer>();
                                 render.flipY = true;

@@ -128,6 +128,7 @@ namespace SaveLoad
             {
                 using (AesCryptoServiceProvider aesCSP = new AesCryptoServiceProvider())
                 {
+                    aesCSP.Mode = CipherMode.CBC;
                     if (encrypt)
                     {
                         key = aesCSP.CreateEncryptor(shaKey, shaIv);

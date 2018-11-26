@@ -100,11 +100,12 @@ public class CorridorDependency
 
     public void toString(int Id)
     {
-        Debug.Log("Corridor " + Id + " is linked with corridors: ");
-
+        string temp = "";
         for (int i=0; i<neighbourCorridor.Count;i++)
         {
-            Debug.Log(neighbourCorridor[i] + " ");
+            temp += neighbourCorridor[i] + " ";
         }
+
+        Debug.Log("ConnectionMap || Corridor " + Id + " is linked with corridors: " + temp);
     }
 }

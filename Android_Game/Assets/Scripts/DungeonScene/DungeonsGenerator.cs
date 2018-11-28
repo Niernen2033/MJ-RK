@@ -32,6 +32,7 @@ public class DungeonsGenerator : MonoBehaviour {
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         dungeonLevelChunks = dungeonManager.GetLevelChunks();//Not sure now if needed
         //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
+        //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
         generationDecission();
     }
@@ -44,7 +45,7 @@ public class DungeonsGenerator : MonoBehaviour {
         //Static list of corridors
         corridorList = new List<Corridor>();
 
-        //to narazie na sztywno
+        //Temporary const
         chunkWidth = 7;
 
         //It's template object for creating another chunks
@@ -75,12 +76,22 @@ public class DungeonsGenerator : MonoBehaviour {
         //Debug.Log("-----------------------CorridorList straight length: " + getCorridorList().Count);
     }
 
-    public void clearingPreviousSpriteObjects()
+    public void clearingPreviousSpriteObjects(int previousIdOfCorridor)
     {
         for(int i=0;i< objectsToGenerate; i++)
         {
             //Destroying previously generated corridor objects
             Destroy(GameObject.Find("DungeonChunk_" + i));
+        }
+
+        //Destroys enemies objects iterating by party(i) and members of it(j)
+       for(int i=0;i< dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties().Count; i++)
+        {
+            for (int j = 0; j < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties()[i].getEnemyObjectArray().Count; j++)
+            {
+                Destroy(GameObject.Find("EnemyObject_" + i + "." + j));
+                Debug.Log("DESTROY THE CHILD, CORRUPT THEM ALL: " + "EnemyObject_" + i + "." + j);
+            }
         }
         producedChunks.Clear();
 
@@ -92,9 +103,10 @@ public class DungeonsGenerator : MonoBehaviour {
 
     public void loadAnotherLevel(int Id)
     {
+        int previousIdOfCorridor = idOfCorridor;
         idOfCorridor = Id;
         Debug.Log("-----------------------ID: " + Id);
-        clearingPreviousSpriteObjects();
+        clearingPreviousSpriteObjects(previousIdOfCorridor);
         Reset();
         movementButton.getThemToTheEntrance();
         Debug.Log("-----------------------Debug4 in dungeonGenerator length: " + getCorridorList().Count);
@@ -117,13 +129,15 @@ public class DungeonsGenerator : MonoBehaviour {
         string pickedOne;
         int pickedOneInt;
 
-        Debug.Log("Id of corridor before: " + idOfCorridor);
+        Debug.Log("DungeonGenerator || generationDecission || Id of corridor before: " + idOfCorridor);
         if (dungeonManager.getLevelsArray().Exists(x => x.getIdOfLevel() == idOfCorridor))
         {
-            Debug.Log("Scene " + idOfCorridor + " was already created!");
+            Debug.Log("DungeonGenerator || generationDecission || Scene " + idOfCorridor + " was already created!");
             objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();
-            Debug.Log("Objects to generate: " + objectsToGenerate);
-            Debug.Log("Id of corridor: " + idOfCorridor);
+            rightBoundPossition = chunkWidth * (objectsToGenerate - 1);
+            rightBoundPossitionForGenerator = chunkWidth * objectsToGenerate;
+            Debug.Log("DungeonGenerator || generationDecission || Objects to generate: " + objectsToGenerate);
+            Debug.Log("DungeonGenerator || generationDecission || idOfCorridor: " + idOfCorridor);
             string debug = "";
             for (i = 0; i < objectsToGenerate; i++)
             {
@@ -131,16 +145,25 @@ public class DungeonsGenerator : MonoBehaviour {
                 generateMap(pickedOneInt, i, true);
                 debug += " " + pickedOneInt;
             }
-            Debug.Log("REEEEEEEEEEEEEEEEEEEEEEEEEEEE " + debug);
+            Debug.Log("DungeonGenerator || generationDecission || pickedOneInt(generated levels) " + debug);
+
+            //Making it to read from already ceated variables of this level
+            loadEnemyParties();
+
         }
         else
         {
+            objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
+            rightBoundPossition = chunkWidth * (objectsToGenerate - 1);
+            rightBoundPossitionForGenerator = chunkWidth * objectsToGenerate;
+
+
             Debug.Log("Scene " + idOfCorridor + " wasn't created!");
 
-            Debug.Log("||--|| Length of array before " + dungeonManager.getLevelsArray().Count + " objects to gen " + objectsToGenerate);
-            dungeonManager.getLevelsArray().Add(new DungeonLevel(dungeonManager.getLevelsArray().Count, objectsToGenerate));
-            Debug.Log("||--|| Length of array after " + dungeonManager.getLevelsArray().Count + " objects to gen " + objectsToGenerate);
-            Debug.Log("||--|| Id of level " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count-1].getIdOfLevel() + " objects to gen " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].getNumberOfChunks());
+            Debug.Log("DungeonGenerator || generationDecission || Length of dungeonManager.getLevelsArray().Count before " + dungeonManager.getLevelsArray().Count + " | objectsToGenerate | " + objectsToGenerate);
+            dungeonManager.getLevelsArray().Add(new DungeonLevel(dungeonManager.getLevelsArray().Count, objectsToGenerate));//tu zryte przypisywanie
+            Debug.Log("DungeonGenerator || generationDecission || Length of dungeonManager.getLevelsArray().Count after " + dungeonManager.getLevelsArray().Count + " | objectsToGenerate | " + objectsToGenerate);
+            Debug.Log("DungeonGenerator || generationDecission || IdOfLevel from last element: " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count-1].getIdOfLevel() + " | objectsToGenerate | " + dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].getNumberOfChunks());
 
 
             for (i = 0; i < objectsToGenerate; i++)
@@ -154,7 +177,9 @@ public class DungeonsGenerator : MonoBehaviour {
                 }
 
                 //Setting and saving texture in array inside DungeonManager
-                dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count-1].setChunkArrayElementTexture(i, pickedOneInt);//tu cos
+                dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].setChunkArrayElementTexture(i, pickedOneInt);//zle id przydziela chyba
+                dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].setIdOfLevel(idOfCorridor);//generuje to samo
+                dungeonManager.getLevelsArray()[dungeonManager.getLevelsArray().Count - 1].setNumberOfChunks(objectsToGenerate);
 
                 pickedOne = pickedOneInt.ToString();
                 generateMap(pickedOneInt, i, false);
@@ -263,14 +288,76 @@ public class DungeonsGenerator : MonoBehaviour {
 
     public void generateEnemyParties()
     {
+        //It's getting random number of parties with limit up to 4 parties per corridor
+        int howManyToGenerate = randomNumber.Next(0, 5);
+        Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemy parties to generate: " + howManyToGenerate);
+        string debugString = "";
         //EnemyParty generatedEnemyParty;
-        for (int i = 0; i < 4; i++)
+        Debug.Log("DungeonsGenerator || generateEnemyParties || How many levels are generated already: " + dungeonManager.getLevelsArray().Count);
+        Debug.Log("DungeonsGenerator || generateEnemyParties || Current corridor: " + idOfCorridor);
+
+        for (int i = 0; i < howManyToGenerate; i++)
         {
-            //generatedEnemyParty = new EnemyParty(objectsToGenerate, idOfCorridor);
-            EnemyParty generatedEnemyParty = new EnemyParty(objectsToGenerate - 1, idOfCorridor);
+            for(int Ii=0;Ii< dungeonManager.getLevelsArray().Count; Ii++)
+            {
+                debugString += dungeonManager.getLevelsArray()[Ii].getIdOfLevel() + " ";
+            }
+            Debug.Log("DungeonsGenerator || generateEnemyParties || SavedId's(already generated levels): " + debugString);
+            Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemies parties are there: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count);
+            //Creates new party with current number of objects, and IdOfCorridor
+            //Checks whatever there are already created parties of enemies
+            EnemyParty generatedEnemyParty = new EnemyParty(howManyToGenerate, idOfCorridor,
+                dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count, i);
+            //Adds newly created EnemyParty to DungeonManager || DungeonLevel || enemyParties
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).addToEnemyParties(generatedEnemyParty);
-            Debug.Log("Spooky skeletons party no " + i);
+            Debug.Log("DungeonsGenerator || generateEnemyParties || Generating party number " + i);
+            debugString = "";
         }
+        for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count; i++){
+            debugString += dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[i].getInitialPositionX() + " ";
+        }
+        Debug.Log("DungeonsGenerator || generateEnemyParties || Possitions of " + 
+            dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count + " enemy parties on this levels: " + debugString);
+
+        //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
+        //generateMap(pickedOneInt, i, true);
+    }
+
+    public void loadEnemyParties()
+    {
+        //Reading already written number of parties
+        int howManyToLoad = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count;
+        Debug.Log("DungeonsGenerator || loadEnemyParties || How many enemy parties to load: " + howManyToLoad);
+        string debugString = "";
+        //EnemyParty generatedEnemyParty;
+        for (int i = 0; i < howManyToLoad; i++)
+        {
+            Debug.Log("DungeonsGenerator || loadEnemyParties || How many levels are generated already: " + dungeonManager.getLevelsArray().Count);
+            Debug.Log("DungeonsGenerator || loadEnemyParties || Current corridor: " + idOfCorridor);
+
+            for (int Ii = 0; Ii < dungeonManager.getLevelsArray().Count; Ii++)
+            {
+                debugString += dungeonManager.getLevelsArray()[Ii].getIdOfLevel() + " ";
+            }
+            Debug.Log("DungeonsGenerator || loadEnemyParties || SavedId's(already generated levels): " + debugString);
+
+
+            Debug.Log("DungeonsGenerator || loadEnemyParties || How many enemies parties are there: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count);
+            //Creates new party with current number of objects, and IdOfCorridor
+            //Checks whatever there are already created parties of enemies
+            EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getSpecificEnemyParty(i);
+            //Adds newly created EnemyParty to DungeonManager || DungeonLevel || enemyParties
+            generatedEnemyParty.loadAlreadyExistingSettingOfEnemies(idOfCorridor, i);
+            Debug.Log("DungeonsGenerator || loadEnemyParties || Generating party number " + i);
+            debugString = "";
+        }
+        for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count; i++)
+        {
+            debugString += dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[i].getInitialPositionX() + " ";
+        }
+        Debug.Log("DungeonsGenerator || loadEnemyParties || Possitions of " +
+            dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count + " enemy parties on this levels: " + debugString);
+
         //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
         //generateMap(pickedOneInt, i, true);
     }

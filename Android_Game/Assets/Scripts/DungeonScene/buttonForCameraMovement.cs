@@ -82,7 +82,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
 
                         if (isFacingRight == false)
                         {
-                            Debug.Log("Kamera x:" + focusedHeroPosition);
+                            Debug.Log("ButtonForCameraMovement || Camera x:" + focusedHeroPosition);
                             for (int i = 0; i < sizeOfParty; i++)
                             {
                                 if (heroesObjects[i].transform.position.x < Camera.main.transform.position.x)
@@ -97,8 +97,8 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                                 render.flipY = false;
                             }
                             isFacingRight = true;
-                            Debug.Log("Last camera coords: " + Camera.main.transform.position.x + " and hero coords ");
-                            for (int i = 0; i < sizeOfParty; i++)
+                            Debug.Log("ButtonForCameraMovement || Last camera coords: " + Camera.main.transform.position.x + " and hero coords ");
+                            for(int i=0;i< sizeOfParty;i++)
                             {
                                 Debug.Log(" " + heroesObjects[i].transform.position.x + ",");
                             }
@@ -128,7 +128,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                                 render.flipY = true;
                             }
                             isFacingRight = false;
-                            Debug.Log("Last camera coords: " + Camera.main.transform.position.x + " and hero coords " + heroesObjects[0].transform.position.x);
+                            Debug.Log("ButtonForCameraMovement ||  Last camera coords: " + Camera.main.transform.position.x + " and hero coords " + heroesObjects[0].transform.position.x);
                         }
                         Camera.main.transform.Translate(Vector2.left);
                     }

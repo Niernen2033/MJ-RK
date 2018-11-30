@@ -11,7 +11,8 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private float focusedHeroPosition;
     private GameObject dungeonCanvas;
     private static DungeonsGenerator dungeonGenerator;
-    private Corridor currentCorridor;
+    private static DungeonManager dungeonManager;
+    private DungeonLevel currentCorridor;
     private int currentCorridorNumber;
     private static GameObject objectForDarkening;
     private static bool shouldApplyTransition;
@@ -56,34 +57,36 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void doorTransition()
     {
         currentCorridorNumber = dungeonGenerator.getIdOfCorridor();//to do reading new nmber
-        currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);
+        currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorNumber);
 
         //For development purposes we're gonna get random corridor to go. Normally we could choose from few of them.
         //Now we should randomize choise. I'll make function for that
         int rand = randomizeChoiseOfCorridor();//here additionaly use randomized number to acces this object from connectionmap
-        Debug.Log("Traveling to corridor number: " + rand);
 
         if (focusedHeroPosition >= 0 && focusedHeroPosition <= 7)
         {
-            Debug.Log("Registered use on entrance door!");
-            dungeonGenerator.loadAnotherLevel(rand);
-            currentCorridorNumber = rand;
-            Debug.Log("-----------------------Indeks przed bledem: " + currentCorridorNumber);
-            Debug.Log("-----------------------CorridorList in dungeonGenerator length: " + dungeonGenerator.getCorridorList().Count);
-            currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);//tu byl blad
-            shouldApplyTransition = true;
+            Debug.Log("ButtonForUsage || doorTransition || Registered use on entrance door!");
+            doTransitionPreparation(rand);
         }
-        else if (focusedHeroPosition >= (currentCorridor.getCorridorLength() - 1) * 7 && focusedHeroPosition <= currentCorridor.getCorridorLength() * 7)
+        else if (focusedHeroPosition >= ((currentCorridor.getNumberOfChunks() - 1) * 7) && focusedHeroPosition <= ((currentCorridor.getNumberOfChunks()) * 7))
         {
-            Debug.Log("Registered use on exit doors!");
-            dungeonGenerator.loadAnotherLevel(rand);
-            currentCorridorNumber = rand;
-            Debug.Log("Now it should fail!");
-            currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);
-            Debug.Log("Told ya son");
-            shouldApplyTransition = true;
+            Debug.Log("ButtonForUsage || doorTransition || Registered use on exit doors!");
+            doTransitionPreparation(rand);
         }
-        Debug.Log("CurrentCorridorNumber is: " + currentCorridorNumber);
+
+
+        Debug.Log("ButtonForUsage || doorTransition || (" + focusedHeroPosition + " >= " + ((currentCorridor.getNumberOfChunks() - 1) * 7) + " && " + focusedHeroPosition + " <= " + (currentCorridor.getNumberOfChunks() * 7) + ")");
+        Debug.Log("ButtonForUsage || doorTransition || CurrentCorridorNumber is: " + currentCorridorNumber);
+    }
+
+    public void doTransitionPreparation(int rand)
+    {
+        dungeonGenerator.loadAnotherLevel(rand);
+        currentCorridorNumber = rand;
+        Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || currentCorridorNumber: " + currentCorridorNumber);
+        Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || Length of corridorList from dungeonGenerator: " + dungeonGenerator.getCorridorList().Count);
+        currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorNumber);
+        shouldApplyTransition = true;
     }
 
     // Use this for initialization
@@ -91,19 +94,17 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         currentCorridorNumber = 0;//to do reading new nmber
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonGenerator = dungeonCanvas.GetComponent<DungeonsGenerator>();
-        currentCorridor = dungeonGenerator.getCorridorFromList(currentCorridorNumber);
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorNumber);
         focusedHero = GameObject.Find("HeroObject1");
         focusedHeroPosition = focusedHero.transform.position.x;
         useButton.onClick.AddListener(doorTransition);
         objectForDarkening = GameObject.Find("Transition");
         objectForDarkeningRenderer = objectForDarkening.GetComponent<SpriteRenderer>();
-        //trans = objectForDarkening.GetComponent<Image>();
         shouldApplyTransition = false;
         alphaColor = objectForDarkening.GetComponent<SpriteRenderer>().material.color;
         speedTimer = 0;
         objectForDarkeningRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        //trans.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        //objectForDarkeningRenderer.
     }
 
     // Update is called once per frame

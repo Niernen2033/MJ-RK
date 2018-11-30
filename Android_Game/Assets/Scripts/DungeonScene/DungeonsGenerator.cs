@@ -288,15 +288,23 @@ public class DungeonsGenerator : MonoBehaviour {
 
     public void generateEnemyParties()
     {
+        bool thereIsEnoughSpace = false;
+        int howManyEnemiesToGenerate = randomNumber.Next(0, 5);
         //It's getting random number of parties with limit up to 4 parties per corridor
-        int howManyToGenerate = randomNumber.Next(0, 5);
-        Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemy parties to generate: " + howManyToGenerate);
+        while (!thereIsEnoughSpace)
+        {
+            thereIsEnoughSpace = makeSureThereWillBeEnoughSpaceForThem(howManyEnemiesToGenerate);
+            howManyEnemiesToGenerate--;
+        }
+
+
+        Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemy parties to generate: " + howManyEnemiesToGenerate);
         string debugString = "";
         //EnemyParty generatedEnemyParty;
         Debug.Log("DungeonsGenerator || generateEnemyParties || How many levels are generated already: " + dungeonManager.getLevelsArray().Count);
         Debug.Log("DungeonsGenerator || generateEnemyParties || Current corridor: " + idOfCorridor);
 
-        for (int i = 0; i < howManyToGenerate; i++)
+        for (int i = 0; i < howManyEnemiesToGenerate; i++)
         {
             for(int Ii=0;Ii< dungeonManager.getLevelsArray().Count; Ii++)
             {
@@ -306,7 +314,7 @@ public class DungeonsGenerator : MonoBehaviour {
             Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemies parties are there: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count);
             //Creates new party with current number of objects, and IdOfCorridor
             //Checks whatever there are already created parties of enemies
-            EnemyParty generatedEnemyParty = new EnemyParty(howManyToGenerate, idOfCorridor,
+            EnemyParty generatedEnemyParty = new EnemyParty(idOfCorridor,
                 dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count, i);
             //Adds newly created EnemyParty to DungeonManager || DungeonLevel || enemyParties
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).addToEnemyParties(generatedEnemyParty);
@@ -360,6 +368,28 @@ public class DungeonsGenerator : MonoBehaviour {
 
         //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
         //generateMap(pickedOneInt, i, true);
+    }
+
+    //It will check if there is enough space in corridor to fit everyone in worst deployment scenario
+    public bool makeSureThereWillBeEnoughSpaceForThem(int howManyToGenerate)
+    {
+        int lengthOfCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();
+        double widthOfUnit = (0.01600781 * 130);
+        double furthestPointOfCorridor = lengthOfCorridor * chunkWidth;
+        double closestPointOfCorridor = 4 * widthOfUnit;
+        //Worst scenario (width of enemy party + gap of the same size + another party and so on...)
+        double howMuchWeNeedInWorstCase = 2 * 4 * widthOfUnit * howManyToGenerate;
+        //Checking if there is enough space
+        if (howMuchWeNeedInWorstCase <= furthestPointOfCorridor - closestPointOfCorridor)
+        {
+            Debug.Log("DungeonsGenerator || generateEnemyParties || makeSureThereWillBeEnoughSpaceForThem || There is enough space for" + howManyToGenerate + "!");
+            return true;
+        }
+        else
+        {
+            Debug.Log("DungeonsGenerator || generateEnemyParties || makeSureThereWillBeEnoughSpaceForThem || There is not enough space for" + howManyToGenerate + "!");
+            return false;
+        }
     }
 
     public Corridor getCorridorFromList(int whichOne)

@@ -98,7 +98,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                             }
                             isFacingRight = true;
                             Debug.Log("ButtonForCameraMovement || Last camera coords: " + Camera.main.transform.position.x + " and hero coords ");
-                            for(int i=0;i< sizeOfParty;i++)
+                            for (int i = 0; i < sizeOfParty; i++)
                             {
                                 Debug.Log(" " + heroesObjects[i].transform.position.x + ",");
                             }

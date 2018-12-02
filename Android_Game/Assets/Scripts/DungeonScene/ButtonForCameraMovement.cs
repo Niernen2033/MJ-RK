@@ -10,6 +10,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     private DungeonsGenerator dungeonGenerator;
     private static GameObject[] heroesObjects;
     private SpriteRenderer render;
+    private static ButtonForUsage buttonForUsage;
 
     private bool isButtonPressed;
     private float speedTimer;
@@ -46,6 +47,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     {
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonGenerator = dungeonCanvas.GetComponent<DungeonsGenerator>();
+        buttonForUsage = GameObject.Find("UseButton").GetComponent<ButtonForUsage>();
         isFacingRight = true;
 
         heroesObjects = new GameObject[sizeOfParty];
@@ -70,7 +72,8 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
             focusedHeroPosition = heroesObjects[1].transform.position.x;
         }
 
-        if (isButtonPressed)
+        //If button is pressed and there is no buttons lock from useButton due to corridor choosing and transition
+        if (isButtonPressed && !buttonForUsage.getShouldButtonsBeLocked())
         {
             speedTimer += Time.deltaTime;
             if (speedTimer > timeLimit)

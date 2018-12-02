@@ -12,6 +12,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private GameObject dungeonCanvas;
     private static DungeonsGenerator dungeonGenerator;
     private static DungeonManager dungeonManager;
+    private static ChooseCorridor chooseCorridor;
     private DungeonLevel currentCorridor;
     private int currentCorridorNumber;
     private static GameObject objectForDarkening;
@@ -22,6 +23,8 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private static float speedTimer;
     //timeLimit is for making sure that camera is moved every few frames
     private double timeLimit = 0.025;
+    //private static bool isCorridorChoosen;
+    private static int choosenCorridor;
 
     [SerializeField]
     private Button useButton;
@@ -61,17 +64,24 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         //For development purposes we're gonna get random corridor to go. Normally we could choose from few of them.
         //Now we should randomize choise. I'll make function for that
-        int rand = randomizeChoiseOfCorridor();//here additionaly use randomized number to acces this object from connectionmap
+        //int rand = randomizeChoiseOfCorridor();//here additionaly use randomized number to acces this object from connectionmap
+
+        //Here we're calling popup to allow user to pick next corridor
+        //For that we're going to send our current corridor id
+        //int rand;
 
         if (focusedHeroPosition >= 0 && focusedHeroPosition <= 7)
         {
             Debug.Log("ButtonForUsage || doorTransition || Registered use on entrance door!");
-            doTransitionPreparation(rand);
+            chooseCorridor.showCorridorDecissionPopup(currentCorridorNumber);
+            //doTransitionPreparation(rand);
         }
         else if (focusedHeroPosition >= ((currentCorridor.getNumberOfChunks() - 1) * 7) && focusedHeroPosition <= ((currentCorridor.getNumberOfChunks()) * 7))
         {
             Debug.Log("ButtonForUsage || doorTransition || Registered use on exit doors!");
-            doTransitionPreparation(rand);
+            chooseCorridor.showCorridorDecissionPopup(currentCorridorNumber);
+            //choosenCorridor = chooseCorridor.showCorridorDecissionPopup(currentCorridorNumber);
+            //doTransitionPreparation(rand);
         }
 
 
@@ -86,7 +96,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || currentCorridorNumber: " + currentCorridorNumber);
         Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || Length of corridorList from dungeonGenerator: " + dungeonGenerator.getCorridorList().Count);
         currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorNumber);
-        shouldApplyTransition = true;
+        //shouldApplyTransition = true;
     }
 
     // Use this for initialization
@@ -97,6 +107,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorNumber);
         focusedHero = GameObject.Find("HeroObject1");
+        chooseCorridor = GameObject.Find("ChooseCorridorPopup").GetComponent<ChooseCorridor>();
         focusedHeroPosition = focusedHero.transform.position.x;
         useButton.onClick.AddListener(doorTransition);
         objectForDarkening = GameObject.Find("Transition");
@@ -116,6 +127,14 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             transitionDarkerning();
         }
+
+        if (chooseCorridor.getIsCorridorChoosen())
+        {
+            choosenCorridor = chooseCorridor.getChoosenCorridorId();
+            chooseCorridor.setIsCorridorChoosen(false);
+            shouldApplyTransition = true;
+            //doTransitionPreparation(choosenCorridor);
+        }
     }
 
     public void transitionDarkerning()
@@ -129,6 +148,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             shouldApplyTransition = false;
             //Debug.Log("Beta ->: ");
+            doTransitionPreparation(choosenCorridor);
         }
         else if (alphaColor.a > 0.0f && shouldApplyTransition == false)
         {

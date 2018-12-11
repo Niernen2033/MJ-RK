@@ -27,6 +27,8 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private static bool shouldButtonsBeLocked;
     private static int choosenCorridor;
     private static bool wasTransitionCalled;
+    //Needed to specify type of loading
+    private static int typeOfLoadingLevel;
 
     [SerializeField]
     private Button useButton;
@@ -103,6 +105,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                     Debug.Log("ButtonForUsage || doorTransition || Registered use on entrance door!");
                     chooseCorridor.showCorridorDecissionPopup(previousCorridorId);
                     shouldButtonsBeLocked = true;
+                    typeOfLoadingLevel = 1;
                 }
             }
             else if (focusedHeroPosition >= ((currentCorridor.getNumberOfChunks() - 1) * 7) && focusedHeroPosition <= ((currentCorridor.getNumberOfChunks()) * 7))
@@ -110,6 +113,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                 Debug.Log("ButtonForUsage || doorTransition || Registered use on exit doors!");
                 chooseCorridor.showCorridorDecissionPopup(currentCorridorId);
                 shouldButtonsBeLocked = true;
+                typeOfLoadingLevel = 0;
             }
 
 
@@ -124,7 +128,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void doTransitionPreparation(int choosenCorridorId)
     {
-        dungeonGenerator.loadAnotherLevel(choosenCorridorId);
+        dungeonGenerator.loadAnotherLevel(choosenCorridorId, typeOfLoadingLevel);
         previousCorridorId = currentCorridorId;
         currentCorridorId = choosenCorridorId;
         Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || currentCorridorNumber: " + currentCorridorId);
@@ -195,8 +199,18 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         shouldButtonsBeLocked = shouldThey;
     }
 
+    public void setPreviousCorridorId(int corridorIdToSet)
+    {
+        previousCorridorId = corridorIdToSet;
+    }
+
     public bool getShouldButtonsBeLocked()
     {
         return shouldButtonsBeLocked;
+    }
+
+    public int getPreviousCorridorId()
+    {
+        return previousCorridorId;
     }
 }

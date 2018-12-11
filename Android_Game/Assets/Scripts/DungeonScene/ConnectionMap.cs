@@ -69,6 +69,7 @@ public class ConnectionMap : MonoBehaviour {
 public class CorridorDependency
 {
     private List<int> neighbourCorridor;
+    private bool isLinkedWithInitialCorridor;//TO DO make sure they will generate them
 
     public CorridorDependency()
     {

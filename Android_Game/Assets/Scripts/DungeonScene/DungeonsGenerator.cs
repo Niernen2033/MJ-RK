@@ -22,6 +22,12 @@ public class DungeonsGenerator : MonoBehaviour {
     private static List<Corridor> corridorList;
     private static ButtonForCameraMovement movementButton;
     private static EnemyGenerator enemyGen;
+    private static FightMode fightMode;
+
+    private static GameObject buttonForUsage;
+    private static GameObject buttonForCameraMovementLeft;
+    private static GameObject buttonForCameraMovementRight;
+    private static GameObject buttonForEscape;
 
     private System.Random randomNumber;
 
@@ -53,6 +59,11 @@ public class DungeonsGenerator : MonoBehaviour {
         //Defines layer to display backgound on
         factoryObject.layer = 0;
 
+        buttonForUsage = GameObject.Find("UseButton");
+        buttonForCameraMovementLeft = GameObject.Find("MoveLeftButton");
+        buttonForCameraMovementRight = GameObject.Find("MoveRightButton");
+        buttonForEscape = GameObject.Find("ButtonForEscape");
+
         objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
         //Saving length data to object for later reload
         corridorToGenerate = new Corridor(objectsToGenerate);
@@ -67,6 +78,8 @@ public class DungeonsGenerator : MonoBehaviour {
         dungeonLevelChunks = dungeonManager.GetLevelChunks();//YET NEEDED
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        fightMode = dungeonCanvas.GetComponent<FightMode>();
+        enemyGen = dungeonCanvas.GetComponent<EnemyGenerator>();
 
         generationDecission();
     }
@@ -78,39 +91,131 @@ public class DungeonsGenerator : MonoBehaviour {
 
     public void clearingPreviousSpriteObjects(int previousIdOfCorridor)
     {
-        for(int i=0;i< objectsToGenerate; i++)
-        {
-            //Destroying previously generated corridor objects
-            Destroy(GameObject.Find("DungeonChunk_" + i));
-        }
-
-        //Destroys enemies objects iterating by party(i) and members of it(j)
-       for(int i=0;i< dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties().Count; i++)
-        {
-            for (int j = 0; j < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties()[i].getEnemyObjectArray().Count; j++)
+            for (int i = 0; i < objectsToGenerate; i++)
             {
-                Destroy(GameObject.Find("EnemyObject_" + i + "." + j));
-                Debug.Log("DESTROY THE CHILD, CORRUPT THEM ALL: " + "EnemyObject_" + i + "." + j);
+                //Destroying previously generated corridor objects
+                Destroy(GameObject.Find("DungeonChunk_" + i));
             }
-        }
-        producedChunks.Clear();
 
-        //Destroying entrance and exit neighbours outside of corridor
-        Destroy(GameObject.Find("DungeonChunkEntrance"));
-        Destroy(GameObject.Find("DungeonChunkExit"));
-        //Destroy(GameObject.Find("New Game Object"));//It's needed when reloading another corridor
+            //Destroys enemies objects iterating by party(i) and members of it(j)
+            for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties().Count; i++)
+            {
+                for (int j = 0; j < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousIdOfCorridor).getEnemyParties()[i].getEnemyObjectArray().Count; j++)
+                {
+                    Destroy(GameObject.Find("EnemyObject_" + i + "." + j));
+                    Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying " + "EnemyObject_" + i + "." + j);
+                }
+            }
+            producedChunks.Clear();
+
+            //Destroying entrance and exit neighbours outside of corridor
+            Destroy(GameObject.Find("DungeonChunkEntrance"));
+            Destroy(GameObject.Find("DungeonChunkExit"));
+            //Destroy(GameObject.Find("New Game Object"));//It's needed when reloading another corridor
     }
 
-    public void loadAnotherLevel(int Id)
+    public void clearingPreviousSpriteObjects(int previousIdOfCorridor, int previousId)
     {
+
+            Destroy(GameObject.Find("BattleBackgroundObject"));
+            Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying BattleBackgroundObject!");
+
+            //int previousCorridorId = fightMode.getPreviousCorridorId();
+            //Destroys enemies objects iterating by party(i) and members of it(j)
+            for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousId).getEnemyParties().Count; i++)
+            {
+                for (int j = 0; j < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousId).getEnemyParties()[i].getEnemyObjectArray().Count; j++)
+                {
+                    Destroy(GameObject.Find("EnemyObject_" + i + "." + j));
+                    Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying " + "EnemyObject_" + i + "." + j);
+                }
+            }
+    }
+
+        public void loadAnotherLevel(int Id, int typeOfLoading)
+    {
+        //There are 3 types of loading 
+        //(0 - for loading next level, 1 - for loading previous level and 2 for loading fight scene)
+        if (typeOfLoading == 0)
+        {
+            int previousIdOfCorridor = idOfCorridor;
+            idOfCorridor = Id;
+            clearingPreviousSpriteObjects(previousIdOfCorridor);
+            Reset();
+            movementButton.getThemToTheEntrance();
+            //Here we have to initialize level again -> reload every object
+        }
+        else if(typeOfLoading == 1)
+        {
+            //Here will be process when we want to go back
+        }
+        else if(typeOfLoading == 2)
+        {
+            buttonForUsage.SetActive(true);
+            buttonForCameraMovementLeft.SetActive(true);
+            buttonForCameraMovementRight.SetActive(true);
+            buttonForEscape.SetActive(false);
+            Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || GUI switched!");
+
+            int previousIdOfCorridor = idOfCorridor;
+            Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Setting local previousIdOfCorridor to: " + previousIdOfCorridor);
+
+            //-1 is for learing fightingStage
+            clearingPreviousSpriteObjects(-1,previousIdOfCorridor);
+            //Making sure button won't be in enabled mode
+            buttonForCameraMovementLeft.GetComponent<ButtonForCameraMovement>().setIsButtonPressed(false);
+            buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().setIsButtonPressed(false);
+            Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Deactivating move buttons!");
+            //fixEnemiesPossition();
+            //movementButton.getThemToTheEntrance();
+            resetAfterFightModeScene();
+
+            //Best to put it here before stepping back after escape
+            Reset();
+            Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
+            Debug.Log("Possition before step back: " + Camera.main.transform.position.x);
+            buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
+            Debug.Log("Possition after step back: " + Camera.main.transform.position.x);
+
+            //Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
+            //fightMode.setPartyIsInFightMode(false);
+            //buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
+            //resetAfterFightModeScene();
+
+            //fightMode.setPartyIsInFightMode(false);
+            //generateFightModeScene(idOfCorridor, );
+            //Apply some kind of fancy transition
+            //Display enemies
+            //Display heroes
+            //Display GUI
+
+
+
+            //Reset();
+            //now we also wanna disable buttons and so on
+        }
+    }
+
+    public void loadFightLevel(int idOfCorridor, int idOfEnemyParty)
+    {
+        buttonForUsage.SetActive(false);
+        buttonForCameraMovementLeft.SetActive(false);
+        buttonForCameraMovementRight.SetActive(false);
+        buttonForEscape.SetActive(true);
+
         int previousIdOfCorridor = idOfCorridor;
-        idOfCorridor = Id;
-        Debug.Log("-----------------------ID: " + Id);
+        //idOfCorridor = Id;
         clearingPreviousSpriteObjects(previousIdOfCorridor);
-        Reset();
-        movementButton.getThemToTheEntrance();
-        Debug.Log("-----------------------Debug4 in dungeonGenerator length: " + getCorridorList().Count);
-        //Here we have to initialize level again -> reload every object
+        generateFightModeScene(idOfCorridor, idOfEnemyParty);
+        //Apply some kind of fancy transition
+        //Display enemies
+        //Display heroes
+        //Display GUI
+
+
+
+        //Reset();
+        //now we also wanna disable buttons and so on
     }
 
     public int getLeftBoundPossition()
@@ -250,6 +355,97 @@ public class DungeonsGenerator : MonoBehaviour {
         }
     }
 
+    public void generateFightModeScene(int idOfCorridor, int idOfEnemyParty)
+    {
+        GameObject tempObject;
+        SpriteRenderer spriteRender;
+        string filePath = "FightSceneBackground/";
+        string typeOfDungeonTexture = "Icy_Background";
+
+        tempObject = Instantiate(factoryObject);
+        tempObject.SetActive(false);
+
+        Debug.Log("DungeonsGenerator || generateFightModeScene || CreatedFightBackgroundScene ");
+
+        //----------------------------------------------------------------------------------------------------------------------
+
+        //Adding SpriteRenderer to component (later we can change it to add it into cloned object)
+        spriteRender = tempObject.AddComponent<SpriteRenderer>();
+
+
+        spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture);
+        tempObject.transform.SetParent(GameObject.Find("Dungeon").transform, false);
+        tempObject.transform.localScale = new Vector3(100, 100, 1);
+
+        tempObject.name = "BattleBackgroundObject";
+        tempObject.SetActive(true);
+
+        //Using minus here because coordinates are from -400 to 400 
+        float halfOfCanvasWidth = (float)(dungeonCanvas.GetComponent<RectTransform>().rect.width * (-0.5));
+        //90 is original space and we're scaling it by 5/7
+        float scaledSpaceBetweenHeroes = 90 * 5 / 7;
+
+        //Due to order of drawing heroes in corridors i had to make a map of orders
+        int[] heroesOrder = { 3, 1, 0, 2 };
+
+        //After generating last chunk we are generating border chunks
+        for (int i = 0; i < movementButton.getHeroesObjects().Length;i++)
+        {
+            movementButton.getHeroesObjects()[heroesOrder[3-i]].transform.localPosition = new Vector3(halfOfCanvasWidth+ (((3-i)+1)*scaledSpaceBetweenHeroes), movementButton.getHeroesObjects()[heroesOrder[3-i]].transform.localPosition.y, 0);
+            //Now i'm gonna scale it down to 5/7 of the original size (35)
+            movementButton.getHeroesObjects()[heroesOrder[3-i]].transform.localScale = new Vector3(25, 25, 1);
+        }
+
+            //Here i should load enemyParty
+            EnemyParty encounteredEnemyParty = loadSpecificEnemyParty(idOfCorridor, idOfEnemyParty);
+
+        for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count; i++)
+        {
+            //Here im changing their possition (MIGHT OVERRIDE IT)
+            //encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3(halfOfCanvasWidth + ((i + 1) * scaledSpaceBetweenHeroes), 0, 0);
+            Debug.Log("EnemyObject_" + idOfEnemyParty + "." + i);
+            //GameObject tempEnemyObject = GameObject.Find("EnemyObject_" + idOfEnemyParty + "." + i);
+
+            //tempEnemyObject.transform.SetParent(GameObject.Find("Dungeon").transform, false);
+           //encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3( ((i + 1) * scaledSpaceBetweenHeroes) + halfOfCanvasWidth - encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition.x, 0, 0);
+        }
+    }
+
+    public void resetAfterFightModeScene()
+    {
+        int[] arrayOfPossitions = { 0, -90, 90, -180 };
+        for (int i = 0; i < movementButton.getHeroesObjects().Length; i++)
+        {
+            movementButton.getHeroesObjects()[i].transform.localPosition = new Vector3(arrayOfPossitions[i], movementButton.getHeroesObjects()[i].transform.localPosition.y, 0);
+            //Now i'm gonna scale it down to 5/7 of the original size (35)
+            movementButton.getHeroesObjects()[i].transform.localScale = new Vector3(35, 35, 1);
+        }
+        Debug.Log("DungeonsGenerator || resetAfterFightModeScene || Heroes objects reset!");
+
+        //Setting possitions of enemies to previous values
+        //int idOfCorridorToReset = fightMode.getCurrentCorridorId();
+        //int idOfEnemyParty = fightMode.getColidedWithPartyNumber();
+        //Debug.Log("DungeonsGenerator || resetAfterFightModeScene || Resetting enemies on corridor: " + idOfCorridorToReset + " of id: " + idOfEnemyParty);
+
+        /*
+        EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getSpecificEnemyParty(idOfEnemyParty);
+        for (int i=0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count;i++)
+        {
+            generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3(generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition.x - movementButton.getHeroesObjects()[0].transform.localPosition.x, -100, 0);
+        }*/
+    }
+
+    public void fixEnemiesPossition()
+    {
+        int idOfCorridorToReset = fightMode.getCurrentCorridorId();
+        int idOfEnemyParty = fightMode.getColidedWithPartyNumber();
+        EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getSpecificEnemyParty(idOfEnemyParty);
+        for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count; i++)
+        {
+            generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3(generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition.x - movementButton.getHeroesObjects()[0].transform.localPosition.x, -100, 0);
+        }
+    }
+
     public void generateEdgesOfMap(GameObject tempObject, GameChunk tempChunk, SpriteRenderer spriteRender, string filePath, string[] typeOfDungeonTexture, string[] specificTextureType)
     {
         //Debug.Log("Dlugość chunkow past: " + producedChunks.Count);
@@ -370,6 +566,15 @@ public class DungeonsGenerator : MonoBehaviour {
         //generateMap(pickedOneInt, i, true);
     }
 
+    public EnemyParty loadSpecificEnemyParty(int idOfCorridor, int idOfEnemyParty)
+    {
+        //Checks whatever there are already created parties of enemies
+        EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getSpecificEnemyParty(idOfEnemyParty);
+        //Adds EnemyParty to DungeonManager || DungeonLevel || enemyParties
+        generatedEnemyParty.loadAlreadyExistingSettingOfEnemies(idOfCorridor, idOfEnemyParty, true);
+        return generatedEnemyParty;
+    }
+
     //It will check if there is enough space in corridor to fit everyone in worst deployment scenario
     public bool makeSureThereWillBeEnoughSpaceForThem(int howManyToGenerate)
     {
@@ -390,6 +595,11 @@ public class DungeonsGenerator : MonoBehaviour {
             Debug.Log("DungeonsGenerator || generateEnemyParties || makeSureThereWillBeEnoughSpaceForThem || There is not enough space for" + howManyToGenerate + "!");
             return false;
         }
+    }
+
+    public void setButtonForEscape(GameObject buttonForEscapeToSet)
+    {
+        buttonForEscape = buttonForEscapeToSet;
     }
 
     public Corridor getCorridorFromList(int whichOne)

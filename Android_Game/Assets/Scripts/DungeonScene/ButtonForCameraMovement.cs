@@ -16,7 +16,9 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     private float speedTimer;
     //timeLimit is for making sure that camera is moved every few frames
     private double timeLimit = 0.125;
-    private int sizeOfParty = 4;
+    //We will need to read it from the city level then it will be hub to share this information ( that is -> Fight mode)
+    //also mind that it will need to be updated when one of the heroes dies or sth;
+    private static int sizeOfParty = 4;
     private float focusedHeroPosition;
     private static bool isFacingRight;
 
@@ -41,6 +43,16 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     public void getThemToTheEntrance()
     {
         Camera.main.transform.Translate(new Vector3(-heroesObjects[0].transform.position.x, 0, 0));
+    }
+
+    public void getThemToTheExit()
+    {
+        Camera.main.transform.Translate(new Vector3(dungeonGenerator.getRightBoundPossition()-heroesObjects[0].transform.position.x, 0, 0));
+    }
+
+    public void getThemStepBackAfterFight()
+    {
+        Camera.main.transform.Translate(Vector2.left);
     }
 
     public void Start()
@@ -106,6 +118,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                                 Debug.Log(" " + heroesObjects[i].transform.position.x + ",");
                             }
                         }
+                        //Moving party by one step to the right
                         Camera.main.transform.Translate(Vector2.right);
                     }
                 }
@@ -140,5 +153,35 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
             }
         }
         //Debug.Log("Is facing right(koniec): " + isFacingRight);
+    }
+
+    public void setSizeOfParty(int sizeOfPartyToSet)
+    {
+        sizeOfParty = sizeOfPartyToSet;
+    }
+
+    public void setHeroesObjects(GameObject[] heroesObjectsToSet)
+    {
+        heroesObjects = heroesObjectsToSet;
+    }
+
+    public void setIsButtonPressed(bool isIt)
+    {
+        isButtonPressed = isIt;
+    }
+
+    public int getSizeOfParty()
+    {
+        return sizeOfParty;
+    }
+
+    public GameObject[] getHeroesObjects()
+    {
+        return heroesObjects;
+    }
+
+    public bool getIsButtonPressed()
+    {
+        return isButtonPressed;
     }
 }

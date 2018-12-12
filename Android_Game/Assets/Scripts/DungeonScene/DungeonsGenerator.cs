@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 
@@ -29,6 +30,8 @@ public class DungeonsGenerator : MonoBehaviour {
     private static GameObject buttonForCameraMovementRight;
     private static GameObject buttonForEscape;
 
+    private static bool loadingHasFinished;
+
     private System.Random randomNumber;
 
     public void Reset()
@@ -41,6 +44,12 @@ public class DungeonsGenerator : MonoBehaviour {
         //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
         generationDecission();
+    }
+
+    public bool ResetWithReturn()
+    {
+        Reset();
+        return true;
     }
 
     public void Start() {
@@ -80,6 +89,7 @@ public class DungeonsGenerator : MonoBehaviour {
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         fightMode = dungeonCanvas.GetComponent<FightMode>();
         enemyGen = dungeonCanvas.GetComponent<EnemyGenerator>();
+        loadingHasFinished = false;
 
         generationDecission();
     }
@@ -171,11 +181,14 @@ public class DungeonsGenerator : MonoBehaviour {
             resetAfterFightModeScene();
 
             //Best to put it here before stepping back after escape
-            Reset();
+            loadingHasFinished = ResetWithReturn();
+            
             Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
             Debug.Log("Possition before step back: " + Camera.main.transform.position.x);
             buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
             Debug.Log("Possition after step back: " + Camera.main.transform.position.x);
+            StartCoroutine(WaitASecond());
+            //fightMode.setPartyIsInFightMode(false);
 
             //Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
             //fightMode.setPartyIsInFightMode(false);
@@ -194,6 +207,15 @@ public class DungeonsGenerator : MonoBehaviour {
             //Reset();
             //now we also wanna disable buttons and so on
         }
+    }
+
+    IEnumerator WaitASecond()
+    {
+        print(Time.time);
+        //yield return new WaitForSeconds(2);
+        yield return new WaitUntil(() => loadingHasFinished == true);
+        fightMode.setPartyIsInFightMode(false);
+        print(Time.time);
     }
 
     public void loadFightLevel(int idOfCorridor, int idOfEnemyParty)
@@ -303,8 +325,11 @@ public class DungeonsGenerator : MonoBehaviour {
         GameObject tempObject;
         GameChunk tempChunk;
         SpriteRenderer spriteRender;
-        string filePath = "WarrensTextures/";
-        string[] typeOfDungeonTexture = { "warrens." };
+        //string filePath = "WarrensTextures/";
+        //string[] typeOfDungeonTexture = { "warrens." };
+        //string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01" };
+        string filePath = "IceTextures/";
+        string[] typeOfDungeonTexture = { "ice." };
         string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01" };
 
         tempObject = Instantiate(factoryObject);
@@ -320,6 +345,10 @@ public class DungeonsGenerator : MonoBehaviour {
         {
             //Generating entrance and exit from the corridor
             spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[1]);
+            if(i == objectsToGenerate - 1)
+            {
+                spriteRender.flipX = true;
+            }
         }
         else
         {

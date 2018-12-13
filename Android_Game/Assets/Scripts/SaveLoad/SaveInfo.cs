@@ -37,7 +37,7 @@ namespace SaveLoad
 
                     public static class Inventory
                     {
-                        public static readonly string AllItems = @"Images/Inventory/all_items";
+                        public static readonly string AllItems = @"Images/Inventory/all_items_1";
                         public static readonly string AllOptionsItems = @"Images/Inventory/all_options";
                     }
                 }            

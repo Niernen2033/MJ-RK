@@ -61,9 +61,20 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
 
         if (sizeOfParty != 0)
         {
-            factoryObject = new GameObject();
-            factoryObject.layer = 0;
-            factoryObject.AddComponent<SpriteRenderer>();
+            if (GameObject.Find("FactoryObject") == null)
+            {
+                factoryObject = new GameObject();
+                factoryObject.name="FactoryObject";
+                factoryObject.layer = 0;
+                factoryObject.AddComponent<SpriteRenderer>();
+                Debug.Log("EnemyGenerator || EnemyParty || Created new FactoryObject");
+            }
+            else
+            {
+                //Should't get in here
+                Debug.Log("EnemyGenerator || EnemyParty || Found FactoryObject");
+                factoryObject = GameObject.Find("FactoryObject");
+            }
 
             //LENGTH OF CORRIDOR IS WRONG ~ fixed i think
             Debug.Log("EnemyGenerator || EnemyParty || SizeOfParty " + (sizeOfParty - 1) + " furthest posible point to place: " + (lengthOfCorridor * chunkWidth - ((sizeOfParty - 1) * 2.081015)));
@@ -205,9 +216,20 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
             SpriteRenderer spriteRender;
             enemyObjectArray.Clear();
 
-            factoryObject = new GameObject();
-            factoryObject.layer = 0;
-            factoryObject.AddComponent<SpriteRenderer>();
+            if (GameObject.Find("FactoryObject") == null)
+            {
+                factoryObject = new GameObject();
+                factoryObject.name = "FactoryObject";
+                factoryObject.layer = 0;
+                factoryObject.AddComponent<SpriteRenderer>();
+                Debug.Log("EnemyGenerator || EnemyParty || Created new FactoryObject");
+            }
+            else
+            {
+                //Should't get in here
+                Debug.Log("EnemyGenerator || EnemyParty || Found FactoryObject");
+                factoryObject = GameObject.Find("FactoryObject");
+            }
 
             for (int i = 0; i < sizeOfParty; i++)
             {

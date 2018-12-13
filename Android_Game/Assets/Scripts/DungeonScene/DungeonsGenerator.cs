@@ -29,6 +29,7 @@ public class DungeonsGenerator : MonoBehaviour {
     private static GameObject buttonForCameraMovementLeft;
     private static GameObject buttonForCameraMovementRight;
     private static GameObject buttonForEscape;
+    private static GameObject buttonForAtackCharging;
 
     private static bool loadingHasFinished;
 
@@ -72,6 +73,7 @@ public class DungeonsGenerator : MonoBehaviour {
         buttonForCameraMovementLeft = GameObject.Find("MoveLeftButton");
         buttonForCameraMovementRight = GameObject.Find("MoveRightButton");
         buttonForEscape = GameObject.Find("ButtonForEscape");
+        buttonForAtackCharging = GameObject.Find("ChargeAtackButton");
 
         objectsToGenerate = randomNumber.Next(minimumNumberOfChunks, maximumNumberOfChunks);
         //Saving length data to object for later reload
@@ -165,6 +167,7 @@ public class DungeonsGenerator : MonoBehaviour {
             buttonForCameraMovementLeft.SetActive(true);
             buttonForCameraMovementRight.SetActive(true);
             buttonForEscape.SetActive(false);
+            buttonForAtackCharging.SetActive(false);
             Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || GUI switched!");
 
             int previousIdOfCorridor = idOfCorridor;
@@ -185,7 +188,11 @@ public class DungeonsGenerator : MonoBehaviour {
             
             Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
             Debug.Log("Possition before step back: " + Camera.main.transform.position.x);
-            buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
+            //Making sure they are far enough to turn back and not be atacked again
+            for (int i = 0; i < 3; i++)
+            {
+                buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
+            }
             Debug.Log("Possition after step back: " + Camera.main.transform.position.x);
             StartCoroutine(WaitASecond());
             //fightMode.setPartyIsInFightMode(false);
@@ -224,6 +231,7 @@ public class DungeonsGenerator : MonoBehaviour {
         buttonForCameraMovementLeft.SetActive(false);
         buttonForCameraMovementRight.SetActive(false);
         buttonForEscape.SetActive(true);
+        buttonForAtackCharging.SetActive(true);
 
         int previousIdOfCorridor = idOfCorridor;
         //idOfCorridor = Id;

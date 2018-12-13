@@ -12,6 +12,7 @@ public static class GameGlobals
         None = -1,
         MianMenuScene = 0,
         CityScene = 1,
+        DungeonScene = 2,
     }
 
     public static string CalculateIndyvidualHash(string data)

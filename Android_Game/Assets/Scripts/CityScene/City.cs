@@ -108,9 +108,9 @@ namespace CityScene
                     }
                 case CityObjectType.Dungeons:
                     {
-                        //GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.
-                        //GameSave.Instance.Update();
-                        //SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);
+                        GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.DungeonScene;
+                        GameSave.Instance.Update();
+                        SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);
                         break;
                     }
                 default:

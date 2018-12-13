@@ -15,6 +15,11 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
     private static GameObject chargeBar;
     private static GameObject chargeBarPointer;
     private static float chargeBarWidth, chargeBarHeight;
+    private static bool chargeReachedPeak;
+    private static float speedTimer;
+    //timeLimit is for actualization every few frames
+    private const double timeLimit = 0.025;
+    private const float speedOfCharging = 0.1f;
 
     // Use this for initialization
     void Start()
@@ -23,6 +28,8 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         buttonForAtackCharging = GameObject.Find("ChargeAtackButton");
         buttonForAtackCharging.SetActive(false);
         buttonIsHeld = false;
+        chargeReachedPeak = false;
+        speedTimer = 0;
 
         filePath = "UI_Elements/";
         typeOfElement = new string[] { "ChargeBar", "ChargeBarPointer" };
@@ -49,11 +56,17 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
     // Update is called once per frame
     void Update()
     {
+        speedTimer += Time.deltaTime;
+        if (speedTimer > timeLimit)
+        {
+            chargeItNow();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         buttonIsHeld = true;
+        chargeReachedPeak = false;
         displayChargeBar();
         actualizeChargeBarPossition();
     }
@@ -78,10 +91,12 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
 
             if(i==0)
             {
+                spriteRenderer.sortingOrder = 0;
                 chargeBar = tempObject;
             }
             else
             {
+                spriteRenderer.sortingOrder = 1;
                 chargeBarPointer = tempObject;
             }
         }
@@ -142,5 +157,27 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
     public void loadChargeBarSize() {
         chargeBarHeight = (float)chargeBar.GetComponent<SpriteRenderer>().bounds.size.y;
         chargeBarWidth = (float)chargeBar.GetComponent<SpriteRenderer>().bounds.size.x;
+    }
+
+    public void chargeItNow()
+    {
+        if (buttonIsHeld == true)
+        {
+            if (chargeReachedPeak == false && chargeBarPointer.transform.position.y < (Camera.main.transform.position.y + chargeBarHeight / 2))
+            {
+                chargeBarPointer.transform.position = new Vector3(Camera.main.transform.position.x, chargeBarPointer.transform.position.y + speedOfCharging, chargeBarPointer.transform.position.z);
+            } else if (chargeReachedPeak == false && chargeBarPointer.transform.position.y >= (Camera.main.transform.position.y + chargeBarHeight / 2))
+            {
+                chargeReachedPeak = true;
+            } else if(chargeReachedPeak == true && chargeBarPointer.transform.position.y > (Camera.main.transform.position.y - chargeBarHeight / 2))
+            {
+                chargeBarPointer.transform.position = new Vector3(Camera.main.transform.position.x, chargeBarPointer.transform.position.y - speedOfCharging, chargeBarPointer.transform.position.z);
+            }else if (chargeReachedPeak == true && chargeBarPointer.transform.position.y <= (Camera.main.transform.position.y - chargeBarHeight / 2))
+            {
+                chargeReachedPeak = false;
+                buttonIsHeld = false;
+                chargeBarPointer.transform.position = new Vector3(Camera.main.transform.position.x, chargeBar.transform.position.y - chargeBarHeight / 2, chargeBarPointer.transform.position.z);
+            }
+        }
     }
 }

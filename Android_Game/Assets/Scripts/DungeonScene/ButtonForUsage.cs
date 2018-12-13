@@ -23,7 +23,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private static float speedTimer;
     //timeLimit is for making sure that camera is moved every few frames
-    private double timeLimit = 0.025;
+    private const double timeLimit = 0.025;
     private static bool shouldButtonsBeLocked;
     private static int choosenCorridor;
     private static bool wasTransitionCalled;

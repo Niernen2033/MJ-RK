@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 493992203}
   - component: {fileID: 493992206}
   - component: {fileID: 493992207}
+  - component: {fileID: 493992208}
   m_Layer: 0
   m_Name: Dungeon
   m_TagString: Untagged
@@ -620,6 +621,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a904eb4510911274d932f0bab47ea122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &493992208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 493992196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb379e71f27996840879750d8bbc4a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &782503593
@@ -914,7 +926,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Escape
 --- !u!222 &784301489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1497,7 +1509,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Atack
 --- !u!222 &1580469621
 CanvasRenderer:
   m_ObjectHideFlags: 0

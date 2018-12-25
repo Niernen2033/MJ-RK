@@ -22,17 +22,27 @@ public class ConnectionMap : MonoBehaviour {
         }
         for (int i = 0; i < numberOfCorridors; i++)
         {
-            do
+            if (i == 0)
             {
-                tempNumb = randomNumber.Next(0, numberOfCorridors);
-            } while (tempNumb == i || corridorDependenciesList[i].getNeighbourCorridor().Contains(tempNumb));
-            //Preventing adding corridor itself or duplicating already added ones
+                //First one must be defined as initial
+                corridorDependenciesList[i].setIsLinkedWithInitialCorridor(true);
+            }
+            else
+            {
+                do
+                {
+                    tempNumb = randomNumber.Next(0, numberOfCorridors);
+                } while (tempNumb == i || corridorDependenciesList[i].getNeighbourCorridor().Contains(tempNumb));
+                //Preventing adding corridor itself or duplicating already added ones
 
-            //Checking if there is no more corridors than 4 (eighter in initial corridor and in the destinated one)
-            if (corridorDependenciesList[i].getNeighbourCorridor().Count < 4 && corridorDependenciesList[tempNumb].getNeighbourCorridor().Count < 4)
-            {
-                corridorDependenciesList[i].addToNeighbourCorridor(tempNumb);
-                corridorDependenciesList[tempNumb].addToNeighbourCorridor(i);
+                //Checking if there is no more corridors than 4 (eighter in initial corridor and in the destinated one)
+                if (corridorDependenciesList[i].getNeighbourCorridor().Count < 4 && corridorDependenciesList[tempNumb].getNeighbourCorridor().Count < 4)
+                {
+                    corridorDependenciesList[i].addToNeighbourCorridor(tempNumb);
+                    corridorDependenciesList[tempNumb].addToNeighbourCorridor(i);
+                }
+                //Check if it's linked with initial one
+                //if ()
             }
         }
 
@@ -40,6 +50,7 @@ public class ConnectionMap : MonoBehaviour {
         {
             corridorDependenciesList[i].toString(i);
         }
+        
     }
     //*************** TO DO ***************
     //I have to make sure that every corridor has atleast one connection ( to prevent that we will propably make
@@ -74,11 +85,7 @@ public class CorridorDependency
     public CorridorDependency()
     {
         neighbourCorridor = new List<int>();
-    }
-
-    public void setNeighbourCorridor(List<int> list)
-    {
-        neighbourCorridor = list;
+        isLinkedWithInitialCorridor = false;
     }
 
     public void addToNeighbourCorridor(int neighbour)
@@ -89,6 +96,16 @@ public class CorridorDependency
         }
     }
 
+    public void setNeighbourCorridor(List<int> list)
+    {
+        neighbourCorridor = list;
+    }
+
+    public void setIsLinkedWithInitialCorridor(bool isIt)
+    {
+        isLinkedWithInitialCorridor = isIt;
+    }
+
     public List<int> getNeighbourCorridor()
     {
         return neighbourCorridor;
@@ -97,6 +114,11 @@ public class CorridorDependency
     public int getSpecificNeighbourCorridor(int whichOne)
     {
         return neighbourCorridor[whichOne];
+    }
+
+    public bool getIsLinkedWithInitialCorridor()
+    {
+        return isLinkedWithInitialCorridor;
     }
 
     public void toString(int Id)

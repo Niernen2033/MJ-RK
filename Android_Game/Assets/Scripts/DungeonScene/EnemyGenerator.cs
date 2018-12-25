@@ -25,6 +25,7 @@ public class EnemyParty{
     private System.Random randomNumber;
     private int sizeOfParty;
     private List<GameObject> enemyObjectArray;
+    private List<GameObject> healthBarObjectsArray;
     //It serves as a template
     private static GameObject factoryObject;
 
@@ -41,7 +42,9 @@ public class EnemyParty{
     private const int minimalSizeOfParty = 1, maximalSizeOfParty = 5;//maximumSizeOfParty = 5;
 
     private string filePath;
-    private string[] typeOfDungeonTexture = { "skeleton", "skeleton_defender", "skeleton_spear", "skeleton_militia" };
+    private string guiFilePath = "UI_Elements/";
+    private string[] typeOfDungeonTexture = { "Defender", "Soldier", "Pikeman", "Archer" };
+    private string[] typeOfBarTexture = { "HealthBarVertical" };
 
     private static DungeonManager dungeonManager;
     private static FightMode fightMode;
@@ -49,6 +52,8 @@ public class EnemyParty{
 public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, int idOfParty)
     {
         enemyObjectArray = new List<GameObject>();
+        healthBarObjectsArray = new List<GameObject>();
+
         randomNumber = new System.Random(DateTime.Now.Millisecond + milisecondsForRand);
         //It is length in number of chunks
         this.idOfCorridor = idOfCorridor;
@@ -253,6 +258,60 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
                 enemyObjectArray[i].transform.localPosition = new Vector3(halfOfCanvasWidth - ((3-i + 1) * scaledSpaceBetweenEnemies), -100, 0);
                 enemyObjectArray[i].transform.localScale = new Vector3(25, 25, 1);
                 enemyObjectArray[i].SetActive(true);
+                //enemyObjectArray[i].transform.parent = null;
+            }
+        }
+    }
+
+    public void displayHealthBarsOnEnemies(int idOfCorridor, int indexOfParty, bool isItFightMode)
+    {
+        if (isItFightMode == true)
+        {
+            int numberOfBarsToDisplay = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[indexOfParty].getEnemyObjectArray().Count;
+            SpriteRenderer spriteRender;
+            healthBarObjectsArray.Clear();
+
+            if (GameObject.Find("FactoryObject") == null)
+            {
+                factoryObject = new GameObject();
+                factoryObject.name = "FactoryObject";
+                factoryObject.layer = 0;
+                factoryObject.AddComponent<SpriteRenderer>();
+                Debug.Log("EnemyGenerator || EnemyParty || Created new FactoryObject");
+            }
+            else
+            {
+                //Should't get in here
+                Debug.Log("EnemyGenerator || EnemyParty || Found FactoryObject");
+                factoryObject = GameObject.Find("FactoryObject");
+            }
+
+            for (int i = 0; i < numberOfBarsToDisplay; i++)
+            {
+                GameObject tempObject = MonoBehaviour.Instantiate(factoryObject);//It is needed here to call MonoBehaviour
+
+                float scaledSpaceBetweenEnemies = 90 * 5 / 7;
+                float halfOfCanvasWidth = (float)(GameObject.Find("Dungeon").GetComponent<RectTransform>().rect.width * 0.5);
+
+                tempObject.SetActive(false);
+                tempObject.name = "EnemyHealthBar_" + indexOfParty + "." + i;
+                //enemyObjectArray.Add(tempObject);
+                healthBarObjectsArray.Add(tempObject);
+                healthBarObjectsArray[i].transform.SetParent(GameObject.Find("Dungeon").transform, false);
+
+                spriteRender = healthBarObjectsArray[i].GetComponent<SpriteRenderer>();
+                //We're getting healthBar texture from array
+                spriteRender.sprite = Resources.Load<Sprite>(guiFilePath + typeOfBarTexture[0]);
+                spriteRender.sortingOrder = 1;
+                //The idea here is as follows: canvas is from -400 to 400 we're getting half of it to reach right end of it
+                //next step it to draw last enemy from right borded +1 is to use one space from border
+                //fightMode.setEnemyPossitionBeforeFight(i, enemyObjectArray[i].transform.localPosition.x);
+                healthBarObjectsArray[i].transform.localPosition = new Vector3(halfOfCanvasWidth - ((3 - i + 1) * scaledSpaceBetweenEnemies), -100, 0);
+                healthBarObjectsArray[i].transform.localScale = new Vector3(25, 25, 1);
+                healthBarObjectsArray[i].SetActive(true);
+                healthBarObjectsArray[i].transform.localPosition = new Vector3(enemyObjectArray[i].transform.localPosition.x, enemyObjectArray[i].transform.localPosition.y + enemyObjectArray[i].GetComponent<SpriteRenderer>().sprite.texture.height/2, 0);
+                healthBarObjectsArray[i].transform.localScale = new Vector3(500, 500, 1);
+
                 //enemyObjectArray[i].transform.parent = null;
             }
         }

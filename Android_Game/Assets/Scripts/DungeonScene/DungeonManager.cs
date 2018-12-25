@@ -37,7 +37,7 @@ public class DungeonManager : MonoBehaviour {
 		
 	}
 
-    public List<DungeonLevelChunk> GetLevelChunks()
+    public List<DungeonLevelChunk> getLevelChunks()
     {
         return levelChunks;
     }

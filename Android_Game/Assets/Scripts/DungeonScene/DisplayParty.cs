@@ -14,7 +14,7 @@ public class DisplayParty : MonoBehaviour {
 
         SpriteRenderer spriteRender;
         string filePath = "HeroesModels/";
-        string[] typeOfDungeonTexture = { "crusader", "jester", "abomination", "vestal" };
+        string[] typeOfDungeonTexture = { "Knight", "Rogue", "Lord", "Priest" };
 
         for (int i = 0; i < 4; i++)
         {

@@ -10,6 +10,7 @@ public class FightMode : MonoBehaviour {
     public static DungeonsGenerator dungeonsGenerator;
     public static EnemyGenerator enemyGenerator;
     public static EnemyParty enemyParty;
+    public static ObjectSelector objectSelector;
     public static int currentCorridorId;
     public static bool partyIsInFightMode;
 
@@ -28,8 +29,9 @@ public class FightMode : MonoBehaviour {
         dungeonsGenerator = dungeonCanvas.GetComponent<DungeonsGenerator>();
         enemyGenerator = dungeonCanvas.GetComponent<EnemyGenerator>();
         buttonForCameraMovement = GameObject.Find("MoveRightButton").GetComponent<ButtonForCameraMovement>();
-        partyIsInFightMode = false;
         buttonForUsage = GameObject.Find("UseButton").GetComponent<ButtonForUsage>();
+        objectSelector = dungeonCanvas.GetComponent<ObjectSelector>();
+        partyIsInFightMode = false;
         enemyPossitionsBeforeFight = new float[4];
         colidedWithPartyNumber = 0;
     }
@@ -47,7 +49,7 @@ public class FightMode : MonoBehaviour {
     {
         int howManyEnemyPartiesAreThere = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorId).getEnemyParties().Count;
 
-        //i should mind that it is not needed if there are no enemy parties at all at this corridor
+        //I should mind that it is not needed if there are no enemy parties at all at this corridor
         //So first we need to check if there is atleast one party and if so -> get needed unitWidth from it
         if (howManyEnemyPartiesAreThere != 0)
         {
@@ -126,6 +128,8 @@ public class FightMode : MonoBehaviour {
 
     public void loadFightMode(int idOfEnemyParty)
     {
+        //objectSelector.loadHeroPossition();
+        objectSelector.loadEnemyPossition(currentCorridorId, idOfEnemyParty);
         //Type of 2 means fightMode
         dungeonsGenerator.loadFightLevel(currentCorridorId, idOfEnemyParty);
         //previousCorridorId = currentCorridorId;

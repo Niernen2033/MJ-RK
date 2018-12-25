@@ -41,7 +41,7 @@ public class DungeonsGenerator : MonoBehaviour
         //Getting dungeonManager to acces his variables
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
-        dungeonLevelChunks = dungeonManager.GetLevelChunks();//Not sure now if needed
+        dungeonLevelChunks = dungeonManager.getLevelChunks();//Not sure now if needed
         //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
         //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
@@ -88,7 +88,7 @@ public class DungeonsGenerator : MonoBehaviour
         //Getting dungeonManager to acces his variables
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();//YET NEEDED
-        dungeonLevelChunks = dungeonManager.GetLevelChunks();//YET NEEDED
+        dungeonLevelChunks = dungeonManager.getLevelChunks();//YET NEEDED
         movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         fightMode = dungeonCanvas.GetComponent<FightMode>();
@@ -142,6 +142,8 @@ public class DungeonsGenerator : MonoBehaviour
             for (int j = 0; j < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousId).getEnemyParties()[i].getEnemyObjectArray().Count; j++)
             {
                 Destroy(GameObject.Find("EnemyObject_" + i + "." + j));
+                Destroy(GameObject.Find("EnemyHealthBar_" + i + "." + j));
+
                 Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying " + "EnemyObject_" + i + "." + j);
             }
         }
@@ -613,6 +615,7 @@ public class DungeonsGenerator : MonoBehaviour
         EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getSpecificEnemyParty(idOfEnemyParty);
         //Adds EnemyParty to DungeonManager || DungeonLevel || enemyParties
         generatedEnemyParty.loadAlreadyExistingSettingOfEnemies(idOfCorridor, idOfEnemyParty, true);
+        generatedEnemyParty.displayHealthBarsOnEnemies(idOfCorridor, idOfEnemyParty, true);
         return generatedEnemyParty;
     }
 

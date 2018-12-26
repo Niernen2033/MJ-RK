@@ -160,19 +160,22 @@ public class ObjectSelector : MonoBehaviour {
                 enemyObjectsArray[i].setPositionOfObject(tempObject.transform.localPosition);
                 
                 Debug.Log("Touch position x: " + touchInWorld.x);
-                Debug.Log("Touch position y: " + touchInWorld.y);
+                //Debug.Log("Touch position y: " + touchInWorld.y);
                 /*
                 Debug.Log("Touch position X1: " + touchInWorld.x + " > " + (halfOfCanvasWidth - ((3 - 0 + 1) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies)) * (-1));
                 Debug.Log("Touch position X1: " + touchInWorld.x + " <= " + (halfOfCanvasWidth - ((3 - 0 + 1) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies)) * (-1));
                 Debug.Log("Touch position X2: " + touchInWorld.x + " > " + (halfOfCanvasWidth - ((3 - 1 + 1) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies)) * (-1));
                 Debug.Log("Touch position X2: " + touchInWorld.x + " <= " + (halfOfCanvasWidth - ((3 - 1 + 1) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies)) * (-1));
                 */
+                //Debug.Log("Current bound's are from: " + ((CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies)) * (-1)) + " to " + ((CanvasWidth / 2 - ((4 - (3 - 3)) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies)) * (-1)));
 
-                if ((touchInWorld.x*(-1) > (CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies))*(-1)) && (touchInWorld.x*(-1) <= (CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies)*(-1))))
+                if ((touchInWorld.x*(-1) > ((CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies + ((4- enemyObjectsArray.Count)*scaledSpaceBetweenEnemies))) * (-1))) && (touchInWorld.x*(-1) <= ((CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies + ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies))) * (-1))))
                 {
                     Debug.Log("Touched an enemy number: " + (enemyObjectsArray.Count-i-1));
+                    //Debug.Log("It's it: " + scaledSpaceBetweenEnemies + " " + CanvasWidth);
+                    Debug.Log("Current bound's are from: " + ((CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies)) * (-1)) + " < " + touchInWorld.x*(-1) +  " <=" + ((CanvasWidth / 2 - ((4 - (3 - i)) * scaledSpaceBetweenEnemies + halfOfSpaceBetweenEnemies)) * (-1)));
                     //enemyHighlightMask.transform.localPosition = enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject();
-                    enemyHighlightMask.transform.localPosition = new Vector3(CanvasWidth/2 - ((4-(3-i))*scaledSpaceBetweenEnemies), enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().y, enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().z);
+                    enemyHighlightMask.transform.localPosition = new Vector3((CanvasWidth / 2 - ((4-(3-i))*scaledSpaceBetweenEnemies )- ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies)), enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().y, enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().z);
                     enemyHighlightMask.SetActive(true);
                     //Debug.Log("Position of highlight: " + enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject());
                 }

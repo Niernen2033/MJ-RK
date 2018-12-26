@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace CityScene
 {
-    public class CityData
+    public class CityData : IPostInstantiate
     {
 
         [XmlElement(Type = typeof(Item), ElementName = "ItemBlackSmithShopBagpackItem")]

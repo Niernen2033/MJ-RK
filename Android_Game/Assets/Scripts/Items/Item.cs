@@ -29,7 +29,7 @@ namespace Items
 
     public enum ItemRarity { None = -1, Basic, Common, Uncommon, Epic, Legendary };
 
-    public class Item
+    public class Item : IPostInstantiate
     {
         //BASIC VARIABLES ====================================================================================
         [XmlIgnore]

@@ -71,8 +71,24 @@ namespace SaveLoad
             }
             GameSave newGameSave = new GameSave();
             newGameSave.Name = name;
-            Directory.CreateDirectory(SaveInfo.Paths.GlobalFolder + name + "_data");
-            if(!XmlManager.Save<GameSave>(newGameSave, SaveInfo.Paths.GlobalFolder + name + "_data/" + name + ".xml", IsCryptoOn))
+            string new_save_path = SaveInfo.Paths.GlobalFolder + name + "_data_";
+            int new_save_path_index = 1;
+            while(true)
+            {
+                string temp_save_path = string.Copy(new_save_path) + new_save_path_index.ToString();
+                if(!Directory.Exists(temp_save_path))
+                {
+                    Directory.CreateDirectory(temp_save_path);
+                    new_save_path = string.Copy(temp_save_path) + "/";
+                    break;
+                }
+                else
+                {
+                    new_save_path_index++;
+                }
+                    
+            }
+            if(!XmlManager.Save<GameSave>(newGameSave, new_save_path + name + ".xml", IsCryptoOn))
             {
                 Debug.Log("Class 'Save' in 'CreateNewSave' function: Cannot save file");
                 return true;

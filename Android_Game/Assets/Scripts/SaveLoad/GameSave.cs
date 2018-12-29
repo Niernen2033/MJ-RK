@@ -88,14 +88,17 @@ namespace SaveLoad
                 }
                     
             }
-            if(!XmlManager.Save<GameSave>(newGameSave, new_save_path + name + ".xml", IsCryptoOn))
+
+            if (!XmlManager.Save<GameSave>(newGameSave, new_save_path + name + ".xml", IsCryptoOn))
             {
                 Debug.Log("Class 'Save' in 'CreateNewSave' function: Cannot save file");
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                ProfileSave.Instance.AcctualSavePath = new_save_path + name + ".xml";
+                ProfileSave.Instance.Update();
+                return true;
             }
         }
 

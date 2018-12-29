@@ -32,11 +32,7 @@ namespace MainMenuScene
         {
             string name = this.inputField.text;
             GameSave.Instance.CreateNewSave(name);
-            string path = SaveInfo.Paths.GlobalFolder + name + "_data/" + name + ".xml";
-            ProfileSave.Instance.AcctualSavePath = path;
-            ProfileSave.Instance.Update();
-
-            GameSave.Instance.Load(path);
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
 
             ChampionGenerator championGenerator = new ChampionGenerator();
             Player player = championGenerator.GenerateNewPlayer(ChampionClass.Mage, name);
@@ -50,11 +46,7 @@ namespace MainMenuScene
         {
             string name = this.inputField.text;
             GameSave.Instance.CreateNewSave(name);
-            string path = SaveInfo.Paths.GlobalFolder + name + "_data/" + name + ".xml";
-            ProfileSave.Instance.AcctualSavePath = path;
-            ProfileSave.Instance.Update();
-
-            GameSave.Instance.Load(path);
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
 
             ChampionGenerator championGenerator = new ChampionGenerator();
             Player player = championGenerator.GenerateNewPlayer(ChampionClass.Range, name);
@@ -68,11 +60,7 @@ namespace MainMenuScene
         {
             string name = this.inputField.text;
             GameSave.Instance.CreateNewSave(name);
-            string path = SaveInfo.Paths.GlobalFolder + name + "_data/" + name + ".xml";
-            ProfileSave.Instance.AcctualSavePath = path;
-            ProfileSave.Instance.Update();
-
-            GameSave.Instance.Load(path);
+            GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
 
             ChampionGenerator championGenerator = new ChampionGenerator();
             Player player = championGenerator.GenerateNewPlayer(ChampionClass.Warrior, name);

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace NPC
 {
-    public enum ChampionClass { None = -1, Mage, Warrior, Range };
+    public enum ChampionClass { None = -1, Mage, Warrior, Range, Priest, Rogue };
     public enum ChampionType { None = -1, Enemy, Normal };
 
     public class Champion
@@ -47,10 +47,10 @@ namespace NPC
         //Basic champions strength
         public Statistics Strength { get; set; }
 
-        //Describe if chhampion has illness or not
+        //Describe if champion has illness or not
         public bool IsIllness { get; set; }
 
-        //List of player backpacki tems
+        //List of player backpack items
         [XmlElement(Type = typeof(Item), ElementName = "ItemBagpackItem")]
         [XmlElement(Type = typeof(ConsumeableItem), ElementName = "ConsumeableBagpackItem")]
         [XmlElement(Type = typeof(Armor), ElementName = "ArmorBagpackItem")]

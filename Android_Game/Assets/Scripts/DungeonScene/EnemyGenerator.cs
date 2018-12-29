@@ -26,6 +26,11 @@ public class EnemyParty{
     private int sizeOfParty;
     private List<GameObject> enemyObjectArray;
     private List<GameObject> healthBarObjectsArray;
+
+    //HealthStats dev
+    private List<int> enemyHealthArray;
+    private List<int> enemyMaxHealthArray;
+
     //It serves as a template
     private static GameObject factoryObject;
 
@@ -53,8 +58,11 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
     {
         enemyObjectArray = new List<GameObject>();
         healthBarObjectsArray = new List<GameObject>();
+        enemyHealthArray = new List<int>();
+        enemyMaxHealthArray = new List<int>();
 
-        randomNumber = new System.Random(DateTime.Now.Millisecond + milisecondsForRand);
+
+    randomNumber = new System.Random(DateTime.Now.Millisecond + milisecondsForRand);
         //It is length in number of chunks
         this.idOfCorridor = idOfCorridor;
         this.idOfParty = idOfParty;
@@ -146,6 +154,9 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
 
             for (int i = 0; i < sizeOfParty; i++)
             {
+                enemyHealthArray.Add(100);
+                enemyMaxHealthArray.Add(100);
+
                 GameObject tempObject = MonoBehaviour.Instantiate(factoryObject);//It is needed here to call MonoBehaviour
                 tempObject.SetActive(false);
                 tempObject.name = "EnemyObject_" + howManyPartiesAlreadyExistsOnThisLevel + "." + i;
@@ -365,5 +376,15 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
     public float getOverallEnemyWidth()
     {
         return (float)overallEnemyWidth;
+    }
+
+    public List<int> getEnemyHealthArray()
+    {
+        return enemyHealthArray;
+    }
+
+    public List<int> getEnemyMaxHealthArray()
+    {
+        return enemyMaxHealthArray;
     }
 }

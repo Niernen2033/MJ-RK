@@ -11,6 +11,7 @@ public class FightMode : MonoBehaviour {
     public static EnemyGenerator enemyGenerator;
     public static EnemyParty enemyParty;
     public static ObjectSelector objectSelector;
+    public static DisplayParty displayParty;
     public static int currentCorridorId;
     public static bool partyIsInFightMode;
 
@@ -31,6 +32,7 @@ public class FightMode : MonoBehaviour {
         buttonForCameraMovement = GameObject.Find("MoveRightButton").GetComponent<ButtonForCameraMovement>();
         buttonForUsage = GameObject.Find("UseButton").GetComponent<ButtonForUsage>();
         objectSelector = dungeonCanvas.GetComponent<ObjectSelector>();
+        displayParty = dungeonCanvas.GetComponent<DisplayParty>();
         partyIsInFightMode = false;
         enemyPossitionsBeforeFight = new float[4];
         colidedWithPartyNumber = 0;
@@ -128,10 +130,15 @@ public class FightMode : MonoBehaviour {
 
     public void loadFightMode(int idOfEnemyParty)
     {
-        //objectSelector.loadHeroPossition();
         objectSelector.loadEnemyPossition(currentCorridorId, idOfEnemyParty);
+
         //Type of 2 means fightMode
         dungeonsGenerator.loadFightLevel(currentCorridorId, idOfEnemyParty);
+
+        //We are calling displayParty class to create health bars for heroes in fight scene
+        displayParty.displayHealthBarsOnHeroes(true);
+        objectSelector.initializeHighlightOnFirstEnemy();
+
         //previousCorridorId = currentCorridorId;
         //currentCorridorId = choosenCorridorId;
         //Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || currentCorridorNumber: " + currentCorridorId);

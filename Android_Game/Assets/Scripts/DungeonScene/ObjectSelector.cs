@@ -20,6 +20,7 @@ public class ObjectSelector : MonoBehaviour {
     private static GameObject tempObject;
     private static int idOfCorridor;
     private static int idOfEnemyParty;
+    private static int idOfChoosenEnemy;
 
     // Use this for initialization
     void Start () {
@@ -159,7 +160,7 @@ public class ObjectSelector : MonoBehaviour {
                 GameObject tempObject = GameObject.Find("EnemyObject_" + idOfEnemyParty + "." + i);
                 enemyObjectsArray[i].setPositionOfObject(tempObject.transform.localPosition);
                 
-                Debug.Log("Touch position x: " + touchInWorld.x);
+                //Debug.Log("Touch position x: " + touchInWorld.x);
                 //Debug.Log("Touch position y: " + touchInWorld.y);
                 /*
                 Debug.Log("Touch position X1: " + touchInWorld.x + " > " + (halfOfCanvasWidth - ((3 - 0 + 1) * scaledSpaceBetweenEnemies - halfOfSpaceBetweenEnemies)) * (-1));
@@ -177,140 +178,39 @@ public class ObjectSelector : MonoBehaviour {
                     //enemyHighlightMask.transform.localPosition = enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject();
                     enemyHighlightMask.transform.localPosition = new Vector3((CanvasWidth / 2 - ((4-(3-i))*scaledSpaceBetweenEnemies )- ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies)), enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().y, enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject().z);
                     enemyHighlightMask.SetActive(true);
+                    idOfChoosenEnemy = (enemyObjectsArray.Count - i - 1);
                     //Debug.Log("Position of highlight: " + enemyObjectsArray[enemyObjectsArray.Count - i - 1].getPositionOfObject());
                 }
             }
         }
     }
 
-/*
-public void checkIfIsTouched()
-{
-    if (Input.touchCount > 0)
+    public void initializeHighlightOnFirstEnemy()
     {
-        Touch touch = Input.GetTouch(0);
-        //Debug.Log("Touch position x: " + touch.position.x);
-        //Debug.Log("Touch position y: " + touch.position.y);
-        float halfOfCanvasWidth = (float)(dungeonCanvas.GetComponent<RectTransform>().rect.width * (-0.5));
-        float canvasWidthInWorldScale = dungeonCanvas.GetComponent<RectTransform>().rect.width * dungeonCanvas.GetComponent<RectTransform>().localScale.x;
-        float canvasHeightInWorldScale = dungeonCanvas.GetComponent<RectTransform>().rect.height * dungeonCanvas.GetComponent<RectTransform>().localScale.y;
-        //Vector3 touchInWorld = Camera.main.ScreenToWorldPoint(touch.position);
-        Vector3 touchInWorld = Camera.main.ScreenToWorldPoint(touch.position);
-        Vector3 canvasVector = dungeonCanvas.GetComponent<RectTransform>().position;
+        float scaledSpaceBetweenEnemies = 90 * 5 / 7;
+        float CanvasWidth = GameObject.Find("Dungeon").GetComponent<RectTransform>().rect.width;
+        //Dev value for setting is as -100
+        float localHeight = -100;
 
-
-        Debug.Log("Touch position x: " + touchInWorld.x);
-        Debug.Log("Touch position y: " + touchInWorld.y);
-        Debug.Log("Canvas caled width: " + Camera.main.transform.TransformPoint(new Vector3 (Camera.main.pixelWidth,1,1)).x);
-        Debug.Log("Canvas width: " + canvasWidthInWorldScale);
-        Debug.Log("Canvas height: " + canvasHeightInWorldScale);
-        Debug.Log("Canvas width vector: " + canvasVector.x);
-        //Debug.Log("Enemy pos x: " + (halfOfCanvasWidth - (4 * scaledSpaceBetweenEnemies)) + " to " + (halfOfCanvasWidth - ((3) * scaledSpaceBetweenEnemies)));
-        //Debug.Log("Enemy pos2 x: " + Camera.main.WorldToViewportPoint(enemyObjectsArray[1].getPositionOfObject()).x + " to " + (Camera.main.WorldToViewportPoint(enemyObjectsArray[1].getPositionOfObject()).x));
-        //Debug.Log("Enemy pos4 x: " + Camera.main.WorldToViewportPoint(enemyObjectsArray[3].getPositionOfObject()).x + " to " + (Camera.main.WorldToViewportPoint(enemyObjectsArray[3].getPositionOfObject()).x));
-
-
-        //90 is original space and we're scaling it by 5/7
-        //Now every point is countes in percentages (from toch input)
-        //We're gonna convert coordinates of the enemies also
-        //Percentages are measued in camera sca
-        //enemyObjectArray[i].transform.localPosition = new Vector3(halfOfCanvasWidth - ((3 - i + 1) * scaledSpaceBetweenEnemies), -100, 0);
-        Debug.Log("Enemy pos1: " + enemyObjectsArray[0].getPositionOfObject().x);
-        Debug.Log("EnemyWidth pos1: " + enemyObjectsArray[0].getObjectWidth()/2);
-        Debug.Log("Canvas width1: " + canvasWidthInWorldScale);
-        Debug.Log("Canvas width vector: " + canvasVector.x);
-
-        for (int i = 0; i < enemyObjectsArray.Count; i++)
-        {
-            //float initialPositionX = Camera.main.transform.InverseTransformPoint(enemyObjectsArray[i].getPositionOfObject()).x - Camera.main.transform.InverseTransformPoint(new Vector3(enemyObjectsArray[i].getObjectWidth() / 2,1,1)).x;
-            float initialPositionX = (float)(enemyObjectsArray[i].getPositionOfObject().x - enemyObjectsArray[i].getObjectWidth());
-
-            float rightBoundPositionX = 0;
-            if (i == enemyObjectsArray.Count - 1)
-            {
-                //rightBoundPositionX = enemyObjectsArray[i].getPositionOfObject().x + enemyObjectsArray[i].getObjectWidth() / 2;
-                rightBoundPositionX = enemyObjectsArray[i].getPositionOfObject().x + enemyObjectsArray[i].getObjectWidth();
-            }
-            else
-            {
-                rightBoundPositionX = initialPositionX - (Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).x - Camera.main.transform.TransformPoint(enemyObjectsArray[i+1].getPositionOfObject()).x);
-            }
-            float initialPositionY = Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).y - enemyObjectsArray[i].getObjectHeight() / 2;
-            float rightBoundPositionY = Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).y + enemyObjectsArray[i].getObjectHeight() / 2;
-            Debug.Log("Enemy pos x: " + initialPositionX + " " + rightBoundPositionX);
-            Debug.Log("Enemy pos y: " + initialPositionY + " " + rightBoundPositionY);
-
-            if ((touchInWorld.x > initialPositionX)&&(touchInWorld.x <= rightBoundPositionX))
-            //&&
-            //(touchInWorld.y < initialPositionY)&&(touchInWorld.y >= rightBoundPositionY))
-            {
-                Debug.Log("I choose you enemy pokemon no. " + i);
-        }
-        }
-        //for (int i = 0; i < heroObjectsArray.Count; i++)
-        //{
-
-        //}
+        Debug.Log("ObjectSelector || initializeHighlightOnFirstEnemy || enemyObjectsArray Count: " + enemyObjectsArray.Count);
+        enemyHighlightMask.transform.localPosition = new Vector3((CanvasWidth / 2 - ((4 - 3 + enemyObjectsArray.Count - 1) * scaledSpaceBetweenEnemies) - ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies)), localHeight, enemyObjectsArray[0].getPositionOfObject().z);
+        enemyHighlightMask.SetActive(true);
     }
-}
-}*/
-    /*
-        public void checkIfIsTouched()
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                Vector3 touchInWorld = Camera.main.ScreenToWorldPoint(touch.position);
 
+    public int getIdOfCorridor()
+    {
+        return idOfCorridor;
+    }
 
-                Debug.Log("Touch position x: " + touchInWorld.x);
-                Debug.Log("Touch position y: " + touchInWorld.y);
-                Debug.Log("Enemy position x from object: " + enemyObjectsArray[0].getPositionOfObject().x);
-                Debug.Log("EnemyWidth from object: " + enemyObjectsArray[0].getObjectWidth());
+    public int getIdOfEnemyParty()
+    {
+        return idOfEnemyParty;
+    }
 
-                float enemyWidths;
-
-                for (int i = 0; i < enemyObjectsArray.Count; i++)
-                {
-                    //float initialPositionX = Camera.main.transform.InverseTransformPoint(enemyObjectsArray[i].getPositionOfObject()).x - Camera.main.transform.InverseTransformPoint(new Vector3(enemyObjectsArray[i].getObjectWidth() / 2,1,1)).x;
-                    float initialPositionX = (float)(enemyObjectsArray[i].getPositionOfObject().x);
-
-                    float rightBoundPositionX = 0;
-                    if (i == enemyObjectsArray.Count - 1)
-                    {
-                        //rightBoundPositionX = enemyObjectsArray[i].getPositionOfObject().x + enemyObjectsArray[i].getObjectWidth() / 2;
-                        rightBoundPositionX = enemyObjectsArray[i].getPositionOfObject().x + enemyObjectsArray[i].getObjectWidth();
-                    }
-                    else
-                    {
-                        rightBoundPositionX = initialPositionX - (Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).x - Camera.main.transform.TransformPoint(enemyObjectsArray[i + 1].getPositionOfObject()).x);
-                    }
-                    float initialPositionY = Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).y - enemyObjectsArray[i].getObjectHeight() / 2;
-                    float rightBoundPositionY = Camera.main.transform.TransformPoint(enemyObjectsArray[i].getPositionOfObject()).y + enemyObjectsArray[i].getObjectHeight() / 2;
-                    /*Debug.Log("-----------------------");
-                    Debug.Log("Enemy pos x: " + initialPositionX + " " + rightBoundPositionX);
-                    Debug.Log("Enemy pos y: " + initialPositionY + " " + rightBoundPositionY);
-                    Debug.Log("Enemy pos x ob: " + enemyObjectsArray[i].getPositionOfObject().x);
-                    Debug.Log("Enemy pos y ob: " + enemyObjectsArray[i].getPositionOfObject().y);
-                    Debug.Log("EnemyWidth from object: " + enemyObjectsArray[i].getObjectWidth());
-                    Debug.Log("-----------------------");*/
-
-    /*
-
-                if ((touchInWorld.x > initialPositionX - (2)) && (touchInWorld.x <= initialPositionX - (i*2)))
-                //&&
-                //(touchInWorld.y < initialPositionY)&&(touchInWorld.y >= rightBoundPositionY))
-                {
-                    Debug.Log("I choose you enemy pokemon no. " + i);
-                }
-                Debug.Log("Enemy pos x: " + (initialPositionX - 2) + " " + (initialPositionX - i*2));
-            }
-            //for (int i = 0; i < heroObjectsArray.Count; i++)
-            //{
-
-            //}
-        }
-    }*/
+    public int getIdOfChoosenEnemy()
+    {
+        return idOfChoosenEnemy;
+    }
 }
 
 public class FightModeObject
@@ -368,5 +268,4 @@ public class FightModeObject
     {
         return objectType;
     }
-
 }

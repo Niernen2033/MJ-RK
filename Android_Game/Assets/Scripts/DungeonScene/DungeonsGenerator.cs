@@ -25,6 +25,7 @@ public class DungeonsGenerator : MonoBehaviour
     private static ButtonForCameraMovement movementButton;
     private static EnemyGenerator enemyGen;
     private static FightMode fightMode;
+    private static DisplayParty displayParty;
 
     private static GameObject buttonForUsage;
     private static GameObject buttonForCameraMovementLeft;
@@ -35,24 +36,6 @@ public class DungeonsGenerator : MonoBehaviour
     private static bool loadingHasFinished;
 
     private System.Random randomNumber;
-
-    public void Reset()
-    {
-        //Getting dungeonManager to acces his variables
-        dungeonCanvas = GameObject.Find("Dungeon");
-        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
-        dungeonLevelChunks = dungeonManager.getLevelChunks();//Not sure now if needed
-        //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
-        //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
-        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
-        generationDecission();
-    }
-
-    public bool ResetWithReturn()
-    {
-        Reset();
-        return true;
-    }
 
     public void Start()
     {
@@ -93,6 +76,7 @@ public class DungeonsGenerator : MonoBehaviour
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         fightMode = dungeonCanvas.GetComponent<FightMode>();
         enemyGen = dungeonCanvas.GetComponent<EnemyGenerator>();
+        displayParty = dungeonCanvas.GetComponent<DisplayParty>();
         loadingHasFinished = false;
 
         generationDecission();
@@ -102,6 +86,24 @@ public class DungeonsGenerator : MonoBehaviour
     void Update()
     {
         //Debug.Log("-----------------------CorridorList straight length: " + getCorridorList().Count);
+    }
+
+    public void Reset()
+    {
+        //Getting dungeonManager to acces his variables
+        dungeonCanvas = GameObject.Find("Dungeon");
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        dungeonLevelChunks = dungeonManager.getLevelChunks();//Not sure now if needed
+        //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
+        //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
+        generationDecission();
+    }
+
+    public bool ResetWithReturn()
+    {
+        Reset();
+        return true;
     }
 
     public void clearingPreviousSpriteObjects(int previousIdOfCorridor)
@@ -146,6 +148,11 @@ public class DungeonsGenerator : MonoBehaviour
 
                 Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying " + "EnemyObject_" + i + "." + j);
             }
+        }
+
+        for (int i = 0; i < displayParty.getNumberOfCreatedHealthbars(); i++)
+        {
+            Destroy(GameObject.Find("HeroHealthBar_" + i));
         }
     }
 

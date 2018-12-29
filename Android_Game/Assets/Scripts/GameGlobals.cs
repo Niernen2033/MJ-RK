@@ -39,5 +39,5 @@ public static class GameGlobals
         return result;
     }
 
-    public static bool IsDebugState { get; } = true;
+    public static bool IsDebugState { get; } = false;
 }

@@ -174,8 +174,9 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         if(dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]<0)
         {
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] = 0;
+            dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].destroyEnemyObject(idOfCorridor, idOfEnemyParty, idOfChoosenEnemy);
         }
-        Debug.Log("ButtonForChargingAtack || hideChargeBar || HP AFTER: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
+        //Debug.Log("ButtonForChargingAtack || hideChargeBar || HP AFTER: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
         return true;
     }
 

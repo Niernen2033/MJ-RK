@@ -45,6 +45,8 @@ public class ObjectSelector : MonoBehaviour {
 
     public void loadEnemyPossition(int idOfCorridorTemp, int idOfEnemyPartyTemp)
     {
+        enemyObjectsArray.Clear();
+
         idOfCorridor = idOfCorridorTemp;
         idOfEnemyParty = idOfEnemyPartyTemp;
         for(int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getSpecificEnemyParty(idOfEnemyParty).getEnemyObjectArray().Count; i++)

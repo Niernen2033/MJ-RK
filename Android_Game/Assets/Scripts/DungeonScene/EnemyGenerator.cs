@@ -53,6 +53,7 @@ public class EnemyParty{
 
     private static DungeonManager dungeonManager;
     private static FightMode fightMode;
+    private static ObjectSelector objectSelector;
 
 public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, int idOfParty)
     {
@@ -61,14 +62,15 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
         enemyHealthArray = new List<int>();
         enemyMaxHealthArray = new List<int>();
 
+        randomNumber = new System.Random(DateTime.Now.Millisecond + milisecondsForRand);
 
-    randomNumber = new System.Random(DateTime.Now.Millisecond + milisecondsForRand);
         //It is length in number of chunks
         this.idOfCorridor = idOfCorridor;
         this.idOfParty = idOfParty;
         dungeonManager = GameObject.Find("Dungeon").GetComponent<DungeonManager>();
         this.lengthOfCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();
         fightMode = GameObject.Find("Dungeon").GetComponent<FightMode>();
+        objectSelector = GameObject.Find("Dungeon").GetComponent<ObjectSelector>();
 
         sizeOfParty = randomNumber.Next(minimalSizeOfParty, maximalSizeOfParty);
 
@@ -326,6 +328,32 @@ public EnemyParty(int idOfCorridor, int howManyPartiesAlreadyExistsOnThisLevel, 
                 //enemyObjectArray[i].transform.parent = null;
             }
         }
+    }
+
+    public void destroyEnemyObject(int idOfCorridor, int idOfEnemyParty, int idOfChoosenEnemy)
+    {
+        dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().RemoveAt(idOfChoosenEnemy);
+        dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyMaxHealthArray().RemoveAt(idOfChoosenEnemy);
+        dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray().RemoveAt(idOfChoosenEnemy);
+        //I will let health destroy itsellf after fight
+        Debug.Log("EnemyGenerator || destroyEnemyObject || Destroying enemyObject no. " + idOfEnemyParty + "." + idOfChoosenEnemy);
+        UnityEngine.Object.Destroy(GameObject.Find("EnemyObject_" + idOfEnemyParty + "." + idOfChoosenEnemy));
+        //Previous health bar is taking over deleted one so we can get rid of only last one
+        UnityEngine.Object.Destroy(GameObject.Find("EnemyHealthBar_" + idOfEnemyParty + "." + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count));
+
+        float scaledSpaceBetweenEnemies = 90 * 5 / 7;
+
+        for (int i=0;i< dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count+1; i++)
+        {
+            if (i != idOfChoosenEnemy && i > idOfChoosenEnemy)
+            {
+                GameObject tempObject = GameObject.Find("EnemyObject_" + idOfEnemyParty + "." + i);
+                tempObject.transform.localPosition = new Vector3(tempObject.transform.localPosition.x - scaledSpaceBetweenEnemies, tempObject.transform.localPosition.y, tempObject.transform.localPosition.z);
+                //Filling the name gap
+                tempObject.name = ("EnemyObject_" + idOfEnemyParty + "." + (i-1));
+            }
+        }
+        objectSelector.loadEnemyPossition(idOfCorridor, idOfEnemyParty);
     }
 
     public void setLengthOfCorridor(int lengthToSet)

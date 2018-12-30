@@ -207,24 +207,6 @@ public class DungeonsGenerator : MonoBehaviour
             }
             Debug.Log("Possition after step back: " + Camera.main.transform.position.x);
             StartCoroutine(WaitASecond());
-            //fightMode.setPartyIsInFightMode(false);
-
-            //Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Reset && Generate position!");
-            //fightMode.setPartyIsInFightMode(false);
-            //buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().getThemStepBackAfterFight();
-            //resetAfterFightModeScene();
-
-            //fightMode.setPartyIsInFightMode(false);
-            //generateFightModeScene(idOfCorridor, );
-            //Apply some kind of fancy transition
-            //Display enemies
-            //Display heroes
-            //Display GUI
-
-
-
-            //Reset();
-            //now we also wanna disable buttons and so on
         }
     }
 
@@ -246,18 +228,8 @@ public class DungeonsGenerator : MonoBehaviour
         buttonForAtackCharging.SetActive(true);
 
         int previousIdOfCorridor = idOfCorridor;
-        //idOfCorridor = Id;
         clearingPreviousSpriteObjects(previousIdOfCorridor);
         generateFightModeScene(idOfCorridor, idOfEnemyParty);
-        //Apply some kind of fancy transition
-        //Display enemies
-        //Display heroes
-        //Display GUI
-
-
-
-        //Reset();
-        //now we also wanna disable buttons and so on
     }
 
     public int getLeftBoundPossition()
@@ -395,6 +367,7 @@ public class DungeonsGenerator : MonoBehaviour
         //Setting possition, naming new object and making it active in inspector
         producedChunks[i].getProducedObject().transform.Translate(Vector2.right * chunkWidth * i);
         producedChunks[i].getProducedObject().name = "DungeonChunk_" + i.ToString();
+        producedChunks[i].getProducedObject().transform.localScale = new Vector3((float)0.975, (float)1.12, 1);
         producedChunks[i].getProducedObject().SetActive(true);
 
         //After generating last chunk we are generating border chunks
@@ -450,13 +423,7 @@ public class DungeonsGenerator : MonoBehaviour
 
         for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count; i++)
         {
-            //Here im changing their possition (MIGHT OVERRIDE IT)
-            //encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3(halfOfCanvasWidth + ((i + 1) * scaledSpaceBetweenHeroes), 0, 0);
             Debug.Log("EnemyObject_" + idOfEnemyParty + "." + i);
-            //GameObject tempEnemyObject = GameObject.Find("EnemyObject_" + idOfEnemyParty + "." + i);
-
-            //tempEnemyObject.transform.SetParent(GameObject.Find("Dungeon").transform, false);
-            //encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3( ((i + 1) * scaledSpaceBetweenHeroes) + halfOfCanvasWidth - encounteredEnemyParty.getEnemyObjectArray()[i].transform.localPosition.x, 0, 0);
         }
     }
 
@@ -527,6 +494,8 @@ public class DungeonsGenerator : MonoBehaviour
                 producedChunks[objectsToGenerate + i].getProducedObject().transform.Translate(Vector2.right * rightBoundPossitionForGenerator);
                 producedChunks[objectsToGenerate + i].getProducedObject().name = "DungeonChunkExit";
             }
+            //Adjusting their size
+            producedChunks[objectsToGenerate + i].getProducedObject().transform.localScale = new Vector3((float)0.975, (float)1.12, 1);
             producedChunks[objectsToGenerate + i].getProducedObject().SetActive(true);
         }
     }

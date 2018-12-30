@@ -36,62 +36,50 @@ namespace MainMenuScene
 
         private void SetUpSaves()
         {
-            //we dont chave global folder to save
-            if (!Directory.Exists(SaveInfo.Paths.GlobalFolder))
-            {
-                //we dont have global folder to save so we can only create it
-                Directory.CreateDirectory(SaveInfo.Paths.GlobalFolder);
+            List<string> allSavesFolderDirectories = Directory.GetDirectories(SaveInfo.Paths.GlobalFolder).ToList();
 
+            //we dont have game profiles
+            if (allSavesFolderDirectories.Count == 0)
+            {
                 this.continueGameButton.interactable = false;
                 this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
             }
-            //we chave global folder to save
+            //we have game profiles
             else
             {
-                List<string> allSavesFolderDirectories = Directory.GetDirectories(SaveInfo.Paths.GlobalFolder).ToList();
+                this.continueGameButton.interactable = false;
+                this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
 
-                //we dont have game profiles
-                if (allSavesFolderDirectories.Count == 0)
+                //check if we have game saves
+                foreach (string saveFile in allSavesFolderDirectories)
                 {
-                    this.continueGameButton.interactable = false;
-                    this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
-                }
-                //we have game profiles
-                else
-                {
-                    this.continueGameButton.interactable = false;
-                    this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
+                    List<string> filesPathInSaveFile = Directory.GetFiles(saveFile).ToList();
 
-                    //check if we have game saves
-                    foreach (string saveFile in allSavesFolderDirectories)
+                    foreach (string savePath in filesPathInSaveFile)
                     {
-                        List<string> filesPathInSaveFile = Directory.GetFiles(saveFile).ToList();
-
-                        foreach (string savePath in filesPathInSaveFile)
+                        if (savePath.Contains(".xml") && !savePath.Contains(".meta"))
                         {
-                            if (savePath.Contains(".xml") && !savePath.Contains(".meta"))
+                            if (!GameSave.Instance.Load(savePath))
                             {
-                                if (!GameSave.Instance.Load(savePath))
-                                {
-                                    Debug.Log("Class: 'Menu' in 'SetUpSavesAndScenes' function: Cannot load save file in folder" + savePath);
-                                    continue;
-                                }
-
-                                this.saveMembers.Add(new SaveMember(GameSave.Instance.Texture, GameSave.Instance.Name, savePath));
+                                Debug.Log("Class: 'Menu' in 'SetUpSavesAndScenes' function: Cannot load save file in folder" + savePath);
+                                continue;
                             }
-                        }
-                    }
 
-                    //check if this save is active save
-                    if (ProfileSave.Instance.AcctualSavePath != null)
-                    {
-                        if (File.Exists(ProfileSave.Instance.AcctualSavePath))
-                        {
-                            this.continueGameButton.interactable = true;
-                            this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.9372549f, 1f, 0f);
+                            this.saveMembers.Add(new SaveMember(GameSave.Instance.Texture, GameSave.Instance.Name, savePath));
                         }
                     }
                 }
+
+                //check if this save is active save
+                if (ProfileSave.Instance.AcctualSavePath != null)
+                {
+                    if (File.Exists(ProfileSave.Instance.AcctualSavePath))
+                    {
+                        this.continueGameButton.interactable = true;
+                        this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.9372549f, 1f, 0f);
+                    }
+                }
+
             }
         }
 
@@ -162,6 +150,17 @@ namespace MainMenuScene
 
         private void LoadSceneData()
         {
+            //we dont chave global folder to save
+            if (!Directory.Exists(SaveInfo.Paths.GlobalFolder))
+            {
+                //we dont have global folder to save so we can only create it
+                Directory.CreateDirectory(SaveInfo.Paths.GlobalFolder);
+
+                this.continueGameButton.interactable = false;
+                this.continueGameButton.GetComponentInChildren<Text>().color = new Color(0.6352941f, 0.6431373f, 0.5411765f);
+            }
+            //=========================================================================================
+
             if (!ProfileSave.Instance.Load())
             {
                 Debug.Log("Trying to create profile save");

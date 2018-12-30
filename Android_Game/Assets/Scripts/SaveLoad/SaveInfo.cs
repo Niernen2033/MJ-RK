@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace SaveLoad
 {
@@ -11,7 +12,20 @@ namespace SaveLoad
         //class
         public static class Paths
         {
-            public static readonly string GlobalFolder = @"Assets/Saves/";
+            public static string GlobalFolder
+            {
+                get
+                {
+                    if(GameGlobals.IsAndroidBuild)
+                    {
+                        return Application.persistentDataPath + "/";
+                    }
+                    else
+                    {
+                        return @"Assets/Saves/";
+                    }
+                }
+            }
             public static readonly string ResourcesFolder = @"Assets/Resources/";
             public static class Resources
             {

@@ -232,11 +232,6 @@ namespace MainMenuScene
 
         public void InvokePlayGame()
         {
-            if (GameGlobals.IsDebugState)
-            {
-                ProfileSave.Instance.AcctualSavePath = @"D:\Repos\MJ-RK\Android_Game\Assets\Saves\testy\tt.xml";
-                ProfileSave.Instance.Update();
-            }
             GameSave.Instance.Load(ProfileSave.Instance.AcctualSavePath);
             SceneManager.LoadScene((int)GameGlobals.SceneIndex.CityScene);
         }

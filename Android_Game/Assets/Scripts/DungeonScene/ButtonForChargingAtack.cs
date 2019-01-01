@@ -11,6 +11,8 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
     private static ObjectSelector objectSelector;
     private static DungeonManager dungeonManager;
     private static DisplayParty displayParty;
+    private static DungeonsGenerator dungeonsGenerator;
+    private static FightMode fightMode;
     private static string filePath;
     private static string[] typeOfElement;
     private static GameObject factoryObject;
@@ -21,6 +23,7 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
     private static bool chargeReachedPeak;
     private static float speedTimer;
     private static float chargeMultiplier;
+    private static bool enemyIsWipedOut;
     //timeLimit is for actualization every few frames
     private const double timeLimit = 0.025;
     private const float speedOfCharging = 0.1f;
@@ -41,6 +44,8 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         objectSelector = dungeonCanvas.GetComponent<ObjectSelector>();
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         displayParty = dungeonCanvas.GetComponent<DisplayParty>();
+        dungeonsGenerator = dungeonCanvas.GetComponent<DungeonsGenerator>();
+        fightMode = dungeonCanvas.GetComponent<FightMode>();
         buttonForAtackCharging.SetActive(false);
         buttonIsHeld = false;
         chargeReachedPeak = false;
@@ -155,8 +160,30 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         Debug.Log("ButtonForChargingAtack || destroyChargeBar || chargeMultiplier " + (int)(chargeMultiplier*100/3.999998));
         bool initialized = false;
         initialized = dealDamageToMarkedEnemy();
-        StartCoroutine(WaitForDamageDealInitialization(initialized));
-        chargeMultiplier = 0;
+
+        //If choosen enemy is not last in the queue
+        if (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count != idOfChoosenEnemy)
+        {
+            StartCoroutine(WaitForDamageDealInitialization(initialized));
+            chargeMultiplier = 0;
+        }
+        else if (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count != 0)
+        {
+            objectSelector.initializeHighlightOnFirstEnemy();
+        }
+        else
+        {
+            GameObject.Find("EnemyHighlightMaskObject").SetActive(false);
+            dungeonsGenerator.loadAnotherLevel(fightMode.getCurrentCorridorId(), 2);
+        }
+
+        //Destroying empty party
+        if (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count == 0)
+        {
+            dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().RemoveAt(idOfEnemyParty);
+            Debug.Log("ButtonForChargingAtack || dealDamageToMarkedEnemy || Party destroyed!");
+        }
+
         chargeBar.SetActive(false);
         chargeBarPointer.SetActive(false);
         Debug.Log("ButtonForChargingAtack || hideChargeBar || ChargeBar hidden!");
@@ -168,13 +195,14 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         idOfEnemyParty = objectSelector.getIdOfEnemyParty();
         idOfChoosenEnemy = objectSelector.getIdOfChoosenEnemy();
 
-        Debug.Log("ButtonForChargingAtack || hideChargeBar || HP BEFORE: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
+        Debug.Log("ButtonForChargingAtack || dealDamageToMarkedEnemy || HP BEFORE: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
 
         dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] -= (int)(chargeMultiplier * 100 / 3.999998);
         if(dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]<0)
         {
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] = 0;
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].destroyEnemyObject(idOfCorridor, idOfEnemyParty, idOfChoosenEnemy);
+            objectSelector.initializeHighlightOnFirstEnemy();
         }
         //Debug.Log("ButtonForChargingAtack || hideChargeBar || HP AFTER: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
         return true;

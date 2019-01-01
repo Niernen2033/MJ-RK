@@ -8,7 +8,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
 {
     private GameObject dungeonCanvas;
     private DungeonsGenerator dungeonGenerator;
-    private static GameObject[] heroesObjects;
+    private static List<GameObject> heroesObjects;
     private SpriteRenderer render;
     private static ButtonForUsage buttonForUsage;
 
@@ -62,11 +62,11 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
         buttonForUsage = GameObject.Find("UseButton").GetComponent<ButtonForUsage>();
         isFacingRight = true;
 
-        heroesObjects = new GameObject[sizeOfParty];
+        heroesObjects = new List<GameObject>();
 
         for (int i = 0; i < sizeOfParty; i++)
         {
-            heroesObjects[i] = GameObject.Find("HeroObject" + (i + 1).ToString());
+            heroesObjects.Add(GameObject.Find("HeroObject" + (i + 1).ToString()));
         }
 
         focusedHeroPosition = heroesObjects[0].transform.position.x;
@@ -98,7 +98,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                         if (isFacingRight == false)
                         {
                             Debug.Log("ButtonForCameraMovement || Camera x:" + focusedHeroPosition);
-                            for (int i = 0; i < sizeOfParty; i++)
+                            for (int i = 0; i < heroesObjects.Count; i++)
                             {
                                 if (heroesObjects[i].transform.position.x < Camera.main.transform.position.x)
                                 {
@@ -113,7 +113,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                             }
                             isFacingRight = true;
                             Debug.Log("ButtonForCameraMovement || Last camera coords: " + Camera.main.transform.position.x + " and hero coords ");
-                            for (int i = 0; i < sizeOfParty; i++)
+                            for (int i = 0; i < heroesObjects.Count; i++)
                             {
                                 Debug.Log(" " + heroesObjects[i].transform.position.x + ",");
                             }
@@ -130,7 +130,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
 
                         if (isFacingRight == true)
                         {
-                            for (int i = 0; i < sizeOfParty; i++)
+                            for (int i = 0; i < heroesObjects.Count; i++)
                             {
                                 if (heroesObjects[i].transform.position.x < Camera.main.transform.position.x)
                                 {
@@ -160,7 +160,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
         sizeOfParty = sizeOfPartyToSet;
     }
 
-    public void setHeroesObjects(GameObject[] heroesObjectsToSet)
+    public void setHeroesObjects(List<GameObject> heroesObjectsToSet)
     {
         heroesObjects = heroesObjectsToSet;
     }
@@ -175,7 +175,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
         return sizeOfParty;
     }
 
-    public GameObject[] getHeroesObjects()
+    public List<GameObject> getHeroesObjects()
     {
         return heroesObjects;
     }

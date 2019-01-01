@@ -70,9 +70,9 @@ public class DungeonsGenerator : MonoBehaviour
 
         //Getting dungeonManager to acces his variables
         dungeonCanvas = GameObject.Find("Dungeon");
-        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();//YET NEEDED
-        dungeonLevelChunks = dungeonManager.getLevelChunks();//YET NEEDED
-        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
+        dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
+        dungeonLevelChunks = dungeonManager.getLevelChunks();
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
         fightMode = dungeonCanvas.GetComponent<FightMode>();
         enemyGen = dungeonCanvas.GetComponent<EnemyGenerator>();
@@ -411,7 +411,7 @@ public class DungeonsGenerator : MonoBehaviour
         int[] heroesOrder = { 3, 1, 0, 2 };
 
         //After generating last chunk we are generating border chunks
-        for (int i = 0; i < movementButton.getHeroesObjects().Length; i++)
+        for (int i = 0; i < movementButton.getHeroesObjects().Count; i++)
         {
             movementButton.getHeroesObjects()[heroesOrder[3 - i]].transform.localPosition = new Vector3(halfOfCanvasWidth + (((3 - i) + 1) * scaledSpaceBetweenHeroes), movementButton.getHeroesObjects()[heroesOrder[3 - i]].transform.localPosition.y, 0);
             //Now i'm gonna scale it down to 5/7 of the original size (35)
@@ -430,11 +430,15 @@ public class DungeonsGenerator : MonoBehaviour
     public void resetAfterFightModeScene()
     {
         int[] arrayOfPossitions = { 0, -90, 90, -180 };
-        for (int i = 0; i < movementButton.getHeroesObjects().Length; i++)
+        //for (int i = 0; i < movementButton.getHeroesObjects().Length; i++)
+        for (int i = 0; i < displayParty.getNumberOfHeroesAlive(); i++)
         {
-            movementButton.getHeroesObjects()[i].transform.localPosition = new Vector3(arrayOfPossitions[i], movementButton.getHeroesObjects()[i].transform.localPosition.y, 0);
-            //Now i'm gonna scale it down to 5/7 of the original size (35)
-            movementButton.getHeroesObjects()[i].transform.localScale = new Vector3(35, 35, 1);
+            if (displayParty.getHeroIsAlive()[i] == true)
+            {
+                movementButton.getHeroesObjects()[i].transform.localPosition = new Vector3(arrayOfPossitions[i], movementButton.getHeroesObjects()[i].transform.localPosition.y, 0);
+                //Now i'm gonna scale it down to 5/7 of the original size (35)
+                movementButton.getHeroesObjects()[i].transform.localScale = new Vector3(35, 35, 1);
+            }
         }
         Debug.Log("DungeonsGenerator || resetAfterFightModeScene || Heroes objects reset!");
 

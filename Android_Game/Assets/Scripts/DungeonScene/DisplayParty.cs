@@ -1,7 +1,9 @@
 ﻿using NPC;
+using SaveLoad;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DisplayParty : MonoBehaviour
 {
@@ -16,12 +18,16 @@ public class DisplayParty : MonoBehaviour
 
     //For dev purposes
     private static List<double> heroMaxHealth;
+    private static int[] heroPositionMap = { 1, 2, 0, 3 };
 
     private static int numberOfHeroesAlive;
+    private static bool[] heroIsAlive = { true, true, true, true };
     private static int numberOfCreatedHealthbars;
     //Array of health bars of heroes
     private List<GameObject> healthBarObjectsArray;
     private static GameObject factoryObject;
+    private static ButtonForCameraMovement movementButton;
+
 
     void Start()
     {
@@ -31,6 +37,7 @@ public class DisplayParty : MonoBehaviour
         string filePath = "HeroesModels/";
         string[] typeOfDungeonTexture = { "Knight", "Rogue", "Lord", "Priest" };
         healthBarObjectsArray = new List<GameObject>();
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();
 
         for (int i = 0; i < numberOfHeroesAlive; i++)
         {
@@ -111,6 +118,7 @@ public class DisplayParty : MonoBehaviour
                 healthBarObjectsArray[i].transform.localScale = new Vector3(500, 500, 1);
             }
         }
+        actualizeHealthBars();
     }
 
     //Call it to 
@@ -132,10 +140,24 @@ public class DisplayParty : MonoBehaviour
         double valueAfterInjure = heroStatsObject[idOfHero].Vitality.Acctual - amountOfDamage;
         if(valueAfterInjure <= 0)
         {
+            /*
             valueAfterInjure = 0;
+            heroIsAlive[idOfHero] = false;
+            numberOfHeroesAlive--;
+            destroyHeroObject(idOfHero);
+            movementButton.getHeroesObjects().RemoveAt(idOfHero);
+            */
+            GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.CityScene;
+            GameSave.Instance.Update();
+            SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);
         }
         heroStatsObject[idOfHero].Vitality.ChangeAcctualValue(valueAfterInjure);
         actualizeHealthBars();
+    }
+
+    public void destroyHeroObject(int idOfHero)
+    {
+        Destroy(GameObject.Find("HeroObject" + (idOfHero + 1)));
     }
 
     public void setNumberOfHeroesAlive(int numberToSet)
@@ -156,5 +178,10 @@ public class DisplayParty : MonoBehaviour
     public int getNumberOfHeroesAlive()
     {
         return numberOfHeroesAlive;
+    }
+
+    public bool[] getHeroIsAlive()
+    {
+        return heroIsAlive;
     }
 }

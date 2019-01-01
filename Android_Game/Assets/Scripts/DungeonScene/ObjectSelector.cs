@@ -64,7 +64,7 @@ public class ObjectSelector : MonoBehaviour {
     {
         int[] heroesOrder = { 3, 1, 0, 2 };
 
-        for (int i=0; i<buttonForCameraMovement.getHeroesObjects().Length-1; i++)
+        for (int i=0; i<buttonForCameraMovement.getHeroesObjects().Count-1; i++)
         {
             GameObject tempObject = buttonForCameraMovement.getHeroesObjects()[heroesOrder[3 - i]];
             SpriteRenderer spriteRendererOfTempObject = tempObject.GetComponent<SpriteRenderer>();
@@ -195,7 +195,8 @@ public class ObjectSelector : MonoBehaviour {
         float localHeight = -100;
 
         Debug.Log("ObjectSelector || initializeHighlightOnFirstEnemy || enemyObjectsArray Count: " + enemyObjectsArray.Count);
-        enemyHighlightMask.transform.localPosition = new Vector3((CanvasWidth / 2 - ((4 - 3 + enemyObjectsArray.Count - 1) * scaledSpaceBetweenEnemies) - ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies)), localHeight, enemyObjectsArray[0].getPositionOfObject().z);
+        enemyHighlightMask.transform.localPosition = new Vector3((CanvasWidth / 2 - ((4 - 3 + enemyObjectsArray.Count - 1) * scaledSpaceBetweenEnemies) - ((4 - enemyObjectsArray.Count) * scaledSpaceBetweenEnemies)), localHeight, 1);
+        idOfChoosenEnemy = 0;
         enemyHighlightMask.SetActive(true);
     }
 
@@ -212,6 +213,11 @@ public class ObjectSelector : MonoBehaviour {
     public int getIdOfChoosenEnemy()
     {
         return idOfChoosenEnemy;
+    }
+
+    public void setIdOfChoosenEnemy(int idToSet)
+    {
+        idOfChoosenEnemy = idToSet;
     }
 }
 

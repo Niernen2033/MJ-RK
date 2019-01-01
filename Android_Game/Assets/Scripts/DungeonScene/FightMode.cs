@@ -68,20 +68,23 @@ public class FightMode : MonoBehaviour {
             //Checking what point of party is the furthest
             for (int i = 0; i < howManyHeroesAreThere; i++)
             {
-                if (i == 0)
+                if (displayParty.getHeroIsAlive()[i] == true)
                 {
-                    furthestPosition = GameObject.Find("HeroObject" + (i + 1)).transform.position.x;
-                    nearestPosition = furthestPosition;
-                }
-                else
-                {
-                    if (GameObject.Find("HeroObject" + (i + 1)).transform.position.x > furthestPosition)
+                    if (i == 0)
                     {
                         furthestPosition = GameObject.Find("HeroObject" + (i + 1)).transform.position.x;
+                        nearestPosition = furthestPosition;
                     }
-                    if (GameObject.Find("HeroObject" + (i + 1)).transform.position.x < furthestPosition)
+                    else
                     {
-                        nearestPosition = GameObject.Find("HeroObject" + (i + 1)).transform.position.x;
+                        if (GameObject.Find("HeroObject" + (i + 1)).transform.position.x > furthestPosition)
+                        {
+                            furthestPosition = GameObject.Find("HeroObject" + (i + 1)).transform.position.x;
+                        }
+                        if (GameObject.Find("HeroObject" + (i + 1)).transform.position.x < furthestPosition)
+                        {
+                            nearestPosition = GameObject.Find("HeroObject" + (i + 1)).transform.position.x;
+                        }
                     }
                 }
             }

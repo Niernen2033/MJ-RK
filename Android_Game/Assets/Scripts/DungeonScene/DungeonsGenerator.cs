@@ -46,7 +46,6 @@ public class DungeonsGenerator : MonoBehaviour
         //Static list of corridors
         corridorList = new List<Corridor>();
 
-        //Temporary const
         chunkWidth = 7;
 
         //It's template object for creating another chunks
@@ -85,7 +84,6 @@ public class DungeonsGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("-----------------------CorridorList straight length: " + getCorridorList().Count);
     }
 
     public void Reset()
@@ -93,10 +91,8 @@ public class DungeonsGenerator : MonoBehaviour
         //Getting dungeonManager to acces his variables
         dungeonCanvas = GameObject.Find("Dungeon");
         dungeonManager = dungeonCanvas.GetComponent<DungeonManager>();
-        dungeonLevelChunks = dungeonManager.getLevelChunks();//Not sure now if needed
-        //objectsToGenerate = dungeonLevelChunks[idOfCorridor].
-        //objectsToGenerate = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getNumberOfChunks();//Problem if it doesn't exist
-        movementButton = FindObjectOfType<ButtonForCameraMovement>();//Needs investigtion
+        dungeonLevelChunks = dungeonManager.getLevelChunks();
+        movementButton = FindObjectOfType<ButtonForCameraMovement>();
         generationDecission();
     }
 
@@ -128,7 +124,6 @@ public class DungeonsGenerator : MonoBehaviour
         //Destroying entrance and exit neighbours outside of corridor
         Destroy(GameObject.Find("DungeonChunkEntrance"));
         Destroy(GameObject.Find("DungeonChunkExit"));
-        //Destroy(GameObject.Find("New Game Object"));//It's needed when reloading another corridor
     }
 
     public void clearingPreviousSpriteObjects(int previousIdOfCorridor, int previousId)
@@ -137,7 +132,6 @@ public class DungeonsGenerator : MonoBehaviour
         Destroy(GameObject.Find("BattleBackgroundObject"));
         Debug.Log("DungeonsGenerator || clearingPreviousSpriteObjects || Destroying BattleBackgroundObject!");
 
-        //int previousCorridorId = fightMode.getPreviousCorridorId();
         //Destroys enemies objects iterating by party(i) and members of it(j)
         for (int i = 0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == previousId).getEnemyParties().Count; i++)
         {
@@ -191,8 +185,6 @@ public class DungeonsGenerator : MonoBehaviour
             buttonForCameraMovementLeft.GetComponent<ButtonForCameraMovement>().setIsButtonPressed(false);
             buttonForCameraMovementRight.GetComponent<ButtonForCameraMovement>().setIsButtonPressed(false);
             Debug.Log("DungeonsGenerator || loadAnotherLevel 2 || Deactivating move buttons!");
-            //fixEnemiesPossition();
-            //movementButton.getThemToTheEntrance();
             resetAfterFightModeScene();
 
             //Best to put it here before stepping back after escape
@@ -213,7 +205,6 @@ public class DungeonsGenerator : MonoBehaviour
     IEnumerator WaitASecond()
     {
         print(Time.time);
-        //yield return new WaitForSeconds(2);
         yield return new WaitUntil(() => loadingHasFinished == true);
         fightMode.setPartyIsInFightMode(false);
         print(Time.time);
@@ -288,7 +279,6 @@ public class DungeonsGenerator : MonoBehaviour
             for (i = 0; i < objectsToGenerate; i++)
             {
                 pickedOneInt = randomNumber.Next(1, 7);
-                //HERE IS LOCAL CORRIDOR - TO BE REMOVED
                 {
                     corridorToGenerate.setTextureArray(pickedOneInt);//Adding texture number to Corridor object
                                                                      //Adding generated corridor object to List
@@ -302,14 +292,11 @@ public class DungeonsGenerator : MonoBehaviour
 
                 pickedOne = pickedOneInt.ToString();
                 generateMap(pickedOneInt, i, false);
-                //dungeonLevelChunks[idOfCorridor].setWasCreated(true);//We will need to eliminate theese
             }
 
             //Temporary generating enemy possition
             generateEnemyParties();
         }
-
-        //EnemyParty enemyParty = new EnemyParty(chunkWidth * (objectsToGenerate - 1), idOfCorridor);
     }
 
     public void generateMap(int pickedOneInt, int i, bool wasAlreadyGenerated)
@@ -317,9 +304,6 @@ public class DungeonsGenerator : MonoBehaviour
         GameObject tempObject;
         GameChunk tempChunk;
         SpriteRenderer spriteRender;
-        //string filePath = "WarrensTextures/";
-        //string[] typeOfDungeonTexture = { "warrens." };
-        //string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01" };
         string filePath = "IceTextures/";
         string[] typeOfDungeonTexture = { "ice." };
         string[] specificTextureType = { "corridor_wall.", "corridor_door.basic", "endhall.01" };
@@ -430,7 +414,7 @@ public class DungeonsGenerator : MonoBehaviour
     public void resetAfterFightModeScene()
     {
         int[] arrayOfPossitions = { 0, -90, 90, -180 };
-        //for (int i = 0; i < movementButton.getHeroesObjects().Length; i++)
+
         for (int i = 0; i < displayParty.getNumberOfHeroesAlive(); i++)
         {
             if (displayParty.getHeroIsAlive()[i] == true)
@@ -441,18 +425,6 @@ public class DungeonsGenerator : MonoBehaviour
             }
         }
         Debug.Log("DungeonsGenerator || resetAfterFightModeScene || Heroes objects reset!");
-
-        //Setting possitions of enemies to previous values
-        //int idOfCorridorToReset = fightMode.getCurrentCorridorId();
-        //int idOfEnemyParty = fightMode.getColidedWithPartyNumber();
-        //Debug.Log("DungeonsGenerator || resetAfterFightModeScene || Resetting enemies on corridor: " + idOfCorridorToReset + " of id: " + idOfEnemyParty);
-
-        /*
-        EnemyParty generatedEnemyParty = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getSpecificEnemyParty(idOfEnemyParty);
-        for (int i=0; i < dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridorToReset).getEnemyParties()[idOfEnemyParty].getEnemyObjectArray().Count;i++)
-        {
-            generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition = new Vector3(generatedEnemyParty.getEnemyObjectArray()[i].transform.localPosition.x - movementButton.getHeroesObjects()[0].transform.localPosition.x, -100, 0);
-        }*/
     }
 
     public void fixEnemiesPossition()
@@ -478,10 +450,6 @@ public class DungeonsGenerator : MonoBehaviour
             tempObject.SetActive(false);
             producedChunks.Add(tempChunk);
 
-            //Debug.Log("Number of object: " + (int)(objectsToGenerate + i));
-            //Debug.Log("Debug iterator!" + i);
-            //Debug.Log("Debug OTG!" + objectsToGenerate);
-            //Debug.Log("Chunk array length: " + producedChunks.Count);
             spriteRender = producedChunks[(int)(objectsToGenerate + i)].getProducedObject().AddComponent<SpriteRenderer>();
             spriteRender.sprite = Resources.Load<Sprite>(filePath + typeOfDungeonTexture[0] + specificTextureType[2]);
 
@@ -518,7 +486,6 @@ public class DungeonsGenerator : MonoBehaviour
 
         Debug.Log("DungeonsGenerator || generateEnemyParties || How many enemy parties to generate: " + howManyEnemiesToGenerate);
         string debugString = "";
-        //EnemyParty generatedEnemyParty;
         Debug.Log("DungeonsGenerator || generateEnemyParties || How many levels are generated already: " + dungeonManager.getLevelsArray().Count);
         Debug.Log("DungeonsGenerator || generateEnemyParties || Current corridor: " + idOfCorridor);
 
@@ -545,9 +512,6 @@ public class DungeonsGenerator : MonoBehaviour
         }
         Debug.Log("DungeonsGenerator || generateEnemyParties || Possitions of " +
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count + " enemy parties on this levels: " + debugString);
-
-        //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
-        //generateMap(pickedOneInt, i, true);
     }
 
     public void loadEnemyParties()
@@ -556,7 +520,6 @@ public class DungeonsGenerator : MonoBehaviour
         int howManyToLoad = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count;
         Debug.Log("DungeonsGenerator || loadEnemyParties || How many enemy parties to load: " + howManyToLoad);
         string debugString = "";
-        //EnemyParty generatedEnemyParty;
         for (int i = 0; i < howManyToLoad; i++)
         {
             Debug.Log("DungeonsGenerator || loadEnemyParties || How many levels are generated already: " + dungeonManager.getLevelsArray().Count);
@@ -585,8 +548,6 @@ public class DungeonsGenerator : MonoBehaviour
         Debug.Log("DungeonsGenerator || loadEnemyParties || Possitions of " +
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties().Count + " enemy parties on this levels: " + debugString);
 
-        //pickedOneInt = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getChunkArrayElementTexture(i);
-        //generateMap(pickedOneInt, i, true);
     }
 
     public EnemyParty loadSpecificEnemyParty(int idOfCorridor, int idOfEnemyParty)
@@ -644,9 +605,9 @@ public class DungeonsGenerator : MonoBehaviour
 
 public class GameChunk
 {
-    //Obiekt właściwego chunka
+    //Object of actual chunk
     private GameObject producedObject;
-    //Wylosowana liczba, żeby wiedzieć, czy tekstura się powtarza
+    //Randomized number to know if texture is duplicated
     private int randomizedNumber;
 
     public GameChunk(GameObject obj, int number)

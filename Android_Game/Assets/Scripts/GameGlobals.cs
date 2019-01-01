@@ -15,7 +15,7 @@ public static class GameGlobals
         DungeonScene = 2,
     }
 
-    public static bool IsAndroidBuild { get; } = false;
+    public static bool IsAndroidBuild { get; } = true;
 
     public static string CalculateIndyvidualHash(string data)
     {

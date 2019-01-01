@@ -140,13 +140,6 @@ public class DisplayParty : MonoBehaviour
         double valueAfterInjure = heroStatsObject[idOfHero].Vitality.Acctual - amountOfDamage;
         if(valueAfterInjure <= 0)
         {
-            /*
-            valueAfterInjure = 0;
-            heroIsAlive[idOfHero] = false;
-            numberOfHeroesAlive--;
-            destroyHeroObject(idOfHero);
-            movementButton.getHeroesObjects().RemoveAt(idOfHero);
-            */
             GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.CityScene;
             GameSave.Instance.Update();
             SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);

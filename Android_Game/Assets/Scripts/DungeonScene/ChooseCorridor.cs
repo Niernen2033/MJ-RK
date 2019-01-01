@@ -63,8 +63,6 @@ public class ChooseCorridor : MonoBehaviour
         {
             corridorsIdArray.Add(randomNumber.Next(0, 10));
         }
-
-        //Debug.Log("ChooseCorridor || DungeonCanvas width:" + canvasWidth + " || DungeonCanvas height: " + canvasHeight);
     }
 
     // Update is called once per frame
@@ -82,13 +80,11 @@ public class ChooseCorridor : MonoBehaviour
     {
         idOfCurrentCorridor = corridorId;
         popupWindow = new Rect(Screen.width / 2 - popupWidth / 2, Screen.height / 2 - popupHeight / 2, popupWidth, popupHeight);
-        //return choosenCorridorId;
     }
 
     void displayOptionsToChooseFrom(int idOfPopup)
     {
         List<int> neighbourCorridorList = connectionMap.getCorridorDependenciesList()[idOfCurrentCorridor].getNeighbourCorridor();
-        //conMap.getCorridorDependenciesList()[currentCorridorNumber].getSpecificNeighbourCorridor(randomizedOne);
         for (int i = 0; i < neighbourCorridorList.Count; i++)
         {
             if (i == 0)

@@ -46,8 +46,6 @@ public class ConnectionMap : MonoBehaviour {
                         corridorDependenciesList[i].setIsLinkedWithInitialCorridor(true);
                     }
                 }
-                //Check if it's linked with initial one
-                //if ()
             }
         }
 
@@ -80,10 +78,6 @@ public class ConnectionMap : MonoBehaviour {
         }
         
     }
-    //*************** TO DO ***************
-    //I have to make sure that every corridor has atleast one connection ( to prevent that we will propably make
-    //unique pairs of corridors and then linkining theese. Next step would be making extra connections
-    //it would be also be nice to do not make to much of them
 
     public int getNumberOfCorridors()
     {
@@ -108,7 +102,7 @@ public class ConnectionMap : MonoBehaviour {
 public class CorridorDependency
 {
     private List<int> neighbourCorridor;
-    private bool isLinkedWithInitialCorridor;//TO DO make sure they will generate them
+    private bool isLinkedWithInitialCorridor;
 
     public CorridorDependency()
     {

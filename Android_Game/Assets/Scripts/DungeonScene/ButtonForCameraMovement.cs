@@ -17,7 +17,7 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     //timeLimit is for making sure that camera is moved every few frames
     private double timeLimit = 0.125;
     //We will need to read it from the city level then it will be hub to share this information ( that is -> Fight mode)
-    //also mind that it will need to be updated when one of the heroes dies or sth;
+    //also mind that it will need to be updated when one of the heroes dies (in future development);
     private static int sizeOfParty = 4;
     private float focusedHeroPosition;
     private static bool isFacingRight;
@@ -76,7 +76,6 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
     {
         if (isFacingRight == true)
         {
-            //focusedHeroPosition = heroesObjects[0].transform.position.x;
             focusedHeroPosition = heroesObjects[0].transform.position.x;
         }
         else
@@ -152,7 +151,6 @@ public class ButtonForCameraMovement : MonoBehaviour, IPointerDownHandler, IPoin
                 speedTimer = 0;
             }
         }
-        //Debug.Log("Is facing right(koniec): " + isFacingRight);
     }
 
     public void setSizeOfParty(int sizeOfPartyToSet)

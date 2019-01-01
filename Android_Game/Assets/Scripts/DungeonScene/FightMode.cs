@@ -20,7 +20,6 @@ public class FightMode : MonoBehaviour {
     public static int arrayIdOfPartyWeAreFightingWith;
     public static float[] enemyPossitionsBeforeFight;
     public static int colidedWithPartyNumber;
-    //public static 
 
 
 	// Use this for initialization
@@ -92,9 +91,6 @@ public class FightMode : MonoBehaviour {
             furthestPosition += enemyPartyWidth;
             bool noCollisionDetected = true;
 
-            //Debug.Log("FightMode || checkIfThereShouldBeAFight || Nearest position: " + nearestPosition + " FurthestPossition: " + furthestPosition);
-
-
             //Now it's time to find enemies like that
             //For now only checking it with furthest point -> encounters only from going right
             for (int i = 0; i < howManyEnemyPartiesAreThere; i++)
@@ -108,7 +104,6 @@ public class FightMode : MonoBehaviour {
                     noCollisionDetected = false;
                     colidedWithPartyNumber = i;
                     i = howManyEnemyPartiesAreThere;
-                    //Debug.Log("FightMode || checkIfThereShouldBeAFight || Nearest position: " + nearestPosition + " FurthestPossition: " + furthestPosition);
                 }
 
                 //If there were collisions
@@ -124,10 +119,6 @@ public class FightMode : MonoBehaviour {
                     break;
                 }
             }
-
-
-            //Get heroes possitions
-            //Get Enemy possitions
         }
     }
 
@@ -141,12 +132,6 @@ public class FightMode : MonoBehaviour {
         //We are calling displayParty class to create health bars for heroes in fight scene
         displayParty.displayHealthBarsOnHeroes(true);
         objectSelector.initializeHighlightOnFirstEnemy();
-
-        //previousCorridorId = currentCorridorId;
-        //currentCorridorId = choosenCorridorId;
-        //Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || currentCorridorNumber: " + currentCorridorId);
-        //Debug.Log("ButtonForUsage || doorTransition || doTransitionPreparation || Length of corridorList from dungeonGenerator: " + dungeonGenerator.getCorridorList().Count);
-        //currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorId);
     }
 
     public void setPartyIsInFightMode(bool isItInFightMode)

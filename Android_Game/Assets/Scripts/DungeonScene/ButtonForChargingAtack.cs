@@ -65,7 +65,6 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         }
         else
         {
-            //Should't get in here
             Debug.Log("ButtonForChargingAtack || Start || Found FactoryObject");
             factoryObject = GameObject.Find("FactoryObject");
         }
@@ -101,7 +100,6 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
         //For development purposes we're gonna randomize dmg dealt and target of atack
         displayParty.dealDamageToHero(randomNumber.Next(0,displayParty.getNumberOfHeroesAlive()), randomNumber.Next(9,30));
     }
-
 
     public void initializeChargeBar()
     {
@@ -204,25 +202,18 @@ public class ButtonForChargingAtack : MonoBehaviour, IPointerDownHandler, IPoint
             dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].destroyEnemyObject(idOfCorridor, idOfEnemyParty, idOfChoosenEnemy);
             objectSelector.initializeHighlightOnFirstEnemy();
         }
-        //Debug.Log("ButtonForChargingAtack || hideChargeBar || HP AFTER: " + dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]);
         return true;
     }
 
     IEnumerator WaitForDamageDealInitialization(bool loadingHasFinished)
     {
-        //yield return new WaitForSeconds(2);
         yield return new WaitUntil(() => loadingHasFinished == true);
         GameObject tempObject = GameObject.Find("EnemyHealthBar_" + idOfEnemyParty + "." + idOfChoosenEnemy);
 
-        //Debug.Log("Whole function " + (500 * ((double)dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] / (double)dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyMaxHealthArray()[idOfChoosenEnemy])));
-        //Debug.Log("Hp: " + (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy]));
-        //Debug.Log("Max Hp: " + (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyMaxHealthArray()[idOfChoosenEnemy]));
-        //float wholeFunction = (500 * (dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] / dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyMaxHealthArray()[idOfChoosenEnemy]));
         tempObject.transform.localScale = new Vector3(tempObject.transform.localScale.x,
             (500 * ((float)dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyHealthArray()[idOfChoosenEnemy] /
             (float)dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == idOfCorridor).getEnemyParties()[idOfEnemyParty].getEnemyMaxHealthArray()[idOfChoosenEnemy]))
             , tempObject.transform.localScale.z);
-        //Debug.Log("Whole " + wholeFunction);
     }
 
     public void actualizeChargeBarPossition()

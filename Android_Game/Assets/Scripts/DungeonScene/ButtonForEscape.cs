@@ -37,7 +37,6 @@ public class ButtonForEscape : MonoBehaviour {
         //There is 30% of chance of escape and 70% of failure
         if(randomNumber.Next(0, 101)<=30)
         {
-            //return true;
             Debug.Log("Escape succesfull!");
             Debug.Log("ButtonForEscape || escapeFromFight || Loading level after fight scene! Scene: " + fightMode.getCurrentCorridorId());
             dungeonsGenerator.loadAnotherLevel(fightMode.getCurrentCorridorId(), 2);

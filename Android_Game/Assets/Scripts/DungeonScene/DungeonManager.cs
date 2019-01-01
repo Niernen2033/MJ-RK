@@ -8,8 +8,7 @@ public class DungeonManager : MonoBehaviour {
 
     //[SerializeField]
     private int numberOfDungeonLevels;
-    //TODO: Eliminating LevelChunks
-    private static List<DungeonLevel> levelsArray;//Array of levels
+    private static List<DungeonLevel> levelsArray;
     private static List<DungeonLevelChunk> levelChunks;
     private DungeonLevelChunk tempChunkObject;
 

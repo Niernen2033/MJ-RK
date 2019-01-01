@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using SaveLoad;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -22,7 +24,6 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private static Color alphaColor;
 
     private static float speedTimer;
-    //timeLimit is for making sure that camera is moved every few frames
     private const double timeLimit = 0.025;
     private static bool shouldButtonsBeLocked;
     private static int choosenCorridor;
@@ -75,10 +76,8 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         randomizedOne = randomNumber.Next(0, howManyAreThere);
         string devLog = "Out of following neighbours: ";
 
-        //Debug.Log("Out of following neighbours of corridor ");
         for (int i = 0; i < howManyAreThere; i++)
         {
-            //Debug.Log(" " + conMap.getCorridorDependenciesList()[currentCorridorNumber].getSpecificNeighbourCorridor(i));
             devLog += " " + conMap.getCorridorDependenciesList()[currentCorridorId].getSpecificNeighbourCorridor(i).ToString();
         }
         Debug.Log(devLog + " of corridor: " + currentCorridorId);
@@ -89,7 +88,7 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (!shouldButtonsBeLocked)
         {
-            currentCorridorId = dungeonGenerator.getIdOfCorridor();//to do reading new nmber
+            currentCorridorId = dungeonGenerator.getIdOfCorridor();
             currentCorridor = dungeonManager.getLevelsArray().Find(x => x.getIdOfLevel() == currentCorridorId);
 
             //Here we're calling popup to allow user to pick next corridor
@@ -98,7 +97,9 @@ public class ButtonForUsage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             {
                 if (currentCorridorId == 0)
                 {
-                    //Here we will need to set returning to town
+                    GameSave.Instance.SceneIndex = GameGlobals.SceneIndex.CityScene;
+                    GameSave.Instance.Update();
+                    SceneManager.LoadScene((int)GameSave.Instance.SceneIndex);
                 }
                 else
                 {

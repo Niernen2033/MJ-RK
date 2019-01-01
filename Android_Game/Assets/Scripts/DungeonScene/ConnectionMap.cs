@@ -19,6 +19,7 @@ public class ConnectionMap : MonoBehaviour {
         for (int i = 0; i < numberOfCorridors; i++)
         {
             corridorDependenciesList.Add(new CorridorDependency());
+            corridorDependenciesList[i].setIsLinkedWithInitialCorridor(false);
         }
         for (int i = 0; i < numberOfCorridors; i++)
         {
@@ -32,19 +33,46 @@ public class ConnectionMap : MonoBehaviour {
                 do
                 {
                     tempNumb = randomNumber.Next(0, numberOfCorridors);
-                } while (tempNumb == i || corridorDependenciesList[i].getNeighbourCorridor().Contains(tempNumb));
-                //Preventing adding corridor itself or duplicating already added ones
+                } while (tempNumb == i || corridorDependenciesList[i].getNeighbourCorridor().Contains(tempNumb) || corridorDependenciesList[tempNumb].getIsLinkedWithInitialCorridor()==false);
+                //Preventing adding corridor itself, duplicating already added ones and making sure it's connected with initial one
 
                 //Checking if there is no more corridors than 4 (eighter in initial corridor and in the destinated one)
                 if (corridorDependenciesList[i].getNeighbourCorridor().Count < 4 && corridorDependenciesList[tempNumb].getNeighbourCorridor().Count < 4)
                 {
                     corridorDependenciesList[i].addToNeighbourCorridor(tempNumb);
                     corridorDependenciesList[tempNumb].addToNeighbourCorridor(i);
+                    if (corridorDependenciesList[tempNumb].getIsLinkedWithInitialCorridor() == true)
+                    {
+                        corridorDependenciesList[i].setIsLinkedWithInitialCorridor(true);
+                    }
                 }
                 //Check if it's linked with initial one
                 //if ()
             }
         }
+
+        //Making additional connections
+        for(int i = 0; i < corridorDependenciesList.Count; i++)
+        {
+            //If certain corridor have less than for connections
+            if(corridorDependenciesList[i].getNeighbourCorridor().Count < 4)
+            {
+                //Checking if we should add corridor or not
+                int tempNumb2 = randomNumber.Next(0, 2);
+                if (tempNumb2 == 1)
+                {
+                    //Looking for possible match
+                    do
+                    {
+                        tempNumb = randomNumber.Next(0, numberOfCorridors);
+                    } while (tempNumb == i || corridorDependenciesList[i].getNeighbourCorridor().Contains(tempNumb) || corridorDependenciesList[tempNumb].getNeighbourCorridor().Count >= 4);
+
+                    corridorDependenciesList[i].addToNeighbourCorridor(tempNumb);
+                    corridorDependenciesList[tempNumb].addToNeighbourCorridor(i);
+                }
+            }
+        }
+        
 
         for(int i = 0; i < corridorDependenciesList.Count; i++)
         {
